@@ -123,7 +123,7 @@ function Test() {
                   <button>Login</button>
                   <div className="register">
                     <p>
-                      Don't Have an Account? <a href="#">SignUp</a>
+                      Dont Have an Account? <a href="#">SignUp</a>
                     </p>
                   </div>
                 </div>
