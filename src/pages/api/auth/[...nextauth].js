@@ -18,24 +18,24 @@ export default NextAuth({
         }
       }
     }),
-    // Credentials({
-    //   name: 'Credentials',
-    // },
-    //   async function authorize(credentials) {
-    //     const client = await clientPromise;
-    //     const db = client.db();
-    //     const user = db.collection('users').findOne({
-    //       email: credentials.email,
-    //       password: credentials.password
-    //     });
+    Credentials({
+      name: 'Credentials',
+    },
+      async function authorize(credentials) {
+        const client = await clientPromise;
+        const db = client.db();
+        const user = db.collection('users').findOne({
+          email: credentials.email,
+          password: credentials.password
+        });
 
-    //     if (user) {
-    //       return user
-    //     } else {
-    //       return null
-    //     }
-    //   }
-    // )
+        if (user) {
+          return user
+        } else {
+          return null
+        }
+      }
+    )
   ],
   secret: process.env.JWT_SECRET,
 
