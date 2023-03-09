@@ -1,4 +1,5 @@
 import React from 'react'
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 function Login() {
   return (
@@ -16,7 +17,15 @@ function Login() {
               <label htmlFor="">Password</label>
             </div>
             <div>
-                
+              <label htmlFor="">
+                <input type="checkbox" name="" id="" />
+                Remeber Me
+              </label>
+              <a href="#">Forget Password</a>
+            </div>
+            <button>Login</button>
+            <div className="register">
+              <p>Dont Have an Account? <a href="#">SignUp</a></p>
             </div>
           </form>
         </div>
