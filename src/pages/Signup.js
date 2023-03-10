@@ -63,8 +63,8 @@ function Login() {
         </div>
       </section>
       <div>
-        <Image src="/" alt="image1" className=' inline absolute w-1/3 h-2/3 bottom-0  left-0 -z-10' width={300} height={200} />
-        <Image src="/" alt="image2" className=' inline absolute w-1/3 h-2/3 bottom-0  right-0 -z-10' width={300} height={200} />
+        <Image src="/vercel.svg" alt="image1" className=' inline absolute w-1/3 h-2/3 bottom-0  left-0 -z-10' width={300} height={200} />
+        <Image src="/vercel.svg" alt="image2" className=' inline absolute w-1/3 h-2/3 bottom-0  right-0 -z-10' width={300} height={200} />
       </div>
     </div>
   )
