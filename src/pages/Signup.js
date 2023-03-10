@@ -5,7 +5,7 @@ import { RxDotFilled } from 'react-icons/rx'
 import Image from 'next/image'
 function Login() {
   return (
-    <div className="mt-20">
+    <div className="mt-10">
       <div className="flex items-center justify-center text-3xl md:text-4xl text-accent font-mono font-bold  mx-52">
         <Image
           className="inline mr-5 my-8 w-10 h-10 md:w-12 md:h-16 "
@@ -19,14 +19,19 @@ function Login() {
 
       <section className="w-full p-5">
         <div className="mx-auto my-0 shadow-[0px_0px_50px_2px_rgb(0,0,0,0.2)] w-96 max-w-lg  py-[25px] px-[40px] rounded-sm bg-white">
-          <h1 className="text-center text-base mt-3 mb-6 font-mono font-semibold tracking-tight text-gray-500">
-            Log in to Agile Builder
+          <h1 className="text-center text-base mt-3 mb-4 font-mono font-semibold tracking-tight text-gray-500">
+            Sign Up for your account
           </h1>
           <div className="  ">
             <form className="block mt-0 w-50">
               <input
                 type="text"
-                placeholder="Enter Email"
+                placeholder="User Name"
+                className="input-md mt-2 transition-all duration-500 w-full h-10 rounded-sm border-gray-300 border-2 bg-gray-50"
+              />
+              <input
+                type="text"
+                placeholder="Email"
                 className="input-md mt-2 transition-all duration-500 w-full h-10 rounded-sm border-gray-300 border-2 bg-gray-50"
               />
               <input
@@ -34,8 +39,13 @@ function Login() {
                 placeholder="Password"
                 className="input-md my-2 transition-all duration-500 input-bordered w-full h-10 rounded-sm  border-gray-300 border-2  bg-gray-50"
               />
+              <input
+                type="password"
+                placeholder=" Confirm Password"
+                className="input-md my-2 transition-all duration-500 input-bordered w-full h-10 rounded-sm  border-gray-300 border-2  bg-gray-50"
+              />
               <button className="btn-active w-full h-10 rounded-md font-mono my-2 font-bold text-gray-100 bg-accent">
-                Log In
+                Sign Up
               </button>
               <div className="text-center text-gray-500 text-xs my-3"> OR </div>
               <button className=" justify-center items-center  h-10 w-full text-center shadow-lg border-2 border-gray-50 rounded-sm">
@@ -46,7 +56,7 @@ function Login() {
               </button>
               <div className="divider my-6 h-1"></div>
               <div className="inline mx-10 text-gray-400 text-sm">
-                Don't have an account? <RxDotFilled className="inline text-gray-800" /> Sign Up!
+                Already have an account? <RxDotFilled className="inline text-gray-800" /> Log In
               </div>
             </form>
           </div>
@@ -54,7 +64,7 @@ function Login() {
       </section>
       <div>
         <Image src="/" alt="image1" className=' inline absolute w-1/3 h-2/3 bottom-0  left-0 -z-10' width={300} height={200} />
-        <Image src="/image2.png" alt="image2" className=' inline absolute w-1/3 h-2/3 bottom-0  right-0 -z-10' width={300} height={200} />
+        <Image src="/" alt="image2" className=' inline absolute w-1/3 h-2/3 bottom-0  right-0 -z-10' width={300} height={200} />
       </div>
     </div>
   )
