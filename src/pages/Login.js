@@ -18,7 +18,7 @@ function Login() {
       </div>
 
       <section className="w-full p-5">
-        <div className="mx-auto my-0 w-96 max-w-lg  py-[25px] px-[40px] rounded-sm bg-white">
+        <div className="mx-auto my-0 shadow-[0px_0px_50px_2px_rgb(0,0,0,0.2)] w-96 max-w-lg  py-[25px] px-[40px] rounded-sm bg-white">
           <h1 className="text-center text-base mt-3 mb-6 font-mono font-semibold tracking-tight text-gray-500">
             Log in to Agile Builder
           </h1>
@@ -34,26 +34,29 @@ function Login() {
                 placeholder="Password"
                 className="input-md my-2 transition-all duration-500 input-bordered w-full h-10 rounded-sm  border-gray-400 border-2"
               />
-              <button className="btn bg-slate-400  w-full h-10 rounded-sm font-mono my-2">
+              <button className="btn-active w-full h-10 rounded-sm font-mono my-2 text-cyan-200">
                 Log In
               </button>
-              <div className="text-center text-gray-400 text-xs mb-4"> OR </div>
+              <div className="text-center text-gray-400 text-xs my-3"> OR </div>
               <button className=" justify-center items-center  h-10 w-full text-center shadow-lg border-2 border-gray-50 rounded-sm">
                 <FcGoogle className="inline  w-5 h-auto mx-2 my-2 " />
                 <div className=" inline font-bold text-slate-600">
                   Continue with Google
                 </div>
               </button>
-              <div className="divider mt-6 h-1"></div>
+              <div className="divider my-8 h-1"></div>
               <div className="inline mx-10 text-gray-400 text-sm">
                 {' '}
-                Don&apos;t have an account? <RxDotFilled className="inline" /> Sign
-                Up!{' '}
+                Don&apos;t have an account? <RxDotFilled className="inline" />
+                <strong>Sign Up!</strong>
               </div>
             </form>
           </div>
         </div>
       </section>
+      <div>
+        <Image src="/wavesOpacity.svg" alt="Waves" className='scale-y-[-1] absolute w-screen h-1/3 bottom-0 -z-10' width={500} height={500} />
+      </div>
     </div>
   )
 }
