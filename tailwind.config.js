@@ -12,27 +12,43 @@ module.exports = {
     extend: {},
   },
   plugins: [require('daisyui')],
+  // daisyui: {
+  //   themes: [
+  //     {
+  //       mytheme: {
+  //         primary: '#2563eb',
+
+  //         secondary: '#7B92B2',
+
+  //         accent: '#67CBA0',
+
+  //         neutral: '#3b82f6',
+
+  //         'base-100': '#2A303C',
+
+  //         info: '#3ABFF8',
+
+  //         success: '#36D399',
+
+  //         warning: '#FBBD23',
+
+  //         error: '#F87272',
+  //       },
+  //     },
+  //   ],
+  // },
+  // daisyui: {
+  //   themes: ["cupcake", ],
+  // },
   daisyui: {
     themes: [
       {
         mytheme: {
-          primary: '#2563eb',
-
-          secondary: '#7B92B2',
-
-          accent: '#67CBA0',
-
-          neutral: '#3b82f6',
-
-          'base-100': '#2A303C',
-
-          info: '#3ABFF8',
-
-          success: '#36D399',
-
-          warning: '#FBBD23',
-
-          error: '#F87272',
+          primary: "#1CDAFF",
+          secondary: "#FEDC79",
+          accent: "#37cdbe",
+          neutral: "#3d4451",
+          "base-100": "#ffffff",
         },
       },
     ],
