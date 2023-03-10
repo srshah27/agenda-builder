@@ -1,5 +1,5 @@
 import Navbar from '../components/Navbar.js'
-
+import Image from 'next/image'
 function Landing() {
   return (
 <body
@@ -114,7 +114,7 @@ function Landing() {
         </div>
         {/* <!--Right Col--> */}
         <div className="w-full md:w-3/5 py-6 text-center">
-          <img className="w-full md:w-4/5 z-50" src="hero.png" />
+          <Image className="w-full md:w-4/5 z-50" src="hero.png" />
         </div>
       </div>
     </div>

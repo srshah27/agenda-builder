@@ -47,7 +47,7 @@ function Login() {
               <div className="divider mt-6 h-1"></div>
               <div className="inline mx-10 text-gray-400 text-sm">
                 {' '}
-                Don't have an account? <RxDotFilled className="inline" /> Sign
+                Don&apos;t have an account? <RxDotFilled className="inline" /> Sign
                 Up!{' '}
               </div>
             </form>
