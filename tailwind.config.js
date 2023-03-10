@@ -37,7 +37,20 @@ module.exports = {
   //     },
   //   ],
   // },
+  // daisyui: {
+  //   themes: ["cupcake", ],
+  // },
   daisyui: {
-    themes: ["cupcake"],
+    themes: [
+      {
+        mytheme: {
+          primary: "#1CDAFF",
+          secondary: "#FEDC79",
+          accent: "#37cdbe",
+          neutral: "#3d4451",
+          "base-100": "#ffffff",
+        },
+      },
+    ],
   },
 }
