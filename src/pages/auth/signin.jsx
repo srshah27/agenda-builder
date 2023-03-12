@@ -1,37 +1,37 @@
-import React from "react";
-import { getProviders, signIn, getSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import { useFormik } from "formik";
-import { useState } from "react";
-import Link from "next/link";
-import login_validate from "@/lib/validate";
+import React from 'react'
+import { getProviders, signIn, getSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { useFormik } from 'formik'
+import { useState } from 'react'
+import Link from 'next/link'
+import login_validate from '@/lib/validate'
 function Test({ providers }) {
-  const [show, setShow] = useState(false);
-  const router = useRouter();
+  const [show, setShow] = useState(false)
+  const router = useRouter()
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
     validate: login_validate,
     onSubmit,
-  });
+  })
   async function onSubmit(values) {
-    const status = await signIn("Credentials", {
+    const status = await signIn('Credentials', {
       redirect: false,
       email: values.email,
       password: values.password,
-      callbackUrl: "/",
-    });
-    console.log(status);
-    if (status.ok) router.push(status.url);
+      callbackUrl: '/',
+    })
+    console.log(status)
+    if (status.ok) router.push(status.url)
   }
   return (
     <>
-      <div className="m-auto rounded-md w-3/5 h-3/4 grid lg:grid-cols-1 text-center">
-        <section className="w-3/4 mx-auto flex flex-col gap-10">
+      <div className="grid w-3/5 m-auto text-center rounded-md h-3/4 lg:grid-cols-1">
+        <section className="flex flex-col w-3/4 gap-10 mx-auto">
           <div className="title">
-            <h1 className="text-gray-800 text-4xl font-bold py-4">Login</h1>
+            <h1 className="py-4 text-4xl font-bold text-gray-800">Login</h1>
             <p className="w-3/4 mx-auto text-gray-400">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores,
               officia?
@@ -43,17 +43,17 @@ function Test({ providers }) {
             <div
               className={`${
                 formik.errors.email && formik.touched.email
-                  ? "border-rose-600"
-                  : ""
+                  ? 'border-rose-600'
+                  : ''
               }`}
             >
               <input
                 type="email"
                 name="email"
                 placeholder="Email"
-                {...formik.getFieldProps("email")}
+                {...formik.getFieldProps('email')}
               />
-              <span className="icon flex items-center px-4">
+              <span className="flex items-center px-4 icon">
                 {/* <HiAtSymbol size={25} /> */}
               </span>
             </div>
@@ -66,18 +66,18 @@ function Test({ providers }) {
             <div
               className={`${
                 formik.errors.password && formik.touched.password
-                  ? "border-rose-600"
-                  : ""
+                  ? 'border-rose-600'
+                  : ''
               }`}
             >
               <input
-                type={`${show ? "text" : "password"}`}
+                type={`${show ? 'text' : 'password'}`}
                 name="password"
                 placeholder="password"
-                {...formik.getFieldProps("password")}
+                {...formik.getFieldProps('password')}
               />
               <span
-                className="icon flex items-center px-4"
+                className="flex items-center px-4 icon"
                 onClick={() => setShow(!show)}
               >
                 {/* <HiFingerPrint size={25} /> */}
@@ -97,45 +97,44 @@ function Test({ providers }) {
 
           {/* bottom */}
           <p className="text-center text-gray-400 ">
-            Don{"'"}t have an account yet?{" "}
-            <Link href={"/auth/register"} className="text-blue-400">
+            Don{"'"}t have an account yet?{' '}
+            <Link href={'/auth/register'} className="text-blue-400">
               Register
             </Link>
           </p>
         </section>
         <div>
           {Object.values(providers).map((provider) => {
-            if(provider.name === "Credentials")
-            return;
+            if (provider.name === 'Credentials') return
             return (
               <div key={provider.name}>
                 <button onClick={() => signIn(provider.id)}>
                   Sign in with {provider.name}
                 </button>
               </div>
-            );
+            )
           })}
         </div>
       </div>
     </>
-  );
+  )
 }
 
 export async function getServerSideProps(context) {
-  const session = await getSession(context);
+  const session = await getSession(context)
   if (session) {
     return {
       redirect: {
-        destination: "/",
+        destination: '/',
         permanent: false,
       },
-    };
+    }
   }
   return {
     props: {
       providers: await getProviders(context),
     },
-  };
+  }
 }
 
-export default Test;
+export default Test
