@@ -6,9 +6,9 @@ import Image from 'next/image'
 function Login() {
   return (
     <div className="mt-10">
-      <div className="flex items-center justify-center text-3xl md:text-4xl text-accent font-mono font-bold  mx-52">
+      <div className="flex items-center justify-center text-3xl md:text-4xl text-primary font-mono font-bold  mx-52">
         <Image
-          className="inline mr-5 my-8 w-10 h-10 md:w-12 md:h-16 "
+          className="inline mr-5 my-6 w-10 h-10 md:w-12 md:h-16 "
           src="/logo.svg"
           alt="agenda"
           width={50}
@@ -44,7 +44,7 @@ function Login() {
                 placeholder=" Confirm Password"
                 className="input-md my-2 transition-all duration-500 input-bordered w-full h-10 rounded-sm  border-gray-300 border-2  bg-gray-50"
               />
-              <button className="btn-active w-full h-10 rounded-md font-mono my-2 font-bold text-gray-100 bg-accent">
+              <button className="btn-active w-full h-10 rounded-md font-mono my-2 font-bold text-gray-100 bg-primary">
                 Sign Up
               </button>
               <div className="text-center text-gray-500 text-xs my-3"> OR </div>
@@ -63,8 +63,8 @@ function Login() {
         </div>
       </section>
       <div>
-        <Image src="/vercel.svg" alt="image1" className=' inline absolute w-1/3 h-2/3 bottom-0  left-0 -z-10' width={300} height={200} />
-        <Image src="/vercel.svg" alt="image2" className=' inline absolute w-1/3 h-2/3 bottom-0  right-0 -z-10' width={300} height={200} />
+        <Image src="/checklist.svg" alt="image1" className='scale-y-[-1] block absolute  top-0  left-14 ' width={400} height={500} />
+        <Image src="/business.svg" alt="image2" className='absolute bottom-0 right-0 -z-10' width={500} height={600} />
       </div>
     </div>
   )
