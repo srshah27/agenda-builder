@@ -12,13 +12,12 @@ function Hero() {
         <h1 className="m-auto text-white">Hello</h1>
       </div>
       {/* <div className='h-1/3'> */}
-        <Image
-          
-          src="/svg/waves.svg"
-          className="absolute bottom-0 left-0 scale-y-[-1] w-full h-1/3"
-          width={100}
-          height={100}
-        />
+      <Image
+        src="/svg/waves.svg"
+        className="absolute bottom-0 left-0 scale-y-[-1] w-full h-1/3"
+        width={100}
+        height={100}
+      />
       {/* </div> */}
       {/* <Image fill alt="public/svg/waves.svg" src="/mountains.jpg" sizes="100vw" /> */}
     </div>
