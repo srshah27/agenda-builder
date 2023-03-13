@@ -1,4 +1,4 @@
-import Navbar from '../components/Navbar.js'
+import Navbar from '../components/NavbarDhara.js'
 import Hero from '@/components/Hero.js'
 function Landing() {
   return (
