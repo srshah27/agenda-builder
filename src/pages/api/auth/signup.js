@@ -4,17 +4,21 @@ import { hash } from "bcryptjs";
 
 export default async function signup(req, res) {
   if (req.method !== "POST") return res.status(405).end();
-  let { name, email, password } = req.body;
+  let { username, email, password } = req.body;
+  console.log(username, email, password);
   // Check if user exists
   await dbConnect()
-
+  console.log("db connected");
   let duplicate = await User.findOne({ email });
   if (duplicate) return res.status(409).end();
   const hashed = await hash(password, 11);
+  console.log(hashed);
   try {
-    let user = await User.create({ name, email, password: hashed });
+    let user = await User.create({ username, email, password: hashed });
+    console.log(user);
     res.status(201).json({ user });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error });
   }
 

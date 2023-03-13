@@ -106,6 +106,7 @@ function Test({ providers }) {
         <div>
           {Object.values(providers).map((provider) => {
             if (provider.name === 'Credentials') return
+            console.log(provider);
             return (
               <div key={provider.name}>
                 <button onClick={() => signIn(provider.id)}>

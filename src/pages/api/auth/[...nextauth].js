@@ -11,10 +11,12 @@ export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
   providers: [
     GoogleProvider({
+      id:"google",
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     Credentials({
+      id: 'credentials',
       name: 'Credentials',
       credentials: {
         email: { label: "Email", type: "text", placeholder: "jsmith" },
@@ -25,14 +27,14 @@ export default NextAuth({
         await dbConnect()
         const user = await User.findOne({ email: credentials.email })
         console.log(user);
-        if (!user) return null
         // if (!user) return null
+        if (!user) throw new Error('No user found')
 
         let checkPassword = await compare(credentials.password, user.password)
 
         console.log(checkPassword);
-        if (!checkPassword) return null
         // if (!checkPassword) return null
+        if (!checkPassword) throw new Error('Password is incorrect')
         return user
 
       }
@@ -42,6 +44,7 @@ export default NextAuth({
 
 
   session: {
+    strategy: "jwt",
     jwt: true,
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
@@ -58,7 +61,9 @@ export default NextAuth({
       return true
     },
     async redirect({ url, baseUrl }) {
-      return url.startsWith(baseUrl) ? url : baseUrl
+      return url.startsWith(baseUrl)
+      ? Promise.resolve(url)
+      : Promise.resolve(baseUrl)
     },
     async session({ session, token, user }) {
 
@@ -75,6 +80,6 @@ export default NextAuth({
     }
   },
   pages: {
-    // signIn: '/auth/signin',
+    // signIn: '/signup',`
   }
 })
