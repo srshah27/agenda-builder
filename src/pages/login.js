@@ -56,7 +56,7 @@ function login() {
         <Image
           src="svg/checklist.svg"
           alt="image1"
-          className="scale-y-[-1] absolute  top-[-6.7px]  left-14 hidden md:hidden lg:block -z-10"
+          className="scale-y-[-1] scale-x-[-1] absolute  top-[-6.7px]  left-14 hidden md:hidden lg:block -z-10"
           width={400}
           height={500}
         />
