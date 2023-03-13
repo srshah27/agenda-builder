@@ -6,15 +6,14 @@ import Image from 'next/image'
 function login() {
   return (
     <div className="mt-20 ">
-      <div className="flex items-center justify-center font-mono text-3xl font-bold text-primary mx-52 shrink-0 min-w-fit">
+      <div className="flex items-center justify-center mx-52">
         <Image
-          className="block w-full h-10 my-8 mr-5"
-          src="Images/logo.svg"
+          className="hidden mx-auto my-6 w-60 h-30 sm:block"
+          src="Images/agenda.svg"
           alt="agenda"
           width={50}
           height={63}
         />
-        {/* <span>Agile Builder</span> */}
       </div>
 
       <section className="w-full p-5">
