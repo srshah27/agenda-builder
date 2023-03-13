@@ -9,7 +9,7 @@ function signup() {
       <div className="flex items-center justify-center text-3xl text-center md:text-4xl text-primary font-mono font-bold mx-52">
         <Image
           className="hidden mr-5 my-6 w-10 h-10 md:w-12 md:h-16 sm:inline"
-          src="/logo.svg"
+          src="Images/logo.svg"
           alt="agenda"
           width={50}
           height={63}
@@ -65,14 +65,14 @@ function signup() {
       </section>
       <div>
         <Image
-          src="/checklist.svg"
+          src="Images/checklist.svg"
           alt="image1"
-          className="scale-y-[-1] absolute  top-0  left-14 hidden md:hidden lg:block -z-10"
+          className="scale-y-[-1] absolute  top-[-6.7px]  left-14 hidden md:hidden lg:block -z-10"
           width={400}
           height={500}
         />
         <Image
-          src="/business.svg"
+          src="Images/business.svg"
           alt="image2"
           className="absolute bottom-0 right-0 -z-10 hidden lg:block"
           width={500}
