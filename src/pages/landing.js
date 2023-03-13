@@ -1,9 +1,10 @@
 import Navbar from '../components/Navbar.js'
-import Image from 'next/image'
+import Hero from '@/components/Hero.js'
 function Landing() {
   return (
     <>
       <Navbar />
+      <Hero />
     </>
   )
 }
