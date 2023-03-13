@@ -3,18 +3,18 @@ import { FcGoogle } from 'react-icons/fc'
 import { RxDotFilled } from 'react-icons/rx'
 // import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Image from 'next/image'
-function Login() {
+function signup() {
   return (
     <div className="mt-10">
-      <div className="flex items-center justify-center text-3xl md:text-4xl text-primary font-mono font-bold  mx-52">
+      <div className="flex items-center justify-center text-3xl text-center md:text-4xl text-primary font-mono font-bold mx-52">
         <Image
-          className="inline mr-5 my-6 w-10 h-10 md:w-12 md:h-16 "
+          className="hidden mr-5 my-6 w-10 h-10 md:w-12 md:h-16 sm:inline"
           src="/logo.svg"
           alt="agenda"
           width={50}
           height={63}
         />
-        <span>Agile Builder</span>
+        <span className="">Agile Builder</span>
       </div>
 
       <section className="w-full p-5">
@@ -56,18 +56,31 @@ function Login() {
               </button>
               <div className="divider my-6 h-1"></div>
               <div className="inline mx-10 text-gray-400 text-sm">
-                Already have an account? <RxDotFilled className="inline text-gray-800" /> Log In
+                Already have an account?{' '}
+                <RxDotFilled className="inline text-gray-800" /> Log In
               </div>
             </form>
           </div>
         </div>
       </section>
       <div>
-        <Image src="/checklist.svg" alt="image1" className='scale-y-[-1] block absolute  top-0  left-14 ' width={400} height={500} />
-        <Image src="/business.svg" alt="image2" className='absolute bottom-0 right-0 -z-10' width={500} height={600} />
+        <Image
+          src="/checklist.svg"
+          alt="image1"
+          className="scale-y-[-1] absolute  top-0  left-14 hidden md:hidden lg:block -z-10"
+          width={400}
+          height={500}
+        />
+        <Image
+          src="/business.svg"
+          alt="image2"
+          className="absolute bottom-0 right-0 -z-10 hidden lg:block"
+          width={500}
+          height={600}
+        />
       </div>
     </div>
   )
 }
 
-export default Login
+export default signup

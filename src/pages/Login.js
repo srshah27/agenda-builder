@@ -3,7 +3,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { RxDotFilled } from 'react-icons/rx'
 // import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Image from 'next/image'
-function Login() {
+function login() {
   return (
     <div className="mt-20 ">
       <div className="flex items-center justify-center font-mono text-3xl font-bold md:text-4xl text-primary mx-52">
@@ -73,4 +73,4 @@ function Login() {
   )
 }
 
-export default Login
+export default login
