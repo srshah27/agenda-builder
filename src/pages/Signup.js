@@ -6,15 +6,14 @@ import Image from 'next/image'
 function signup() {
   return (
     <div className="mt-10">
-      <div className="flex items-center justify-center text-3xl text-center md:text-4xl text-primary font-mono font-bold mx-52">
+      <div className="flex items-center justify-center mx-52">
         <Image
-          className="hidden mr-5 my-6 w-10 h-10 md:w-12 md:h-16 sm:inline"
-          src="Images/logo.svg"
+          className="hidden mx-auto my-6 w-60 h-30 sm:block"
+          src="Images/agenda.svg"
           alt="agenda"
           width={50}
           height={63}
         />
-        <span className="">Agile Builder</span>
       </div>
 
       <section className="w-full p-5">
