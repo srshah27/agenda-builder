@@ -9,7 +9,7 @@ function login() {
       <div className="flex items-center justify-center font-mono text-3xl font-bold md:text-4xl text-primary mx-52">
         <Image
           className="inline w-10 h-10 my-8 mr-5 md:w-12 md:h-16 "
-          src="/logo.svg"
+          src="Images/logo.svg"
           alt="agenda"
           width={50}
           height={63}
@@ -55,16 +55,16 @@ function login() {
       </section>
       <div>
         <Image
-          src="/checklist.svg"
+          src="Images/checklist.svg"
           alt="image1"
-          className="scale-y-[-1] block absolute top-[-6.7px] left-14 "
+          className="scale-y-[-1] absolute  top-[-6.7px]  left-14 hidden md:hidden lg:block -z-10"
           width={400}
           height={500}
         />
         <Image
-          src="/business.svg"
+          src="Images/business.svg"
           alt="image2"
-          className="absolute bottom-0 right-0 -z-10"
+          className="absolute bottom-0 right-0 -z-10 hidden lg:block"
           width={500}
           height={600}
         />
