@@ -1,4 +1,4 @@
-import {React, useState} from 'react'
+import { React, useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { RxDotFilled } from 'react-icons/rx'
 import Link from 'next/link'
@@ -7,9 +7,12 @@ import { getProviders, signIn, getSession } from 'next-auth/react'
 import { useFormik, Field, ErrorMessage, FormikProvider } from 'formik'
 import Image from 'next/image'
 import Router from 'next/router'
+import ErrorAlert from '@/components/ErrorAlert'
+import toast, { Toaster } from 'react-hot-toast'
+
 function Login() {
   const router = Router
-  const [error, setError] = useState('');
+  const [error, setError] = useState('')
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -27,22 +30,24 @@ function Login() {
     })
     console.log(status)
     if (status.ok) router.push(status.url)
-    if(status.status === 401) setError(status.error)
+    if (status.status === 401) setError(status.error)
+    if (status.error) toast.error(status.error)
   }
 
   return (
     <FormikProvider value={formik}>
+      <Toaster />
       <div className="mt-20 flex flex-col">
         {/* <div className="flex shrink-0 items-center justify-center mx-52 bg-red-400"> */}
-          <div className='max-w-full mx-auto my-6 sm:block'>
-            <Image
-              className=""
-              src="svg/agenda.svg"
-              alt="agenda"
-              width={200}
-              height={200}
-            />
-          </div>
+        <div className="max-w-full mx-auto my-6 sm:block">
+          <Image
+            className=""
+            src="svg/agenda.svg"
+            alt="agenda"
+            width={200}
+            height={200}
+          />
+        </div>
         {/* </div> */}
 
         <section className="w-full p-5">
@@ -127,6 +132,7 @@ function Login() {
             height={600}
           />
         </div>
+        <ErrorAlert />
       </div>
     </FormikProvider>
   )
@@ -141,6 +147,9 @@ export async function getServerSideProps(context) {
         permanent: false,
       },
     }
+  }
+  return {
+    props: {},
   }
 }
 
