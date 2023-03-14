@@ -9,21 +9,21 @@ const Release = () => {
     <>
       <div>
         <h2>Timeline</h2>
-        {timelineKeys.forEach((key, index) => {
+        {timelineKeys.map((key, index) => {
           return (
             <div key={index}><h3>{key + ' : ' + timeline[key].title}</h3> <h4>{timeline[key].description}</h4></div>
           )
         })}
       </div>
-      {/* <div>
+      <div>
         <h2>Releases</h2>
-        {releasesKeys.forEach((key, index) => {
+        {releasesKeys.map((key, index) => {
           const release = releases[key]
           return (
             <div key={index}><h3>{release.title + ' : ' + release.version}</h3> <h4>{release.description}</h4></div>
           )
         })}
-      </div> */}
+      </div>
     </>
   )
 }
