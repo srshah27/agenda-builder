@@ -15,45 +15,46 @@ function Signup({ providers }) {
       cpassword: '',
     },
     validate: (values) => {
-    
-      const errors = {};
+      const errors = {}
       if (!values.email) {
-        errors.email = 'Please enter valid email address';
-      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-        errors.email = 'Invalid email address';
+        errors.email = 'Please enter valid email address'
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+      ) {
+        errors.email = 'Invalid email address'
       }
 
       // validate confirm password
       if (!values.cpassword) {
-        errors.cpassword = "Please confirm your password";
+        errors.cpassword = 'Please confirm your password'
       } else if (values.password !== values.cpassword) {
-        errors.cpassword = "Password Not Match...!"
-      } else if (values.cpassword.includes(" ")) {
-        errors.cpassword = "Invalid Confirm Password"
+        errors.cpassword = 'Password Not Match...!'
+      } else if (values.cpassword.includes(' ')) {
+        errors.cpassword = 'Invalid Confirm Password'
       }
 
       // validation for password
       if (!values.password) {
-        errors.password = "Please enter your password";
+        errors.password = 'Please enter your password'
       } else if (values.password.length < 8 || values.password.length > 20) {
-        errors.password =  " Must be greater then 8 and less then 20 characters long";
-      } else if (values.password.includes(" ")) {
-        errors.password = "Invalid Password";
+        errors.password =
+          ' Must be greater then 8 and less then 20 characters long'
+      } else if (values.password.includes(' ')) {
+        errors.password = 'Invalid Password'
       }
 
       // validation for designation
       if (!values.username) {
-        errors.username = "Please enter your username";
+        errors.username = 'Please enter your username'
       } else if (values.username.length < 3 || values.username.length > 20) {
-        errors.username = "Must be greater then 3 and less then 20 characters long";
+        errors.username =
+          'Must be greater then 3 and less then 20 characters long'
       }
 
-      return errors;
-      
+      return errors
     },
-    
+
     onSubmit,
-    
   })
   async function onSubmit(values) {
     const res = await fetch('/api/auth/signup', {
@@ -63,9 +64,9 @@ function Signup({ providers }) {
         username: values.username,
         email: values.email,
         password: values.password,
-      })
+      }),
     })
-    console.log(res);
+    console.log(res)
     console.log(res)
     if (res.ok) {
       const status = await signIn('credentials', {
@@ -78,14 +79,17 @@ function Signup({ providers }) {
 
   return (
     <FormikProvider value={formik}>
-        <div className="flex items-center justify-center mx-52">
+      <div className="mt-10 flex flex-col">
+        {/* <div className="flex items-center justify-center mx-52 bg-red-400"> */}
+        <div className="max-w-full mx-auto my-6 sm:block">
           <Image
-            className="hidden mx-auto my-6 w-60 h-30 sm:block"
+            className=""
             src="svg/agenda.svg"
             alt="agenda"
-            width={50}
-            height={63}
+            width={200}
+            height={200}
           />
+          {/* </div> */}
         </div>
 
         <section className="w-full p-5">
@@ -93,16 +97,18 @@ function Signup({ providers }) {
             <h1 className="text-center text-base mt-3 mb-4 font-mono font-semibold tracking-tight text-gray-500">
               Sign Up for your account
             </h1>
-            <div className= "form-control ">
+            <div className="form-control ">
               <form className="block mt-0 w-50" onSubmit={formik.handleSubmit}>
-              <div>
-                <input
-                  type="text"
-                  placeholder="User Name*"
-                  className="input-md mt-2 transition-all duration-500 w-full h-10 rounded-sm border-gray-300 border-2 bg-gray-50"
-                  {...formik.getFieldProps('username')}
-                />
-                {formik.touched.username && formik.errors.username ? <div className='error' >{formik.errors.username}</div> :null}
+                <div>
+                  <input
+                    type="text"
+                    placeholder="User Name*"
+                    className="input-md mt-2 transition-all duration-500 w-full h-10 rounded-sm border-gray-300 border-2 bg-gray-50"
+                    {...formik.getFieldProps('username')}
+                  />
+                  {formik.touched.username && formik.errors.username ? (
+                    <div className="error">{formik.errors.username}</div>
+                  ) : null}
                 </div>
                 <input
                   type="text"
@@ -110,35 +116,49 @@ function Signup({ providers }) {
                   className="input-md mt-2 transition-all duration-500 w-full h-10 rounded-sm border-gray-300 border-2 bg-gray-50"
                   {...formik.getFieldProps('email')}
                 />
-                {formik.touched.email && formik.errors.email ? <div className='error' >{formik.errors.email}</div> :null}
+                {formik.touched.email && formik.errors.email ? (
+                  <div className="error">{formik.errors.email}</div>
+                ) : null}
                 <input
                   type="password"
                   placeholder="Password*"
                   className="input-md my-2 transition-all duration-500 input-bordered w-full h-10 rounded-sm  border-gray-300 border-2  bg-gray-50"
                   {...formik.getFieldProps('password')}
                 />
-                {formik.touched.password && formik.errors.password ? <div className='error' >{formik.errors.password}</div> :null}
+                {formik.touched.password && formik.errors.password ? (
+                  <div className="error">{formik.errors.password}</div>
+                ) : null}
                 <input
                   type="password"
                   placeholder=" Confirm Password*"
                   className="input-md my-2 transition-all duration-500 input-bordered w-full h-10 rounded-sm  border-gray-300 border-2  bg-gray-50"
                   {...formik.getFieldProps('cpassword')}
                 />
-                {formik.touched.cpassword && formik.errors.cpassword ? <div className='error' >{formik.errors.cpassword}</div> :null}
+                {formik.touched.cpassword && formik.errors.cpassword ? (
+                  <div className="error">{formik.errors.cpassword}</div>
+                ) : null}
                 <button className="btn-active w-full h-10 rounded-md font-mono my-2 font-bold text-gray-100 bg-primary">
                   Sign Up
                 </button>
               </form>
               <div className="text-center text-gray-500 text-xs my-3"> OR </div>
-              <button onClick={() => signIn("google", { callbackUrl: '/' })} className='items-center justify-center w-full h-10 text-center border-2 rounded-sm shadow-lg border-gray-50'><FcGoogle className="inline w-5 h-auto mx-2 my-2 " /><div className="inline font-bold text-slate-600">
-                Continue with Google
-              </div></button>
+              <button
+                onClick={() => signIn('google', { callbackUrl: '/' })}
+                className="items-center justify-center w-full h-10 text-center border-2 rounded-sm shadow-lg border-gray-50"
+              >
+                <FcGoogle className="inline w-5 h-auto mx-2 my-2 " />
+                <div className="inline font-bold text-slate-600">
+                  Continue with Google
+                </div>
+              </button>
               <div className="divider my-6 h-1"></div>
               <div className="inline mx-10 text-gray-400 text-sm">
                 Already have an account?{' '}
-                <RxDotFilled className="inline text-gray-800" /> <Link className='text-blue-400 hover:underline' href={'/login'}>Log In</Link>
+                <RxDotFilled className="inline text-gray-800" />{' '}
+                <Link className="text-blue-400 hover:underline" href={'/login'}>
+                  Log In
+                </Link>
               </div>
-
             </div>
           </div>
         </section>
@@ -158,6 +178,7 @@ function Signup({ providers }) {
             height={600}
           />
         </div>
+      </div>
     </FormikProvider>
   )
 }
