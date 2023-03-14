@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { RxDotFilled } from 'react-icons/rx'
 import Link from 'next/link'
@@ -9,6 +9,7 @@ import Image from 'next/image'
 import Router from 'next/router'
 function Login() {
   const router = Router
+  const [error, setError] = useState('');
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -26,6 +27,7 @@ function Login() {
     })
     console.log(status)
     if (status.ok) router.push(status.url)
+    if(status.status === 401) setError(status.error)
   }
 
   return (

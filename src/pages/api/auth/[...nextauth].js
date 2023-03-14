@@ -28,13 +28,13 @@ export default NextAuth({
         const user = await User.findOne({ email: credentials.email })
         console.log(user);
         // if (!user) return null
-        if (!user) throw new Error('No user found')
+        if (!user) throw new Error('No user found with this email address')
 
         let checkPassword = await compare(credentials.password, user.password)
 
         console.log(checkPassword);
         // if (!checkPassword) return null
-        if (!checkPassword) throw new Error('Password is incorrect')
+        if (!checkPassword) throw new Error('Incorrect Credentials')
         return user
 
       }

@@ -10,7 +10,7 @@ export default async function signup(req, res) {
   await dbConnect()
   console.log("db connected");
   let duplicate = await User.findOne({ email });
-  if (duplicate) return res.status(409).end();
+  if (duplicate) return res.status(409).json({ error: "User already exists" });
   const hashed = await hash(password, 11);
   console.log(hashed);
   try {
@@ -19,7 +19,7 @@ export default async function signup(req, res) {
     res.status(201).json({ user });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error });
+    res.status(500).json({ error: "Internal Server Error. Please try again sometime later." });
   }
 
 }

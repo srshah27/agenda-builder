@@ -1,4 +1,4 @@
-import React from 'react'
+import {React, useState} from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { RxDotFilled } from 'react-icons/rx'
 import { getProviders, signIn, getSession } from 'next-auth/react'
@@ -6,7 +6,10 @@ import Link from 'next/link'
 import { useFormik, FormikProvider, Form, Field, ErrorMessage } from 'formik'
 import registerValidate from '@/lib/validate'
 import Image from 'next/image'
+import Router from 'next/router'
 function Signup({ providers }) {
+  const [error, setError] = useState('');
+  const router = Router
   const formik = useFormik({
     initialValues: {
       username: '',
@@ -71,6 +74,15 @@ function Signup({ providers }) {
         password: values.password,
         callbackUrl: '/',
       })
+      
+      if(status.status === 201){
+        router.push('/')
+      }else if(status.status === 409){
+        setError(status.error)
+      }else if (status.status === 500){
+        setError(status.error)
+      }
+      
     }
   }
 
