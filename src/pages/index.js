@@ -7,8 +7,8 @@ export default function Home({ sess }) {
   return (
     <>
       <div className="flex justify-center h-screen">
-        <h1 className="my-auto font-semibold">Agenda Builder</h1>
-        {session ? <button onClick={()=>signOut()} className="my-auto font-semibold">Sign Out</button> : <Link href="/login" className="my-auto font-semibold">Login</Link>}
+        <h1 className="my-auto font-semibold">Agenda Builder</h1> 
+        {session ? <button onClick={()=>signOut()} className="my-auto font-semibold text-primary"> &nbsp;Sign Out</button> : <Link href="/login" className="my-auto font-semibold text-primary">&nbsp;Login</Link>}
 
         {/* <button className="btn btn-primary">Button</button> */}
       </div>
