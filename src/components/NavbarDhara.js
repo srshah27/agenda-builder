@@ -9,7 +9,7 @@ function Navbar() {
   const [navbar, setNavbar] = useState(false)
   return (
     <>
-      <nav className="w-full bg-slate-50 opacity-80 fixed top-0 left-0 z-10 ">
+      <nav className="w-full bg-slate-50 opacity-90 fixed top-0 left-0 z-10 ">
         <div className="justify-between  mx-4 lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
             <div className="flex items-center py-3 md:py-4 md:block left-0 ">
@@ -50,17 +50,17 @@ function Navbar() {
               }`}
             >
               <ul className="h-screen md:h-auto items-center justify-center md:flex font-mono">
-                <li className=" text-xl text-neutral py-2 md:px-6 text-center border-b-2  md:border-b-0  border-primary  md:hover:text-primary ">
+                <li className=" text-xl text-neutral py-2 md:px-6 text-center border-b-2  md:border-b-0  border-primary  md:hover:text-primary md:hover:underline">
                   <Link href="#about" onClick={() => setNavbar(!navbar)}>
                     About
                   </Link>
                 </li>
-                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary">
+                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline">
                   <Link href="#blog" onClick={() => setNavbar(!navbar)}>
                     Blogs
                   </Link>
                 </li>
-                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2 md:border-b-0   border-primary  md:hover:text-primary">
+                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2 md:border-b-0   border-primary  md:hover:text-primary md:hover:underline">
                   <Link href="#contact" onClick={() => setNavbar(!navbar)}>
                    Contacts
                   </Link>
@@ -70,7 +70,7 @@ function Navbar() {
                     Projects
                   </Link>
                   </li> */}
-                <li className="text-xl text-neutral py-2 px-6 text-center   md:border-b-0   border-primary  md:hover:text-primary">
+                <li className="text-xl text-neutral py-2 px-6 text-center   md:border-b-0   border-primary  md:hover:text-primary md:hover:underline">
                   <Link href="/login" onClick={() => setNavbar(!navbar)}>
                     LogIn
                   </Link>

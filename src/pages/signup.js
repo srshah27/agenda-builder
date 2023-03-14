@@ -136,7 +136,7 @@ function Signup({ providers }) {
               <div className="divider my-6 h-1"></div>
               <div className="inline mx-10 text-gray-400 text-sm">
                 Already have an account?{' '}
-                <RxDotFilled className="inline text-gray-800" /> <Link className='underline text-blue-400' href={'/login'}>Log In</Link>
+                <RxDotFilled className="inline text-gray-800" /> <Link className='text-blue-400 hover:underline' href={'/login'}>Log In</Link>
               </div>
 
             </div>
