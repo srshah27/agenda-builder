@@ -8,7 +8,7 @@ function Hero() {
       <section className="h-screen">
         <div className="flex justify-around items-center flex-wrap h-screen">
           <div className="text-blue-900 font-mono lg:text-justify text-center">
-            <h1 className="text-[6vw] font-bold">
+            <h1 className="text-[5vw] font-bold">
                Welcome to <br/> Agenda Builder!
             </h1>
             <p className="text-[2vw] mt-4 text-gray-100">
@@ -26,12 +26,6 @@ function Hero() {
               className="max-w-full"
             />
           {/* </div> */}
-        </div>
-        <div className="h-screen bg-blue-50 w-full">
-          <div className ="flex-col text-primary font-mono p-20 text-center">
-            <h4 className="text-md text-neutral">Agenda Builder 101 </h4>
-            <h1 className="text-5xl font-extrabold">Organise Your Task</h1>
-          </div>
         </div>
       </section>
       {/* <div className="md:pl-36 md:pt-52 pl-8 pt-48 text-blue-900 font-mono lg:text-justify text-center">
