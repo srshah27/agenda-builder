@@ -12,7 +12,7 @@ function Navbar() {
       <nav className="w-full bg-slate-50 opacity-90 fixed top-0 left-0 z-10 ">
         <div className="justify-between  mx-4 lg:max-w-7xl md:items-center md:flex md:px-8">
           <div>
-            <div className="flex items-center py-3 md:py-4 md:block left-0 ">
+            <div className="items-center py-3 md:py-4 sm:inline-block left-0 ">
               <Link href="/">
                 <Image
                   src="/svg/agenda.svg"
@@ -23,11 +23,11 @@ function Navbar() {
               </Link>
               <div className="md:hidden">
                 <button
-                  className="p-2 text-gray-700 right-0 " //rounded-md outline-none focus:border-gray-400 focus:border
+                  className="text-gray-700 right-8 absolute top-4" //rounded-md outline-none focus:border-gray-400 focus:border
                   onClick={() => setNavbar(!navbar)}
                 >
                   {navbar ? (
-                    <IoClose className="text-primary  w-6 h-6 ml-[480px]" />
+                    <IoClose className=" text-primary  w-6 h-6 ml-[480px]" />
                     // <Image src={close} width={40} height={30} alt="logo" />
                   ) : (
                     // <Image
@@ -45,8 +45,8 @@ function Navbar() {
           </div>
           <div>
             <div
-              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-                navbar ? 'p-12 md:p-0 block' : 'hidden'
+              className={`flex-1  md:block   ${
+                navbar ? 'md:p-0 block' : 'hidden'
               }`}
             >
               <ul className="h-screen md:h-auto items-center justify-center md:flex font-mono">
@@ -70,9 +70,9 @@ function Navbar() {
                     Projects
                   </Link>
                   </li> */}
-                <li className="text-xl text-neutral py-2 px-6 text-center   md:border-b-0   border-primary  md:hover:text-primary md:hover:underline">
-                  <Link href="/login" onClick={() => setNavbar(!navbar)}>
-                    LogIn
+                <li className="text-xl text-neutral py-2 px-6 text-center  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline">
+                  <Link href="/signup" onClick={() => setNavbar(!navbar)}>
+                    SignUp
                   </Link>
                 </li>
               </ul>
