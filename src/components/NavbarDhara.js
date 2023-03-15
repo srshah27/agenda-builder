@@ -1,8 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-// import menu from '../../public/svg/menu.svg'
-// import close from '../../public/svg/close.svg'
 import {HiMenu} from 'react-icons/hi'
 import {IoClose} from 'react-icons/io5'
 function Navbar() {
@@ -28,15 +26,7 @@ function Navbar() {
                 >
                   {navbar ? (
                     <IoClose className=" text-primary  w-6 h-6 ml-[480px]" />
-                    // <Image src={close} width={40} height={30} alt="logo" />
                   ) : (
-                    // <Image
-                    //   src={menu}
-                    //   width={30}
-                    //   height={30}
-                    //   alt="logo"
-                    //   className="focus:border-none active:border-none"
-                    // />
                     <HiMenu className="text-primary w-6 h-6 ml-[480px]" />
                   )}
                 </button>
@@ -49,18 +39,18 @@ function Navbar() {
                 navbar ? 'md:p-0 block' : 'hidden'
               }`}
             >
-              <ul className="h-screen md:h-auto items-center justify-center md:flex font-mono">
-                <li className=" text-xl text-neutral py-2 md:px-6 text-center border-b-2  md:border-b-0  border-primary  md:hover:text-primary md:hover:underline">
+              <ul className="h-screen md:h-auto items-center justify-center md:flex font-mono mt-20 md:mt-0">
+                <li className=" text-xl text-neutral py-2 md:px-6 text-center border-b-2  md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-[21rem]">
                   <Link href="#about" onClick={() => setNavbar(!navbar)}>
                     About
                   </Link>
                 </li>
-                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline">
+                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-60">
                   <Link href="#blog" onClick={() => setNavbar(!navbar)}>
                     Blogs
                   </Link>
                 </li>
-                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2 md:border-b-0   border-primary  md:hover:text-primary md:hover:underline">
+                <li className="text-xl text-neutral py-2 text-primary-6 text-center  border-b-2 md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-36">
                   <Link href="#contact" onClick={() => setNavbar(!navbar)}>
                    Contacts
                   </Link>
@@ -70,7 +60,7 @@ function Navbar() {
                     Projects
                   </Link>
                   </li> */}
-                <li className="text-xl text-neutral py-2 px-6 text-center  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline">
+                <li className="text-xl text-neutral py-2 px-6 text-center  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-5">
                   <Link href="/signup" onClick={() => setNavbar(!navbar)}>
                     SignUp
                   </Link>

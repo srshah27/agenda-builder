@@ -10,8 +10,12 @@ function Hero() {
         <div className={styles.wave}></div>
         <div className={styles.wave}></div>
         <div className={styles.wave}></div>
-        <div className="md:pl-36 md:pt-52 pl-8 pt-48 text-gray-100 text-4xl md:text-7xl font-mono lg:text-justify text-center ">Welcome to <br/> Agenda Builder!</div>
-        <div className="md:pl-36 pt-8 pl-8 text-gray-100  text-2xl md:text-3xl font-mono lg:text-justify text-center ">Add tasks and collaborate with your colleagues. <br/> Let&aposs get oraganized together.</div>
+          <div className="md:pl-36 md:pt-52 pl-8 pt-48 text-gray-100 text-4xl md:text-7xl font-mono lg:text-justify text-center ">
+          Welcome to <br/> Agenda Builder!
+          </div>
+          <div className="md:pl-36 pt-8 pl-8 text-gray-100  text-2xl md:text-3xl font-mono lg:text-justify text-center ">
+          Add tasks and collaborate with your colleagues. <br/> Let&apos;s get oraganized together.
+          </div>
         <Image
         src="/img/track.png"
         alt='track'
