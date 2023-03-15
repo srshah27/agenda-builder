@@ -12,7 +12,7 @@ function Landing() {
       <Hero />
       <Feature/>
       <Use/>
-      <Footer/>
+      {/* <Footer/> */}
     </>
   )
 }
