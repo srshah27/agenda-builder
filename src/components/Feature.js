@@ -3,7 +3,7 @@ import Image from "next/image"
 const Feature = () => {
   return (
        <div className="h-screen bg-blue-50 w-full">
-          <div className ="flex-col text-primary font-mono p-32 text-center">
+          <div className ="flex-col text-primary font-mono p-16 text-center">
             <h4 className="text-md text-neutral">Agenda Builder 101 </h4>
             <h1 className="text-[4vw] font-extrabold">Organise Your Task</h1>  
           </div>

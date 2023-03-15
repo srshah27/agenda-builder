@@ -5,9 +5,9 @@ import styles from "../styles/GradientBG.module.css"
 function Hero() {
   return (
     <>
-      <section className="w-4/5 mx-auto my-auto pt-40 flex flex-wrap">
-        <div className="flex flex-col justify-center items-center flex-wrap py-4 mx-auto">
-          <div>
+      <section className="w-4/5 mx-auto my-auto pt-40 flex flex-wrap h-screen">
+        <div className="flex flex-col justify-center items-center flex-wrap py-4 lg:mb-32 mx-auto">
+          <div className="">
             <h1 className="text-3xl text-center mb-4 text-black font-medium">
               Welcome to Agenda Builder
             </h1>
