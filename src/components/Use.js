@@ -17,7 +17,7 @@ const Use = () => {
                     </div>
                     <div className ={styles.content}>
                         <h2>Step I</h2>
-                        <p> Do Something</p>
+                        <p>Create Workspace</p>
                     </div>
                 </div>
                 <div className={styles.workcard}>
@@ -26,7 +26,7 @@ const Use = () => {
                     </div>
                     <div className ={styles.content}>
                         <h2>Step II</h2>
-                        <p> Do Something</p>
+                        <p>Invite Team Members</p>
                     </div>
                 </div>
                 <div className={styles.workcard}>
@@ -35,7 +35,7 @@ const Use = () => {
                     </div>
                     <div className ={styles.content}>
                         <h2>Step III</h2>
-                        <p> Do Something</p>
+                        <p>Collaborate Together</p>
                     </div>
                 </div>
                 <div className={styles.workcard}>
@@ -44,7 +44,7 @@ const Use = () => {
                     </div>
                     <div className ={styles.content}>
                         <h2>Step IV</h2>
-                        <p> Do Something</p>
+                        <p>Finish Tasks Quickly</p>
                     </div>
                 </div>
             </section>
