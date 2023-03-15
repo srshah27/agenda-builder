@@ -1,4 +1,4 @@
-export const timeline = {
+export const timelines = {
   "0.1.0": {
     "title": "Initial release",
     "description": "Start of the project with a basic implementation of the API and a simple web interface."
@@ -55,8 +55,42 @@ export const releases = {
         "User Sign In with Credential and Google",
         "User Sign Out"
       ],
-      "fixes": null,
-      "changes": null
+      "fixes": ["Session", "JWT"],
+      "changes": ["Logo"]
+    }
+  },
+  "Initial Release1": {
+    "version": "0.1.0",
+    "date": "2023-03-15",
+    "title": "1 Release",
+    "description": "Initial Release",
+    "features": {
+      "pages": ["Landing Page", "Sign Up Page", "Sign In Page"],
+      "backend": [
+        "User Authentication",
+        "User Registration with Credential and Google",
+        "User Sign In with Credential and Google",
+        "User Sign Out"
+      ],
+      "fixes": ["Session", "JWT"],
+      "changes": ["Logo"]
+    }
+  },
+  "Initial Release2": {
+    "version": "0.1.0",
+    "date": "2023-03-15",
+    "title": "2 Release",
+    "description": "Initial Release",
+    "features": {
+      "pages": ["Landing Page", "Sign Up Page", "Sign In Page"],
+      "backend": [
+        "User Authentication",
+        "User Registration with Credential and Google",
+        "User Sign In with Credential and Google",
+        "User Sign Out"
+      ],
+      "fixes": ["Session", "JWT"],
+      "changes": ["Logo"]
     }
   }
 }
