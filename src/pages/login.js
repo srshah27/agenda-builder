@@ -28,7 +28,6 @@ function Login() {
       password: values.password,
       callbackUrl: '/',
     })
-    console.log(status)
     if (status.ok) router.push(status.url)
     if (status.status === 401) setError(status.error)
     if (status.error) toast.error(status.error)

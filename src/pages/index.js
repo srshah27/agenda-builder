@@ -4,6 +4,7 @@ import { useSession, getSession, signOut } from 'next-auth/react'
 export default function Home({ sess }) {
   const { data: session, status } = useSession()
   console.log(sess);
+  console.log(session);
   return (
     <>
       <div className="flex justify-center h-screen">
