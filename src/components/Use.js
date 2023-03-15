@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const Use = () => {
   return (
-      <div className="h-screen bg-primary w-full">
+      <div className="h-auto bg-primary w-full">
       
           <div className ="flex-col text-gray-200 font-mono pt-10 pb-32  text-center text-[4vw] font-extrabold">
             <h1>Manage Your Work Smartly</h1>  

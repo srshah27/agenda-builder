@@ -3,6 +3,7 @@ import Hero from "@/components/Hero.js"
 import Feature from "@/components/Feature"
 import Use from "@/components/Use"
 import Navbar from "@/components/NavbarDhara"
+import Footer from "@/components/Footer"
 function Landing() {
   return (
     <>
@@ -11,6 +12,7 @@ function Landing() {
       <Hero />
       <Feature/>
       <Use/>
+      <Footer/>
     </>
   )
 }
