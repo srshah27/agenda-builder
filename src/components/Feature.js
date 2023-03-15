@@ -2,14 +2,14 @@ import Image from "next/image"
 
 const Feature = () => {
   return (
-       <div className="h-screen bg-blue-200 w-full">
+       <div className="h-screen bg-white w-full">
           <div className ="flex-col text-primary font-mono p-16 text-center">
             <h4 className="text-md text-neutral">Agenda Builder 101 </h4>
             <h1 className="text-[4vw] font-extrabold">Organise Your Task</h1>  
           </div>
           <div className ="flex justify-around flex-wrap">
             <Image
-              src="/img/todo.png"
+              src="/svg/todo.svg"
               alt="track"
               width={440}
               height={440}
