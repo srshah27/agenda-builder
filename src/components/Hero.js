@@ -1,29 +1,32 @@
 import Image from "next/image"
 import Link from "next/link"
-import GradientBG from "./GradientBG"
+import styles from "../styles/GradientBG.module.css"
 
 function Hero() {
   return (
     <>
       <section className="h-screen">
         <div className="flex justify-around items-center flex-wrap h-screen">
-          <div className="">
-            <h1>Welcome to Agenda Builder</h1>
+          <div className="text-blue-900 font-mono lg:text-justify text-center">
+            <div className="text-[6vw] font-bold">
+               Welcome to <br/> Agenda Builder!
+            </div>
+            <div className="text-[2vw] mt-4 text-gray-100">
+            Add tasks, collaborate with your colleagues. <br/> Let&apos;s get oraganized together.
+            </div>
           </div>
-          <div className="">
+          {/* <div className="max-w-full"> */}
+          {/* <img src = "/img/track.png" alt="track" className="w-[35vw] h-[28vw]"/> */}
             <Image
               src="/img/track.png"
               alt="track"
-              width={400}
-              height={400}
-              className=""
-              // className=" absolute right-32 top-36 hidden md:hidden lg:block"
-              // width={440}
-              // height={400}
+              width={380}
+              height={380}
+              className="max-w-full"
             />
-          </div>
+          {/* </div> */}
         </div>
-        <div className="text-gray-800 bottom-20 pl-44 text-xl font-mono bg-red-400">
+        <div className="h-screen">
           <span>
             Agenda Builder 101 <br />
           </span>
