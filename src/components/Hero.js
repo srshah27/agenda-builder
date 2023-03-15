@@ -5,32 +5,59 @@ import styles from "../styles/GradientBG.module.css"
 function Hero() {
   return (
     <>
-      <section className="h-screen">
-        <div className="flex justify-around items-center flex-wrap h-screen">
-          <div className="text-blue-900 font-mono lg:text-justify text-center">
+      <section className="w-4/5 mx-auto my-auto pt-40 flex flex-wrap">
+        <div className="flex flex-col justify-center items-center flex-wrap py-4 mx-auto">
+          <div>
+            <h1 className="text-3xl text-center mb-4 text-black font-medium">
+              Welcome to Agenda Builder
+            </h1>
+            <p className="text-white text-center mb-6">
+              Add tasks, collaborate with your colleagues. Lets get oraganized
+              together.
+            </p>
+          </div>
+          <div className="flex justify-center flex-col lg:flex-row">
+            <input
+              type="text"
+              className="input input-bordered input-primary w-80 m-2 hidden lg:block"
+            />
+            <button className="btn w-full lg:w-auto m-2">SignUp</button>
+          </div>
+        </div>
+        <div className="mx-auto mt-4 justify-around">
+          <Image
+            src="/img/track.png"
+            alt="track"
+            width={350}
+            height={300}
+            className=""
+          />
+        </div>
+
+        {/* <div className="text-blue-900 font-mono lg:text-justify text-center">
             <div className="text-[6vw] font-bold">
-               Welcome to <br/> Agenda Builder!
+              Welcome to <br /> Agenda Builder!
             </div>
             <div className="text-[2vw] mt-4 text-gray-100">
-            Add tasks, collaborate with your colleagues. <br/> Let&apos;s get oraganized together.
-            </div>
-          </div>
-          {/* <div className="max-w-full"> */}
-          {/* <img src = "/img/track.png" alt="track" className="w-[35vw] h-[28vw]"/> */}
-            <Image
-              src="/img/track.png"
-              alt="track"
-              width={380}
-              height={380}
-              className="max-w-full"
-            />
-          {/* </div> */}
-        </div>
-        <div className="h-screen">
+              Add tasks, collaborate with your colleagues. <br /> Let&apos;s get
+              oraganized together.
+          </div> */}
+        {/* <div className="max-w-full"> */}
+        {/* <img src = "/img/track.png" alt="track" className="w-[35vw] h-[28vw]"/> */}
+        {/* <Image
+            src="/img/track.png"
+            alt="track"
+            width={380}
+            height={380}
+            className="max-w-full"
+          /> */}
+        {/* </div> */}
+        {/* </div> */}
+        {/* <div className="h-screen">
           <span>
             Agenda Builder 101 <br />
           </span>
-        </div>
+        </div> */}
       </section>
       {/* <div className="md:pl-36 md:pt-52 pl-8 pt-48 text-blue-900 font-mono lg:text-justify text-center">
         <div className="text-4xl md:text-7xl font-bold">
