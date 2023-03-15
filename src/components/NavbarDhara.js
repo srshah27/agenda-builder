@@ -61,7 +61,7 @@ function Navbar() {
                   </Link>
                   </li> */}
                 <li className="text-xl text-neutral py-2 px-6 text-center  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-5">
-                  <button className="btn-active w-40 h-12 rounded-md mx-8 font-bold bg-primary text-gray-50">
+                  <button className="btn-active w-40 h-12 rounded-md mx-8 font-bold bg-blue-900 text-gray-50">
                     <Link href="/signup"> Sign Up </Link>
                   </button>
                 </li>
