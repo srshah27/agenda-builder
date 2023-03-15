@@ -2,7 +2,7 @@ import dbConnect from "@/lib/dbconnect";
 import User from "@/models/Users";
 import { hash } from "bcryptjs";
 
-export default async function signup(req, res) {
+export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
   let { username, email, password } = req.body;
   console.log(username, email, password);

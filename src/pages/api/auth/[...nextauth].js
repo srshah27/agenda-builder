@@ -26,16 +26,13 @@ export default NextAuth({
 
         await dbConnect()
         const user = await User.findOne({ email: credentials.email })
-        console.log(user);
         // if (!user) return null
         if (!user) throw new Error('No user found with this email address')
 
         let checkPassword = await compare(credentials.password, user.password)
-
-        console.log(checkPassword);
         // if (!checkPassword) return null
         if (!checkPassword) throw new Error('Incorrect Credentials')
-        return user
+        return { id: user._id, name: user.username, email: user.email}
 
       }
     })
@@ -58,6 +55,9 @@ export default NextAuth({
   debug: true,
   callbacks: {
     async signIn({ user, account, profile }) {
+      if(account.provider === 'google'){
+        user = {id: user._id, name: user.username, email: user.email, image: user.image}
+      }
       return true
     },
     async redirect({ url, baseUrl }) {
@@ -65,8 +65,7 @@ export default NextAuth({
       ? Promise.resolve(url)
       : Promise.resolve(baseUrl)
     },
-    async session({ session, token, user }) {
-
+    async session({ session, token }) {
       return session
     },
     async jwt({ token, user, account, profile }) {
