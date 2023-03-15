@@ -13,9 +13,10 @@ function Hero() {
         <div className="md:pl-36 md:pt-52 pl-8 pt-48 text-gray-100 text-4xl md:text-7xl font-mono lg:text-justify text-center ">Welcome to <br/> Agenda Builder!</div>
         <div className="md:pl-36 pt-8 pl-8 text-gray-100  text-2xl md:text-3xl font-mono lg:text-justify text-center ">Add tasks and collaborate with your colleagues. <br/> Let&aposs get oraganized together.</div>
         <Image
-        src="/svg/track.svg"
+        src="/img/track.png"
+        alt='track'
         className=" absolute right-36 top-40 hidden md:hidden lg:block"
-        width={400}
+        width={440}
         height={400}
       />
       
@@ -23,6 +24,7 @@ function Hero() {
       {/* <div className='h-1/3'> */}
       <Image
         src="/svg/waves.svg"
+        alt='waves'
         className="absolute bottom-[-1px] left-0 scale-y-[-1]  w-full md:h-1/3  h-1/4 "
         width={100}
         height={100}
