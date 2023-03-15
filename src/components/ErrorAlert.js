@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react"
 
-const ErrorAlert = ({message}) => {
+const ErrorAlert = ({ message }) => {
   return (
     <div className="alert alert-error shadow-lg w-[20vw] absolute bottom-16 left-16">
       <div>
@@ -17,7 +17,7 @@ const ErrorAlert = ({message}) => {
             d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <span className=''>{ message }</span>
+        <span className="">{message}</span>
       </div>
     </div>
   )
