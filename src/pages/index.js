@@ -7,9 +7,6 @@ import Footer from "@/components/Footer"
 import { useSession, getSession, signOut } from "next-auth/react"
 
 export default function Home({ sess }) {
-  const { data: session, status } = useSession()
-  console.log(sess)
-  console.log(session)
   return (
     <>
       <Navbar />
@@ -20,13 +17,4 @@ export default function Home({ sess }) {
       <Footer />
     </>
   )
-}
-
-export async function getServerSideProps(context) {
-  let session = await getSession(context)
-  return {
-    props: {
-      sess: session,
-    },
-  }
 }

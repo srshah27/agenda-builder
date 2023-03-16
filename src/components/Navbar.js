@@ -3,7 +3,12 @@ import Link from 'next/link'
 import { useState } from 'react'
 import {HiMenu} from 'react-icons/hi'
 import {IoClose} from 'react-icons/io5'
+import { useSession, getSession, signOut } from "next-auth/react"
 function Navbar() {
+  
+  const { data: session, status } = useSession()
+  console.log(session);
+  
   const [navbar, setNavbar] = useState(false)
   return (
     <>
@@ -56,9 +61,12 @@ function Navbar() {
                   </Link>
                   </li>
                 <li className="text-xl text-neutral py-2 px-6 text-center md:absolute right-5">
-                  <button className="btn-active w-32 h-12 rounded-md text bg-transparent md:bg-neutral md:text-gray-50 md:hover:bg-blue-900">
+                {!session ? <button className="btn-active w-32 h-12 rounded-md text bg-transparent md:bg-neutral md:text-gray-50 md:hover:bg-blue-900">
                     <Link href="/signup"> Sign Up </Link>
-                  </button>
+                  </button> : <button className="btn-active w-32 h-12 rounded-md text bg-transparent md:bg-neutral md:text-gray-50 md:hover:bg-blue-900 "onClick={()=>signOut()}>
+                     Sign Out 
+                  </button>}
+                  
                 </li>
               </ul>
             </div>
