@@ -4,7 +4,6 @@ import Feature from "@/components/home/Feature"
 import Use from "@/components/home/Use"
 import Navbar from "@/components/Navbar"
 import Footer from "@/components/Footer"
-import { useSession, getSession, signOut } from "next-auth/react"
 
 export default function Home({ sess }) {
   return (
