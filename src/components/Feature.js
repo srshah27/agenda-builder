@@ -11,8 +11,8 @@ const Feature = () => {
             <Image
               src="/svg/todo.svg"
               alt="track"
-              width={500}
-              height={500}
+              width={30}
+              height={30}
               className = "hidden lg:block"
             />
             <div className ="text-xl text-primary text-left space-x-6 ml-4">

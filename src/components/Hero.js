@@ -5,7 +5,17 @@ import styles from "../styles/GradientBG.module.css"
 function Hero() {
   return (
     <>
-      <section className="w-4/5 mx-auto my-auto pt-40 flex flex-wrap h-screen">
+    <div className="hero min-h-screen">
+  <div className="hero-content flex-col lg:flex-row-reverse">
+    <img src="svg/track.svg" className="max-w-sm  shadow-2xl" />
+    <div>
+      <h1 className="text-5xl font-bold">Box Office News!</h1>
+      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+      <button className="btn btn-primary">Get Started</button>
+    </div>
+  </div>
+</div>
+      {/* <section className="w-4/5 mx-auto my-auto pt-40 flex flex-wrap h-screen">
         <div className="flex justify-center items-center flex-wrap py-4 lg:mb-32 mx-auto max-w-md">
           <div className="">
             <h1 className="text-3xl text-center mb-4 text-blue-900 font-medium">
@@ -36,7 +46,7 @@ function Hero() {
             className=""
           />
         </div>
-      </section>
+      </section> */}
     </>
   )
 }

@@ -9,7 +9,7 @@ const ReleasesPage = () => {
   const timelineKeys = Object.keys(timelines)
   return (
     <>
-      {/* <div className='grid grid-flow-col gap-4 justify-center'>
+      <div className='grid grid-flow-col gap-4 justify-around'>
         <div className="bg-white rounded-lg shadow overflow-hidden max-w-fit sticky left-0 top-0">
           <div className="px-4 py-5 sm:p-6">
             <h2 className="text-3xl font-medium text-gray-900">Timeline</h2>
@@ -27,11 +27,11 @@ const ReleasesPage = () => {
           ))}
 
         </div>
-      </div> */}
+      </div>
 
 
       {/* Fixed left col */}
-      <div className='grid grid-flow-col gap-4 justify-center'>
+      {/* <div className='grid grid-flow-col gap-4 justify-center'>
         <div className="fixed max-w-fit">
           <div className="bg-white rounded-lg shadow overflow-hidden w-96">
             <div className="px-4 py-5 sm:p-6">
@@ -59,7 +59,7 @@ const ReleasesPage = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
 
 
