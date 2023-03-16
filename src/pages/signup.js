@@ -76,11 +76,11 @@ function Signup({ providers }) {
       const status = await signIn('credentials', {
         email: values.email,
         password: values.password,
-        callbackUrl: '/',
+        callbackUrl: '/api/w/get',
       })
 
       if (status.status === 201) {
-        router.push('/')
+        router.push('/api/w/get')
       } else if (status.status === 409) {
         setError(status.error)
       } else if (status.status === 500) {

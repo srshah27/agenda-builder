@@ -26,7 +26,7 @@ function Login() {
       redirect: false,
       email: values.email,
       password: values.password,
-      callbackUrl: '/',
+      callbackUrl: '/api/w/get',
     })
     if (status.ok) router.push(status.url)
     if (status.status === 401) setError(status.error)
