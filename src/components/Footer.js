@@ -5,7 +5,7 @@ import { IoCall } from "react-icons/io5"
 
 const Footer = () => {
   return (
-    <footer className="footer p-10 bg-neutral text-neutral-content">
+    <footer className="footer p-10 bg-neutral text-neutral-content" id="footer">
       <div>
         <Image src="/svg/agenda.svg" width={150} height={50} />
         <p className="text-center lg:text-left">
