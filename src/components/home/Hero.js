@@ -1,6 +1,5 @@
 import Image from "next/image"
 import Link from "next/link"
-import styles from "../styles/GradientBG.module.css"
 
 function Hero() {
   return (
@@ -24,5 +23,21 @@ function Hero() {
     </>
   )
 }
+
+// export default function Home({ sess }) {
+//   const { data: session, status } = useSession()
+//   console.log(sess);
+//   console.log(session);
+//   return (
+//     <>
+//       <div className="flex justify-center h-screen">
+//         <h1 className="my-auto font-semibold">Agenda Builder</h1> 
+//         {session ? <button onClick={()=>signOut()} className="my-auto font-semibold text-primary"> &nbsp;Sign Out</button> : <Link href="/login" className="my-auto font-semibold text-primary">&nbsp;Login</Link>}
+
+//         {/* <button className="btn btn-primary">Button</button> */}
+//       </div>
+//     </>
+//   )
+// }
 
 export default Hero

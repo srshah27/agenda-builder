@@ -1,13 +1,12 @@
-import { getToken } from "next-auth/jwt"
 import dbConnect from "@/lib/dbconnect";
-import User from "@/models/Users";
 import Workspace from "@/models/Workspaces";
 import sessionUser from "@/middleware/getSessionUser";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).end();
-  await dbConnect();
   const { user } = await sessionUser({ req });
+  if(user.error) return res.status(401).json({error: user.error, dberror: user.dberror});
+  await dbConnect();
 
   const { workspaceName } = req.body;
 
