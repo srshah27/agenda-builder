@@ -5,7 +5,7 @@ const Use = () => {
   return (
       <div className="h-auto bg-primary w-full">
       
-          <div className ="flex-col text-gray-200 font-mono pt-10 pb-32  text-center text-[4vw] font-extrabold">
+          <div className ="flex-col text-gray-200 font-mono pt-10 pb-32  text-center text-6xl font-extrabold">
             <h1>Manage Your Work Smartly</h1>  
           </div>
           
@@ -17,7 +17,7 @@ const Use = () => {
                     </div>
                     <div className ={styles.content}>
                         <h2>Step I</h2>
-                        <p>Create Workspace</p>
+                        <p>Create  A Workspace</p>
                     </div>
                 </div>
                 <div className={styles.workcard}>

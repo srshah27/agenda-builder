@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 const NewHero = ({ heading, content }) => {
   return (
@@ -13,7 +14,7 @@ const NewHero = ({ heading, content }) => {
         <div className="flex flex-col items-center">
           <h1 className="text-5xl max-w-lg font-thin text-white text-center lg:text-start leading-snug">{heading}</h1>
           <p className="py-6 text-center">{content}</p>
-          <button className="btn btn-primary max-w-md">Get Started</button>
+          <button className="btn btn-primary max-w-md"> <Link href= "/login"> Get Started </Link> </button>
         </div>
       </div>
     </div>
