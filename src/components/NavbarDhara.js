@@ -40,17 +40,17 @@ function Navbar() {
               }`}
             >
               <ul className="h-screen md:h-auto items-center justify-center md:flex font-mono mt-20 md:mt-0">
-                <li className=" text-xl text-neutral py-2 md:px-6 text-center border-b-2  md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-[21rem]">
+                <li className=" text-xl text-neutral py-2 md:px-6 text-center border-b-2  md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-[26rem]">
                   <Link href="#about" onClick={() => setNavbar(!navbar)}>
                     About
                   </Link>
                 </li>
-                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-60">
+                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-80">
                   <Link href="#blog" onClick={() => setNavbar(!navbar)}>
                     Blogs
                   </Link>
                 </li>
-                <li className="text-xl text-neutral py-2 text-primary-6 text-center  border-b-2 md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-36">
+                <li className="text-xl text-neutral py-2 text-primary-6 text-center  border-b-2 md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-52">
                   <Link href="#contact" onClick={() => setNavbar(!navbar)}>
                    Contacts
                   </Link>
@@ -61,7 +61,7 @@ function Navbar() {
                   </Link>
                   </li> */}
                 <li className="text-xl text-neutral py-2 px-6 text-center  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-5">
-                  <button className="btn-active w-40 h-12 rounded-md mx-8 font-bold bg-primary text-gray-50">
+                  <button className="btn-active w-32 h-12 rounded-md text bg-neutral text-gray-50">
                     <Link href="/signup"> Sign Up </Link>
                   </button>
                 </li>
