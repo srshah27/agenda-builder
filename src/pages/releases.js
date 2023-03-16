@@ -26,7 +26,7 @@ const ReleasesPage = () => {
             </div>
           ))}
         </div>
-      </div> 
+      </div>
 
 
       {/* Fixed left col */}
@@ -58,7 +58,7 @@ const ReleasesPage = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
 
 
