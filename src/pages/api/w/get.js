@@ -23,7 +23,9 @@ export default async function handler(req, res) {
     const { id } = req.body;
     const workspaces = await Workspace.find({id: id});
     res.status(200).json(workspaces);
+  }else{
+    
+  res.status(405).json({error: "Method not allowed"})
   }
-  res.status(200).json({user})
   
 }

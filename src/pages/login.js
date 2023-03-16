@@ -142,7 +142,7 @@ export async function getServerSideProps(context) {
   if (session) {
     return {
       redirect: {
-        destination: '/',
+        destination: '/api/w/get',
         permanent: false,
       },
     }
