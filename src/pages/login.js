@@ -106,9 +106,9 @@ function Login() {
               </button>
               <div className="h-1 my-6 divider"></div>
               <div className="inline mx-10 text-sm text-gray-400">
-                Don&apos;t have an account?{' '}
+                Don&apos;t have an account?{' '} 
                 <RxDotFilled className="inline text-gray-800" />{' '}
-                <Link className="" href={'/signup'}>
+                <Link className="text-blue-400 hover:underline" href={'/signup'}>
                   Sign Up!
                 </Link>
               </div>

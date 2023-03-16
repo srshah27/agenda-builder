@@ -5,16 +5,22 @@ import styles from "../styles/GradientBG.module.css"
 function Hero() {
   return (
     <>
-    <div className="hero min-h-screen">
-  <div className="hero-content flex-col lg:flex-row-reverse">
-    <img src="svg/track.svg" className="max-w-sm  shadow-2xl" />
-    <div>
-      <h1 className="text-5xl font-bold">Box Office News!</h1>
-      <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
-      <button className="btn btn-primary">Get Started</button>
-    </div>
-  </div>
-</div>
+      <div className="hero min-h-screen">
+        <div className="hero-content flex-col lg:flex-row-reverse">
+          <Image
+            src="/img/track.png"
+            alt="track"
+            width={380}
+            height={380}
+            className="max-w-sm"
+          />
+          <div className="text-center md:text-left font-mono  text-gray-50">
+            <h1 className=" text-4xl md:text-6xl font-bold  text-blue-900">Welcome to Agenda Builder, Manage & Create Tasks Together.</h1>
+            <p className="py-6 text-md md:text-2xl">Add tasks, deadlines and collaborate with your colleagues. Lets get oraganized together.</p>
+            <button className="btn bg-blue-900 max-w-md"><Link href= "/login"> Get Started </Link> </button>
+          </div>
+        </div>
+      </div>
       {/* <section className="w-4/5 mx-auto my-auto pt-40 flex flex-wrap h-screen">
         <div className="flex justify-center items-center flex-wrap py-4 lg:mb-32 mx-auto max-w-md">
           <div className="">
