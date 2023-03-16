@@ -5,7 +5,7 @@ import styles from "../styles/GradientBG.module.css"
 function Hero() {
   return (
     <>
-      <div className="hero min-h-screen">
+      <div className="hero min-h-screen" id="home">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <Image
             src="/img/trackv2.png"
