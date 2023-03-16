@@ -32,8 +32,8 @@ export const timelines = {
     "description": ""
   },
   "0.9.0": {
-    "title": "",
-    "description": ""
+    "title": "Final Touches",
+    "description": "Graphics and final touches."
   },
   "1.0.0": {
     "title": "Final Release",
@@ -48,41 +48,7 @@ export const releases = {
     "title": "Initial Release",
     "description": "Initial Release",
     "features": {
-      "pages": ["Landing Page", "Sign Up Page", "Sign In Page"],
-      "backend": [
-        "User Authentication",
-        "User Registration with Credential and Google",
-        "User Sign In with Credential and Google",
-        "User Sign Out"
-      ],
-      "fixes": ["Session", "JWT"],
-      "changes": ["Logo"]
-    }
-  },
-  "Initial Release1": {
-    "version": "0.1.0",
-    "date": "2023-03-15",
-    "title": "1 Release",
-    "description": "Initial Release",
-    "features": {
-      "pages": ["Landing Page", "Sign Up Page", "Sign In Page"],
-      "backend": [
-        "User Authentication",
-        "User Registration with Credential and Google",
-        "User Sign In with Credential and Google",
-        "User Sign Out"
-      ],
-      "fixes": ["Session", "JWT"],
-      "changes": ["Logo"]
-    }
-  },
-  "Initial Release2": {
-    "version": "0.1.0",
-    "date": "2023-03-15",
-    "title": "2 Release",
-    "description": "Initial Release",
-    "features": {
-      "pages": ["Landing Page", "Sign Up Page", "Sign In Page"],
+      "pages": ["Landing Page", "Sign Up Page", "Log In Page"],
       "backend": [
         "User Authentication",
         "User Registration with Credential and Google",
