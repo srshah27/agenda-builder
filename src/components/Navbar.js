@@ -40,14 +40,9 @@ function Navbar() {
               }`}
             >
               <ul className="h-screen md:h-auto items-center justify-center md:flex font-mono mt-20 md:mt-0">
-                <li className=" text-xl text-neutral py-2 md:px-6 text-center border-b-2  md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-[26rem]">
+                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-80">
                   <Link href="#about" onClick={() => setNavbar(!navbar)}>
                     About
-                  </Link>
-                </li>
-                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-80">
-                  <Link href="#blog" onClick={() => setNavbar(!navbar)}>
-                    Blogs
                   </Link>
                 </li>
                 <li className="text-xl text-neutral py-2 text-primary-6 text-center  border-b-2 md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-52">
