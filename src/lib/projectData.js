@@ -59,4 +59,5 @@ export const releases = {
       "changes": ["Logo"]
     }
   }
+  
 }
