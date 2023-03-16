@@ -28,8 +28,8 @@ export const timelines = {
     "description": "Added the ability to add and remove collaborators from workspaces and boards."
   },
   "0.8.0": {
-    "title": "",
-    "description": ""
+    "title": "Optimizations and Improvements",
+    "description": "Optimizing the code and improving the user experience."
   },
   "0.9.0": {
     "title": "Final Touches",

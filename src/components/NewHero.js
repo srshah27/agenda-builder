@@ -12,8 +12,8 @@ const NewHero = ({ heading, content }) => {
           className="rounded-lg"
         />
         <div className="flex flex-col items-center">
-          <h1 className="text-5xl max-w-lg font-thin text-white text-center lg:text-start leading-snug">{heading}</h1>
-          <p className="py-6 text-center">{content}</p>
+          <h1 className="md:text-5xl text-3xl max-w-lg text-white text-center lg:text-start leading-snug font-mono font-bold">{heading}</h1>
+          <p className="py-6 text-center text-2xl">{content}</p>
           <button className="btn btn-primary max-w-md"> <Link href= "/login"> Get Started </Link> </button>
         </div>
       </div>

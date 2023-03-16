@@ -10,13 +10,13 @@ function Landing() {
     <>
       <Navbar />
       <GradientBG />
-      <NewHero
+      {/* <NewHero
         heading={"Welcome to Agenda Builder, Manage & Create Tasks Together"}
         content={
           "Add tasks, collaborate with your colleagues. Lets get oraganized together."
         }
-      />
-      {/* <Hero /> */}
+      /> */}
+      <Hero />
       <Feature />
       <Use />
       <Footer />
