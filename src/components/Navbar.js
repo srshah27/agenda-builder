@@ -45,8 +45,8 @@ function Navbar() {
               }`}
             >
               <ul className="h-screen md:h-auto items-center justify-center md:flex font-mono mt-20 md:mt-0">
-                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-80">
-                  <Link href="#footer" onClick={() => setNavbar(!navbar)}>
+                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-[23rem]">
+                  <Link href="#home" onClick={() => setNavbar(!navbar)}>
                     Home
                   </Link>
                 </li>
@@ -55,7 +55,7 @@ function Navbar() {
                   About
                   </Link>
                 </li>
-                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2 md:border-b-0   border-primary  md:hover:text-primary">
+                <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2 md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-64">
                   <Link href="#footer" onClick={() => setNavbar(!navbar)}>
                    Contacts
                   </Link>
