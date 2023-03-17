@@ -1,7 +1,7 @@
-import Image from "next/image"
-import { BsTwitter, BsFacebook, BsYoutube } from "react-icons/bs"
-import { SiGmail } from "react-icons/si"
-import { IoCall } from "react-icons/io5"
+import Image from 'next/image'
+import { BsTwitter, BsFacebook, BsYoutube } from 'react-icons/bs'
+import { SiGmail } from 'react-icons/si'
+import { IoCall } from 'react-icons/io5'
 
 const Footer = () => {
   return (
@@ -18,10 +18,15 @@ const Footer = () => {
       <div>
         <span className="footer-title text-center lg:text-left">About Us</span>
         <div className="">
-          <p> Provident cupiditate voluptatem et in. Quaerat fugiat ut <br/>assumenda  excepturi exercitationem quasi. In deleniti <br/> eaque aut repudiandae et a id nisi. </p>
+          <p>
+            {' '}
+            Provident cupiditate voluptatem et in. Quaerat fugiat ut <br />
+            assumenda excepturi exercitationem quasi. In deleniti <br /> eaque
+            aut repudiandae et a id nisi.{' '}
+          </p>
         </div>
       </div>
-      
+
       <div>
         <span className="footer-title text-center lg:text-left">Contact</span>
         <div className="grid grid-flow-row gap-4">
@@ -35,7 +40,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
-      
+
       <div>
         <span className="footer-title text-center lg:text-left">Social</span>
         <div className="grid grid-flow-col gap-4">

@@ -5,7 +5,6 @@ Source :
 https://github.com/vercel/next.js/blob/canary/examples/with-mongodb-mongoose/utils/dbConnect.js 
 **/
 
-
 const MONGODB_URI = process.env.MONGODB_URI
 
 if (!MONGODB_URI) {
@@ -25,7 +24,7 @@ if (!cached) {
   cached = global.mongoose = { conn: null, promise: null }
 }
 
-async function dbConnect () {
+async function dbConnect() {
   if (cached.conn) {
     return cached.conn
   }

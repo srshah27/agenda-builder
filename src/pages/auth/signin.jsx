@@ -11,17 +11,17 @@ function Test({ providers }) {
   const formik = useFormik({
     initialValues: {
       email: '',
-      password: '',
+      password: ''
     },
     validate: login_validate,
-    onSubmit,
+    onSubmit
   })
   async function onSubmit(values) {
     const status = await signIn('Credentials', {
       redirect: false,
       email: values.email,
       password: values.password,
-      callbackUrl: '/',
+      callbackUrl: '/'
     })
     console.log(status)
     if (status.ok) router.push(status.url)
@@ -104,9 +104,9 @@ function Test({ providers }) {
           </p>
         </section>
         <div>
-          {Object.values(providers).map((provider) => {
+          {Object.values(providers).map(provider => {
             if (provider.name === 'Credentials') return
-            console.log(provider);
+            console.log(provider)
             return (
               <div key={provider.name}>
                 <button onClick={() => signIn(provider.id)}>
@@ -127,14 +127,14 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         destination: '/',
-        permanent: false,
-      },
+        permanent: false
+      }
     }
   }
   return {
     props: {
-      providers: await getProviders(context),
-    },
+      providers: await getProviders(context)
+    }
   }
 }
 

@@ -16,9 +16,9 @@ function Signup({ providers }) {
       username: '',
       email: '',
       password: '',
-      cpassword: '',
+      cpassword: ''
     },
-    validate: (values) => {
+    validate: values => {
       const errors = {}
       if (!values.email) {
         errors.email = 'Please enter valid email address'
@@ -58,7 +58,7 @@ function Signup({ providers }) {
       return errors
     },
 
-    onSubmit,
+    onSubmit
   })
   async function onSubmit(values) {
     const res = await fetch('/api/auth/signup', {
@@ -67,8 +67,8 @@ function Signup({ providers }) {
       body: JSON.stringify({
         username: values.username,
         email: values.email,
-        password: values.password,
-      }),
+        password: values.password
+      })
     })
     console.log(res)
     console.log(res)
@@ -76,7 +76,7 @@ function Signup({ providers }) {
       const status = await signIn('credentials', {
         email: values.email,
         password: values.password,
-        callbackUrl: '/api/w/get',
+        callbackUrl: '/api/w/get'
       })
 
       if (status.status === 201) {
@@ -203,14 +203,14 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         destination: '/',
-        permanent: false,
-      },
+        permanent: false
+      }
     }
   }
   return {
     props: {
-      providers: await getProviders(context),
-    },
+      providers: await getProviders(context)
+    }
   }
 }
 

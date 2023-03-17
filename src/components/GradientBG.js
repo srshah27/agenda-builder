@@ -1,4 +1,4 @@
-import styles from "@/styles/GradientBG.module.css"
+import styles from '@/styles/GradientBG.module.css'
 
 const GradientBG = () => {
   return (

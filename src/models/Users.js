@@ -1,23 +1,23 @@
-import { Schema, model, models } from 'mongoose';
+import { Schema, model, models } from 'mongoose'
 
 const UserSchema = new Schema({
   username: {
     type: String,
-    required: true,
+    required: true
   },
   email: {
     type: String,
     required: true,
-    unique: true,
+    unique: true
   },
   password: {
     type: String,
-    required: true,
+    required: true
   },
   image: {
     type: String,
-    required: false,
-  },
-});
+    required: false
+  }
+})
 
-module.exports = models.User || model('User', UserSchema);
+module.exports = models.User || model('User', UserSchema)

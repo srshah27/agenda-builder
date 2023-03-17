@@ -1,5 +1,5 @@
-import styles from "@/styles/Use.module.css"
-import Image from "next/image"
+import styles from '@/styles/Use.module.css'
+import Image from 'next/image'
 
 const Use = () => {
   return (
