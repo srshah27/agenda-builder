@@ -36,6 +36,7 @@ export default async function handler(req, res) {
         { id, name, createdAt, collaborators, roles, invite },
         { new: true }
       )
+      return res.status(202).json({ updatedWorkspace })
     }
 
     case 'DELETE': {
@@ -44,10 +45,11 @@ export default async function handler(req, res) {
         'collaborators.user': user._id,
         'collaborators.creator': true
       })
+      return res.status(202).json({ message: 'Workspace deleted' })
     }
-
+      
     default: {
       return res.status(405).json({ error: 'Method not allowed' })
     }
-  }
+  } 
 }
