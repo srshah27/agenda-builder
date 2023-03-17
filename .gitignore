@@ -31,5 +31,5 @@ yarn-error.log*
 # vercel
 .vercel
 
-# user files
+# User
 /mine

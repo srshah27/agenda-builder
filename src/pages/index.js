@@ -1,10 +1,19 @@
-export default function Home() {
+import GradientBG from "@/components/GradientBG"
+import Hero from "@/components/home/Hero.js"
+import Feature from "@/components/home/Feature"
+import Use from "@/components/home/Use"
+import Navbar from "@/components/Navbar"
+import Footer from "@/components/Footer"
+
+export default function Home({ sess }) {
   return (
     <>
-      <div className="flex justify-center h-screen">
-        <h1 className="my-auto font-semibold">Agenda Builder</h1>
-        {/* <button className="btn btn-primary">Button</button> */}
-      </div>
+      <Navbar />
+      <GradientBG />
+      <Hero />
+      <Feature />
+      <Use />
+      <Footer />
     </>
   )
 }
