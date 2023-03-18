@@ -23,5 +23,6 @@ export default async function sessionUser({ req }) {
     return result
   }
   result.user = user
+  result.error = null
   return result
 }
