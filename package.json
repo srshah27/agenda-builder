@@ -10,12 +10,17 @@
     "prettier": "prettier -write ."
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.17",
+    "@chakra-ui/react": "^2.5.1",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@next-auth/mongodb-adapter": "^1.1.1",
     "bcryptjs": "^2.4.3",
     "daisyui": "^2.51.3",
     "eslint": "8.34.0",
     "eslint-config-next": "13.2.1",
     "formik": "^2.2.9",
+    "framer-motion": "^10.5.0",
     "mongodb": "^4.1.1",
     "mongoose": "^7.0.1",
     "next": "13.2.1",
