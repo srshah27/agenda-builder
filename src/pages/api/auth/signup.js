@@ -4,8 +4,8 @@ import { hash } from 'bcryptjs'
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end()
-  let { username, email, password } = req.body
-  console.log(username, email, password)
+  let { name, email, password } = req.body
+  console.log(name, email, password)
   // Check if user exists
   await dbConnect()
   console.log('db connected')
@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const hashed = await hash(password, 11)
   console.log(hashed)
   try {
-    let user = await User.create({ name: username, email, password: hashed })
+    let user = await User.create({ name, email, password: hashed })
     console.log(user)
     res.status(201).json({ user })
   } catch (error) {

@@ -18,7 +18,7 @@ const NewUser = ({ session }) => {
   console.log(session);
   
   const [uname, setUname] = useState(session.user.name.replace(/\s/g, '').toLowerCase());
-  const [image, setImage] = useState(`https://api.dicebear.com/5.x/initials/svg?seed=${session.user.name}&radius=50&backgroundColor=27d3d5,3ea7da,9d8eef&backgroundType=gradientLinear&fontFamily=Verdana&fontSize=46`);
+  const [image, setImage] = useState(session.user.image || `https://api.dicebear.com/5.x/initials/svg?seed=${session.user.name}&radius=50&backgroundColor=27d3d5,3ea7da,9d8eef&backgroundType=gradientLinear&fontFamily=Verdana&fontSize=46`);
   let e = false
   checkExists(uname).then((res) => e = res)
   const [exists, setExists] = useState(e);
@@ -62,7 +62,7 @@ const NewUser = ({ session }) => {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
-  if (!session || !session.user.userId) {
+  if (!session || session.user.userId !== undefined) {
     return {
       redirect: {
         destination: '/login',

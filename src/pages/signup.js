@@ -13,7 +13,7 @@ function Signup({ providers }) {
   const router = Router
   const formik = useFormik({
     initialValues: {
-      username: '',
+      name: '',
       email: '',
       password: '',
       cpassword: ''
@@ -48,10 +48,10 @@ function Signup({ providers }) {
       }
 
       // validation for designation
-      if (!values.username) {
-        errors.username = 'Please enter your username'
-      } else if (values.username.length < 3 || values.username.length > 20) {
-        errors.username =
+      if (!values.name) {
+        errors.name = 'Please enter your name'
+      } else if (values.name.length < 3 || values.name.length > 20) {
+        errors.name =
           'Must be greater then 3 and less then 20 characters long'
       }
 
@@ -65,7 +65,7 @@ function Signup({ providers }) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: values.username,
+        name: values.name,
         email: values.email,
         password: values.password
       })
@@ -118,10 +118,10 @@ function Signup({ providers }) {
                     type="text"
                     placeholder="User Name*"
                     className="input-md mt-2 transition-all duration-500 w-full h-10 rounded-sm border-gray-300 border-2 bg-gray-50"
-                    {...formik.getFieldProps('username')}
+                    {...formik.getFieldProps('name')}
                   />
-                  {formik.touched.username && formik.errors.username ? (
-                    <div className="error">{formik.errors.username}</div>
+                  {formik.touched.name && formik.errors.name ? (
+                    <div className="error">{formik.errors.name}</div>
                   ) : null}
                 </div>
                 <input
