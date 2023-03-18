@@ -3,9 +3,9 @@ import User from '@/models/Users'
 import sessionUser from '@/middleware/getSessionUser'
 
 export default async function handler(req, res) {
-  const { user } = await sessionUser({ req })
-  if (user.error)
-    return res.status(401).json({ error: user.error, dberror: user.dberror })
+  const { user, error, dberror } = await sessionUser({ req })
+  if (error || dberror)
+    return res.status(401).json({ error: error, dberror: dberror })
   
   
   try {
