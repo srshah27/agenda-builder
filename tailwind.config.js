@@ -6,10 +6,10 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
 
     // Or if using `src` directory:
-    './src/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {},
+    extend: {}
   },
   plugins: [require('daisyui')],
   // daisyui: {
@@ -44,13 +44,13 @@ module.exports = {
     themes: [
       {
         mytheme: {
-          primary: "#0097B2",
-          secondary: "#FEDC79",
-          accent: "#37cdbe",
-          neutral: "#3d4451",
-          "base-100": "#ffffff",
-        },
-      },
-    ],
-  },
+          primary: '#0097B2',
+          secondary: '#FEDC79',
+          accent: '#37cdbe',
+          neutral: '#3d4451',
+          'base-100': '#ffffff'
+        }
+      }
+    ]
+  }
 }

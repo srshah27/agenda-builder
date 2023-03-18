@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
 export const Release = ({ release }) => {
-  const { version, date, title, description, features } = release;
+  const { version, date, title, description, features } = release
 
   return (
     <div className="bg-white rounded-lg shadow overflow-hidden max-w-4xl">
@@ -13,18 +13,26 @@ export const Release = ({ release }) => {
           </p>
           <p className="mt-2 text-base text-gray-500">{description}</p>
           <div className="mt-6 w-fit">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">Features</h3>
+            <h3 className="text-lg leading-6 font-medium text-gray-900">
+              Features
+            </h3>
             <div className="mt-2 grid grid-cols-1 gap-5 lg:grid-cols-2">
               {Object.keys(features).map((category, index) => {
-                const s = index % 2 === 0 ? "bg-gray-100" : "bg-gray-200";
-                const l = index % 3 === 0 ? "bg-gray-100" : "bg-gray-200";
+                const s = index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'
+                const l = index % 3 === 0 ? 'bg-gray-100' : 'bg-gray-200'
                 return (
                   <div
                     key={category}
-                    className={`${index % 2 === 0 ? "bg-gray-100" : "bg-gray-200"} ${index % 3 === 0 ? "lg:bg-gray-100" : "lg:bg-gray-200"} rounded-lg shadow lg:w-64`}
+                    className={`${
+                      index % 2 === 0 ? 'bg-gray-100' : 'bg-gray-200'
+                    } ${
+                      index % 3 === 0 ? 'lg:bg-gray-100' : 'lg:bg-gray-200'
+                    } rounded-lg shadow lg:w-64`}
                   >
                     <div className="px-4 py-5 sm:p-6">
-                      <h4 className="text-md font-medium text-gray-900 capitalize">{category}</h4>
+                      <h4 className="text-md font-medium text-gray-900 capitalize">
+                        {category}
+                      </h4>
                       <ul className="mt-4 space-y-4 ">
                         {features[category].map((feature, index) => (
                           <li key={index} className="flex">
@@ -41,7 +49,9 @@ export const Release = ({ release }) => {
                                 />
                               </svg>
                             </div>
-                            <span className="ml-3 text-gray-700">{feature}</span>
+                            <span className="ml-3 text-gray-700">
+                              {feature}
+                            </span>
                           </li>
                         ))}
                       </ul>
@@ -54,5 +64,5 @@ export const Release = ({ release }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

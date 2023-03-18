@@ -1,14 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
-import {HiMenu} from 'react-icons/hi'
-import {IoClose} from 'react-icons/io5'
-import { useSession, getSession, signOut } from "next-auth/react"
+import { HiMenu } from 'react-icons/hi'
+import { IoClose } from 'react-icons/io5'
+import { useSession, getSession, signOut } from 'next-auth/react'
 function Navbar() {
-  
   const { data: session, status } = useSession()
-  console.log(session);
-  
+  console.log(session)
+
   const [navbar, setNavbar] = useState(false)
   return (
     <>
@@ -52,21 +51,27 @@ function Navbar() {
                 </li>
                 <li className="text-xl text-neutral py-2 text-primary-6 text-center  border-b-2 md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-52">
                   <Link href="#footer" onClick={() => setNavbar(!navbar)}>
-                  About
+                    About
                   </Link>
                 </li>
                 <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2 md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-64">
                   <Link href="#footer" onClick={() => setNavbar(!navbar)}>
-                   Contacts
+                    Contacts
                   </Link>
-                  </li>
+                </li>
                 <li className="text-xl text-neutral py-2 px-6 text-center md:absolute right-5">
-                {!session ? <button className="btn-active w-32 h-12 rounded-md text bg-transparent md:bg-neutral md:text-gray-50 md:hover:bg-blue-900">
-                    <Link href="/signup"> Sign Up </Link>
-                  </button> : <button className="btn-active w-32 h-12 rounded-md text bg-transparent md:bg-neutral md:text-gray-50 md:hover:bg-blue-900 "onClick={()=>signOut()}>
-                     Sign Out 
-                  </button>}
-                  
+                  {!session ? (
+                    <button className="btn-active w-32 h-12 rounded-md text bg-transparent md:bg-neutral md:text-gray-50 md:hover:bg-blue-900">
+                      <Link href="/signup"> Sign Up </Link>
+                    </button>
+                  ) : (
+                    <button
+                      className="btn-active w-32 h-12 rounded-md text bg-transparent md:bg-neutral md:text-gray-50 md:hover:bg-blue-900 "
+                      onClick={() => signOut()}
+                    >
+                      Sign Out
+                    </button>
+                  )}
                 </li>
               </ul>
             </div>

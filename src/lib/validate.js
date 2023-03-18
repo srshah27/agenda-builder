@@ -1,55 +1,53 @@
 export function login_validate(values) {
-  const errors = {};
+  const errors = {}
 
   if (!values.email) {
-    errors.email = 'Required';
+    errors.email = 'Required'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = 'Invalid email address'
   }
 
   // validation for password
   if (!values.password) {
-    errors.password = "Required";
+    errors.password = 'Required'
   }
 
-  return errors;
-
+  return errors
 }
 
 export function registerValidate(values) {
-
-  const errors = {};
+  const errors = {}
 
   if (!values.email) {
-    errors.email = 'Required';
+    errors.email = 'Required'
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = 'Invalid email address'
   }
 
   // validate confirm password
   if (!values.cpassword) {
-    errors.cpassword = "Required";
+    errors.cpassword = 'Required'
   } else if (values.password !== values.cpassword) {
-    errors.cpassword = "Password Not Match...!"
-  } else if (values.cpassword.includes(" ")) {
-    errors.cpassword = "Invalid Confirm Password"
+    errors.cpassword = 'Password Not Match...!'
+  } else if (values.cpassword.includes(' ')) {
+    errors.cpassword = 'Invalid Confirm Password'
   }
 
   // validation for password
   if (!values.password) {
-    errors.password = "Required";
+    errors.password = 'Required'
   } else if (values.password.length < 8 || values.password.length > 20) {
-    errors.password = "Must be greater then 8 and less then 20 characters long";
-  } else if (values.password.includes(" ")) {
-    errors.password = "Invalid Password";
+    errors.password = 'Must be greater then 8 and less then 20 characters long'
+  } else if (values.password.includes(' ')) {
+    errors.password = 'Invalid Password'
   }
 
   // validation for designation
   if (!values.username) {
-    errors.username = "Required";
+    errors.username = 'Required'
   } else if (values.username.length < 3 || values.username.length > 20) {
-    errors.username = "Must be greater then 3 and less then 20 characters long";
+    errors.username = 'Must be greater then 3 and less then 20 characters long'
   }
 
-  return errors;
+  return errors
 }

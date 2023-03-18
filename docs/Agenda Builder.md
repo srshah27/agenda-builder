@@ -10,11 +10,11 @@
 
 - Home Page
 
-    Home Page
+  Home Page
 
 - Session Module
 
-    Login Options :
+  Login Options :
 
   - Credentials
   - Google
@@ -30,9 +30,10 @@
     - Email
     - Password
 
-        Options:
+      Options:
 
     - Forget Password
+
   - Logout (Sign Out)
 
         Button / URL
@@ -49,7 +50,9 @@
     - Last Name
     - Email
     - Password & Confirm Password
+
 - User Module
+
   - Profile
 
         User’s Profile Page
@@ -58,6 +61,7 @@
 
     - Display User Information
     - Update Information (If current user == profile user)
+
   - Dashboard
 
         User’s Workspace/Board Dashboard
@@ -71,19 +75,24 @@
       - User’s Workspaces
       - Guest Workspaces
     - Create new Workspace/Board
+
 - Workspace Module
+
   - Create New
+
     - By Template
+
       - Display Templates
 
             Let User choose, then
 
       - Create that particular Workspace
+
     - Scratch
 
             Create an Empty Untitled Workspace
 
-        Requires user to change Workspace’s Title (Default: “Untitled”)
+      Requires user to change Workspace’s Title (Default: “Untitled”)
 
   - Dashboard
 
@@ -103,12 +112,15 @@
         - Remove Collaborators
 
 - Board Page
+
   - Create New
+
     - Scratch
 
             Create an Empty Untitled Board without any list.
 
     - By Template
+
       - Display Templates
 
             Let User choose, then
@@ -118,6 +130,7 @@
         Requires user to change Workspace’s Title (Default: “Untitled”)
 
   - Views
+
     - Board View (Default)
 
             Like a Kanban Board.
@@ -164,6 +177,7 @@
     Each board has set of Labels, which can be applied to cards.
 
 ---
+
 <br/>
 
 # Lists
@@ -182,9 +196,9 @@ There can be N no of Lists in a board.
 
 A card is an entity which has a parent list.
 
-A card can have (* compulsory)
+A card can have (\* compulsory)
 
-- Title *
+- Title \*
 - Description
 - Start Date
 - Due / End Date

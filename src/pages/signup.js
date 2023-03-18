@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { RxDotFilled } from 'react-icons/rx'
 import { getProviders, signIn, getSession } from 'next-auth/react'
@@ -13,12 +13,12 @@ function Signup({ providers }) {
   const router = Router
   const formik = useFormik({
     initialValues: {
-      username: '',
+      name: '',
       email: '',
       password: '',
-      cpassword: '',
+      cpassword: ''
     },
-    validate: (values) => {
+    validate: async (values) => {
       const errors = {}
       if (!values.email) {
         errors.email = 'Please enter valid email address'
@@ -48,27 +48,27 @@ function Signup({ providers }) {
       }
 
       // validation for designation
-      if (!values.username) {
-        errors.username = 'Please enter your username'
-      } else if (values.username.length < 3 || values.username.length > 20) {
-        errors.username =
+      if (!values.name) {
+        errors.name = 'Please enter your name'
+      } else if (values.name.length < 3 || values.name.length > 20) {
+        errors.name =
           'Must be greater then 3 and less then 20 characters long'
       }
 
       return errors
     },
 
-    onSubmit,
+    onSubmit
   })
   async function onSubmit(values) {
     const res = await fetch('/api/auth/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: values.username,
+        name: values.name,
         email: values.email,
-        password: values.password,
-      }),
+        password: values.password
+      })
     })
     console.log(res)
     console.log(res)
@@ -76,7 +76,7 @@ function Signup({ providers }) {
       const status = await signIn('credentials', {
         email: values.email,
         password: values.password,
-        callbackUrl: '/api/w/get',
+        callbackUrl: '/newuser'
       })
 
       if (status.status === 201) {
@@ -118,10 +118,10 @@ function Signup({ providers }) {
                     type="text"
                     placeholder="User Name*"
                     className="input-md mt-2 transition-all duration-500 w-full h-10 rounded-sm border-gray-300 border-2 bg-gray-50"
-                    {...formik.getFieldProps('username')}
+                    {...formik.getFieldProps('name')}
                   />
-                  {formik.touched.username && formik.errors.username ? (
-                    <div className="error">{formik.errors.username}</div>
+                  {formik.touched.name && formik.errors.name ? (
+                    <div className="error">{formik.errors.name}</div>
                   ) : null}
                 </div>
                 <input
@@ -203,14 +203,14 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         destination: '/',
-        permanent: false,
-      },
+        permanent: false
+      }
     }
   }
   return {
     props: {
-      providers: await getProviders(context),
-    },
+      providers: await getProviders(context)
+    }
   }
 }
 

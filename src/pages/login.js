@@ -16,17 +16,17 @@ function Login() {
   const formik = useFormik({
     initialValues: {
       email: '',
-      password: '',
+      password: ''
     },
     validate: login_validate,
-    onSubmit,
+    onSubmit
   })
   async function onSubmit(values) {
     const status = await signIn('credentials', {
       redirect: false,
       email: values.email,
       password: values.password,
-      callbackUrl: '/api/w/get',
+      callbackUrl: '/api/w/get'
     })
     if (status.ok) router.push(status.url)
     if (status.status === 401) setError(status.error)
@@ -106,9 +106,12 @@ function Login() {
               </button>
               <div className="h-1 my-6 divider"></div>
               <div className="inline mx-10 text-sm text-gray-400">
-                Don&apos;t have an account?{' '} 
+                Don&apos;t have an account?{' '}
                 <RxDotFilled className="inline text-gray-800" />{' '}
-                <Link className="text-blue-400 hover:underline" href={'/signup'}>
+                <Link
+                  className="text-blue-400 hover:underline"
+                  href={'/signup'}
+                >
                   Sign Up!
                 </Link>
               </div>
@@ -143,12 +146,12 @@ export async function getServerSideProps(context) {
     return {
       redirect: {
         destination: '/api/w/get',
-        permanent: false,
-      },
+        permanent: false
+      }
     }
   }
   return {
-    props: {},
+    props: {}
   }
 }
 

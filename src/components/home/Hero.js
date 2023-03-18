@@ -1,5 +1,5 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from 'next/image'
+import Link from 'next/link'
 
 function Hero() {
   return (
@@ -14,9 +14,16 @@ function Hero() {
             className="max-w-sm"
           />
           <div className="text-center md:text-left font-mono  text-gray-50">
-            <h1 className=" text-4xl md:text-6xl font-bold  text-blue-900">Welcome to Agenda Builder, Manage & Create Tasks Together.</h1>
-            <p className="py-6 text-md md:text-2xl">Add tasks, deadlines and collaborate with your colleagues. Lets get oraganized together.</p>
-            <button className="btn bg-blue-900 max-w-md"><Link href= "/login"> Get Started </Link> </button>
+            <h1 className=" text-4xl md:text-6xl font-bold  text-blue-900">
+              Welcome to Agenda Builder, Manage & Create Tasks Together.
+            </h1>
+            <p className="py-6 text-md md:text-2xl">
+              Add tasks, deadlines and collaborate with your colleagues. Lets
+              get oraganized together.
+            </p>
+            <button className="btn bg-blue-900 max-w-md">
+              <Link href="/login"> Get Started </Link>{' '}
+            </button>
           </div>
         </div>
       </div>
@@ -31,7 +38,7 @@ function Hero() {
 //   return (
 //     <>
 //       <div className="flex justify-center h-screen">
-//         <h1 className="my-auto font-semibold">Agenda Builder</h1> 
+//         <h1 className="my-auto font-semibold">Agenda Builder</h1>
 //         {session ? <button onClick={()=>signOut()} className="my-auto font-semibold text-primary"> &nbsp;Sign Out</button> : <Link href="/login" className="my-auto font-semibold text-primary">&nbsp;Login</Link>}
 
 //         {/* <button className="btn btn-primary">Button</button> */}

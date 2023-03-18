@@ -1,7 +1,7 @@
 export const Timeline = ({ timeline, timelineKeys }) => {
   return (
     <div className="mt-6 mb-36">
-      {Object.keys(timeline).map((version) => (
+      {Object.keys(timeline).map(version => (
         <div key={version} className="relative pb-8">
           {version !== timelineKeys[timelineKeys.length - 1] && (
             <span
@@ -22,7 +22,7 @@ export const Timeline = ({ timeline, timelineKeys }) => {
                 </div>
                 <div
                   className={` absolute font-medium sm:hidden text-gray-900  ${
-                    timeline[version].title.length > 22 ? "top-0" : "top-2.5"
+                    timeline[version].title.length > 22 ? 'top-0' : 'top-2.5'
                   }`}
                 >
                   {timeline[version].title}
