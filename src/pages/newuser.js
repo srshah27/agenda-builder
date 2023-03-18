@@ -7,7 +7,7 @@ const checkExists = async (uname) => {
   let res = await fetch('http://localhost:3000/api/u/uname', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ userId: uname })
+    body: JSON.stringify({ uid: uname })
   })
   let data = await res.json()
   console.log(data);
@@ -36,7 +36,7 @@ const NewUser = ({ session }) => {
     let res = await fetch('/api/u/uname', {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId: uname, email: session.user.email, image })
+      body: JSON.stringify({ uid: uname, email: session.user.email, image })
     })
     let data = await res.json()
     if(data.user)
@@ -62,7 +62,7 @@ const NewUser = ({ session }) => {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
-  if (!session || session.user.userId !== undefined) {
+  if (!session || session.user.uid !== undefined) {
     return {
       redirect: {
         destination: '/login',

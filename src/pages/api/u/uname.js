@@ -20,8 +20,8 @@ export default async function handler(req, res) {
   switch (reqType) {
 
     case 'POST': {
-      const { userId } = req.body
-      const exists = await User.exists({ userId })
+      const { uid } = req.body
+      const exists = await User.exists({ uid })
       if (exists) {
         return res.status(200).json({ exists: true })
       } else {
@@ -30,11 +30,11 @@ export default async function handler(req, res) {
     }
     
     case 'PATCH':{
-      const { userId, email, image } = req.body
+      const { uid, email, image } = req.body
       console.log(email, user.email);
       if(email !== user.email)
         return res.status(401).json({ error: 'Unauthorized' })
-      const userdb = await User.findOneAndUpdate({ email }, { userId, image })
+      const userdb = await User.findOneAndUpdate({ email }, { uid, image })
       if(userdb)
         return res.status(200).json({ user: userdb })
       else

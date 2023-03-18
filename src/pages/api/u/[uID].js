@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       .json({ error: 'Database connection error', dberror: error })
   }
   const { uID } = req.query
-  const userdb = await User.findOne({ userId: uID }, '-password')
+  const userdb = await User.findOne({ uid: uID }, '-password')
   if(!userdb){
     return res.status(404).json({ error: 'User not found' })
   }
@@ -23,16 +23,16 @@ export default async function handler(req, res) {
   const reqType = req.method
   switch (reqType) {
     case 'GET': {
-      if (uID !== user.userId)
-        return res.status(401).json({ error: 'Unauthorized', uID, userId: user.userId })
+      if (uID !== user.uid)
+        return res.status(401).json({ error: 'Unauthorized', uID, uid: user.uid })
       if (userdb) {
         return res.status(200).json({ user: userdb })
       }
     }
 
     case 'PATCH': {
-      const { userId, email, image, name } = req.body;
-      const modify = await User.findOneAndUpdate({ userId: uID }, { userId, email, image, name })
+      const { uid, email, image, name } = req.body;
+      const modify = await User.findOneAndUpdate({ uid: uID }, { uid, email, image, name })
       if(modify)
         return res.status(200).json({ user: modify })
       else

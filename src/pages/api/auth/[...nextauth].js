@@ -56,7 +56,8 @@ export default NextAuth({
       console.log("user", user);
       if (account.provider === 'google') {
         user = {
-          id: user.userId,
+          id: user.id,
+          userId: user.userId,
           name: user.username,
           email: user.email,
           image: user.image
