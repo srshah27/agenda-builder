@@ -16,7 +16,7 @@ export async function getServerSideProps(context) {
     }
   }
   const { uID } = context.params
-  let res = await fetch(`http://localhost:3000/api/u/${uID}`)
+  let res = await fetch(`/api/u/${uID}`)
   let data = await res.json()
   if(res.ok){
     return {
@@ -26,6 +26,13 @@ export async function getServerSideProps(context) {
       }
     }
   }
+  return {
+    redirect: {
+      destination: '/',
+    }
+  }
+  
+  
 }
 
 export default Dashboard

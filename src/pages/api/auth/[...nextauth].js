@@ -70,8 +70,8 @@ export default NextAuth({
         : Promise.resolve(baseUrl)
     },
     async session({ session, token }) {
-      session.userId = token.userId
-      session.image = token.picture
+      session.user.userId = token.userId
+      session.user.image = token.picture
       return session
     },
     async jwt({ token, user, account, profile }) {
