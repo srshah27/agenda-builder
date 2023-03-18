@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { RxDotFilled } from 'react-icons/rx'
 import { getProviders, signIn, getSession } from 'next-auth/react'
@@ -18,7 +18,7 @@ function Signup({ providers }) {
       password: '',
       cpassword: ''
     },
-    validate: values => {
+    validate: async (values) => {
       const errors = {}
       if (!values.email) {
         errors.email = 'Please enter valid email address'
@@ -76,7 +76,7 @@ function Signup({ providers }) {
       const status = await signIn('credentials', {
         email: values.email,
         password: values.password,
-        callbackUrl: '/api/w/get'
+        callbackUrl: '/newuser'
       })
 
       if (status.status === 201) {

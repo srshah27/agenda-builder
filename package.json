@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@next-auth/mongodb-adapter": "^1.1.1",
+    "@reduxjs/toolkit": "^1.9.3",
     "bcryptjs": "^2.4.3",
     "daisyui": "^2.51.3",
     "eslint": "8.34.0",
@@ -24,9 +25,12 @@
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.0",
     "react-icons": "^4.8.0",
-    "react-modal": "^3.16.1"
+    "react-modal": "^3.16.1",
+    "react-redux": "^8.0.5",
+    "redux": "^4.2.1"
   },
   "devDependencies": {
+    "@redux-devtools/core": "^3.13.1",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
     "prettier": "2.8.4",

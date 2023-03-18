@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const hashed = await hash(password, 11)
   console.log(hashed)
   try {
-    let user = await User.create({ username, email, password: hashed })
+    let user = await User.create({ name: username, email, password: hashed })
     console.log(user)
     res.status(201).json({ user })
   } catch (error) {

@@ -31,7 +31,8 @@ export default NextAuth({
         let checkPassword = await compare(credentials.password, user.password)
         // if (!checkPassword) return null
         if (!checkPassword) throw new Error('Incorrect Credentials')
-        return { id: user._id, name: user.username, email: user.email }
+        console.log("asdasd", user);
+        return { id: user._id, name: user.name, email: user.email, userId: user.userId, image: user.image }
       }
     })
   ],
@@ -52,9 +53,10 @@ export default NextAuth({
   debug: true,
   callbacks: {
     async signIn({ user, account, profile }) {
+      console.log("user", user);
       if (account.provider === 'google') {
         user = {
-          id: user._id,
+          id: user.userId,
           name: user.username,
           email: user.email,
           image: user.image
@@ -68,10 +70,12 @@ export default NextAuth({
         : Promise.resolve(baseUrl)
     },
     async session({ session, token }) {
+      session.userId = token.userId
+      session.image = token.picture
       return session
     },
     async jwt({ token, user, account, profile }) {
-      if (user) token.id = user.id
+      if (user) { token.id = user.userId;  token.userId = user.userId}
       if (account) {
         token.accessToken = account.access_token
         if (account.provider === 'google') token.id = profile.id
@@ -80,6 +84,7 @@ export default NextAuth({
     }
   },
   pages: {
-    // signIn: '/signup',`
+    signIn: '/login',
+    newUser: '/newuser'
   }
 })
