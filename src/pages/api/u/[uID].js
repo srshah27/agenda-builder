@@ -3,8 +3,9 @@ import User from '@/models/Users'
 import sessionUser from '@/middleware/getSessionUser'
 
 export default async function handler(req, res) {
+  console.log(req);
   const { user, error, dberror } = await sessionUser({ req })
-  if (error || dberror)
+  if (dberror)
     return res.status(401).json({ error: error, dberror: dberror })
 
   try {
@@ -23,8 +24,6 @@ export default async function handler(req, res) {
   const reqType = req.method
   switch (reqType) {
     case 'GET': {
-      if (uID !== user.uid)
-        return res.status(401).json({ error: 'Unauthorized', uID, uid: user.uid })
       if (userdb) {
         return res.status(200).json({ user: userdb })
       }
