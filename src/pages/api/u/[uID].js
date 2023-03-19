@@ -1,5 +1,6 @@
 import dbConnect from '@/lib/dbconnect'
 import User from '@/models/Users'
+import Workspace from '@/models/Workspaces'
 import sessionUser from '@/middleware/getSessionUser'
 
 export default async function handler(req, res) {
@@ -24,9 +25,21 @@ export default async function handler(req, res) {
   const reqType = req.method
   switch (reqType) {
     case 'GET': {
-      if (userdb) {
-        return res.status(200).json({ user: userdb })
-      }
+      const workspacesCreator = await Workspace.find({
+        collaborators: {
+          $elemMatch: { user: uID, creator: true }
+        }
+      })
+      const workspacesCollab = await Workspace.find({
+        collaborators: {
+          $elemMatch: { user: uID, creator: false }
+        }
+      })
+      return res.status(200).json({
+        asCreator: workspacesCreator,
+        asCollaborator: workspacesCollab,
+        user: userdb
+      })
     }
 
     case 'PATCH': {

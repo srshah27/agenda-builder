@@ -5,10 +5,8 @@ const initialState = {
   name: '',
   email: '',
   image: '',
-  status: 'idle',
-  isValid: false,
-  isCreating: false,
-  isFetching: false,
+  loading: 'idle'
+  
 }
 
 const fetchUser = createAsyncThunk('user/fetchUser', async (uid) => {
@@ -28,16 +26,12 @@ export const userSlice = createSlice({
   name: 'workspace',
   initialState,
   reducers: {
-    increment: state => {
-      state.value += 1
-    },
-    decrement: state => {
-      state.value -= 1
-    },
-    incrementByAmount: (state, action) => {
-      state.value += action.payload
+    fetchUser,
+    updateUser: (state, action) => {
+      state[action.payload.key] = action.payload.value
     }
-  }
+  },
+  extraReducers
 })
 
 // Action creators are generated for each case reducer function
