@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const workspaceSlice = createSlice({
   name: 'workspace',
   initialState: {
-    workspaces: [],
+    boards: [],
   },
   reducers: {
     increment: state => {
