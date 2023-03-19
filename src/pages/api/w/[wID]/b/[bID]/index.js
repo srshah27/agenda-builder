@@ -1,5 +1,4 @@
 import dbConnect from '@/lib/dbconnect'
-import Workspace from '@/models/Workspaces'
 import Board from '@/models/Boards'
 import List from '@/models/Lists'
 import Card from '@/models/Cards'
@@ -17,36 +16,35 @@ export default async function handler(req, res) {
       .status(500)
       .json({ error: 'Database connection error', dberror: error })
   }
-  const { wID } = req.query
+  const { wID, bID } = req.query
   const reqType = req.method
   switch (reqType) {
     case 'GET': {
-      const workspace = await Workspace.findOne({
-        id: wID
+      const board = await Board.findOne({
+        id: bID
       })
-      return res.status(200).json({ workspace })
+      return res.status(200).json({ board })
     }
 
     case 'PATCH': {
-      const { id, name, createdAt, collaborators, roles, invite } = req.body
-      const updatedWorkspace = await Workspace.findOneAndUpdate(
+      const { name, backgroundImage } = req.body
+      const updatedBoard = await Board.findOneAndUpdate(
         {
-          id: wID
+          id: bID,
         },
-        { id, name, createdAt, collaborators, roles, invite },
+        { name, backgroundImage },
         { new: true }
       )
-      return res.status(202).json({ updatedWorkspace })
+      return res.status(202).json({ updatedBoard })
     }
 
     case 'DELETE': {
-      await Card.deleteMany({ workspaceId: wID });
-      await List.deleteMany({ workspaceId: wID });
-      await Board.deleteMany({ workspaceId: wID });
-      await Workspace.findOneAndDelete({
-        id: wID
+      await Card.deleteMany({ boardId: bID });
+      await List.deleteMany({ boardId: bID });
+      await Board.findOneAndDelete({
+        id: bID
       })
-      return res.status(202).json({ message: 'Workspace deleted' })
+      return res.status(202).json({ message: 'Board deleted' })
     }
 
     default: {

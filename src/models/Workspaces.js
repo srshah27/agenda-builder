@@ -9,12 +9,9 @@ const WorkspaceSchema = new Schema({
     default: new Date().toISOString()
   },
   collaborators: [
-    { user: { type: ObjectId, ref: 'User' }, creator: Boolean, role: String }
+    { user: String, creator: Boolean, role: String }
   ],
   roles: [{ name: String }],
-  // boards: [{ type: ObjectId, ref: 'Board' }],
-  // lists: [{ type: ObjectId, ref: 'List' }],
-  // cards: [{ type: ObjectId, ref: 'Card' }],
   invite: {
     link: String,
     disabled: { type: Boolean, default: false },

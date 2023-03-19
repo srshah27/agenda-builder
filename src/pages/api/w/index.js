@@ -17,26 +17,9 @@ export default async function handler(req, res) {
 
   const reqType = req.method
   switch (reqType) {
-    case 'GET': {
-      const workspacesCreator = await Workspace.find({
-        collaborators: {
-          $elemMatch: { user: user._id, creator: true }
-        }
-      })
-      const workspacesCollab = await Workspace.find({
-        collaborators: {
-          $elemMatch: { user: user._id, creator: false }
-        }
-      })
-      return res.status(200).json({
-        asCreator: workspacesCreator,
-        asCollaborator: workspacesCollab
-      })
-    }
 
     case 'POST': {
-      const { workspaceName } = req.body
-
+      const { workspaceName, userId } = req.body
       let workspaceId = workspaceName.replace(/\s/g, '').toLowerCase()
       let duplicate = await Workspace.findOne({ id: workspaceId })
       let newWorkspaceId
@@ -56,7 +39,7 @@ export default async function handler(req, res) {
         // lists: [],
         // cards: [],
         invite: { link: '', disabled: false, expiresAt: null },
-        collaborators: [{ user: user._id, creator: true, role: 'Admin' }]
+        collaborators: [{ user: userId, creator: true, role: 'Admin' }]
       }
 
       const workspace = await Workspace.create(workspaceObj)
