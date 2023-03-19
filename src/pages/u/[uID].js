@@ -16,9 +16,16 @@ export async function getServerSideProps(context) {
     }
   }
   const { uID } = context.params
-  let res = await fetch(`/api/u/${uID}`)
+  if(uID != session.user.uid)
+    return {
+      redirect: {
+        destination: '/u/'+session.user.uid,
+      }
+    }
+  console.log(uID);
+  let res = await fetch(`${process.env.BASE_URL}/api/u/${uID}`)
   let data = await res.json()
-  if(res.ok){
+  if(data.user){
     return {
       props: {
         session,
@@ -31,8 +38,6 @@ export async function getServerSideProps(context) {
       destination: '/',
     }
   }
-  
-  
 }
 
 export default Dashboard

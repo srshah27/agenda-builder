@@ -32,7 +32,7 @@ export default NextAuth({
         // if (!checkPassword) return null
         if (!checkPassword) throw new Error('Incorrect Credentials')
         console.log("asdasd", user);
-        return { id: user._id, name: user.name, email: user.email, userId: user.userId, image: user.image }
+        return { id: user._id, name: user.name, email: user.email, uid: user.uid, image: user.image }
       }
     })
   ],
@@ -57,7 +57,7 @@ export default NextAuth({
       if (account.provider === 'google') {
         user = {
           id: user.id,
-          userId: user.userId,
+          uid: user.uid,
           name: user.username,
           email: user.email,
           image: user.image
@@ -71,12 +71,12 @@ export default NextAuth({
         : Promise.resolve(baseUrl)
     },
     async session({ session, token }) {
-      session.user.userId = token.userId
+      session.user.uid = token.uid
       session.user.image = token.picture
       return session
     },
     async jwt({ token, user, account, profile }) {
-      if (user) { token.id = user.userId;  token.userId = user.userId}
+      if (user) { token.id = user.uid;  token.uid = user.uid}
       if (account) {
         token.accessToken = account.access_token
         if (account.provider === 'google') token.id = profile.id
