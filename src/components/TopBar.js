@@ -46,6 +46,7 @@ export default function WithSubnavigation() {
                     display={{ base: "flex", md: "none" }}
                 >
                     <IconButton
+                        color="cyan.400"
                         onClick={onToggle}
                         icon={
                             isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
