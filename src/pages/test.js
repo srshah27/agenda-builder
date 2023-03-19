@@ -9,7 +9,7 @@ export default function Home({ sess }) {
     <ChakraProvider>
       <TopBar/>
       {/* <List/> */}
-      <Example/>
+      {/* <Example/> */}
     </ChakraProvider>
     </>
   )

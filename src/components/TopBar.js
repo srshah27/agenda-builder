@@ -1,19 +1,11 @@
 import React from 'react';
+import Menu1 from './Menu1';
 import { Image, Flex, Text, IconButton, Link, Button, Box } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { HiHome } from 'react-icons/hi';
-import { Menu, MenuButton, MenuList, MenuItem, Lorem } from '@chakra-ui/react'
+import { Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
 import { useDisclosure } from '@chakra-ui/react'
-import{ Drawer, DrawerBody, DrawerContent, DrawerHeader, DrawerOverlay} from '@chakra-ui/react'
-import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    ModalCloseButton,
-} from '@chakra-ui/react'
+import {Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton} from '@chakra-ui/react'
 
 // import { Container } from 'postcss';
 
@@ -25,16 +17,7 @@ export default function TopBar() {
         <Flex>
             <Flex h="12" w="full" bgColor="gray.400" >
                 <Image src="/svg/agenda.svg" alt="logo" h="6" m="3" />
-                <Menu color="cyan.500">
-                    <MenuButton as={Button} rightIcon={<ChevronDownIcon />} bg="transparent" color="blue.800" my="1">
-                        Workspace
-                    </MenuButton>
-                    <MenuList >
-                        <Text mx="2" fontFamily="mono" color="blue.400" fontSize="sm" > Your Workspaces</Text>
-                        <MenuItem> <Image src="/img/image1.png" h="8" mx="2" borderRadius="3" /> Workspace 1</MenuItem>
-                        <MenuItem> <Image src="/img/image2.png" h="8" mx="2" borderRadius="3" /> Workspace 2</MenuItem>
-                    </MenuList>
-                </Menu>
+                <Menu1/>
                 <Menu color="cyan.500">
                     <MenuButton as={Button} rightIcon={<ChevronDownIcon />} bg="transparent" color="blue.800" my="1">
                         Templates
@@ -45,18 +28,23 @@ export default function TopBar() {
                         <MenuItem> <Box bg='tomato' h="8" w="8" mx="2" borderRadius="3" /> Red</MenuItem>
                     </MenuList>
                 </Menu>
-                <Button onClick={onOpen}>Open Drawer</Button>
-                <Drawer placement='right' onClose={onClose} isOpen={isOpen}>
-                    <DrawerOverlay />
-                    <DrawerContent>
-                        <DrawerHeader borderBottomWidth='1px'>Basic Drawer</DrawerHeader>
-                        <DrawerBody>
-                            <p>Some contents...</p>
-                            <p>Some contents...</p>
-                            <p>Some contents...</p>
-                        </DrawerBody>
-                    </DrawerContent>
-                </Drawer>
+                <Button onClick={onOpen}>Open Modal</Button>
+                <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                        <ModalHeader>Modal Title</ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                            <p> dve</p>
+                        </ModalBody>
+                        <ModalFooter>
+                            <Button colorScheme='blue' mr={3} onClick={onClose}>
+                                Close
+                            </Button>
+                            <Button variant='ghost'>Secondary Action</Button>
+                        </ModalFooter>
+                    </ModalContent>
+                </Modal>
                 <Link href="/">
                     <IconButton
                         icon={<HiHome />}
