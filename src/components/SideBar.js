@@ -9,7 +9,7 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody,
 export default function SimpleSidebar({ children }) {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
-        <Box minH="100%" bg={useColorModeValue("gray.100", "gray.900")}>
+        <Box minH="100%" bg={useColorModeValue("gray.200", "gray.900")}>
             <SidebarContent
                 onClose1={() => onClose}
                 display={{ base: "none", md: "block" }}
@@ -29,7 +29,7 @@ export default function SimpleSidebar({ children }) {
             </Drawer>
             {/* mobilenav */}
             <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
-            <Box ml={{ base: 0, md: 60 }} pt="16" h="100%" w="100%" pos="fixed" top="0" zIndex="-1" bg={useColorModeValue("gray.100", "gray.700")}>
+            <Box ml={{ base: 0, md: 60 }} pt="16" h="100%" w="100%" pos="fixed" top="0" zIndex="-1" bg={useColorModeValue("gray.50", "gray.700")}>
                 {children}
             </Box>
         </Box>
@@ -62,7 +62,7 @@ const SidebarContent = ({ onClose1, ...rest }) => {
                     <Modal isOpen={isOpen} onClose={onClose}>
                         <ModalOverlay />
                         <ModalContent>
-                            <ModalHeader color="cyan.100">Create workspace</ModalHeader>
+                            <ModalHeader>Create workspace</ModalHeader>
                             <ModalCloseButton />
                             <ModalBody>
                                 <Input placeholder='Workspace Name' />
