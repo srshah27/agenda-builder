@@ -1,11 +1,11 @@
-const Avatar = ({ url }) => {
+const Avatar = ({ url, w, h }) => {
   return (
     <div>
       <img
         src={url}
         alt="avatar"
-        width={100}
-        height={100}
+        width={w}
+        height={h}
       />
     </div>
   )
