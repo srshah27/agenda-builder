@@ -12,10 +12,10 @@ import {
     Text,
     useDisclosure
 } from "@chakra-ui/react"
-import {FiStar, FiSettings} from "react-icons/fi"
-import {AiFillCaretRight} from "react-icons/ai"
-import {HiOutlineTemplate} from "react-icons/hi"
-import {TbLayoutBoardSplit} from "react-icons/tb"
+import { FiStar, FiSettings } from "react-icons/fi"
+import { AiFillCaretRight } from "react-icons/ai"
+import { HiOutlineTemplate } from "react-icons/hi"
+import { TbLayoutBoardSplit } from "react-icons/tb"
 const LinkItems = [
     { name: "Boards", icon: TbLayoutBoardSplit },
     { name: "Templates", icon: HiOutlineTemplate },
@@ -46,6 +46,9 @@ export default function SimpleSidebar({ children }) {
             </Drawer>
             {/* mobilenav */}
             <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
+            <Box ml={{ base: 0, md: 60 }} pt="16" h="100%" w="100%" pos="fixed" top="0" zIndex="-1" bg={useColorModeValue("gray.100", "gray.700")}>
+                {children}
+            </Box>
         </Box>
     )
 }
@@ -61,8 +64,8 @@ const SidebarContent = ({ onClose, ...rest }) => {
             h="full"
             {...rest}
         >
-            <Flex h="10"  m="2" justifyContent="end" >
-                <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} color="cyan.400"/>
+            <Flex h="10" m="2" justifyContent="end" >
+                <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} color="cyan.400" />
             </Flex>
             {LinkItems.map(link => (
                 <NavItem key={link.name} icon={link.icon}>
@@ -122,7 +125,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
             justifyContent="flex-start"
             {...rest}
         >
-        <Text > See More</Text>
+            <Text > See More</Text>
             <IconButton
                 variant="ghost"
                 onClick={onOpen}
