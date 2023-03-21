@@ -1,26 +1,40 @@
 import React from 'react'
-import { Grid, GridItem, Flex, Text } from '@chakra-ui/react'
+import { Wrap, WrapItem, Flex, Text, Center, Stack } from '@chakra-ui/react'
 const Work = () => {
-  const colors = ['red', 'orange', 'yellow', 'green', 'teal', 'blue', 'cyan', 'purple', 'pink']
-  const [index, setIndex] = React.useState(0)
-  const changeColor = () => {
-    index >= colors.length - 1 ? setIndex(0) : setIndex(index + 1)
-  }
+
+
   return (
 
-    <Flex >
-      <Text pos="fixed" top="10%" left="20%" fontSize="lg" > Recent Workspaces</Text>
-      <Flex pos="absolute" top="18%" left="20%">
-        <Grid templateColumns='repeat(5, 1fr)' gap={6} >
-          <GridItem w='52' h='32' bg='red.500' borderRadius={6} />
-          <GridItem w='52' h='32' bg='red.500' borderRadius={6} />
-          <GridItem w='52' h='32' bg='red.500' borderRadius={6} />
-          <GridItem w='52' h='32' bg='red.500' borderRadius={6} />
-          <GridItem w='52' h='32' bg='red.500' borderRadius={6} />
-          <GridItem as="button" w='52' h='32' bg='gray.50' borderRadius={6} textColor="blue.400"> Create a board</GridItem>
-        </Grid>
+    <Stack left={["0%", "0%", "16%", "16%"]} m="4" pos="fixed">
+      <Text fontSize="lg" color="red"> Your Workspaces</Text>
+      <Flex >
+        <Stack>
+          <Text fontSize="sm" color="gray.500"> Your workspaces are where you can organize your projects and tasks. </Text>
+          <Wrap>
+            <WrapItem>
+              <Center w='180px' h='80px' bg='red.200'>
+                Box 1
+              </Center>
+            </WrapItem>
+            <WrapItem>
+              <Center w='180px' h='80px' bg='green.200'>
+                Box 2
+              </Center>
+            </WrapItem>
+            <WrapItem>
+              <Center w='180px' h='80px' bg='tomato'>
+                Box 3
+              </Center>
+            </WrapItem>
+            <WrapItem>
+              <Center w='180px' h='80px' bg='blue.200'>
+                Box 4
+              </Center>
+            </WrapItem>
+          </Wrap>
+        </Stack>
       </Flex>
-    </Flex >
+    </Stack >
   )
 }
 
