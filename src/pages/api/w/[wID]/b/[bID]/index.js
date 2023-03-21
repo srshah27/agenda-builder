@@ -21,7 +21,8 @@ export default async function handler(req, res) {
   switch (reqType) {
     case 'GET': {
       const board = await Board.findOne({
-        id: bID
+        id: bID,
+        workspaceId: wID,
       })
       return res.status(200).json({ board })
     }

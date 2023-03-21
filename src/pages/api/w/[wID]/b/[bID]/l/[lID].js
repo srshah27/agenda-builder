@@ -20,7 +20,9 @@ export default async function handler(req, res) {
   switch (reqType) {
     case 'GET': {
       const list = await List.findOne({
-        id: lID
+        id: lID,
+        boardId: bID,
+        workspaceId: wID
       })
       return res.status(200).json({ list })
     }

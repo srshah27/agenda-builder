@@ -15,7 +15,7 @@ export default async function handler(req, res) {
   const reqType = req.method
   switch (reqType) {
     case 'GET': {
-      const lists = await List.find({ boardId: bID })
+      const lists = await List.find({ boardId: bID, workspaceId: wID })
       return res.status(200).json({ lists })
     }
 

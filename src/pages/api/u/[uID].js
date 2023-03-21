@@ -4,7 +4,6 @@ import Workspace from '@/models/Workspaces'
 import sessionUser from '@/middleware/getSessionUser'
 
 export default async function handler(req, res) {
-  console.log(req);
   const { user, error, dberror } = await sessionUser({ req })
   if (dberror)
     return res.status(401).json({ error: error, dberror: dberror })

@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const reqType = req.method
   switch (reqType) {
     case 'GET': {
-      const card = await Card.find({ boardId: bID })
+      const card = await Card.find({ boardId: bID, workspaceId: wID })
       return res.status(200).json({ card })
     }
 

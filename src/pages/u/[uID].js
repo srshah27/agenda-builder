@@ -1,8 +1,17 @@
 import React from 'react'
 import { getSession } from 'next-auth/react'
-const Dashboard = () => {
+import TopBar from '@/components/TopBar'
+import SideBar from '@/components/SideBar'
+import Work from '@/components/Work'
+import { ChakraProvider } from '@chakra-ui/react'
+const Dashboard = ({ user , asCreator, asCollaborator}) => {
+  console.log(user);
   return (
-    <div>Dashboard</div>
+    <ChakraProvider>
+      <TopBar />
+      <SideBar />
+      <Work asCreator={asCreator} asCollaborator={asCollaborator } />
+    </ChakraProvider>
   )
 }
 
@@ -25,11 +34,14 @@ export async function getServerSideProps(context) {
   console.log(uID);
   let res = await fetch(`${process.env.BASE_URL}/api/u/${uID}`)
   let data = await res.json()
+  console.log(data);
   if(data.user){
     return {
       props: {
         session,
-        user: data.user
+        user: data.user,
+        asCreator: data.asCreator,
+        asCollaborator: data.asCollaborator,
       }
     }
   }

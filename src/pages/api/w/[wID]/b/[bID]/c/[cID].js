@@ -30,6 +30,8 @@ export default async function handler(req, res) {
       const updatedBoard = await Card.findOneAndUpdate(
         {
           id: cID,
+          boardId: bID,
+          workspaceId: wID
         },
         { name, sequence, assignedTo, description },
         { new: true }
