@@ -14,19 +14,21 @@ import {
     PopoverContent,
     useColorModeValue,
     useBreakpointValue,
-    useDisclosure
+    useDisclosure,
+    useColorMode
 } from "@chakra-ui/react"
 import {
     HamburgerIcon,
     CloseIcon,
     ChevronDownIcon,
-    ChevronRightIcon
+    MoonIcon,
+    SunIcon
 } from "@chakra-ui/icons"
 import { HiHome } from 'react-icons/hi';
 
 export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure()
-
+    const { colorMode, toggleColorMode } = useColorMode();
     return (
         <Box>
             <Flex
@@ -72,11 +74,14 @@ export default function WithSubnavigation() {
                     justify={"flex-end"}
                     direction={"row"}
                 >
+                    <Button onClick={toggleColorMode} bg="transparent">
+                        {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
+                    </Button>
                     <Link href="/">
                         <IconButton
                             icon={<HiHome />}
-                            fontSize="xl"
                             color="cyan.500"
+                            fontSize="xl"
                             bg="transparent"
                             display={{ base: "inline-flex", md: "inline-flex" }}
                         />
@@ -140,7 +145,7 @@ const DesktopNav = () => {
     )
 }
 
-const DesktopSubNav = ({label, href }) => {
+const DesktopSubNav = ({ label, href }) => {
     return (
         <Link
             href={href}
@@ -269,5 +274,5 @@ const NAV_ITEMS = [
             }
         ]
     },
-    
+
 ]
