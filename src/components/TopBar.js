@@ -24,11 +24,15 @@ import {
     MoonIcon,
     SunIcon
 } from "@chakra-ui/icons"
-import { HiHome } from 'react-icons/hi';
+import Avatar from "./Avatar";
+import { useSession } from "next-auth/react";
+
 
 export default function WithSubnavigation() {
     const { isOpen, onToggle } = useDisclosure()
     const { colorMode, toggleColorMode } = useColorMode();
+    const { data: session } = useSession();
+
     return (
         <Box>
             <Flex
@@ -58,11 +62,12 @@ export default function WithSubnavigation() {
                     />
                 </Flex>
                 <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-                    <Image src="/svg/agenda.svg" h="auto" w="40" m="1"
-                        textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-                        fontFamily={'heading'}
-                    >
-                    </Image>
+                    <Link href="/">
+                        <Image src="/svg/agenda.svg" h="auto" w="40" m="1"
+                            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
+                            fontFamily={'heading'}
+                        />
+                    </Link>
 
                     <Flex display={{ base: "none", md: "flex" }} ml={10}>
                         <DesktopNav />
@@ -70,29 +75,25 @@ export default function WithSubnavigation() {
                 </Flex>
 
                 <Stack
-                    flex={{ base: 1, md: 0 }}
+                    flex={{ base: 1, md: 1 }}
                     justify={"flex-end"}
                     direction={"row"}
+                    alignItems="center"
+
                 >
                     <Button onClick={toggleColorMode} bg="transparent">
                         {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
                     </Button>
-                    <Link href="/">
-                        <IconButton
-                            icon={<HiHome />}
-                            color="cyan.500"
-                            fontSize="xl"
-                            bg="transparent"
-                            display={{ base: "inline-flex", md: "inline-flex" }}
-                        />
-                    </Link>
+                    <Flex>
+                        <Avatar url={session?.user.image} w={35} h={35} />
+                    </Flex>
                 </Stack>
             </Flex>
 
             <Collapse in={isOpen} animateOpacity>
                 <MobileNav />
             </Collapse>
-        </Box>
+        </Box >
     )
 }
 
