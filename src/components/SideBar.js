@@ -8,13 +8,15 @@ import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody,
 import { useState } from 'react'
 import { useRouter } from "next/router"
 
-export default function SimpleSidebar({ children }) {
+export default function SimpleSidebar({ children, updateRefresh }) {
+  
   const { isOpen, onOpen, onClose } = useDisclosure()
   return (
     <Box minH="100%" bg={useColorModeValue("gray.100", "gray.900")}>
       <SidebarContent
         onClose1={() => onClose}
         display={{ base: "none", md: "block" }}
+        update={updateRefresh}
       />
       <Drawer
         autoFocus={false}
@@ -26,7 +28,7 @@ export default function SimpleSidebar({ children }) {
         size="full"
       >
         <DrawerContent>
-          <SidebarContent onClose1={onClose} />
+          <SidebarContent onClose1={onClose} update={ updateRefresh } />
         </DrawerContent>
       </Drawer>
       {/* mobilenav */}
@@ -38,7 +40,8 @@ export default function SimpleSidebar({ children }) {
   )
 }
 
-const SidebarContent = ({ onClose1, ...rest }) => {
+const SidebarContent = ({ onClose1, update,  ...rest }) => {
+
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [workspaceName, setWorkspaceName] = useState('');
   const router = useRouter()
@@ -52,6 +55,7 @@ const SidebarContent = ({ onClose1, ...rest }) => {
     const data = await res.json()
     console.log(data);
     setWorkspaceName('')
+    update()
     onClose()
   }
 

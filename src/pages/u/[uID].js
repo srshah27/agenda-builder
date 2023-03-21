@@ -10,18 +10,19 @@ const Dashboard = ({ user }) => {
   const { uID } = router.query
   const [asCreator, setAsCreator] = useState([])
   const [asCollaborator, setAsCollaborator] = useState([])
+  const [refreshKey, setRefreshKey] = useState(0);
   
   useEffect(() => {
    
-    fetch(`/api/u/${uID}`).then((res) => res.json()).then((data) => { setAsCreator(data.asCreator); setAsCollaborator(data.asCollaborator) })
-  }, [uID]);
+    fetch(`/api/u/${uID}`).then((res) => res.json()).then((data) => { setAsCreator(data.asCreator); setAsCollaborator(data.asCollaborator); console.log("Updated"); })
+  }, [refreshKey, uID]);
   
   
   console.log(asCreator);
   return (
     <ChakraProvider >
       <TopBar />
-      <SideBar>
+      <SideBar updateRefresh={ () => setRefreshKey((prev) => prev + 1) }>
         <Work asCreator={asCreator} asCollaborator={asCollaborator} />
       </SideBar>
     </ChakraProvider>

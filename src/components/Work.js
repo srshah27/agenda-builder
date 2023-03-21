@@ -83,17 +83,29 @@ const Workspace = ({ id, workspace }) => {
 }
 
 const Work = ({ asCreator, asCollaborator }) => {
+  
+  const [creatorWorkspace, setCreatorWorkspace] = useState(asCreator);
+  const [collabWorkspace, setCollabWorkspace] = useState(asCollaborator);
+  
+  useEffect(() => {
+    setCreatorWorkspace(asCreator);
+    setCollabWorkspace(asCollaborator);
+    console.log(asCreator, asCollaborator);
+  }, [asCreator, asCollaborator]);
+  
   console.log(asCreator)
   const color = useColorModeValue("gray.900", "gray.50")
   return (
     <Stack m="12" pos="fixed">
-      {asCreator.length > 0 &&  <HStack> <BsPersonGear/> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you created</Text> </HStack>}
-      {asCreator.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
+      {creatorWorkspace.length > 0 &&  <HStack> <BsPersonGear/> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you created</Text> </HStack>}
+      {creatorWorkspace.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
 
-      {asCollaborator.length > 0 && <HStack> <BsPeople/> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you Collaborate</Text> </HStack>}
-      {asCollaborator.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
+      {collabWorkspace.length > 0 && <HStack> <BsPeople/> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you Collaborate</Text> </HStack>}
+      {collabWorkspace.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
     </Stack >
   )
 }
+
+
 
 export default Work
