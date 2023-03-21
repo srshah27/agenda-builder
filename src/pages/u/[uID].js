@@ -1,11 +1,23 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { getSession } from 'next-auth/react'
 import TopBar from '@/components/TopBar'
 import SideBar from '@/components/SideBar'
 import Work from '@/components/Work'
 import { ChakraProvider } from '@chakra-ui/react'
-const Dashboard = ({ user, asCreator, asCollaborator }) => {
-  console.log(user);
+import { useRouter } from 'next/router'
+const Dashboard = ({ user }) => {
+  const router = useRouter()
+  const { uID } = router.query
+  const [asCreator, setAsCreator] = useState([])
+  const [asCollaborator, setAsCollaborator] = useState([])
+  
+  useEffect(() => {
+   
+    fetch(`/api/u/${uID}`).then((res) => res.json()).then((data) => { setAsCreator(data.asCreator); setAsCollaborator(data.asCollaborator) })
+  }, [uID]);
+  
+  
+  console.log(asCreator);
   return (
     <ChakraProvider >
       <TopBar />

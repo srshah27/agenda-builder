@@ -20,6 +20,7 @@ export default async function handler(req, res) {
 
     case 'POST': {
       const { id, name, createdBy, createdAt, backgroundImage  } = req.body
+      console.log(name);
       const data = {
         id,
         workspaceId: wID,

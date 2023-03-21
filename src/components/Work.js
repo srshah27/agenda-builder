@@ -11,7 +11,8 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
-import { BsPersonGear, BsPeople } from 'react-icons/bs'
+import {BsPersonGear, BsPeople} from 'react-icons/bs'
+import shortid from 'shortid'
 
 const Workspace = ({ id, workspace }) => {
   const [boards, setBoards] = useState([]);
@@ -21,7 +22,21 @@ const Workspace = ({ id, workspace }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const router = useRouter()
   const { uId } = router.query
-
+  const [boardName, setBoardName] = useState('');
+  
+  const submitBoard = async (e) => {
+    console.log(boardName);
+    const res = await fetch(`/api/w/${id}/b`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({name: boardName, id: shortid.generate(), creator: uId})
+    })
+    const data = await res.json()
+    console.log(data);
+    setBoardName('')
+    onClose()
+  }
+  
   return (
     <Flex p="5">
       <Stack>
@@ -50,11 +65,10 @@ const Workspace = ({ id, workspace }) => {
                 <ModalHeader color="cyan.100">Create board</ModalHeader>
                 <ModalCloseButton />
                 <ModalBody>
-                  <Input placeholder='Board Name' />
-                  <Input hidden value={uId} />
+                  <Input placeholder='Board Name' value={boardName} onChange={ (e) => {setBoardName(e.target.value)} } />
                 </ModalBody>
                 <ModalFooter>
-                  <Button mr={3} onClick={onClose}>
+                  <Button  mr={3} onClick={submitBoard}>
                     Create
                   </Button>
                   <Button variant='ghost'>Close</Button>
@@ -69,13 +83,14 @@ const Workspace = ({ id, workspace }) => {
 }
 
 const Work = ({ asCreator, asCollaborator }) => {
-  console.log(asCreator.length)
+  console.log(asCreator)
+  const color = useColorModeValue("gray.900", "gray.50")
   return (
     <Stack m="12" pos="fixed">
-      {asCreator.length > 0 && <HStack> <BsPersonGear /> <Text fontSize="md" color={useColorModeValue("gray.900", "gray.50")} fontWeight="semibold">  Workspaces you created</Text> </HStack>}
+      {asCreator.length > 0 &&  <HStack> <BsPersonGear/> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you created</Text> </HStack>}
       {asCreator.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
 
-      {asCollaborator.length > 0 && <HStack> <BsPeople /> <Text fontSize="md" color={useColorModeValue("gray.900", "gray.50")} fontWeight="semibold">  Workspaces you Collaborate</Text> </HStack>}
+      {asCollaborator.length > 0 && <HStack> <BsPeople/> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you Collaborate</Text> </HStack>}
       {asCollaborator.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
     </Stack >
   )

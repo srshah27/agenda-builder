@@ -10,7 +10,8 @@ const BoardsSchema = new Schema({
   workspaceId: { type: String, ref: 'Workspace' },
   createdBy: { type: String, ref: 'User' },
   backgroundImage: String,
-  
+  lastViewedAt: Date,
+  favorite: Boolean
 })
 
 module.exports = models.Board || model('Board', BoardsSchema)
