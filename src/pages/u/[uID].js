@@ -21,7 +21,7 @@ const Dashboard = ({ user }) => {
   console.log(asCreator);
   return (
     <ChakraProvider >
-      <TopBar />
+      <TopBar asCreator={asCreator} asCollaborator={asCollaborator} />
       <SideBar updateRefresh={ () => setRefreshKey((prev) => prev + 1) }>
         <Work asCreator={asCreator} asCollaborator={asCollaborator} />
       </SideBar>
