@@ -9,7 +9,14 @@ const Board = () => {
   const [initData, setinitData] = useState(initialData)
 
   const onDragEnd = result => {
-    const { destination, source } = result
+    const { destination, source, draggableId } = result
+    if(!destination) return
+    console.log(destination, source, draggableId);
+    let newData = { ...initData }
+    newData.columns[source.droppableId].taskIds.splice(source.index, 1)
+    newData.columns[destination.droppableId].taskIds.splice(destination.index, 0, draggableId)
+    setinitData(newData)
+
   }
   console.log('here')
   console.log(initData)
@@ -23,9 +30,9 @@ const Board = () => {
 
         <Flex justify={'space-between'} px="4rem" py="2rem">
           {initData.columnOrder.map(columnId => {
-            const column = initData.columns[columnId]
-            const tasks = column.taskIds.map(taskId => initData.tasks[taskId])
-
+            let column = initData.columns[columnId]
+            let tasks = column.taskIds.map(taskId => initData.tasks[taskId])
+            console.log("updated");
             return <Column key={column.id} column={column} tasks={tasks} />
           })}
         </Flex>
