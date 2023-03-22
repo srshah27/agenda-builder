@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { TbLayoutBoardSplit } from 'react-icons/tb'
+import {HiOutlineViewGrid} from 'react-icons/hi'
+import {BsPersonPlus} from 'react-icons/bs'
+import {FiSettings} from 'react-icons/fi'
 import { Wrap, WrapItem, Flex, Text, Center, Stack, useDisclosure, Button, Input, useColorModeValue, HStack, Spacer, Link, textDecoration } from '@chakra-ui/react'
 import {
   Modal,
@@ -42,11 +45,11 @@ const Workspace = ({ id, workspace }) => {
       <Stack>
         <HStack mb="2">
           <Text fontSize="xl" color={useColorModeValue("gray.900", "gray.50")}> {workspace.name} </Text>
-          <Flex pos="fixed" right="14.5%">
-            <Button h="8" mx="2" > <TbLayoutBoardSplit /> {'     '} Boards</Button>
-            <Button h="8" mx="2" > <TbLayoutBoardSplit /> {' '} Boards</Button>
-            <Button h="8" mx="2"> <TbLayoutBoardSplit /> {' '} Boards</Button>
-            <Button h="8" mx="2"> <TbLayoutBoardSplit /> {' '} Boards</Button>
+          <Flex pos="absolute" right="13%">
+            <Button h="8" mx="2"  bgColor={useColorModeValue("gray.100", "gray.600")}> <TbLayoutBoardSplit /> <Text display={{ base: "none", md: "block" }}>Boards </Text></Button>
+            <Button h="8" mx="2" bgColor={useColorModeValue("gray.100", "gray.600")}> <HiOutlineViewGrid/> <Text display={{ base: "none", md: "block" }}>Views </Text></Button>
+            <Button h="8" mx="2" bgColor={useColorModeValue("gray.100", "gray.600")}> <BsPersonPlus /> <Text display={{ base: "none", md: "block" }}>Members </Text></Button>
+            <Button h="8" mx="2"bgColor={useColorModeValue("gray.100", "gray.600")}> <FiSettings /> <Text display={{ base: "none", md: "block" }}>Settings </Text></Button>
           </Flex>
         </HStack>
         <Wrap>
@@ -98,13 +101,15 @@ const Work = ({ asCreator, asCollaborator }) => {
   console.log(asCreator)
   const color = useColorModeValue("gray.900", "gray.50")
   return (
-    <Stack m="12" pos="fixed">
+    <Flex bg="red.900">
+    <Stack ml={{ base: 0, md: 60 }} mt="16" pt="12" pl={{ base: 8, md: 20 }} pos="absolute" bg={useColorModeValue("gray.50", "gray.700")}>
       {creatorWorkspace.length > 0 && <HStack> <BsPersonGear /> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you created</Text> </HStack>}
       {creatorWorkspace.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
 
       {collabWorkspace.length > 0 && <HStack> <BsPeople /> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you Collaborate</Text> </HStack>}
       {collabWorkspace.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
     </Stack >
+    </Flex>
   )
 }
 

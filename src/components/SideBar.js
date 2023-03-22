@@ -33,7 +33,7 @@ export default function SimpleSidebar({ children, updateRefresh }) {
       </Drawer>
       {/* mobilenav */}
       <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
-      <Box ml={{ base: 0, md: 60 }} pt="16" h="100%" w="100%" pos="fixed" top="0" zIndex="-1" bg={useColorModeValue("gray.100", "gray.700")}>
+      <Box h="100%" w="100%" pos="absolute" top="0" left="0" zIndex="-1" >
         {children}
       </Box>
     </Box>
@@ -67,23 +67,21 @@ const SidebarContent = ({ onClose1, update,  ...rest }) => {
       w={{ base: "full", md: 60 }}
       pos="fixed"
       h="full"
+      top="0"
+      zIndex={-1}
       {...rest}
     >
       <Flex h="10" m="2" justifyContent="end" >
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose1} color="cyan.400" />
       </Flex>
-      {/* {LinkItems.map(link => (
-                <NavItem key={link.name} icon={link.icon}  >
-                    {link.name}
-                </NavItem>
-            ))} */}
-      <Stack px="5" alignItems='flex-start'>
+  
+      <Stack px="5" pt="10" alignItems='flex-start'>
         <HStack fontSize="lg">
           <HiOutlineViewGridAdd /> <Button onClick={onOpen} bg="transparent" _hover={{ bg: "transparent" }}>Create Workspace</Button>
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent>
-              <ModalHeader color="cyan.100">Create workspace</ModalHeader>
+              <ModalHeader >Create workspace</ModalHeader>
               <ModalCloseButton />
               <ModalBody>
                 <Input placeholder='Workspace Name' value={workspaceName} onChange={ (e) => setWorkspaceName(e.target.value) } />
@@ -115,47 +113,47 @@ const SidebarContent = ({ onClose1, update,  ...rest }) => {
   )
 }
 
-const NavItem = ({ icon, children, ...rest }) => {
-  return (
-    <Link
-      href="#"
-      style={{ textDecoration: "none" }}
-      _focus={{ boxShadow: "none" }}
-    >
-      <Flex
-        align="center"
-        p="4"
-        mx="4"
-        borderRadius="lg"
-        role="group"
-        cursor="pointer"
-        _hover={{
-          bg: "cyan.400",
-          color: "white"
-        }}
-        {...rest}
-      >
-        {icon && (
-          <Icon
-            mr="4"
-            fontSize="16"
-            _groupHover={{
-              color: "white"
-            }}
-            as={icon}
-          />
-        )}
-        {children}
-      </Flex>
-    </Link>
-  )
-}
+// const NavItem = ({ icon, children, ...rest }) => {
+//   return (
+//     <Link
+//       href="#"
+//       style={{ textDecoration: "none" }}
+//       _focus={{ boxShadow: "none" }}
+//     >
+//       <Flex
+//         align="center"
+//         p="4"
+//         mx="4"
+//         borderRadius="lg"
+//         role="group"
+//         cursor="pointer"
+//         _hover={{
+//           bg: "cyan.400",
+//           color: "white"
+//         }}
+//         {...rest}
+//       >
+//         {icon && (
+//           <Icon
+//             mr="4"
+//             fontSize="16"
+//             _groupHover={{
+//               color: "white"
+//             }}
+//             as={icon}
+//           />
+//         )}
+//         {children}
+//       </Flex>
+//     </Link>
+//   )
+// }
 
 const MobileNav = ({ onOpen, ...rest }) => {
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
-      px={{ base: 4, md: 24 }}
+      px={{ base: 4, md: 60}}
       height="10"
       alignItems="center"
       bg={useColorModeValue("white", "gray.900")}
