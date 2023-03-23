@@ -8,7 +8,7 @@ const Column = ({ column, tasks }) => {
     <Flex rounded={'md'} w="20rem" h="20rem" flexDir="column" bg={'#9d8eef'}>
       <Flex align={'center'} h="60px" rounded={'sm'} px="1.5rem">
         <Text fontSize={'20px'} color={'#000'}>
-          {column.title}
+          {column.title}sdajfkj
         </Text>
       </Flex>
 

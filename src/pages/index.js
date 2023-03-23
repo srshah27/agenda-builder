@@ -4,6 +4,7 @@ import Feature from '@/components/home/Feature'
 import Use from '@/components/home/Use'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
+import AvatarMenu from '@/components/AvatarMenu'
 
 export default function Home({ sess }) {
   return (
@@ -13,6 +14,7 @@ export default function Home({ sess }) {
       <Hero />
       <Feature />
       <Use />
+      <AvatarMenu />
       <Footer />
     </>
   )
