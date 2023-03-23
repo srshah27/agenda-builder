@@ -5,7 +5,7 @@ import { Draggable } from 'react-beautiful-dnd'
 
 const Column = ({ column, tasks }) => {
   return (
-    <Flex rounded={'md'} w="20rem" h="20rem" flexDir="column" bg={'#9d8eef'}>
+    <Flex rounded={'md'} w="20rem" h="auto" flexDir="column" bgColor={'gray.700'}>
       <Flex align={'center'} h="60px" rounded={'sm'} px="1.5rem">
         <Text fontSize={'20px'} color={'#000'}>
           {column.title}

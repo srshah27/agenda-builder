@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Flex, Heading, Text } from '@chakra-ui/react'
 import { DragDropContext } from 'react-beautiful-dnd'
 import dynamic from 'next/dynamic'
+import UserNav from '@/components/UserNav'
 // import { initialData } from '../../data/InitialData'
 const Column = dynamic(() => import('../components/Board/Column'), { ssr: false })
 
@@ -10,7 +11,7 @@ const Board = () => {
 
   const onDragEnd = result => {
     const { destination, source, draggableId } = result
-    if(!destination) return
+    if (!destination) return
     console.log(destination, source, draggableId);
     let newData = { ...initData }
     newData.columns[source.droppableId].taskIds.splice(source.index, 1)
@@ -21,23 +22,26 @@ const Board = () => {
   console.log('here')
   console.log(initData)
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Flex flexDir="column" bg="#3ea7da" minH="100vh" w="full" color={'white'}>
-        <Flex py="4rem" flexDir={'column'} align="center">
-          <Heading>Agile Builder</Heading>
-          <Text fontSize={'20px'}>(Board Name)</Text>
-        </Flex>
+    <>
+      <UserNav />
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Flex flexDir="column" bg="#3ea7da" minH="100vh" w="full" color={'white'}>
+          <Flex py="4rem" flexDir={'column'} align="center">
+            <Heading>Agile Builder</Heading>
+            <Text fontSize={'20px'}>(Board Name)</Text>
+          </Flex>
 
-        <Flex justify={'space-between'} px="4rem" py="2rem">
-          {initData.columnOrder.map(columnId => {
-            let column = initData.columns[columnId]
-            let tasks = column.taskIds.map(taskId => initData.tasks[taskId])
-            console.log("updated");
-            return <Column key={column.id} column={column} tasks={tasks} />
-          })}
+          <Flex justify={'space-between'} px="4rem" py="2rem">
+            {initData.columnOrder.map(columnId => {
+              let column = initData.columns[columnId]
+              let tasks = column.taskIds.map(taskId => initData.tasks[taskId])
+              console.log("updated");
+              return <Column key={column.id} column={column} tasks={tasks} />
+            })}
+          </Flex>
         </Flex>
-      </Flex>
-    </DragDropContext>
+      </DragDropContext>
+    </>
   )
 }
 
