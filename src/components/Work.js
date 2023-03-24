@@ -121,7 +121,7 @@ const Work = ({ asCreator, asCollaborator }) => {
   const color = useColorModeValue("gray.900", "gray.50")
   return (
     <Flex bg="red.900">
-      <Stack ml={{ base: 0, md: 60 }} mt="16" pt="12" pl={{ base: 8, md: 20 }} pos="absolute" bg={useColorModeValue("gray.50", "gray.700")}>
+      <Stack ml={{ base: 0, md: 60 }} mt="16" pt="12" pl={{ base: 8, md: 20 }} pos="absolute"  bg={useColorModeValue("gray.50", "gray.700")} minH="100vh" minW="83.3vw">
         {creatorWorkspace.length > 0 && <HStack> <BsPersonGear /> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you created</Text> </HStack>}
         {creatorWorkspace.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
 

@@ -24,7 +24,7 @@ import {
   MoonIcon,
   SunIcon
 } from "@chakra-ui/icons"
-import Avatar from "./Avatar";
+import AvatarMenu from "./AvatarMenu";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
@@ -107,7 +107,7 @@ export default function WithSubnavigation({ asCreator, asCollaborator }) {
             {colorMode === 'light' ? <MoonIcon /> : <SunIcon />}
           </Button>
           <Flex>
-            <Avatar url={session?.user.image} w={35} h={35} />
+            <AvatarMenu />
           </Flex>
         </Stack>
       </Flex>

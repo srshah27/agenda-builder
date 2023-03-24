@@ -1,14 +1,14 @@
-import { Flex, Text } from '@chakra-ui/react'
+import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 import { Draggable } from 'react-beautiful-dnd'
 
 const Column = ({ column, tasks }) => {
   return (
-    <Flex rounded={'md'} w="20rem" h="auto" flexDir="column" bgColor={'gray.700'}>
+    <Flex rounded={'md'} w="20rem" h="auto" flexDir="column" bgColor={'gray.200'}>
       <Flex align={'center'} h="60px" rounded={'sm'} px="1.5rem">
         <Text fontSize={'20px'} color={'#000'}>
-          {column.title}sdajfkj
+          {column.title}
         </Text>
       </Flex>
 
@@ -29,12 +29,13 @@ const Column = ({ column, tasks }) => {
                     mb="1rem"
                     h="72px"
                     p={'1.5rem'}
-                    bg="#000"
+                    bg={useColorModeValue("gray.50", "gray.700")}
+                    rounded="md"
                     ref={draggableProvided.innerRef}
                     {...draggableProvided.draggableProps}
                     {...draggableProvided.dragHandleProps}
                   >
-                    <Text>{task.content}</Text>
+                    <Text color={useColorModeValue("gray.700", "gray.50")}>{task.content}</Text>
                     {/* {draggableProvided.placeholder} */}
                   </Flex>
                 )}

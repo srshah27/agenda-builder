@@ -33,7 +33,7 @@ export default function SimpleSidebar({ children, updateRefresh }) {
       </Drawer>
       {/* mobilenav */}
       <MobileNav display={{ base: "flex", md: "none" }} onOpen={onOpen} />
-      <Box h="100%" w="100%" pos="absolute" top="0" left="0" zIndex="-1" >
+      <Box h="100%" w="100%" pos="absolute" top="0" left="0" zIndex="-1"  >
         {children}
       </Box>
     </Box>

@@ -4,42 +4,36 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
   MenuGroup,
-  MenuOptionGroup,
-  MenuDivider
+  MenuDivider,
 } from '@chakra-ui/react'
 
-import {
-  HamburgerIcon,
-  AddIcon,
-  ExternalLinkIcon,
-  RepeatIcon,
-  EditIcon
-} from '@chakra-ui/icons'
+import Avatar from './Avatar'
+import { useSession } from 'next-auth/react'
 
 const AvatarMenu = () => {
+  const { data: session } = useSession();
   return (
     <Menu>
       <MenuButton
         as={IconButton}
         aria-label="Options"
-        icon={<HamburgerIcon />}
-        variant="outline"
-      />
+        variant="ghost"
+        pr="4"
+        _hover={{ bg: "transparent" }}
+      >
+        <Avatar url={session?.user.image} w={28} h={28} />
+      </MenuButton>
       <MenuList>
-        <MenuItem icon={<AddIcon />} command="⌘T">
-          New Tab
-        </MenuItem>
-        <MenuItem icon={<ExternalLinkIcon />} command="⌘N">
-          New Window
-        </MenuItem>
-        <MenuItem icon={<RepeatIcon />} command="⌘⇧N">
-          Open Closed Tab
-        </MenuItem>
-        <MenuItem icon={<EditIcon />} command="⌘O">
-          Open File...
-        </MenuItem>
+        <MenuGroup title='Profile'>
+          <MenuItem>My Account</MenuItem>
+          <MenuItem>Payments </MenuItem>
+        </MenuGroup>
+        <MenuDivider />
+        <MenuGroup title='Help'>
+          <MenuItem>Docs</MenuItem>
+          <MenuItem>FAQ</MenuItem>
+        </MenuGroup>
       </MenuList>
     </Menu>
   )
