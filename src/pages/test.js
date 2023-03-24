@@ -7,9 +7,9 @@ export default function Home({ sess }) {
   return (
     <>
       <ChakraProvider>
-        <TopBar />
+        {/* <TopBar /> */}
         <SideBar />
-        <Work />
+        {/* <Work /> */}
       </ChakraProvider>
     </>
   )

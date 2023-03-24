@@ -4,7 +4,7 @@ import { TbLayoutBoardSplit } from 'react-icons/tb'
 import { HiOutlineViewGrid } from 'react-icons/hi'
 import { BsPersonPlus } from 'react-icons/bs'
 import { FiSettings } from 'react-icons/fi'
-import { Box, Wrap, WrapItem, Flex, Text, Center, Stack, useDisclosure, Button, Input, useColorModeValue, HStack, Spacer, Link, textDecoration } from '@chakra-ui/react'
+import { Box, Wrap, WrapItem, Flex, Text, Center, Stack, useDisclosure, Button, Input, useColorModeValue, HStack, Spacer, textDecoration } from '@chakra-ui/react'
 import {
   Modal,
   ModalOverlay,
@@ -14,9 +14,10 @@ import {
   ModalBody,
   ModalCloseButton,
 } from '@chakra-ui/react'
+import Link from 'next/link'
 import { BsPersonGear, BsPeople } from 'react-icons/bs'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
-import shortid from 'shortid'
+import { nanoid } from 'nanoid'
 
 const Workspace = ({ id, workspace }) => {
   const [boards, setBoards] = useState([]);
@@ -28,7 +29,6 @@ const Workspace = ({ id, workspace }) => {
   const { uId } = router.query
   const [boardName, setBoardName] = useState('');
   const handleDelete = async (e, data) => {
-    console.log(data);
     
     fetch(`/api/w/${data.wID}/b/${data.bID}`, { method: "DELETE"}).then((res) => res.json()).then((data) => { setBoards(boards.filter((board) => board.id != data.bID)) })
     
@@ -39,7 +39,7 @@ const Workspace = ({ id, workspace }) => {
     const res = await fetch(`/api/w/${id}/b`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: boardName, id: shortid.generate(), creator: uId })
+      body: JSON.stringify({ name: boardName, id: nanoid(), creator: uId })
     })
     const data = await res.json()
     console.log(data);
@@ -118,7 +118,6 @@ const Work = ({ asCreator, asCollaborator }) => {
     console.log(asCreator, asCollaborator);
   }, [asCreator, asCollaborator]);
 
-  console.log(asCreator)
   const color = useColorModeValue("gray.900", "gray.50")
   return (
     <Flex bg="red.900">
