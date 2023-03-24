@@ -8,7 +8,6 @@ import {
   Stack,
   Collapse,
   Icon,
-  Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -17,6 +16,7 @@ import {
   useDisclosure,
   useColorMode
 } from "@chakra-ui/react"
+import Link from "next/link"
 import {
   HamburgerIcon,
   CloseIcon,

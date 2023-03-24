@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { TbLayoutBoardSplit } from 'react-icons/tb'
-import {HiOutlineViewGrid} from 'react-icons/hi'
-import {BsPersonPlus} from 'react-icons/bs'
-import {FiSettings} from 'react-icons/fi'
-import { Wrap, WrapItem, Flex, Text, Center, Stack, useDisclosure, Button, Input, useColorModeValue, HStack, Spacer, Link, textDecoration } from '@chakra-ui/react'
+import { HiOutlineViewGrid } from 'react-icons/hi'
+import { BsPersonPlus } from 'react-icons/bs'
+import { FiSettings } from 'react-icons/fi'
+import { Box, Wrap, WrapItem, Flex, Text, Center, Stack, useDisclosure, Button, Input, useColorModeValue, HStack, Spacer, Link, textDecoration } from '@chakra-ui/react'
 import {
   Modal,
   ModalOverlay,
@@ -15,6 +15,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import { BsPersonGear, BsPeople } from 'react-icons/bs'
+import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import shortid from 'shortid'
 
 const Workspace = ({ id, workspace }) => {
@@ -26,7 +27,13 @@ const Workspace = ({ id, workspace }) => {
   const router = useRouter()
   const { uId } = router.query
   const [boardName, setBoardName] = useState('');
-
+  const handleDelete = async (e, data) => {
+    console.log(data);
+    
+    fetch(`/api/w/${data.wID}/b/${data.bID}`, { method: "DELETE"}).then((res) => res.json()).then((data) => { setBoards(boards.filter((board) => board.id != data.bID)) })
+    
+    
+  }
   const submitBoard = async (e) => {
     console.log(boardName);
     const res = await fetch(`/api/w/${id}/b`, {
@@ -46,21 +53,23 @@ const Workspace = ({ id, workspace }) => {
         <HStack mb="2">
           <Text fontSize="xl" color={useColorModeValue("gray.900", "gray.50")}> {workspace.name} </Text>
           <Flex pos="absolute" right="13%">
-            <Button h="8" mx="2"  bgColor={useColorModeValue("gray.100", "gray.600")}> <TbLayoutBoardSplit /> <Text display={{ base: "none", md: "block" }}>Boards </Text></Button>
-            <Button h="8" mx="2" bgColor={useColorModeValue("gray.100", "gray.600")}> <HiOutlineViewGrid/> <Text display={{ base: "none", md: "block" }}>Views </Text></Button>
+            <Button h="8" mx="2" bgColor={useColorModeValue("gray.100", "gray.600")}> <TbLayoutBoardSplit /> <Text display={{ base: "none", md: "block" }}>Boards </Text></Button>
+            <Button h="8" mx="2" bgColor={useColorModeValue("gray.100", "gray.600")}> <HiOutlineViewGrid /> <Text display={{ base: "none", md: "block" }}>Views </Text></Button>
             <Button h="8" mx="2" bgColor={useColorModeValue("gray.100", "gray.600")}> <BsPersonPlus /> <Text display={{ base: "none", md: "block" }}>Members </Text></Button>
-            <Button h="8" mx="2"bgColor={useColorModeValue("gray.100", "gray.600")}> <FiSettings /> <Text display={{ base: "none", md: "block" }}>Settings </Text></Button>
+            <Button h="8" mx="2" bgColor={useColorModeValue("gray.100", "gray.600")}> <FiSettings /> <Text display={{ base: "none", md: "block" }}>Settings </Text></Button>
           </Flex>
         </HStack>
         <Wrap>
           {boards.length > 0 && boards.map((board) => (
-            <WrapItem key={board.id} pr="4">
-              <Link href={`/w/${id}/${board.id}`} textDecoration="none">
-                <Center w='180px' h='100px' bg='red.200' borderRadius="md">
-                  {board.name}
-                </Center>
-              </Link>
-            </WrapItem>
+            <ContextMenuTrigger key={board.id} id={board.id}>
+              <WrapItem pr="4">
+                <Link href={`/w/${id}/${board.id}`} textDecoration="none">
+                  <Center w='180px' h='100px' bg='red.200' borderRadius="md">
+                    {board.name}
+                  </Center>
+                </Link>
+              </WrapItem>
+            </ContextMenuTrigger>
           ))}
           <WrapItem >
             <Button w='180px' h='100px' onClick={onOpen} bg={useColorModeValue("gray.300", "gray.600")}>Create Board</Button>
@@ -83,6 +92,17 @@ const Workspace = ({ id, workspace }) => {
           </WrapItem>
         </Wrap>
       </Stack>
+      {boards.length > 0 && boards.map((board) => (
+        <ContextMenu key={board.id} id={board.id}>
+          <Box m={5} bg="gray.100" p={5} w={130} rounded={5}>
+            <MenuItem onClick={handleDelete} data={{ bID: board.id, wID: id }}>
+              <Box bg="gray.300" p={ 3 } rounded={5}>
+                Delete
+              </Box>
+            </MenuItem>
+          </Box>
+        </ContextMenu>
+      ))}
     </Flex>
   )
 }
@@ -102,13 +122,13 @@ const Work = ({ asCreator, asCollaborator }) => {
   const color = useColorModeValue("gray.900", "gray.50")
   return (
     <Flex bg="red.900">
-    <Stack ml={{ base: 0, md: 60 }} mt="16" pt="12" pl={{ base: 8, md: 20 }} pos="absolute" bg={useColorModeValue("gray.50", "gray.700")}>
-      {creatorWorkspace.length > 0 && <HStack> <BsPersonGear /> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you created</Text> </HStack>}
-      {creatorWorkspace.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
+      <Stack ml={{ base: 0, md: 60 }} mt="16" pt="12" pl={{ base: 8, md: 20 }} pos="absolute" bg={useColorModeValue("gray.50", "gray.700")}>
+        {creatorWorkspace.length > 0 && <HStack> <BsPersonGear /> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you created</Text> </HStack>}
+        {creatorWorkspace.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
 
-      {collabWorkspace.length > 0 && <HStack> <BsPeople /> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you Collaborate</Text> </HStack>}
-      {collabWorkspace.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
-    </Stack >
+        {collabWorkspace.length > 0 && <HStack> <BsPeople /> <Text fontSize="md" color={color} fontWeight="semibold">  Workspaces you Collaborate</Text> </HStack>}
+        {collabWorkspace.map((workspace) => (<Workspace key={workspace.id} id={workspace.id} workspace={workspace} />))}
+      </Stack >
     </Flex>
   )
 }
