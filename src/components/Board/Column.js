@@ -4,6 +4,8 @@ import { Droppable } from 'react-beautiful-dnd'
 import { Draggable } from 'react-beautiful-dnd'
 
 const Column = ({ column, tasks }) => {
+  let bgColor = useColorModeValue('gray.50', 'gray.700')
+  let textColor = useColorModeValue("gray.700", "gray.50")
   return (
     <Flex rounded={'md'} w="20rem" h="auto" flexDir="column" bgColor={'gray.200'}>
       <Flex align={'center'} h="60px" rounded={'sm'} px="1.5rem">
@@ -29,13 +31,13 @@ const Column = ({ column, tasks }) => {
                     mb="1rem"
                     h="72px"
                     p={'1.5rem'}
-                    bg={useColorModeValue("gray.50", "gray.700")}
+                    bg={bgColor}
                     rounded="md"
                     ref={draggableProvided.innerRef}
                     {...draggableProvided.draggableProps}
                     {...draggableProvided.dragHandleProps}
                   >
-                    <Text color={useColorModeValue("gray.700", "gray.50")}>{task.content}</Text>
+                    <Text color={textColor}>{task.content}</Text>
                     {/* {draggableProvided.placeholder} */}
                   </Flex>
                 )}
