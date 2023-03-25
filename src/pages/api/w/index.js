@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
     case 'POST': {
       const { workspaceName, userId } = req.body
-      let workspaceId = workspaceName.replace(/\s/g, '').toLowerCase()
+      let workspaceId = workspaceName.replace(/[^a-zA-Z]/g, '').toLowerCase()
       let duplicate = await Workspace.findOne({ id: workspaceId })
       let newWorkspaceId
       let c = 0
