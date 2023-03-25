@@ -1,53 +1,41 @@
-import { Flex, Text, useColorModeValue } from '@chakra-ui/react'
 import React from 'react'
-import { Droppable } from 'react-beautiful-dnd'
-import { Draggable } from 'react-beautiful-dnd'
+import { Droppable, Draggable } from 'react-beautiful-dnd'
+import TaskList from './TaskList'
 
-const Column = ({ column, tasks }) => {
-  let bgColor = useColorModeValue('gray.50', 'gray.700')
-  let textColor = useColorModeValue("gray.700", "gray.50")
+const Column = ({ column, tasks, index }) => {
+  // let bgColor = useColorModeValue('gray.50', 'gray.700')
+  // let textColor = useColorModeValue('gray.700', 'gray.50')
   return (
-    <Flex rounded={'md'} w="20rem" h="auto" flexDir="column" bgColor={'gray.200'}>
-      <Flex align={'center'} h="60px" rounded={'sm'} px="1.5rem">
-        <Text fontSize={'20px'} color={'#000'}>
-          {column.title}
-        </Text>
-      </Flex>
+    <Draggable draggableId={column.id} index={index}>
+      {(draggableProvided, draggableSnapshot) => (
+        <div
+          {...draggableProvided.draggableProps}
+          ref={draggableProvided.innerRef}
+          className={`flex flex-col w-[250px] m-2 border rounded ${
+            draggableSnapshot.isDragging ? 'bg-blue-400' : 'bg-blue-400'
+          }`}
+        >
+          <div {...draggableProvided.dragHandleProps} className="p-2 text-2xl">
+            {column.title}
+          </div>
+          <Droppable droppableId={column.id} type="task">
+            {(droppableProvided, droppableSnapshot) => (
+              <div
+                ref={droppableProvided.innerRef}
+                {...droppableProvided.droppableProps}
+                className={`grow min-h-[100px] p-2 ${
+                  droppableSnapshot.isDraggingOver ? 'bg-orange-400' : 'bg-orange-400'
+                }`}
+              >
+                <TaskList tasks={tasks} />
 
-      <Droppable droppableId={column.id}>
-        {(droppableProvided, droppanbleSnapshot) => (
-          <Flex
-            px={'1.5rem'}
-            py={'1rem'}
-            flexDir="column"
-            flex={1}
-            ref={droppableProvided.innerRef}
-            {...droppableProvided.droppableProps}
-          >
-            {tasks.map((task, index) => (
-              <Draggable key={task.id} draggableId={task.id} index={index}>
-                {(draggableProvided, draggableSnapshot) => (
-                  <Flex
-                    mb="1rem"
-                    h="72px"
-                    p={'1.5rem'}
-                    bg={bgColor}
-                    rounded="md"
-                    ref={draggableProvided.innerRef}
-                    {...draggableProvided.draggableProps}
-                    {...draggableProvided.dragHandleProps}
-                  >
-                    <Text color={textColor}>{task.content}</Text>
-                    {/* {draggableProvided.placeholder} */}
-                  </Flex>
-                )}
-              </Draggable>
-            ))}
-            {droppableProvided.placeholder}
-          </Flex>
-        )}
-      </Droppable>
-    </Flex>
+                {droppableProvided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </div>
+      )}
+    </Draggable>
   )
 }
 

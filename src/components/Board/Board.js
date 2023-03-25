@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { Flex, Heading, Text } from '@chakra-ui/react'
-import { DragDropContext } from 'react-beautiful-dnd'
 import dynamic from 'next/dynamic'
 import AvatarMenu from '@/components/AvatarMenu'
+import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
+
 // import { initialData } from '../../data/InitialData'
-const Column = dynamic(() => import('./Board/Column'), {
+const Column = dynamic(() => import('./Column'), {
   ssr: false
 })
 
 const Board = () => {
-  const [initData, setinitData] = useState(initialData) 
+  const [initData, setinitData] = useState(initialData)
 
   const onDragEnd = result => {
     const { destination, source, draggableId } = result
@@ -25,31 +26,38 @@ const Board = () => {
     setinitData(newData)
   }
   return (
-    <>
-      <AvatarMenu />
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Flex
-          flexDir="column"
-          bg="#3ea7da"
-          minH="100vh"
-          w="full"
-          color={'white'}
+    <DragDropContext onDragEnd={()=>{}}>
+      <React.StrictMode>
+        <Droppable
+          droppableId="all-columns"
+          direction="horizontal"
+          type="column"
         >
-          <Flex py="4rem" flexDir={'column'} align="center">
-            <Heading>Agile Builder</Heading>
-            <Text fontSize={'20px'}>(Board Name)</Text>
-          </Flex>
+          {droppableProvided => (
+            <div
+              ref={droppableProvided.innerRef}
+              {...droppableProvided.droppableProps}
+              className="flex"
+            >
+              {initData.columnOrder.map((columnId, index) => {
+                const column = initData.columns[columnId]
+                const tasks = column.taskIds.map(taskId => initData.tasks[taskId])
 
-          <Flex justify={'space-between'} px="4rem" py="2rem" bgColor="red">
-            {initData.columnOrder.map(columnId => {
-              let column = initData.columns[columnId]
-              let tasks = column.taskIds.map(taskId => initData.tasks[taskId])
-              return <Column key={column.id} column={column} tasks={tasks} />
-            })}
-          </Flex>
-        </Flex>
-      </DragDropContext>
-    </>
+                return (
+                  <Column
+                    key={column.id}
+                    column={column}
+                    tasks={tasks}
+                    index={index}
+                  />
+                )
+              })}
+              {droppableProvided.placeholder}
+            </div>
+          )}
+        </Droppable>
+      </React.StrictMode>
+    </DragDropContext>
   )
 }
 
