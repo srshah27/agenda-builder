@@ -2,11 +2,11 @@ import React from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import TaskList from './TaskList'
 
-const Column = ({ column, tasks, index }) => {
+const List = ({ list, tasks, index }) => {
   // let bgColor = useColorModeValue('gray.50', 'gray.700')
   // let textColor = useColorModeValue('gray.700', 'gray.50')
   return (
-    <Draggable draggableId={column.id} index={index}>
+    <Draggable draggableId={list.id} index={index}>
       {(draggableProvided, draggableSnapshot) => (
         <div
           {...draggableProvided.draggableProps}
@@ -16,9 +16,9 @@ const Column = ({ column, tasks, index }) => {
           }`}
         >
           <div {...draggableProvided.dragHandleProps} className="p-2 text-2xl">
-            {column.title}
+            {list.name}
           </div>
-          <Droppable droppableId={column.id} type="task">
+          <Droppable droppableId={list.id} type="task">
             {(droppableProvided, droppableSnapshot) => (
               <div
                 ref={droppableProvided.innerRef}
@@ -27,7 +27,7 @@ const Column = ({ column, tasks, index }) => {
                   droppableSnapshot.isDraggingOver ? 'bg-orange-400' : 'bg-orange-400'
                 }`}
               >
-                <TaskList tasks={tasks} />
+                <TaskList tasks={tasks} list={ list } />
 
                 {droppableProvided.placeholder}
               </div>
@@ -39,4 +39,4 @@ const Column = ({ column, tasks, index }) => {
   )
 }
 
-export default Column
+export default List

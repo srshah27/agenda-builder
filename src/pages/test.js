@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import UserNav from '@/components/UserNav'
 import SubNav from '@/components/SubNav'
 import Text from '../components/svg/Collab.js'
-const Column = dynamic(() => import('@/components/Board/Column'), {
+const Column = dynamic(() => import('@/components/Board/List'), {
   ssr: false
 })
 
@@ -27,9 +27,9 @@ const Board = () => {
   }
   return (
     <>
-    <Text />
+      <Text />
       <UserNav />
-      <SubNav/>
+      <SubNav />
       <DragDropContext onDragEnd={onDragEnd}>
         <Flex
           flexDir="column"
@@ -37,13 +37,13 @@ const Board = () => {
           minH="100vh"
           color={'white'}
         >
-          
+
 
           <Flex justify='space-between' px="6%" py="20">
             {initData.columnOrder.map(columnId => {
               let column = initData.columns[columnId]
               let tasks = column.taskIds.map(taskId => initData.tasks[taskId])
-              return <Column key={column.id} column={column} tasks={tasks} px="2%"/>
+              return <Column key={column.id} column={column} tasks={tasks} px="2%" />
             })}
           </Flex>
         </Flex>

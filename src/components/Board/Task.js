@@ -13,7 +13,7 @@ const Task = ({ task, index }) => {
             draggableSnapshot.isDragging ? 'bg-emerald-400' : 'bg-emerald-400'
           } `}
         >
-          {task.content}
+          {task.name}
         </div>
       )}
     </Draggable>

@@ -26,17 +26,18 @@ export default async function handler(req, res) {
     }
 
     case 'PATCH': {
-      const { sequence, name, assignedTo, description } = req.body
-      const updatedBoard = await Card.findOneAndUpdate(
+      const { sequence, name, assignedTo, description, listId, } = req.body
+      const updatedCard = await Card.findOneAndUpdate(
         {
           id: cID,
           boardId: bID,
           workspaceId: wID
         },
-        { name, sequence, assignedTo, description },
+        { name, sequence, assignedTo, description, listId },
         { new: true }
       )
-      return res.status(202).json({ updatedBoard })
+      console.log(updatedCard);
+      return res.status(202).json({ updatedCard })
     }
 
     case 'DELETE': {

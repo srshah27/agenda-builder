@@ -5,11 +5,11 @@ import SideBar from '@/components/SideBar'
 import Work from '@/components/Work'
 import { ChakraProvider } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-const Dashboard = ({ user, data}) => {
+const Dashboard = ({ user, Creator, Collaborator}) => {
   const router = useRouter()
   const { uID } = router.query
-  const [asCreator, setAsCreator] = useState(data.asCreator)
-  const [asCollaborator, setAsCollaborator] = useState(data.asCollaborator)
+  const [asCreator, setAsCreator] = useState(Creator)
+  const [asCollaborator, setAsCollaborator] = useState(Collaborator)
   const [refreshKey, setRefreshKey] = useState(0);
   
   useEffect(() => {
@@ -17,9 +17,6 @@ const Dashboard = ({ user, data}) => {
     fetch(`/api/u/${uID}`).then((res) => res.json()).then((data) => { setAsCreator(data.asCreator); setAsCollaborator(data.asCollaborator); console.log("Updated"); })
   }, [refreshKey, uID]);
   
-  
-  console.log(asCreator);
-  return <> {data} </>
   return (
     <ChakraProvider >
       <TopBar asCreator={asCreator} asCollaborator={asCollaborator} />
@@ -50,22 +47,13 @@ export async function getServerSideProps(context) {
   let res = await fetch(`${process.env.BASE_URL}/api/u/${uID}`)
   let data = await res.json()
   console.log(data);
-  return {
-    props: {
-      session,
-      data,
-      user: data.user,
-      asCreator: data.asCreator,
-      asCollaborator: data.asCollaborator,
-    }
-  }
   if (data.user) {
     return {
       props: {
         session,
         user: data.user,
-        asCreator: data.asCreator,
-        asCollaborator: data.asCollaborator,
+        Creator: data.asCreator,
+        Collaborator: data.asCollaborator,
       }
     }
   }
