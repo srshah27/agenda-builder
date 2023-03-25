@@ -4,7 +4,7 @@ import { DragDropContext } from 'react-beautiful-dnd'
 import dynamic from 'next/dynamic'
 import UserNav from '@/components/UserNav'
 import SubNav from '@/components/SubNav'
-// import { initialData } from '../../data/InitialData'
+import Text from '../components/svg/Collab.js'
 const Column = dynamic(() => import('@/components/Board/Column'), {
   ssr: false
 })
@@ -27,6 +27,7 @@ const Board = () => {
   }
   return (
     <>
+    <Text />
       <UserNav />
       <SubNav/>
       <DragDropContext onDragEnd={onDragEnd}>
