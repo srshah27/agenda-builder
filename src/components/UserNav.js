@@ -40,7 +40,7 @@ const UserNav = () => {
 
     const renderButtons = () => {
 
-        const { data: session } = useSession();
+        // const { data: session } = useSession();
         return (
             <>
                <AvatarMenu/>
