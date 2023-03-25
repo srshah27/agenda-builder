@@ -6,6 +6,7 @@ import Credentials from 'next-auth/providers/credentials'
 import { compare } from 'bcryptjs'
 import dbConnect from '@/lib/dbconnect'
 import User from '@/models/Users'
+import { nanoid } from 'nanoid'
 
 export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
@@ -53,7 +54,17 @@ export default NextAuth({
   debug: true,
   callbacks: {
     async signIn({ user, account, profile }) {
-      console.log("user", user);
+      if(!user?.uid){
+        const query = { uid: new RegExp(`^${user.name.replace(/[^a-zA-Z]/g, '').toLowerCase()}`, 'i') };
+        const docs = await User.find(query);
+
+        // Generate new uid for the given name
+        let uid = user.name.replace(/[^a-zA-Z]/g, '').toLowerCase();
+        if (docs.length > 0) {
+          uid += docs.length;
+        }
+        user.uid = uid || nanoid(10);
+      }
       if (account.provider === 'google') {
         user = {
           id: user.id,
@@ -86,6 +97,6 @@ export default NextAuth({
   },
   pages: {
     signIn: '/login',
-    newUser: '/newuser'
+    newUser: '/'
   }
 })

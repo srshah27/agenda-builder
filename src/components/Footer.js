@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="footer p-10 bg-neutral text-neutral-content" id="footer">
       <div>
-        <Image src="/svg/agenda.svg" width={150} height={50} />
+        <Image src="/svg/agenda.svg" width={150} height={50} alt="i1" />
         <p className="text-center lg:text-left">
           Agile Builder Ltd.
           <br />

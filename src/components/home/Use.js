@@ -12,7 +12,7 @@ const Use = () => {
         <section className={styles.workcard_container}>
           <div className={styles.workcard}>
             <div className={styles.imgbox}>
-              <img src="img/image1.png" />
+              <img src="img/image1.png" alt="i1" />
             </div>
             <div className={styles.content}>
               <h2>Step I</h2>
@@ -21,7 +21,7 @@ const Use = () => {
           </div>
           <div className={styles.workcard}>
             <div className={styles.imgbox}>
-              <img src="img/image2.png" />
+              <img src="img/image2.png" alt="i2" />
             </div>
             <div className={styles.content}>
               <h2>Step II</h2>
@@ -30,7 +30,7 @@ const Use = () => {
           </div>
           <div className={styles.workcard}>
             <div className={styles.imgbox}>
-              <img src="img/image3.png" />
+              <img src="img/image3.png" alt="i3" />
             </div>
             <div className={styles.content}>
               <h2>Step III</h2>
@@ -39,7 +39,7 @@ const Use = () => {
           </div>
           <div className={styles.workcard}>
             <div className={styles.imgbox}>
-              <img src="img/image4.png" />
+              <img src="img/image4.png" alt="i4" />
             </div>
             <div className={styles.content}>
               <h2>Step IV</h2>
