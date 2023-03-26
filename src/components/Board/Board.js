@@ -167,8 +167,6 @@ const Board = ({ board, cards, lists }) => {
                 pl="4"
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
-                h="500px"
-                bg={"red.100"}
               >
                 {boardData.lists.map(list => {
                   const tasks = boardData.cards.filter(
