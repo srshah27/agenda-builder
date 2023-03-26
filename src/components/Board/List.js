@@ -9,41 +9,30 @@ const List = ({ list, tasks, index }) => {
   return (
     <Draggable draggableId={list.id} index={index}>
       {(draggableProvided, draggableSnapshot) => (
-        <Flex
-          mx="6"
-          my="4"
-          flexDir="column"
-          borderRadius="md"
-          bgColor={useColorModeValue('gray.200', 'gray.200')}
+        <div
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
+          className={`flex flex-col w-[250px] m-2 border rounded ${draggableSnapshot.isDragging ? 'bg-blue-400' : 'bg-blue-400'
+            }`}
         >
-          <Flex
-            minW="300px"
-            p="2"
-            fontSize="xl"
-            textColor={useColorModeValue('gray.600', 'black')}
-            {...draggableProvided.dragHandleProps}
-          >
+          <div {...draggableProvided.dragHandleProps} className="p-2 text-2xl">
             {list.name}
-          </Flex>
+          </div>
           <Droppable droppableId={list.id} type="task">
             {(droppableProvided, droppableSnapshot) => (
-              <Flex
-                borderBottomRadius="md"
-                p="2"
-                borderTop="2px"
-                flexGrow="1"
+              <div
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
+                className={`grow min-h-[100px] p-2 ${droppableSnapshot.isDraggingOver ? 'bg-orange-400' : 'bg-orange-400'
+                  }`}
               >
                 <TaskList tasks={tasks} list={list} />
 
                 {droppableProvided.placeholder}
-              </Flex>
+              </div>
             )}
           </Droppable>
-        </Flex>
+        </div>
       )}
     </Draggable>
   )
