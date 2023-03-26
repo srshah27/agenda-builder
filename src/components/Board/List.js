@@ -6,7 +6,7 @@ import { GrFormAdd } from 'react-icons/gr'
 import { IconContext } from 'react-icons'
 
 const List = ({ list, tasks, index }) => {
-  let _color = useColorModeValue('gray.50', 'gray.700')
+  let _color = useColorModeValue('gray.100', 'gray.700')
   // let textColor = useColorModeValue('gray.700', 'gray.50')
   let _c = useColorModeValue('gray.50', 'gray.900')
   let invert = useColorModeValue('gray.900', 'gray.50')
@@ -31,7 +31,7 @@ const List = ({ list, tasks, index }) => {
               <Box
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
-                className={`min-h-[0px] p-2 border-t-2`}
+                className={`min-h-0 p-2 border-t-2`}
               >
                 <TaskList tasks={tasks} list={list}/>
 

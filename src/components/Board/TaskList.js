@@ -1,5 +1,4 @@
 import React from 'react'
-import { Draggable } from 'react-beautiful-dnd'
 import Task from './Task'
 import { useColorModeValue, Box } from '@chakra-ui/react'
 

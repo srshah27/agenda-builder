@@ -149,8 +149,11 @@ const Board = ({ board, cards, lists }) => {
     <Box
       display="block"
       position="relative"
-      height="calc(100vh - 90px)"
+      height="calc(100vh - 80px)"
       overflowX="auto"
+      bg={
+        'linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);'
+      }
     >
       <DragDropContext onDragEnd={onDragEnd}>
         <React.StrictMode>
@@ -164,7 +167,8 @@ const Board = ({ board, cards, lists }) => {
                 pl="4"
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
-                
+                h="500px"
+                bg={"red.100"}
               >
                 {boardData.lists.map(list => {
                   const tasks = boardData.cards.filter(

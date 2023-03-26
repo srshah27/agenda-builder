@@ -5,7 +5,7 @@ import UserNav from '@/components/UserNav'
 import SubNav from '@/components/SubNav'
 import { Box } from '@chakra-ui/react'
 const BoardPage = ({ workspace, board, cards, lists, user }) => {
-  console.log(board, cards, lists)
+  // console.log(board, cards, lists)
   return (
     // <div className="absolute top-0 left-0 h-full w-full bg-green-500">
     //   {/* <UserNav />

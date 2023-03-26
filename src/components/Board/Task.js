@@ -11,7 +11,7 @@ const Task = ({ task, index }) => {
           {...draggableProvided.draggableProps}
           {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
-          className={`flex p-2 mb-2 border rounded-md w-full shadow-md ${
+          className={`font-light flex p-2 pt-2 mb-3 border rounded-sm w-full shadow-md h-[40px] ${
             draggableSnapshot.isDragging ? 'bg-gray-500' : 'bg-gray-900'
           } `}
         >
