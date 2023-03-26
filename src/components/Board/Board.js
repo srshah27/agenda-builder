@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { Flex, Heading, Text } from '@chakra-ui/react'
+import { Flex, HStack, useColorModeValue } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import AvatarMenu from '@/components/AvatarMenu'
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
+import UserNav from '../UserNav';
+import SubNav from '../SubNav';
 
 // import { initialData } from '../../data/InitialData'
 const List = dynamic(() => import('./List'), {
@@ -16,14 +17,14 @@ const Board = ({ board, cards, lists }) => {
     lists: lists.sort((a, b) => a.sequence - b.sequence)
   })
   const [refresh, setRefresh] = useState(false);
-  
-  
+
+
   useEffect(() => {
     setBoardData({ ...boardData, lists: boardData.lists.sort((a, b) => a.sequence - b.sequence), cards: boardData.cards.sort((a, b) => a.sequence - b.sequence) })
   }, [refresh]);
-  
-  
-  
+
+
+
   const updateDb = (url, body, cardsOrLists) => {
     fetch(url, {
       method: 'PATCH',
@@ -53,17 +54,17 @@ const Board = ({ board, cards, lists }) => {
       if (Greater) {
         if (list.sequence > current && list.sequence <= sequence) {
           list.sequence = list.sequence - 1 // Update query else 
-          updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/1${list.id}`, { sequence: list.sequence - 1 }, ogiData)
+          updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${list.id}`, { sequence: list.sequence - 1 }, ogiData)
         }
       } else {
         if (list.sequence < current && list.sequence >= sequence) {
           list.sequence = list.sequence + 1 // Update query else 
-          updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/1${list.id}`, { sequence: list.sequence + 1 }, ogiData)
+          updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${list.id}`, { sequence: list.sequence + 1 }, ogiData)
         }
       }
     })
     currentList.sequence = sequence // Upadte query currentList
-    updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/1${currentList.id}`, { sequence: currentList.sequence + 1 }, ogiData)
+    updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${currentList.id}`, { sequence: currentList.sequence + 1 }, ogiData)
     console.log(data.lists);
 
     return data
@@ -74,8 +75,8 @@ const Board = ({ board, cards, lists }) => {
     let currentCard = data.cards.find((card) => card.id === id)
     // handle remove from source
     data.cards.forEach((card) => {
-      if(card.listId === source.droppableId){
-        if(card.sequence > source.index){
+      if (card.listId === source.droppableId) {
+        if (card.sequence > source.index) {
           card.sequence = card.sequence - 1
           updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${card.id}`, { sequence: card.sequence - 1 }, ogiData)
         }
@@ -113,37 +114,40 @@ const Board = ({ board, cards, lists }) => {
     setBoardData(updatedData)
   }
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <React.StrictMode>
-        <Droppable
-          droppableId="all-columns"
-          direction="horizontal"
-          type="column"
-        >
-          {droppableProvided => (
-            <div
-              ref={droppableProvided.innerRef}
-              {...droppableProvided.droppableProps}
-              className="flex"
-            >
-              {boardData.lists.map((list) => {
-                const tasks = boardData.cards.filter((card) => card.listId === list.id)
-                tasks.sort((a, b) => a.sequence - b.sequence)
-                return (
-                  <List
-                    key={list.id}
-                    list={list}
-                    tasks={tasks}
-                    index={list.sequence}
-                  />
-                )
-              })}
-              {droppableProvided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </React.StrictMode>
-    </DragDropContext>
+      <Flex bgColor={useColorModeValue('gray.100', 'red.600')} minW="100vw" minH="100vh" flexGrow="1" pos="relative">
+      {/* <DragDropContext onDragEnd={onDragEnd}>
+        <React.StrictMode>
+          <Droppable
+            droppableId="all-columns"
+            direction="horizontal"
+            type="column"
+            
+          >
+            {droppableProvided => (
+              <Flex pl="4"
+                ref={droppableProvided.innerRef}
+                {...droppableProvided.droppableProps}
+
+              >
+                {boardData.lists.map((list) => {
+                  const tasks = boardData.cards.filter((card) => card.listId === list.id)
+                  tasks.sort((a, b) => a.sequence - b.sequence)
+                  return (
+                    <List
+                      key={list.id}
+                      list={list}
+                      tasks={tasks}
+                      index={list.sequence}
+                    />
+                  )
+                })}
+                {droppableProvided.placeholder}
+              </Flex>
+            )}
+          </Droppable>
+        </React.StrictMode>
+      </DragDropContext> */}
+    </Flex>
   )
 }
 

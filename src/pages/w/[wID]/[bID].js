@@ -1,9 +1,18 @@
 import React from 'react'
 import { getSession } from 'next-auth/react'
 import Board from '@/components/Board/Board'
+import UserNav from '@/components/UserNav';
+import SubNav from '@/components/SubNav';
 const BoardPage = ({ workspace, board, cards, lists, user }) => {
   console.log(board, cards, lists);
-  return <Board board={board} cards={cards} lists={lists} />
+  return (
+    <>
+    
+      <UserNav />
+      <SubNav />
+      <Board board={board} cards={cards} lists={lists} />
+    </>
+  )
 }
 
 export async function getServerSideProps(context) {

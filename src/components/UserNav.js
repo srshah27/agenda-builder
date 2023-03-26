@@ -4,7 +4,8 @@ import {
     Box,
     Spacer,
     HStack,
-    Image
+    Image,
+    useColorModeValue
 } from "@chakra-ui/react"
 import Link from "next/link"
 import PropTypes from "prop-types"
@@ -13,43 +14,12 @@ import { useSession } from "next-auth/react";
 import AvatarMenu from "./AvatarMenu";
 
 const UserNav = () => {
-    // const user = useAppSelector(state => state.user)
 
-    // const logout = async () => {
-    //     const URL = "/api/logout"
 
-    //     const response = await fetch(URL, {
-    //         method: "POST",
-    //         mode: "cors",
-    //         cache: "no-cache",
-    //         credentials: "same-origin",
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         },
-    //         redirect: "follow",
-    //         referrerPolicy: "no-referrer",
-    //         body: JSON.stringify({})
-    //     })
-
-    //     const responseInJson = await response.json()
-
-    //     if (responseInJson.message === "success") {
-    //         window.location.href = `${window.location.origin}/login`
-    //     }
-    // }
-
-    const renderButtons = () => {
-
-        // const { data: session } = useSession();
-        return (
-            <>
-               <AvatarMenu/>
-            </>
-        )
-    }
+    
 
     return (
-        <HStack boxShadow="sm" bg="rgba(0,0,0,0.3)" display="flex">
+        <HStack boxShadow="sm" bgColor = {useColorModeValue('gray.300', 'gray.700')} display="flex">
             <Link href="/"><Button  bg="transparent" size="sm">Boards</Button></Link>
             <Spacer />
             <Link href="/">
@@ -59,7 +29,6 @@ const UserNav = () => {
             </Link>
             <Spacer />
             <AvatarMenu/>
-            {/* {renderButtons()} */}
         </HStack>
     )
 }
