@@ -1,39 +1,38 @@
 import React from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import TaskList from './TaskList'
+import { useColorModeValue, Box } from '@chakra-ui/react'
 
 const List = ({ list, tasks, index }) => {
-  // let bgColor = useColorModeValue('gray.50', 'gray.700')
+  let _color = useColorModeValue('gray.50', 'gray.700')
   // let textColor = useColorModeValue('gray.700', 'gray.50')
   return (
     <Draggable draggableId={list.id} index={index}>
       {(draggableProvided, draggableSnapshot) => (
-        <div
+        <Box bgColor={_color}
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
-          className={`flex flex-col w-[250px] m-2 border rounded ${
-            draggableSnapshot.isDragging ? 'bg-blue-400' : 'bg-blue-400'
-          }`}
+          className={`flex flex-col w-[250px] m-4 border rounded shadow-md 
+            }`}
         >
-          <div {...draggableProvided.dragHandleProps} className="p-2 text-2xl">
+          <Box {...draggableProvided.dragHandleProps} className="p-2 text-md">
             {list.name}
-          </div>
+          </Box>
           <Droppable droppableId={list.id} type="task">
             {(droppableProvided, droppableSnapshot) => (
-              <div
+              <Box
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
-                className={`grow min-h-[100px] p-2 ${
-                  droppableSnapshot.isDraggingOver ? 'bg-orange-400' : 'bg-orange-400'
-                }`}
+                className={`grow min-h-[100px] p-2 border-t-2
+                  }`}
               >
-                <TaskList tasks={tasks} list={ list } />
+                <TaskList tasks={tasks} list={list} />
 
                 {droppableProvided.placeholder}
-              </div>
+              </Box>
             )}
           </Droppable>
-        </div>
+        </Box>
       )}
     </Draggable>
   )

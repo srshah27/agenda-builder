@@ -1,11 +1,11 @@
 import React from 'react'
-import { HStack, Spacer, Text } from '@chakra-ui/react'
+import { HStack, Spacer, Text, useColorModeValue } from '@chakra-ui/react'
 import { Menu, MenuButton, MenuList, MenuItem, IconButton } from '@chakra-ui/react'
 import { SettingsIcon } from '@chakra-ui/icons'
 
 const SubNav = () => {
     return (
-        <HStack boxShadow="sm" bg="rgba(0,0,0,0.1)" display="flex">
+        <HStack boxShadow="sm" bgColor = {useColorModeValue('gray.300', 'gray.500')}  display="flex">
             <Text fontSize="md" p="2">Board Name</Text>
             <Spacer />
             <Menu >

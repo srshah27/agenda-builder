@@ -1,8 +1,8 @@
-import Board from '@/components/Board/Board'
+import UnsplashFetch from '@/components/Board/UnsplashFetch'
 import React from 'react'
 
 const workspace = () => {
-  return <Board />
+  return <UnsplashFetch />
 }
 
 export default workspace

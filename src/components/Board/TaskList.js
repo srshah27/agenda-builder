@@ -4,7 +4,7 @@ import Task from './Task'
 
 const TaskList = ({ tasks, list }) => {
   return (
-    <div>
+    <div className='w-full'>
       {tasks.map((task, index) => (
         <Task key={task.id} task={task} index={task.sequence} />
       ))}
