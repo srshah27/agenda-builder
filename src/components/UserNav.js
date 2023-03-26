@@ -13,10 +13,11 @@ import PropTypes from "prop-types"
 import { useSession } from "next-auth/react";
 import AvatarMenu from "./AvatarMenu";
 
-const UserNav = () => {
+const UserNav = ({ board }) => {
+    const { data: session } = useSession();
     return (
         <HStack boxShadow="sm" bgColor = {useColorModeValue('gray.300', 'gray.700')} display="flex">
-            <Link href="/"><Button  bg="transparent" size="sm">Boards</Button></Link>
+            <Link href={`/u/${ session?.user?.uid}`}><Button  bg="transparent" size="sm">Boards</Button></Link>
             <Spacer />
             <Link href="/">
                 <Image src="/svg/agenda.svg" h="auto" w="40"  p="2"

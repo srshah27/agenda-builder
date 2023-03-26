@@ -19,8 +19,8 @@ const BoardPage = ({ workspace, board, cards, lists, user }) => {
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
     >
-      <UserNav />
-      <SubNav />
+      <UserNav board={board} />
+      <SubNav board={ board } />
       <Board board={board} cards={cards} lists={lists} />
     </Box>
   )

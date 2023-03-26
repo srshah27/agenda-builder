@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 
 import Avatar from './Avatar'
-import { useSession } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 
 const AvatarMenu = () => {
   const { data: session } = useSession();
@@ -27,7 +27,7 @@ const AvatarMenu = () => {
       <MenuList>
         <MenuGroup title='Profile'>
           <MenuItem>My Account</MenuItem>
-          <MenuItem>Payments </MenuItem>
+          <MenuItem onClick={() => signOut()}>Sign Out </MenuItem>
         </MenuGroup>
         <MenuDivider />
         <MenuGroup title='Help'>
