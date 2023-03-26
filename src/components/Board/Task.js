@@ -9,8 +9,8 @@ const Task = ({ task, index }) => {
           {...draggableProvided.draggableProps}
           {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
-          className={`flex p-2 mb-2 border rounded ${
-            draggableSnapshot.isDragging ? 'bg-emerald-400' : 'bg-emerald-400'
+          className={`flex p-2 mb-2 border rounded-md w-full ${
+            draggableSnapshot.isDragging ? 'bg-emerald-300' : 'bg-emerald-800'
           } `}
         >
           {task.name}

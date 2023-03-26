@@ -1,17 +1,28 @@
 import React from 'react'
 import { getSession } from 'next-auth/react'
 import Board from '@/components/Board/Board'
-import UserNav from '@/components/UserNav';
-import SubNav from '@/components/SubNav';
+import UserNav from '@/components/UserNav'
+import SubNav from '@/components/SubNav'
+import { Box } from '@chakra-ui/react'
 const BoardPage = ({ workspace, board, cards, lists, user }) => {
-  console.log(board, cards, lists);
+  console.log(board, cards, lists)
   return (
-    <>
-    
+    // <div className="absolute top-0 left-0 h-full w-full bg-green-500">
+    //   {/* <UserNav />
+    //   <SubNav />
+    //   <Board board={board} cards={cards} lists={lists} /> */}
+    // </div>
+    <Box
+      backgroundImage={`url('${board.backgroundImage}')`}
+      backgroundPosition="center"
+      h="100vh"
+      backgroundRepeat="no-repeat"
+      backgroundSize="cover"
+    >
       <UserNav />
       <SubNav />
       <Board board={board} cards={cards} lists={lists} />
-    </>
+    </Box>
   )
 }
 
@@ -20,7 +31,7 @@ export async function getServerSideProps(context) {
   if (!session) {
     return {
       redirect: {
-        destination: '/login',
+        destination: '/login'
       }
     }
   }
@@ -28,10 +39,15 @@ export async function getServerSideProps(context) {
 
   let res = await fetch(`${process.env.BASE_URL}/api/w/${wID}`)
   let { workspace } = await res.json()
-  if (workspace === null || workspace.collaborators.findIndex((collaborator) => collaborator.user === session.user.uid) === -1)
+  if (
+    workspace === null ||
+    workspace.collaborators.findIndex(
+      collaborator => collaborator.user === session.user.uid
+    ) === -1
+  )
     return {
       redirect: {
-        destination: `/u/${session.user.uid}/`,
+        destination: `/u/${session.user.uid}/`
       }
     }
   res = await fetch(`${process.env.BASE_URL}/api/w/${wID}/b/${bID}`)
@@ -49,6 +65,5 @@ export async function getServerSideProps(context) {
       user: session.user
     }
   }
-
 }
 export default BoardPage

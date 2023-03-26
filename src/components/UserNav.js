@@ -14,10 +14,6 @@ import { useSession } from "next-auth/react";
 import AvatarMenu from "./AvatarMenu";
 
 const UserNav = () => {
-
-
-    
-
     return (
         <HStack boxShadow="sm" bgColor = {useColorModeValue('gray.300', 'gray.700')} display="flex">
             <Link href="/"><Button  bg="transparent" size="sm">Boards</Button></Link>

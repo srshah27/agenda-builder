@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { Flex, HStack, useColorModeValue } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
-import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
-import UserNav from '../UserNav';
-import SubNav from '../SubNav';
+import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
+import UserNav from '../UserNav'
+import SubNav from '../SubNav'
+import { Box } from '@chakra-ui/react'
 
 // import { initialData } from '../../data/InitialData'
 const List = dynamic(() => import('./List'), {
@@ -16,14 +17,15 @@ const Board = ({ board, cards, lists }) => {
     cards,
     lists: lists.sort((a, b) => a.sequence - b.sequence)
   })
-  const [refresh, setRefresh] = useState(false);
-
+  const [refresh, setRefresh] = useState(false)
 
   useEffect(() => {
-    setBoardData({ ...boardData, lists: boardData.lists.sort((a, b) => a.sequence - b.sequence), cards: boardData.cards.sort((a, b) => a.sequence - b.sequence) })
-  }, [refresh]);
-
-
+    setBoardData({
+      ...boardData,
+      lists: boardData.lists.sort((a, b) => a.sequence - b.sequence),
+      cards: boardData.cards.sort((a, b) => a.sequence - b.sequence)
+    })
+  }, [refresh])
 
   const updateDb = (url, body, cardsOrLists) => {
     fetch(url, {
@@ -31,13 +33,19 @@ const Board = ({ board, cards, lists }) => {
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(body)
     })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.updatedList === null) { setBoardData({ ...cardsOrLists }); setRefresh(!refresh) }
-        if (data.updatedCard === null) { setBoardData({ ...cardsOrLists }); setRefresh(!refresh) }
+      .then(res => res.json())
+      .then(data => {
+        if (data.updatedList === null) {
+          setBoardData({ ...cardsOrLists })
+          setRefresh(!refresh)
+        }
+        if (data.updatedCard === null) {
+          setBoardData({ ...cardsOrLists })
+          setRefresh(!refresh)
+        }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(error => {
+        console.log(error)
         setBoardData(data)
       })
   }
@@ -46,52 +54,77 @@ const Board = ({ board, cards, lists }) => {
     let ogiData = data
     let id = draggableId
     let sequence = destination.index
-    let currentList = data.lists.find((list) => list.id === id)
+    let currentList = data.lists.find(list => list.id === id)
     let current = currentList.sequence
-    current = data.lists.find((list) => list.id === id).sequence
-    let Greater = sequence > data.lists.find((list) => list.id === id).sequence ? true : false // true if greater else false
-    data.lists.forEach((list) => {
+    current = data.lists.find(list => list.id === id).sequence
+    let Greater =
+      sequence > data.lists.find(list => list.id === id).sequence ? true : false // true if greater else false
+    data.lists.forEach(list => {
       if (Greater) {
         if (list.sequence > current && list.sequence <= sequence) {
-          list.sequence = list.sequence - 1 // Update query else 
-          updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${list.id}`, { sequence: list.sequence - 1 }, ogiData)
+          list.sequence = list.sequence - 1 // Update query else
+          updateDb(
+            `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${list.id}`,
+            { sequence: list.sequence - 1 },
+            ogiData
+          )
         }
       } else {
         if (list.sequence < current && list.sequence >= sequence) {
-          list.sequence = list.sequence + 1 // Update query else 
-          updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${list.id}`, { sequence: list.sequence + 1 }, ogiData)
+          list.sequence = list.sequence + 1 // Update query else
+          updateDb(
+            `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${list.id}`,
+            { sequence: list.sequence + 1 },
+            ogiData
+          )
         }
       }
     })
     currentList.sequence = sequence // Upadte query currentList
-    updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${currentList.id}`, { sequence: currentList.sequence + 1 }, ogiData)
-    console.log(data.lists);
+    updateDb(
+      `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${currentList.id}`,
+      { sequence: currentList.sequence + 1 },
+      ogiData
+    )
+    console.log(data.lists)
 
     return data
   }
   const handleTaskDrag = (data, destination, source, draggableId) => {
     let ogiData = data
     let id = draggableId
-    let currentCard = data.cards.find((card) => card.id === id)
+    let currentCard = data.cards.find(card => card.id === id)
     // handle remove from source
-    data.cards.forEach((card) => {
+    data.cards.forEach(card => {
       if (card.listId === source.droppableId) {
         if (card.sequence > source.index) {
           card.sequence = card.sequence - 1
-          updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${card.id}`, { sequence: card.sequence - 1 }, ogiData)
+          updateDb(
+            `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${card.id}`,
+            { sequence: card.sequence - 1 },
+            ogiData
+          )
         }
       }
       if (card.listId === destination.droppableId) {
         if (card.sequence >= destination.index) {
           card.sequence = card.sequence + 1
-          updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${card.id}`, { sequence: card.sequence + 1 }, ogiData)
+          updateDb(
+            `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${card.id}`,
+            { sequence: card.sequence + 1 },
+            ogiData
+          )
         }
       }
     })
     currentCard.listId = destination.droppableId
     currentCard.sequence = destination.index // Upadte query currentCard
-    updateDb(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${currentCard.id}`, { sequence: currentCard.sequence, listId: currentCard.listId }, ogiData)
-    console.log(data.cards);
+    updateDb(
+      `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${currentCard.id}`,
+      { sequence: currentCard.sequence, listId: currentCard.listId },
+      ogiData
+    )
+    console.log(data.cards)
     return data
   }
 
@@ -104,8 +137,7 @@ const Board = ({ board, cards, lists }) => {
     let updatedData = {}
     if (type === 'column') {
       updatedData = handleColumnDrag(ogiData, destination, source, draggableId)
-    }
-    else if (type === 'task') {
+    } else if (type === 'task') {
       updatedData = handleTaskDrag(ogiData, destination, source, draggableId)
     } else {
       return
@@ -114,23 +146,29 @@ const Board = ({ board, cards, lists }) => {
     setBoardData(updatedData)
   }
   return (
-      <Flex bgColor={useColorModeValue('gray.100', 'red.600')} minW="100vw" minH="100vh" flexGrow="1" pos="relative">
-      {/* <DragDropContext onDragEnd={onDragEnd}>
+    <Box
+      display="block"
+      position="relative"
+      height="calc(100vh - 90px)"
+      overflowX="auto"
+    >
+      <DragDropContext onDragEnd={onDragEnd}>
         <React.StrictMode>
           <Droppable
             droppableId="all-columns"
             direction="horizontal"
             type="column"
-            
           >
             {droppableProvided => (
-              <Flex pl="4"
+              <Flex
+                pl="4"
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
-
               >
-                {boardData.lists.map((list) => {
-                  const tasks = boardData.cards.filter((card) => card.listId === list.id)
+                {boardData.lists.map(list => {
+                  const tasks = boardData.cards.filter(
+                    card => card.listId === list.id
+                  )
                   tasks.sort((a, b) => a.sequence - b.sequence)
                   return (
                     <List
@@ -146,10 +184,9 @@ const Board = ({ board, cards, lists }) => {
             )}
           </Droppable>
         </React.StrictMode>
-      </DragDropContext> */}
-    </Flex>
+      </DragDropContext>
+    </Box>
   )
 }
 
 export default Board
-
