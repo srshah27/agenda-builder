@@ -20,9 +20,9 @@ export default async function handler(req, res) {
   if (docs.length > 0) {
     uid += docs.length;
   }
-  
+  let image = `https://api.dicebear.com/5.x/initials/svg?seed=${name}&radius=50&backgroundColor=27d3d5,3ea7da,9d8eef&backgroundType=gradientLinear&fontFamily=Verdana&fontSize=46`
   try {
-    let user = await User.create({ name, email, password: hashed, uid: uid || nanoid(10) })
+    let user = await User.create({ name, email, password: hashed, uid: uid || nanoid(10), image })
     console.log(user)
     res.status(201).json({ user })
   } catch (error) {
