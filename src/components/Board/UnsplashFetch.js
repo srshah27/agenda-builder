@@ -15,8 +15,7 @@ const Unsplash = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [images, setImages] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
-
-  const dispatch = useDispatch()
+  
   const unsplash = createApi({
     accessKey: process.env.NEXT_PUBLIC_UNSPLASH_API
   })
