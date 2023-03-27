@@ -2,8 +2,7 @@ import React from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import TaskList from './TaskList'
 import { useColorModeValue, Box, Spacer, Flex } from '@chakra-ui/react'
-import { GrFormAdd } from 'react-icons/gr'
-import { IconContext } from 'react-icons'
+import { AddIcon } from '@chakra-ui/icons'
 
 const List = ({ list, tasks, index, addCard }) => {
   let _color = useColorModeValue('gray.100', 'gray.700')
@@ -20,6 +19,7 @@ const List = ({ list, tasks, index, addCard }) => {
           className={`m-4 border rounded shadow-md `}
           h="fit-content"
           w={250}
+          minW={250}
           m
           flexDirection={'column'}
         >
@@ -40,15 +40,14 @@ const List = ({ list, tasks, index, addCard }) => {
             )}
           </Droppable>
           <Box className='px-2'>
-            <Box bgColor={_c}
-              className={`flex p-2 mb-2  border rounded-md w-full shadow-md bg-gray-900 `}
+            <Box bgColor={_color}
+              className={`flex p-2 mb-2 w-full shadow-md `}
               as='button'
+              alignItems={'center'}
               onClick={() => addCard(list.id)}
             >
-              Add Card
-              <Spacer />
-
-              <GrFormAdd size={25} />
+              <AddIcon w={3} h={ 3 } mr={ 3 } />
+              Add a card
             </Box>
           </Box>
         </Box>

@@ -13,7 +13,6 @@ const BoardPage = ({ workspace, board, cards, lists, user }) => {
     //   <Board board={board} cards={cards} lists={lists} /> */}
     // </div>
     <Box
-      backgroundImage={`url('${board.backgroundImage}')`}
       backgroundPosition="center"
       h="100vh"
       backgroundRepeat="no-repeat"
