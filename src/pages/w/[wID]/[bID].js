@@ -20,7 +20,7 @@ const BoardPage = ({ workspace, board, cards, lists, user }) => {
       backgroundSize="cover"
     >
       <UserNav board={board} />
-      <SubNav board={ board } />
+      <SubNav board={board} />
       <Board board={board} cards={cards} lists={lists} />
     </Box>
   )

@@ -1,7 +1,7 @@
 import React from 'react'
 import { timelines, releases } from '@/lib/projectData'
-import { Release } from '@/components/release'
-import { Timeline } from '@/components/timeline'
+import { Release } from '@/components/releases/release'
+import { Timeline } from '@/components/releases/timeline'
 
 const ReleasesPage = () => {
   const releasesKeys = Object.keys(releases).reverse()

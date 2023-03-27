@@ -8,9 +8,7 @@ const WorkspaceSchema = new Schema({
     type: Date,
     default: new Date().toISOString()
   },
-  collaborators: [
-    { user: String, creator: Boolean, role: String }
-  ],
+  collaborators: [{ user: String, creator: Boolean, role: String }],
   roles: [{ name: String }],
   invite: {
     link: String,

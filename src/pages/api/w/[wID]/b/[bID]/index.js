@@ -6,8 +6,7 @@ import sessionUser from '@/middleware/getSessionUser'
 
 export default async function handler(req, res) {
   const { user, error, dberror } = await sessionUser({ req })
-  if (dberror)
-    return res.status(401).json({ error: error, dberror: dberror })
+  if (dberror) return res.status(401).json({ error: error, dberror: dberror })
 
   try {
     await dbConnect()
@@ -22,7 +21,7 @@ export default async function handler(req, res) {
     case 'GET': {
       const board = await Board.findOne({
         id: bID,
-        workspaceId: wID,
+        workspaceId: wID
       })
       return res.status(200).json({ board })
     }
@@ -31,7 +30,7 @@ export default async function handler(req, res) {
       const { name, backgroundImage } = req.body
       const updatedBoard = await Board.findOneAndUpdate(
         {
-          id: bID,
+          id: bID
         },
         { name, backgroundImage },
         { new: true }
@@ -40,8 +39,8 @@ export default async function handler(req, res) {
     }
 
     case 'DELETE': {
-      await Card.deleteMany({ boardId: bID });
-      await List.deleteMany({ boardId: bID });
+      await Card.deleteMany({ boardId: bID })
+      await List.deleteMany({ boardId: bID })
       await Board.findOneAndDelete({
         id: bID
       })

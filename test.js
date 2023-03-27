@@ -38,7 +38,6 @@
 //           color={'white'}
 //         >
 
-
 //           <Flex justify='space-between' px="6%" py="20">
 //             {initData.columnOrder.map(columnId => {
 //               let column = initData.columns[columnId]

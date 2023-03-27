@@ -13,17 +13,17 @@ const List = ({ list, tasks, index }) => {
   return (
     <Draggable draggableId={list.id} index={index}>
       {(draggableProvided, draggableSnapshot) => (
-        
-        <Box bgColor={_color}
+        <Box
+          bgColor={_color}
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
           className={`m-4 border rounded shadow-md `}
-          h='fit-content'
+          h="fit-content"
           w={250}
           m
           flexDirection={'column'}
-        > 
-          <Box {...draggableProvided.dragHandleProps} className="p-2 text-md"> 
+        >
+          <Box {...draggableProvided.dragHandleProps} className="p-2 text-md">
             {list.name}
           </Box>
           <Droppable droppableId={list.id} type="task">
@@ -33,21 +33,21 @@ const List = ({ list, tasks, index }) => {
                 {...droppableProvided.droppableProps}
                 className={`min-h-0 p-2 border-t-2`}
               >
-                <TaskList tasks={tasks} list={list}/>
+                <TaskList tasks={tasks} list={list} />
 
                 {droppableProvided.placeholder}
               </Box>
             )}
           </Droppable>
-          <Box className='px-2'>
-          <Box bgColor={_c}
-            className={`flex p-2 mb-2  border rounded-md w-full shadow-md bg-gray-900 `}
-          >
-            Add Card
+          <Box className="px-2">
+            <Box
+              bgColor={_c}
+              className={`flex p-2 mb-2  border rounded-md w-full shadow-md bg-gray-900 `}
+            >
+              Add Card
               <Spacer />
-              
               <GrFormAdd size={25} />
-          </Box>
+            </Box>
           </Box>
         </Box>
       )}

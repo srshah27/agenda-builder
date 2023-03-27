@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+
 function Hero() {
   const { data: session, status } = useSession()
   return (
@@ -23,7 +24,10 @@ function Hero() {
               get oraganized together.
             </p>
             <button className="btn bg-blue-900 max-w-md">
-              <Link href={ session?`/u/${session.user.uid}` : '/login'}> Get Started </Link>{' '}
+              <Link href={session ? `/u/${session.user.uid}` : '/login'}>
+                {' '}
+                Get Started{' '}
+              </Link>{' '}
             </button>
           </div>
         </div>

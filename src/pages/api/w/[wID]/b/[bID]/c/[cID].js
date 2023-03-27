@@ -5,8 +5,7 @@ import sessionUser from '@/middleware/getSessionUser'
 
 export default async function handler(req, res) {
   const { user, error, dberror } = await sessionUser({ req })
-  if (dberror)
-    return res.status(401).json({ error: error, dberror: dberror })
+  if (dberror) return res.status(401).json({ error: error, dberror: dberror })
 
   try {
     await dbConnect()
@@ -19,14 +18,14 @@ export default async function handler(req, res) {
   const reqType = req.method
   switch (reqType) {
     case 'GET': {
-      const card = await Card.findOne({ 
+      const card = await Card.findOne({
         id: cID
       })
       return res.status(200).json({ card })
     }
 
     case 'PATCH': {
-      const { sequence, name, assignedTo, description, listId, } = req.body
+      const { sequence, name, assignedTo, description, listId } = req.body
       const updatedCard = await Card.findOneAndUpdate(
         {
           id: cID,
@@ -36,7 +35,7 @@ export default async function handler(req, res) {
         { name, sequence, assignedTo, description, listId },
         { new: true }
       )
-      console.log(updatedCard);
+      console.log(updatedCard)
       return res.status(202).json({ updatedCard })
     }
 

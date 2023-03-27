@@ -19,7 +19,7 @@ export default async function handler(req, res) {
     }
 
     case 'POST': {
-      const { id, name, createdBy, createdAt, sequence, listId} = req.body
+      const { id, name, createdBy, createdAt, sequence, listId } = req.body
       const count = await Card.find({ boardId: bID, workspaceId: wID }).count()
       const data = {
         id,
@@ -29,10 +29,10 @@ export default async function handler(req, res) {
         name,
         createdAt,
         createdBy,
-        sequence: sequence || count + 1,
+        sequence: sequence || count + 1
       }
       const card = await Card.create(data)
-      
+
       return res.status(201).json({ card })
     }
     default: {

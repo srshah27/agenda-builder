@@ -32,8 +32,14 @@ export default NextAuth({
         let checkPassword = await compare(credentials.password, user.password)
         // if (!checkPassword) return null
         if (!checkPassword) throw new Error('Incorrect Credentials')
-        console.log("asdasd", user);
-        return { id: user._id, name: user.name, email: user.email, uid: user.uid, image: user.image }
+        console.log('asdasd', user)
+        return {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          uid: user.uid,
+          image: user.image
+        }
       }
     })
   ],
@@ -54,16 +60,21 @@ export default NextAuth({
   debug: true,
   callbacks: {
     async signIn({ user, account, profile }) {
-      if(!user?.uid){
-        const query = { uid: new RegExp(`^${user.name.replace(/[^a-zA-Z]/g, '').toLowerCase()}`, 'i') };
-        const docs = await User.find(query);
+      if (!user?.uid) {
+        const query = {
+          uid: new RegExp(
+            `^${user.name.replace(/[^a-zA-Z]/g, '').toLowerCase()}`,
+            'i'
+          )
+        }
+        const docs = await User.find(query)
 
         // Generate new uid for the given name
-        let uid = user.name.replace(/[^a-zA-Z]/g, '').toLowerCase();
+        let uid = user.name.replace(/[^a-zA-Z]/g, '').toLowerCase()
         if (docs.length > 0) {
-          uid += docs.length;
+          uid += docs.length
         }
-        user.uid = uid || nanoid(10);
+        user.uid = uid || nanoid(10)
       }
       if (account.provider === 'google') {
         user = {
@@ -87,7 +98,10 @@ export default NextAuth({
       return session
     },
     async jwt({ token, user, account, profile }) {
-      if (user) { token.id = user.uid;  token.uid = user.uid}
+      if (user) {
+        token.id = user.uid
+        token.uid = user.uid
+      }
       if (account) {
         token.accessToken = account.access_token
         if (account.provider === 'google') token.id = profile.id

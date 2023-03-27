@@ -7,7 +7,6 @@ import { getProviders, signIn, getSession } from 'next-auth/react'
 import { useFormik, Field, ErrorMessage, FormikProvider } from 'formik'
 import Image from 'next/image'
 import Router from 'next/router'
-import ErrorAlert from '@/components/ErrorAlert'
 import toast, { Toaster } from 'react-hot-toast'
 
 function Login() {

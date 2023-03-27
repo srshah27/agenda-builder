@@ -5,8 +5,7 @@ import sessionUser from '@/middleware/getSessionUser'
 
 export default async function handler(req, res) {
   const { user, error, dberror } = await sessionUser({ req })
-  if (dberror)
-    return res.status(401).json({ error: error, dberror: dberror })
+  if (dberror) return res.status(401).json({ error: error, dberror: dberror })
 
   try {
     await dbConnect()
@@ -17,7 +16,7 @@ export default async function handler(req, res) {
   }
   const { uID } = req.query
   const userdb = await User.findOne({ uid: uID }, '-password')
-  if(!userdb){
+  if (!userdb) {
     return res.status(404).json({ error: 'User not found' })
   }
 
@@ -42,12 +41,13 @@ export default async function handler(req, res) {
     }
 
     case 'PATCH': {
-      const { uid, email, image, name } = req.body;
-      const modify = await User.findOneAndUpdate({ uid: uID }, { uid, email, image, name })
-      if(modify)
-        return res.status(200).json({ user: modify })
-      else
-        return res.status(404).json({ error: 'User not found' })
+      const { uid, email, image, name } = req.body
+      const modify = await User.findOneAndUpdate(
+        { uid: uID },
+        { uid, email, image, name }
+      )
+      if (modify) return res.status(200).json({ user: modify })
+      else return res.status(404).json({ error: 'User not found' })
     }
     default: {
       return res.status(405).json({ error: 'Method not allowed' })

@@ -18,7 +18,7 @@ function Signup({ providers }) {
       password: '',
       cpassword: ''
     },
-    validate: async (values) => {
+    validate: async values => {
       const errors = {}
       if (!values.email) {
         errors.email = 'Please enter valid email address'
@@ -51,8 +51,7 @@ function Signup({ providers }) {
       if (!values.name) {
         errors.name = 'Please enter your name'
       } else if (values.name.length < 3 || values.name.length > 20) {
-        errors.name =
-          'Must be greater then 3 and less then 20 characters long'
+        errors.name = 'Must be greater then 3 and less then 20 characters long'
       }
 
       return errors

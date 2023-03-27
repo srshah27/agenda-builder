@@ -2,7 +2,7 @@ import dbConnect from '@/lib/dbconnect'
 import Board from '@/models/Boards'
 
 export default async function handler(req, res) {
- const {wID} = req.query
+  const { wID } = req.query
   try {
     await dbConnect()
   } catch (error) {
@@ -14,20 +14,20 @@ export default async function handler(req, res) {
   const reqType = req.method
   switch (reqType) {
     case 'GET': {
-      const boards  =  await Board.find({workspaceId: wID})
+      const boards = await Board.find({ workspaceId: wID })
       return res.status(200).json({ boards })
     }
 
     case 'POST': {
-      const { id, name, createdBy, createdAt, backgroundImage  } = req.body
-      console.log(name);
+      const { id, name, createdBy, createdAt, backgroundImage } = req.body
+      console.log(name)
       const data = {
         id,
         workspaceId: wID,
         name,
         createdAt,
         createdBy,
-        backgroundImage: backgroundImage || 'default',
+        backgroundImage: backgroundImage || 'default'
       }
       const board = await Board.create(data)
       return res.status(201).json({ board })

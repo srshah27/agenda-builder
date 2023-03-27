@@ -1,6 +1,6 @@
-import UnsplashReact, { Base64Uploader, withDefaultProps } from "unsplash-react"
+import UnsplashReact, { Base64Uploader, withDefaultProps } from 'unsplash-react'
 
-const MY_ACCESS_KEY = "Agenda Builder"
+const MY_ACCESS_KEY = 'Agenda Builder'
 
 const TestSplash = () => {
   return (

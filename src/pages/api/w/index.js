@@ -17,7 +17,6 @@ export default async function handler(req, res) {
 
   const reqType = req.method
   switch (reqType) {
-
     case 'POST': {
       const { workspaceName, userId } = req.body
       let workspaceId = workspaceName.replace(/[^a-zA-Z]/g, '').toLowerCase()

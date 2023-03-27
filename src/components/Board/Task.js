@@ -7,11 +7,12 @@ const Task = ({ task, index }) => {
   return (
     <Draggable draggableId={task.id} index={index}>
       {(draggableProvided, draggableSnapshot) => (
-        <Box bgColor={_color}
+        <Box
+          bgColor={_color}
           {...draggableProvided.draggableProps}
           {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
-          className={`font-light flex p-2 pt-2 mb-3 border rounded-sm w-full shadow-md h-[40px] ${
+          className={`font-light flex p-2 pt-2 mb-3 border rounded-md w-full shadow-md h-[40px] ${
             draggableSnapshot.isDragging ? 'bg-gray-500' : 'bg-gray-900'
           } `}
         >

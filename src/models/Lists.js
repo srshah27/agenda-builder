@@ -10,8 +10,7 @@ const ListsSchema = new Schema({
   createdBy: { type: String, ref: 'User' },
   sequence: Number,
   boardId: { type: String, ref: 'Board' },
-  workspaceId: { type: String, ref: 'Workspace' },
-
+  workspaceId: { type: String, ref: 'Workspace' }
 })
 
 module.exports = models.List || model('List', ListsSchema)

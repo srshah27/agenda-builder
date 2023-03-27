@@ -7,8 +7,7 @@ import sessionUser from '@/middleware/getSessionUser'
 
 export default async function handler(req, res) {
   const { user, error, dberror } = await sessionUser({ req })
-  if (dberror)
-    return res.status(401).json({ error: error, dberror: dberror })
+  if (dberror) return res.status(401).json({ error: error, dberror: dberror })
 
   try {
     await dbConnect()
@@ -40,9 +39,9 @@ export default async function handler(req, res) {
     }
 
     case 'DELETE': {
-      await Card.deleteMany({ workspaceId: wID });
-      await List.deleteMany({ workspaceId: wID });
-      await Board.deleteMany({ workspaceId: wID });
+      await Card.deleteMany({ workspaceId: wID })
+      await List.deleteMany({ workspaceId: wID })
+      await Board.deleteMany({ workspaceId: wID })
       await Workspace.findOneAndDelete({
         id: wID
       })
