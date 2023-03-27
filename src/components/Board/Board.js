@@ -93,6 +93,23 @@ const Board = ({ board, cards, lists }) => {
     let newLists = [...boardData.lists, data]
     setBoardData({ ...boardData, lists: newLists })
   }
+  const handleDelete = async (e, data) => {
+    if (data.type === 'list') {
+      fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${data.list.id}`, { method: 'DELETE' })
+        .then(res => res.json())
+        .then(d => {
+          setBoardData({ ...boardData, lists: boardData.lists.filter(list => list.id != data.list.id) })
+        })
+    }
+    if (data.type === 'card') {
+      fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${data.card.id}`, { method: 'DELETE' })
+        .then(res => res.json())
+        .then(d => {
+          setBoardData({ ...boardData, cards: boardData.cards.filter(card => card.id != data.card.id) })
+        })
+    }
+  }
+  
   const handleColumnDrag = (data, destination, source, draggableId) => {
     let ogiData = JSON.parse(JSON.stringify(data))
     let id = draggableId
@@ -156,14 +173,18 @@ const Board = ({ board, cards, lists }) => {
           ogiData
         )
     })
-
+    updateDb(
+      `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${currentCard.id}`,
+      { listId: currentCard.listId },
+      ogiData
+    )
     return data
   }
 
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result
-    console.log(source.index, destination.index);
     if (!destination) return
+    console.log(source.index, destination.index);
     let ogiData = { ...boardData }
     let updatedData = {}
     if (type === 'column') {
@@ -211,6 +232,7 @@ const Board = ({ board, cards, lists }) => {
                       tasks={tasks}
                       index={list.sequence}
                       addCard={addCard}
+                      deleteListOrCard={handleDelete}
                     />
 
                   )
@@ -223,7 +245,7 @@ const Board = ({ board, cards, lists }) => {
                   minW={250}
                 >
                   <Box className="p-2 text-md flex" as='button' onClick={addList} w='full' alignItems={'center'}>
-                    <AddIcon size={ 15 } mr={3} /> Add another list
+                    <AddIcon w={4} h={4} mr={3} /> Add another list
                   </Box>
 
                 </Box>
