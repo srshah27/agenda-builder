@@ -13,14 +13,12 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
     <Draggable draggableId={list.id} index={index}>
       {(draggableProvided, draggableSnapshot) => (
 
-        <Box bgColor={_color}
+        <Flex bgColor={_color}
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
           className={`m-4 border rounded shadow-md `}
           h="fit-content"
-          w={250}
-          minW={250}
-          m
+          w={"80%"}
           flexDirection={'column'}
         >
           <ContextMenuTrigger key={list.id} id={list.id}>
@@ -42,17 +40,17 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
             </Box>
           </ContextMenu>
           
-          <Droppable droppableId={list.id} type="task">
+          <Droppable droppableId={list.id} type="task" direction='horizontal'>
             {(droppableProvided, droppableSnapshot) => (
-              <Box
+              <div
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
-                className={`min-h-0 p-2 border-t-2`}
+                className={`p-2 bg-red-300 w-full`}
               >
                 <TaskList tasks={tasks} list={list} deleteListOrCard={deleteListOrCard } />
 
                 {droppableProvided.placeholder}
-              </Box>
+              </div>
             )}
           </Droppable>
           <Box className='px-2'>
@@ -66,7 +64,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               Add a card
             </Box>
           </Box>
-        </Box>
+        </Flex>
       )}
     </Draggable>
   )

@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Flex, HStack, Spacer, useColorModeValue } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
-import UserNav from '../UserNav'
-import SubNav from '../SubNav'
 import { nanoid } from 'nanoid'
 import { Box } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
@@ -198,6 +196,7 @@ const Board = ({ board, cards, lists }) => {
     setBoardData(updatedData)
   }
   return (
+    // complete outside box
     <Box
       display="block"
       position="relative"
@@ -209,16 +208,20 @@ const Board = ({ board, cards, lists }) => {
     >
       <DragDropContext onDragEnd={onDragEnd}>
         <React.StrictMode>
+            {/* all the lists */}
           <Droppable
             droppableId="all-columns"
-            direction="horizontal"
+            direction="vertical"
             type="column"
           >
             {droppableProvided => (
+                // box with all lists
               <Flex
                 px="4"
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
+                direction={"column"}
+                alignItems={'center'}
               >
                 {boardData.lists.map(list => {
                   const tasks = boardData.cards.filter(
@@ -234,7 +237,6 @@ const Board = ({ board, cards, lists }) => {
                       addCard={addCard}
                       deleteListOrCard={handleDelete}
                     />
-
                   )
                 })}
                 {droppableProvided.placeholder}
