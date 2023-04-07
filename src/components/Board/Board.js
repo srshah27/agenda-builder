@@ -7,7 +7,7 @@ import SubNav from '../SubNav'
 import { nanoid } from 'nanoid'
 import { Box } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
-import { GrFormAdd } from 'react-icons/gr'
+import { AddIcon } from '@chakra-ui/icons'
 
 // import { initialData } from '../../data/InitialData'
 const List = dynamic(() => import('./List'), {
@@ -39,6 +39,7 @@ const Board = ({ board, cards, lists }) => {
     })
       .then(res => res.json())
       .then(data => {
+        console.log(data.updatedList, data.updatedCard);
         if (data.updatedList === null) {
           setBoardData({ ...cardsOrLists })
           setRefresh(!refresh)
@@ -54,7 +55,6 @@ const Board = ({ board, cards, lists }) => {
       })
   }
   const addCard = (listId) => {
-    console.log('added card to: ' + listId);
     let sequence = boardData.cards.filter(card => card.listId === listId).length
     const data = {
       id: nanoid(),
@@ -66,7 +66,6 @@ const Board = ({ board, cards, lists }) => {
       boardId: boardData.board.id,
       sequence
     }
-    console.log(data);
     fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -86,7 +85,6 @@ const Board = ({ board, cards, lists }) => {
       boardId: boardData.board.id,
       sequence
     }
-    console.log(data);
     fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -95,93 +93,98 @@ const Board = ({ board, cards, lists }) => {
     let newLists = [...boardData.lists, data]
     setBoardData({ ...boardData, lists: newLists })
   }
+  const handleDelete = async (e, data) => {
+    if (data.type === 'list') {
+      fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${data.list.id}`, { method: 'DELETE' })
+        .then(res => res.json())
+        .then(d => {
+          setBoardData({ ...boardData, lists: boardData.lists.filter(list => list.id != data.list.id) })
+        })
+    }
+    if (data.type === 'card') {
+      fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${data.card.id}`, { method: 'DELETE' })
+        .then(res => res.json())
+        .then(d => {
+          setBoardData({ ...boardData, cards: boardData.cards.filter(card => card.id != data.card.id) })
+        })
+    }
+  }
+  
   const handleColumnDrag = (data, destination, source, draggableId) => {
-    let ogiData = data
+    let ogiData = JSON.parse(JSON.stringify(data))
     let id = draggableId
     let currentList = data.lists.find(list => list.id === id)
-    console.log(source.index, destination.index);
+    let oldData = []
 
     data.lists.forEach(list => {
-
+      oldData.push({ ...list })
       if (list.sequence > source.index) {
         list.sequence = list.sequence - 1 // Update query else
-        console.log("1st" + list.sequence);
-        updateDb(
-          `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${list.id}`,
-          { sequence: list.sequence - 1 },
-          ogiData
-        )
-      }
+        console.log(`rm ${list.id} ${list.sequence}`);
 
-    })
-    data.lists.forEach(list => {
-      console.log("2nd" + list.sequence);
+      }
       if (list.sequence >= destination.index) {
         list.sequence = list.sequence + 1 // Update query else
-        updateDb(
-          `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${list.id}`,
-          { sequence: list.sequence + 1 },
-          ogiData
-        )
+        console.log(`add ${list.id} ${list.sequence}`);
+
       }
 
     })
     currentList.sequence = destination.index // Upadte query currentList
-    console.log("last" + currentList.sequence);
-    updateDb(
-      `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${currentList.id}`,
-      { sequence: destination.sequence },
-      ogiData
-    )
-    console.log(data.lists)
+    console.log(oldData === data);
+    data.lists.forEach(list => {
 
+      if (list.sequence !== oldData.find(l => l.id === list.id).sequence)
+        updateDb(
+          `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${list.id}`,
+          { sequence: list.sequence },
+          ogiData
+        )
+
+    })
     return data
   }
   const handleTaskDrag = (data, destination, source, draggableId) => {
-    let ogiData = data
+    let ogiData = JSON.parse(JSON.stringify(data))
     let id = draggableId
     let currentCard = data.cards.find(card => card.id === id)
+    let oldData = []
     // handle remove from source
     data.cards.forEach(card => {
+      oldData.push({ ...card })
       if (card.listId === source.droppableId) {
         if (card.sequence > source.index) {
           card.sequence = card.sequence - 1
-          updateDb(
-            `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${card.id}`,
-            { sequence: card.sequence - 1 },
-            ogiData
-          )
         }
       }
-    })
-    data.cards.forEach(card => {
       if (card.listId === destination.droppableId) {
         if (card.sequence >= destination.index) {
           card.sequence = card.sequence + 1
-          updateDb(
-            `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${card.id}`,
-            { sequence: card.sequence + 1 },
-            ogiData
-          )
         }
       }
     })
     currentCard.listId = destination.droppableId
     currentCard.sequence = destination.index // Upadte query currentCard
+    data.cards.forEach(card => {
+      if (card.sequence !== oldData.find(c => c.id === card.id).sequence)
+        updateDb(
+          `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${card.id}`,
+          { sequence: card.sequence },
+          ogiData
+        )
+    })
     updateDb(
       `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${currentCard.id}`,
-      { sequence: currentCard.sequence, listId: currentCard.listId },
+      { listId: currentCard.listId },
       ogiData
     )
-    console.log(data.cards)
     return data
   }
 
   const onDragEnd = result => {
-    // console.log(result);
     const { destination, source, draggableId, type } = result
     if (!destination) return
-    console.log(type, destination, source, draggableId)
+    console.log(source.index, destination.index);
     let ogiData = { ...boardData }
     let updatedData = {}
     if (type === 'column') {
@@ -213,7 +216,7 @@ const Board = ({ board, cards, lists }) => {
           >
             {droppableProvided => (
               <Flex
-                pl="4"
+                px="4"
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
               >
@@ -229,6 +232,7 @@ const Board = ({ board, cards, lists }) => {
                       tasks={tasks}
                       index={list.sequence}
                       addCard={addCard}
+                      deleteListOrCard={handleDelete}
                     />
 
                   )
@@ -238,11 +242,10 @@ const Board = ({ board, cards, lists }) => {
                   className={`m-4 border rounded shadow-md `}
                   h='fit-content'
                   w={250}
-                  m
-                  flexDirection={'column'}
+                  minW={250}
                 >
-                  <Box className="p-2 text-md" as='button' onClick={addList}>
-                    Add new List <Spacer />  <GrFormAdd size={25} />
+                  <Box className="p-2 text-md flex" as='button' onClick={addList} w='full' alignItems={'center'}>
+                    <AddIcon w={4} h={4} mr={3} /> Add another list
                   </Box>
 
                 </Box>

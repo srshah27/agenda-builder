@@ -22,7 +22,7 @@ const UserNav = ({ board }) => {
       display="flex"
     >
       <Link href={`/u/${session?.user?.uid}`}>
-        <Button bg="transparent" size="sm">
+        <Button  size="sm">
           Boards
         </Button>
       </Link>
