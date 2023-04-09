@@ -44,6 +44,8 @@ const Workspace = ({ id, workspace }) => {
       })
   }, [boards, id])
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const { isOpen: isOpenInvite, onOpen: onOpenInvite, onClose: onCloseInvite } = useDisclosure()
+
   const router = useRouter()
   const { uId } = router.query
   const [boardName, setBoardName] = useState('')
@@ -66,6 +68,20 @@ const Workspace = ({ id, workspace }) => {
     setBoardName('')
     onClose()
   }
+
+  const createLink = async () => {
+    console.log(workspace);
+    console.log('create link');
+    const res = await fetch(`/api/w/invite`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ wID: workspace.id })
+    })
+    const data = await res.json()
+    console.log(data);
+    workspace.invite = data.workspace.invite;
+  }
+
 
   return (
     <Flex p="5">
@@ -98,11 +114,37 @@ const Workspace = ({ id, workspace }) => {
               h="8"
               mx="2"
               bgColor={useColorModeValue('gray.100', 'gray.600')}
+              onClick={onOpenInvite}
             >
               {' '}
               <BsPersonPlus />{' '}
               <Text display={{ base: 'none', md: 'block' }}>Members </Text>
             </Button>
+
+            <Modal isOpen={isOpenInvite} onClose={onCloseInvite}>
+              <ModalOverlay />
+              <ModalContent>
+                <ModalHeader color="cyan.100">Invite Members to {workspace?.name} Workspace</ModalHeader>
+                {workspace.invite.link != "" && new Date() < new Date(workspace.invite.expiresAt) ? (<>{process.env.NEXT_PUBLIC_BASE_URL +'/w/i/' + workspace?.invite?.link }</>) : <></>}
+                {workspace.invite.link == "" || new Date() >= new Date(workspace.invite.expiresAt) ? (<>Link is not Created or Expired</>) : <></>}
+                <ModalCloseButton />
+                <ModalBody>
+
+                </ModalBody>
+                <ModalFooter>
+                  {workspace.invite.link != "" && new Date() < new Date(workspace.invite.expiresAt) ?
+                    (<Button mr={3} onClick={(e) => {
+                      navigator.clipboard.writeText(process.env.NEXT_PUBLIC_BASE_URL +'/w/i/' + workspace?.invite?.link)
+                    }}>
+                      Copy Invite Link 
+                    </Button>) : <></>}
+                  {workspace.invite.link == "" || new Date() >= new Date(workspace.invite.expiresAt) ? (<Button mr={3} onClick={() => createLink()} >
+                    Create Invite Link
+                  </Button>) : <></>}
+                </ModalFooter>
+              </ModalContent>
+            </Modal>
+
             <Button
               h="8"
               mx="2"
@@ -154,7 +196,7 @@ const Workspace = ({ id, workspace }) => {
                   <Button mr={3} onClick={submitBoard}>
                     Create
                   </Button>
-                  <Button variant="ghost">Close</Button>
+                  <Button variant="ghost" onClick={onClose}>Close</Button>
                 </ModalFooter>
               </ModalContent>
             </Modal>

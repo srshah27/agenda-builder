@@ -20,6 +20,9 @@ const Board = ({ board, cards, lists }) => {
     cards,
     lists: lists.sort((a, b) => a.sequence - b.sequence)
   })
+  
+  const [dragDisabled, setDragDisabled] = useState(false);
+  
   const [refresh, setRefresh] = useState(false)
   const { data: session } = useSession()
   useEffect(() => {
@@ -108,6 +111,7 @@ const Board = ({ board, cards, lists }) => {
           setBoardData({ ...boardData, cards: boardData.cards.filter(card => card.id != data.card.id) })
         })
     }
+
   }
   
   const handleColumnDrag = (data, destination, source, draggableId) => {

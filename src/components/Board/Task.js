@@ -2,10 +2,10 @@ import React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { Box, useColorModeValue, Spacer } from '@chakra-ui/react'
 
-const Task = ({ task, index }) => {
+const Task = ({ task, index, dragDisabled }) => {
   let _color = useColorModeValue('gray.50', 'gray.900')
   return (
-    <Draggable draggableId={task.id} index={index}>
+    <Draggable draggableId={task.id} index={index} isdragDisabled={dragDisabled}>
       {(draggableProvided, draggableSnapshot) => (
         <Box
           bgColor={_color}

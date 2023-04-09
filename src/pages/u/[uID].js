@@ -48,10 +48,8 @@ export async function getServerSideProps(context) {
         destination: '/u/' + session.user.uid
       }
     }
-  console.log(uID)
   let res = await fetch(`${process.env.BASE_URL}/api/u/${uID}`)
   let data = await res.json()
-  console.log(data)
   if (data.user) {
     return {
       props: {

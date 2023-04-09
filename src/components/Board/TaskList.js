@@ -3,7 +3,7 @@ import Task from './Task'
 import { useColorModeValue, Box } from '@chakra-ui/react'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 
-const TaskList = ({ tasks, list, deleteListOrCard }) => {
+const TaskList = ({ tasks, list, deleteListOrCard  }) => {
   return (
     <div className="w-full">
       {tasks.map((task, index) => (
