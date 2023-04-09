@@ -24,16 +24,16 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
           flexDirection={'column'}
         >
           <ContextMenuTrigger key={list.id} id={list.id}>
-          <Box {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'}>
-            {list.name} <Spacer/>{list.sequence}
-          </Box>
+            <Box {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'}>
+              {list.name} <Spacer />{list.sequence}
+            </Box>
           </ContextMenuTrigger>
-          
+
           <ContextMenu id={list.id}>
-            <Box m={2} bg="gray.100"  w={130} rounded={5}>
+            <Box m={2} bg="gray.100" w={130} rounded={5}>
               <MenuItem
                 onClick={deleteListOrCard}
-                data={{ list: list, type:'list' }}
+                data={{ list: list, type: 'list' }}
               >
                 <Box bg="gray.300" p={3} rounded={5}>
                   Delete
@@ -41,7 +41,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               </MenuItem>
             </Box>
           </ContextMenu>
-          
+
           <Droppable droppableId={list.id} type="task">
             {(droppableProvided, droppableSnapshot) => (
               <Box
@@ -49,7 +49,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
                 {...droppableProvided.droppableProps}
                 className={`min-h-0 p-2 border-t-2`}
               >
-                <TaskList tasks={tasks} list={list} deleteListOrCard={deleteListOrCard } />
+                <TaskList tasks={tasks} list={list} deleteListOrCard={deleteListOrCard} />
 
                 {droppableProvided.placeholder}
               </Box>
@@ -62,7 +62,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               alignItems={'center'}
               onClick={() => addCard(list.id)}
             >
-              <AddIcon w={3} h={ 3 } mr={ 3 } />
+              <AddIcon w={3} h={3} mr={3} />
               Add a card
             </Box>
           </Box>

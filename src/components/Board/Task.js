@@ -12,9 +12,8 @@ const Task = ({ task, index, dragDisabled }) => {
           {...draggableProvided.draggableProps}
           {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
-          className={`font-light flex p-2 pt-2 mb-2 border rounded-md w-full shadow-md h-[40px] ${
-            draggableSnapshot.isDragging ? 'bg-gray-500' : 'bg-gray-900'
-          } `}
+          className={`font-light flex p-2 pt-2 mb-2 border rounded-md w-full shadow-md h-[40px] ${draggableSnapshot.isDragging ? 'bg-gray-500' : 'bg-gray-900'
+            } `}
         >
           {task.name} <Spacer /> {task.sequence}
         </Box>

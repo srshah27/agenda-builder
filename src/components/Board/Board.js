@@ -113,7 +113,7 @@ const Board = ({ board, cards, lists }) => {
     }
 
   }
-  
+
   const handleColumnDrag = (data, destination, source, draggableId) => {
     let ogiData = JSON.parse(JSON.stringify(data))
     let id = draggableId
