@@ -2,30 +2,41 @@ import React from 'react'
 import Task from './TaskHorizontal'
 import { useColorModeValue, Box } from '@chakra-ui/react'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
+import { Droppable } from 'react-beautiful-dnd'
 
 const TaskList = ({ tasks, list, deleteListOrCard }) => {
   return (
-    <div className="flex w-full items-center gap-4">
-      {tasks.map((task, index) => (
-        <div key={task.id} className='w-full'>
-          <ContextMenuTrigger key={task.id} id={task.id}>
-            <Task task={task} index={task.sequence} />
-          </ContextMenuTrigger>
-          <ContextMenu id={task.id}>
-            <Box m={2} bg="gray.100" w={130} rounded={5}>
-              <MenuItem
-                onClick={deleteListOrCard}
-                data={{ card: task, type: 'card' }}
-              >
-                <Box bg="gray.300" p={3} rounded={5}>
-                  Delete
+    <Droppable droppableId={list.id} type="task" direction='horizontal'>
+      {(droppableProvided, droppableSnapshot) => (
+        <div
+          ref={droppableProvided.innerRef}
+          {...droppableProvided.droppableProps}
+          className={`p-2 flex overflow-auto`}
+        >
+
+          {tasks.map((task, index) => (
+            <div className="flex items-center flex-shrink-0">
+              <ContextMenuTrigger key={task.id} id={task.id}>
+                <Task task={task} index={task.sequence} />
+              </ContextMenuTrigger>
+              <ContextMenu id={task.id}>
+                <Box m={2} bg="gray.100" w={130} rounded={5}>
+                  <MenuItem
+                    onClick={deleteListOrCard}
+                    data={{ card: task, type: 'card' }}
+                  >
+                    <Box bg="gray.300" p={3} rounded={5}>
+                      Delete
+                    </Box>
+                  </MenuItem>
                 </Box>
-              </MenuItem>
-            </Box>
-          </ContextMenu>
+              </ContextMenu>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      )}
+
+    </Droppable>
   )
 }
 export default TaskList

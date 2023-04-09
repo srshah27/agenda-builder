@@ -22,9 +22,9 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
           flexDirection={'column'}
         >
           <ContextMenuTrigger key={list.id} id={list.id}>
-            <Box {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'}>
+            <Flex {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'}>
               {list.name} <Spacer />{list.sequence}
-            </Box>
+            </Flex>
           </ContextMenuTrigger>
 
           <ContextMenu id={list.id}>
@@ -39,20 +39,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               </MenuItem>
             </Box>
           </ContextMenu>
-
-          <Droppable droppableId={list.id} type="task" direction='horizontal'>
-            {(droppableProvided, droppableSnapshot) => (
-              <div
-                ref={droppableProvided.innerRef}
-                {...droppableProvided.droppableProps}
-                className={`p-2 bg-red-300 w-full`}
-              >
-                <TaskList tasks={tasks} list={list} deleteListOrCard={deleteListOrCard} />
-
-                {droppableProvided.placeholder}
-              </div>
-            )}
-          </Droppable>
+          <TaskList tasks={tasks} list={list} deleteListOrCard={deleteListOrCard} />
           <Box className='px-2'>
             <Box bgColor={_color}
               className={`flex p-2 mb-2 w-full shadow-md `}
