@@ -4,6 +4,7 @@ import Board from '@/components/Board/Board'
 import UserNav from '@/components/UserNav'
 import SubNav from '@/components/SubNav'
 import { Box } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 const BoardPage = ({ workspace, board, cards, lists, user }) => {
   // console.log(board, cards, lists)
   return (
@@ -12,16 +13,18 @@ const BoardPage = ({ workspace, board, cards, lists, user }) => {
     //   <SubNav />
     //   <Board board={board} cards={cards} lists={lists} /> */}
     // </div>
-    <Box
-      backgroundPosition="center"
-      h="100vh"
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover"
-    >
-      <UserNav board={board} />
-      <SubNav board={board} />
-      <Board board={board} cards={cards} lists={lists} />
-    </Box>
+    <ChakraProvider>
+      <Box
+        backgroundPosition="center"
+        h="100vh"
+        backgroundRepeat="no-repeat"
+        backgroundSize="cover"
+      >
+        <UserNav board={board} />
+        <SubNav board={board} />
+        <Board board={board} cards={cards} lists={lists} />
+      </Box>
+    </ChakraProvider>
   )
 }
 

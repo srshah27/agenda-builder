@@ -11,11 +11,12 @@ import { SettingsIcon } from '@chakra-ui/icons'
 
 const SubNav = ({ board }) => {
   return (
+
     <HStack
       boxShadow="sm"
-      bgColor={useColorModeValue('gray.300', 'gray.500')}
-      display="flex"
-    >
+      bgColor={useColorModeValue('gray.200', 'gray.500')}
+      display="flex">
+
       {/* <Text fontSize="md" p="2">{ board.name }</Text> */}
       <Spacer />
       <Menu>
