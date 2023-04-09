@@ -5,9 +5,9 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 
 const TaskList = ({ tasks, list, deleteListOrCard }) => {
   return (
-    <div className="flex w-full items-center gap-4">
+    <div className="w-full">
       {tasks.map((task, index) => (
-        <div key={task.id} className='w-full'>
+        <span key={task.id}>
           <ContextMenuTrigger key={task.id} id={task.id}>
             <Task task={task} index={task.sequence} />
           </ContextMenuTrigger>
@@ -23,7 +23,8 @@ const TaskList = ({ tasks, list, deleteListOrCard }) => {
               </MenuItem>
             </Box>
           </ContextMenu>
-        </div>
+        </span>
+
       ))}
     </div>
   )

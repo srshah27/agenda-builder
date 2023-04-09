@@ -13,25 +13,27 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
     <Draggable draggableId={list.id} index={index}>
       {(draggableProvided, draggableSnapshot) => (
 
-        <Flex bgColor={_color}
+        <Box bgColor={_color}
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
           className={`m-4 border rounded shadow-md `}
           h="fit-content"
-          w={"80%"}
+          w={250}
+          minW={250}
+          m
           flexDirection={'column'}
         >
           <ContextMenuTrigger key={list.id} id={list.id}>
-          <Box {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'}>
-            {list.name} <Spacer/>{list.sequence}
-          </Box>
+            <Box {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'}>
+              {list.name} <Spacer />{list.sequence}
+            </Box>
           </ContextMenuTrigger>
-          
+
           <ContextMenu id={list.id}>
-            <Box m={2} bg="gray.100"  w={130} rounded={5}>
+            <Box m={2} bg="gray.100" w={130} rounded={5}>
               <MenuItem
                 onClick={deleteListOrCard}
-                data={{ list: list, type:'list' }}
+                data={{ list: list, type: 'list' }}
               >
                 <Box bg="gray.300" p={3} rounded={5}>
                   Delete
@@ -39,18 +41,18 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               </MenuItem>
             </Box>
           </ContextMenu>
-          
-          <Droppable droppableId={list.id} type="task" direction='horizontal'>
+
+          <Droppable droppableId={list.id} type="task">
             {(droppableProvided, droppableSnapshot) => (
-              <div
+              <Box
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
-                className={`p-2 bg-red-300 w-full`}
+                className={`min-h-0 p-2 border-t-2`}
               >
-                <TaskList tasks={tasks} list={list} deleteListOrCard={deleteListOrCard } />
+                <TaskList tasks={tasks} list={list} deleteListOrCard={deleteListOrCard} />
 
                 {droppableProvided.placeholder}
-              </div>
+              </Box>
             )}
           </Droppable>
           <Box className='px-2'>
@@ -60,11 +62,11 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               alignItems={'center'}
               onClick={() => addCard(list.id)}
             >
-              <AddIcon w={3} h={ 3 } mr={ 3 } />
+              <AddIcon w={3} h={3} mr={3} />
               Add a card
             </Box>
           </Box>
-        </Flex>
+        </Box>
       )}
     </Draggable>
   )
