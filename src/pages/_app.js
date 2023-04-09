@@ -5,7 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 export default function App({ Component, pageProps, session }) {
   return (
-    <ChakraProvider>
+    // <ChakraProvider>
       <SessionProvider session={session}>
         <NextNProgress
           color="#0079bf"
@@ -15,6 +15,6 @@ export default function App({ Component, pageProps, session }) {
         />
         <Component {...pageProps} />
       </SessionProvider>
-    </ChakraProvider>
+    // </ChakraProvider>
   )
 }
