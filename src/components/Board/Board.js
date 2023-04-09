@@ -237,6 +237,7 @@ const Board = ({ board, cards, lists }) => {
                       index={list.sequence}
                       addCard={addCard}
                       deleteListOrCard={handleDelete}
+                      boardData={boardData}
                     />
 
                   )

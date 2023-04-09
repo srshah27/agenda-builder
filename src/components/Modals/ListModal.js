@@ -9,7 +9,7 @@ import {
 
 
 
-const CardModal = ({ board, card }) => {
+const ListModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const initialRef = React.useRef(null)
   return (
@@ -27,11 +27,11 @@ const CardModal = ({ board, card }) => {
       >
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Edit Card</ModalHeader>
+          <ModalHeader>Edit List</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
-              <FormLabel>Card Name</FormLabel>
+              <FormLabel>List Name</FormLabel>
               <Input ref={initialRef} placeholder='Snehil' />
             </FormControl>
 
@@ -58,4 +58,4 @@ const CardModal = ({ board, card }) => {
   )
 }
 
-export default CardModal
+export default ListModal
