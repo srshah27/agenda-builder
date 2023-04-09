@@ -14,7 +14,6 @@ export default function Home({ sess }) {
       <Hero />
       <Feature />
       <Use />
-      <AvatarMenu />
       <Footer />
     </>
   )
