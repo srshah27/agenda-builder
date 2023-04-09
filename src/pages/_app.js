@@ -1,11 +1,8 @@
 import '@/styles/globals.css'
 import { SessionProvider } from 'next-auth/react'
 import NextNProgress from 'nextjs-progressbar'
-import { ChakraProvider } from '@chakra-ui/react'
-import localFont from '@next/font/local'
 import Head from 'next/head'
 
-const myFont = localFont({ src: '../../public/Fonts/GeneralSans_Complete/GeneralSans_Complete/Fonts/Variable/GeneralSans-Variable.ttf' })
 
 export default function App({ Component, pageProps, session }) {
   <Head>
