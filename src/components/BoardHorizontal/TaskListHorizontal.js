@@ -15,7 +15,7 @@ const TaskList = ({ tasks, list, deleteListOrCard }) => {
         >
 
           {tasks.map((task, index) => (
-            <div className="flex items-center flex-shrink-0">
+            <div className="flex items-center flex-shrink-0" key={ index }>
               <ContextMenuTrigger key={task.id} id={task.id}>
                 <Task task={task} index={task.sequence} />
               </ContextMenuTrigger>
