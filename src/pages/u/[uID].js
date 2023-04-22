@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { getSession } from 'next-auth/react'
+import { getSession, useSession } from 'next-auth/react'
 import TopBar from '@/components/TopBar'
 import SideBar from '@/components/SideBar'
 import Work from '@/components/Work'
 import { ChakraProvider } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 const Dashboard = ({ user, Creator, Collaborator }) => {
+  
+  const { data: session, status } = useSession()
+  
   const router = useRouter()
   const { uID } = router.query
   const [asCreator, setAsCreator] = useState(Creator)
@@ -45,7 +48,7 @@ export async function getServerSideProps(context) {
   if (uID != session.user.uid)
     return {
       redirect: {
-        destination: '/u/' + session.user.uid
+        destination: '/u/' + session.user.user_id / hash / is_admin / email
       }
     }
   let res = await fetch(`${process.env.BASE_URL}/api/u/${uID}`)

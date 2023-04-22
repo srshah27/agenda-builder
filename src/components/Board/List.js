@@ -31,7 +31,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard, boardData }) => {
     console.log(`/api/w/${list.workspaceId}/b/${list.boardId}/l/${list.id}`);
     // do query to update the card
 
-    fetch(`/api/w/${list.workspaceId}/b/${list.boardId}/l/${list.id}`, {
+    fetch(`/api/w/${list.workspaceId}/b/${list.boardId}/lidf/${list.id}`, {
       method: 'PATCH',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ name: list.name})
