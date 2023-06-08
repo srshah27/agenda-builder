@@ -21,20 +21,20 @@ const Task = ({ task, index, dragDisabled, boardData }) => {
     let value = e.target.value;
     setCurrentTask({ ...currentTask, [type]: value });
   }
-  const handleSave =  () => {
+  const handleSave = () => {
     console.log('asdasd');
     task.name = currentTask.name;
     task.description = currentTask.description;
     // do query to update the card
-    
+
     fetch(`/api/w/${task.workspaceId}/b/${task.boardId}/c/${task.id}`, {
       method: 'PATCH',
       headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({name: task.name, description: task.description})
+      body: JSON.stringify({ name: task.name, description: task.description })
     })
-    
+
     onClose()
-    
+
   }
 
   return (

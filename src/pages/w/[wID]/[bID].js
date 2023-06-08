@@ -1,7 +1,7 @@
 import React from 'react'
 import { getSession } from 'next-auth/react'
 import Board from '@/components/Board/Board'
-import BoardHorizontal from '@/components/BoardHorizontal/BoardHorizontal'
+import BoardHorizontal from '@/components/Board/Board'
 import UserNav from '@/components/UserNav'
 import SubNav from '@/components/SubNav'
 import { Box } from '@chakra-ui/react'
