@@ -14,19 +14,32 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
       {(draggableProvided, draggableSnapshot) => (
 
         <Flex bgColor={_color}
-          {...draggableProvided.draggableProps}
+          {...draggableProvided.draggableProps}a
           ref={draggableProvided.innerRef}
           className={`m-4 border rounded shadow-md `}
           h="fit-content"
           w={"80%"}
-          flexDirection={'column'}
+          flexDirection={'row'}
         >
           <ContextMenuTrigger key={list.id} id={list.id}>
-            <Flex {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'}>
-              {list.name} <Spacer />{list.sequence}
+            <Flex {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'} direction={'column'}>
+              {list.name} <Spacer />{list.sequence}<Spacer />8:30<Spacer />9:30
             </Flex>
           </ContextMenuTrigger>
 
+
+          <TaskList tasks={tasks} list={list} deleteListOrCard={deleteListOrCard} />
+          {/* <Box className='px-2'>
+            <Box bgColor={_color}
+              className={`flex p-2 mb-2 w-full shadow-md `}
+              as='button'
+              alignItems={'center'}
+              onClick={() => addCard(list.id)}
+            >
+              <AddIcon w={3} h={3} mr={3} />
+              Add a card
+            </Box>
+          </Box> */}
           <ContextMenu id={list.id}>
             <Box m={2} bg="gray.100" w={130} rounded={5}>
               <MenuItem
@@ -39,19 +52,8 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               </MenuItem>
             </Box>
           </ContextMenu>
-          <TaskList tasks={tasks} list={list} deleteListOrCard={deleteListOrCard} />
-          <Box className='px-2'>
-            <Box bgColor={_color}
-              className={`flex p-2 mb-2 w-full shadow-md `}
-              as='button'
-              alignItems={'center'}
-              onClick={() => addCard(list.id)}
-            >
-              <AddIcon w={3} h={3} mr={3} />
-              Add a card
-            </Box>
-          </Box>
         </Flex>
+
       )}
     </Draggable>
   )

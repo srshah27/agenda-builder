@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Flex, HStack, Spacer, useColorModeValue } from '@chakra-ui/react'
+import { Flex, HStack, Heading, Spacer, Text, useColorModeValue } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
 import { nanoid } from 'nanoid'
@@ -200,12 +200,16 @@ const Board = ({ board, cards, lists }) => {
     <Box
       display="block"
       position="relative"
-      // height="fit-content"
       overflowX="auto"
       bg={
         'linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);'
       }
     >
+      <div className='flex justify-around outline-double m-2'>
+        <Heading className='text-center'>The Summit</Heading>
+        <Text fontSize='3xl'>Start Time:</Text>
+        <Text fontSize='3xl'>End Time:</Text>
+      </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <React.StrictMode>
           {/* all the lists */}
@@ -236,7 +240,6 @@ const Board = ({ board, cards, lists }) => {
                       index={list.sequence}
                       addCard={addCard}
                       deleteListOrCard={handleDelete}
-                    // ignoreContainerClipping={true}
                     />
                   )
                 })}
