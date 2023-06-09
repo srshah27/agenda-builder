@@ -1,7 +1,7 @@
 import React from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import TaskList from './TaskListHorizontal'
-import { useColorModeValue, Box, Spacer, Flex } from '@chakra-ui/react'
+import { useColorModeValue, Box, Spacer, Flex, Text } from '@chakra-ui/react'
 import { AddIcon } from '@chakra-ui/icons'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
@@ -23,7 +23,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
         >
           <ContextMenuTrigger key={list.id} id={list.id}>
             <Flex {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'} direction={'column'}>
-              {list.name} <Spacer />{list.sequence}<Spacer />8:30<Spacer />9:30
+              <Text fontSize={'2xl'} fontWeight={'600'}>{list.name} </Text><Spacer />{list.sequence}<Spacer />8:30<Spacer />9:30
             </Flex>
           </ContextMenuTrigger>
 
