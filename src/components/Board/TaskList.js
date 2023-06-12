@@ -1,32 +1,29 @@
 import React from 'react'
 import Task from './Task'
-import { useColorModeValue, Box } from '@chakra-ui/react'
+import { useColorModeValue, Box, Text } from '@chakra-ui/react'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
+import { Droppable } from 'react-beautiful-dnd'
 
-const TaskList = ({ tasks, list, deleteListOrCard, boardData  }) => {
+const TaskList = ({ tasks, list, deleteListOrCard }) => {
   return (
-    <div className="w-full">
-      {tasks.map((task, index) => (
-        <span key={task.id}>
-          <ContextMenuTrigger key={task.id} id={task.id}>
-            <Task task={task} index={task.sequence} boardData={boardData} />
-          </ContextMenuTrigger>
-          <ContextMenu id={task.id}>
-            <Box m={2} bg="gray.100" w={130} rounded={5}>
-              <MenuItem
-                onClick={deleteListOrCard}
-                data={{ card: task, type: 'card' }}
-              >
-                <Box bg="gray.300" p={3} rounded={5}>
-                  Delete
-                </Box>
-              </MenuItem>
-            </Box>
-          </ContextMenu>
-        </span>
+    <Droppable droppableId={list.id} type="task" direction='horizontal'>
+      {(droppableProvided, droppableSnapshot) => (
+        <div
+          ref={droppableProvided.innerRef}
+          {...droppableProvided.droppableProps}
+          className={`p-2 w-full flex flex-col min-h-[150px]`}
+        >
+          <h2 className='text-xl text-center'>This will be the description of the Task</h2>
 
-      ))}
-    </div>
+          <div className="flex mt-8">
+            {tasks.map((task, index) => (
+              <Task task={task} index={task.sequence} />
+            ))}
+          </div>
+        </div>
+      )}
+
+    </Droppable>
   )
 }
 export default TaskList

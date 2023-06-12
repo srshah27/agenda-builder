@@ -2,6 +2,7 @@ import '@/styles/globals.tail.css'
 import { SessionProvider } from 'next-auth/react'
 import NextNProgress from 'nextjs-progressbar'
 import Head from 'next/head'
+import { ChakraProvider } from '@chakra-ui/react'
 
 
 export default function App({ Component, pageProps, session }) {
@@ -9,16 +10,18 @@ export default function App({ Component, pageProps, session }) {
     <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,400,700&display=swap" rel="stylesheet"></link>
   </Head>
   return (
-    <SessionProvider session={session}>
-      <NextNProgress
-        color="#0079bf"
-        startPosition={0.3}
-        stopDelayMs={200}
-        height={4}
-      />
-      <main className='myFont.className'>
-        <Component {...pageProps} />
-      </main>
-    </SessionProvider>
+    <ChakraProvider>
+      <SessionProvider session={session}>
+        <NextNProgress
+          color="#0079bf"
+          startPosition={0.3}
+          stopDelayMs={200}
+          height={4}
+        />
+        <main className='myFont.className'>
+          <Component {...pageProps} />
+        </main>
+      </SessionProvider>
+    </ChakraProvider>
   )
 }

@@ -1,9 +1,9 @@
-import GradientBG from '@/components/home/GradientBG'
-import Hero from '@/components/home/Hero.js'
-import Feature from '@/components/home/Feature'
-import Use from '@/components/home/Use'
-import Navbar from '@/components/home/Navbar'
-import Footer from '@/components/home/Footer'
+import GradientBG from '@/components/Landing/GradientBG'
+import Hero from '@/components/Landing/Hero.js'
+import Feature from '@/components/Landing/Feature'
+import Use from '@/components/Landing/Use'
+import Navbar from '@/components/Landing/Navbar'
+import Footer from '@/components/Landing/Footer'
 import AvatarMenu from '@/components/Avatar/AvatarMenu'
 
 export default function Home({ sess }) {

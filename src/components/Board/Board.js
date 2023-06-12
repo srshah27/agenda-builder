@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Flex, HStack, Spacer, useColorModeValue } from '@chakra-ui/react'
+import { Flex, HStack, Heading, Spacer, Text, useColorModeValue } from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
-import UserNav from '../UserNav'
-import SubNav from '../SubNav'
 import { nanoid } from 'nanoid'
 import { Box } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
@@ -15,14 +13,12 @@ const List = dynamic(() => import('./List'), {
 })
 
 const Board = ({ board, cards, lists }) => {
+
   const [boardData, setBoardData] = useState({
     board,
     cards,
     lists: lists.sort((a, b) => a.sequence - b.sequence)
   })
-  
-  const [dragDisabled, setDragDisabled] = useState(false);
-  
   const [refresh, setRefresh] = useState(false)
   const { data: session } = useSession()
   useEffect(() => {
@@ -111,7 +107,6 @@ const Board = ({ board, cards, lists }) => {
           setBoardData({ ...boardData, cards: boardData.cards.filter(card => card.id != data.card.id) })
         })
     }
-
   }
 
   const handleColumnDrag = (data, destination, source, draggableId) => {
@@ -201,28 +196,39 @@ const Board = ({ board, cards, lists }) => {
 
     setBoardData(updatedData)
   }
+
   return (
+    // complete outside box
     <Box
       display="block"
       position="relative"
-      height="calc(100vh - 80px)"
       overflowX="auto"
       bg={
         'linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);'
       }
     >
+      <div className='flex justify-around outline-double m-2'>
+        {/* <Heading className='text-center'>The Summit</Heading> */}
+        <input type="text" className='bg-transparent'/>
+        <Text fontSize='3xl'>Start Time:</Text>
+        <Text fontSize='3xl'>End Time:</Text>
+      </div>
       <DragDropContext onDragEnd={onDragEnd}>
         <React.StrictMode>
+          {/* all the lists */}
           <Droppable
             droppableId="all-columns"
-            direction="horizontal"
+            direction="vertical"
             type="column"
           >
             {droppableProvided => (
+              // box with all lists
               <Flex
                 px="4"
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
+                direction={"column"}
+                alignItems={'center'}
               >
                 {boardData.lists.map(list => {
                   const tasks = boardData.cards.filter(
@@ -237,9 +243,7 @@ const Board = ({ board, cards, lists }) => {
                       index={list.sequence}
                       addCard={addCard}
                       deleteListOrCard={handleDelete}
-                      boardData={boardData}
                     />
-
                   )
                 })}
                 {droppableProvided.placeholder}

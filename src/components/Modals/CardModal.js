@@ -39,11 +39,6 @@ const CardModal = ({ board, card }) => {
               <FormLabel>Description</FormLabel>
               <Textarea placeholder='Here is a sample placeholder' />
             </FormControl>
-
-            {/* <FormControl mt={4}>
-              <FormLabel>Assigned To</FormLabel>
-              <Input ref={initialRef} placeholder='Snehil' />
-            </FormControl> */}
           </ModalBody>
 
           <ModalFooter>
