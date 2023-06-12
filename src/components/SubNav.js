@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { HStack, Spacer, Text, useColorModeValue } from '@chakra-ui/react'
 import {
   Menu,
@@ -13,7 +13,7 @@ import { useState } from 'react'
 const SubNav = ({ board }) => {
   
   const [boardName, setboardName] = useState(board.name)
-  
+
   async function handleBoardName(e){
     setboardName(e.target.value)
     let res = await fetch(`/api/w/${board.workspaceID}/b/${board.id}`, {

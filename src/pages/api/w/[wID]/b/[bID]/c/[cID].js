@@ -1,10 +1,9 @@
 import dbConnect from '@/lib/dbconnect'
-import Board from '@/models/Boards'
 import Card from '@/models/Cards'
 import sessionUser from '@/middleware/getSessionUser'
 
 export default async function handler(req, res) {
-  const { user, error, dberror } = await sessionUser({ req })
+  const { error, dberror } = await sessionUser({ req })
   if (dberror) return res.status(401).json({ error: error, dberror: dberror })
 
   try {
