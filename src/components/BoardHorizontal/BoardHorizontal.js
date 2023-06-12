@@ -13,6 +13,7 @@ const List = dynamic(() => import('./ListHorizontal'), {
 })
 
 const Board = ({ board, cards, lists }) => {
+
   const [boardData, setBoardData] = useState({
     board,
     cards,
@@ -195,6 +196,7 @@ const Board = ({ board, cards, lists }) => {
 
     setBoardData(updatedData)
   }
+
   return (
     // complete outside box
     <Box
@@ -206,7 +208,8 @@ const Board = ({ board, cards, lists }) => {
       }
     >
       <div className='flex justify-around outline-double m-2'>
-        <Heading className='text-center'>The Summit</Heading>
+        {/* <Heading className='text-center'>The Summit</Heading> */}
+        <input type="text" className='bg-transparent'/>
         <Text fontSize='3xl'>Start Time:</Text>
         <Text fontSize='3xl'>End Time:</Text>
       </div>

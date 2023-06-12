@@ -8,16 +8,31 @@ import {
   IconButton
 } from '@chakra-ui/react'
 import { SettingsIcon } from '@chakra-ui/icons'
+import { useState } from 'react'
 
 const SubNav = ({ board }) => {
+  
+  const [boardName, setboardName] = useState(board.name)
+  
+  async function handleBoardName(e){
+    setboardName(e.target.value)
+    let res = await fetch(`/api/w/${board.workspaceID}/b/${board.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: e.target.value })
+    })
+    let data = await res.json()
+    console.log(data);
+  }
   return (
-
     <HStack
       boxShadow="sm"
       bgColor={useColorModeValue('gray.200', 'gray.500')}
-      display="flex">
+      display="flex"
+      height="70px"
+    >
 
-      <Text fontSize="md" p="2">{ board.name }</Text>
+      <input fontSize="md" p="2" value={boardName} onChange={handleBoardName} className='bg-transparent'/>
       <button>Timings</button>
       <button>Sections</button>
       <button>Activities</button>
@@ -38,6 +53,7 @@ const SubNav = ({ board }) => {
         </MenuList>
       </Menu>
     </HStack>
+
   )
 }
 

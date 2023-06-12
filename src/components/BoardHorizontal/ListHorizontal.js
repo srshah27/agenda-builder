@@ -29,7 +29,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
 
 
           <TaskList tasks={tasks} list={list} deleteListOrCard={deleteListOrCard} />
-          {/* <Box className='px-2'>
+          <Box className='px-2'>
             <Box bgColor={_color}
               className={`flex p-2 mb-2 w-full shadow-md `}
               as='button'
@@ -39,7 +39,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               <AddIcon w={3} h={3} mr={3} />
               Add a card
             </Box>
-          </Box> */}
+          </Box>
           <ContextMenu id={list.id}>
             <Box m={2} bg="gray.100" w={130} rounded={5}>
               <MenuItem

@@ -22,7 +22,7 @@ const AvatarMenu = () => {
         pr="4"
         _hover={{ bg: 'transparent' }}
       >
-        <Avatar url={session?.user.image} w={28} h={28} />
+        <Avatar url={session?.user.image} w={30} h={30} />
       </MenuButton>
       <MenuList>
         <MenuGroup title="Profile">

@@ -20,6 +20,9 @@ const UserNav = ({ board }) => {
       boxShadow="sm"
       bgColor={useColorModeValue('gray.300', 'gray.700')}
       display="flex"
+      height={'60px'}
+      pl="4"
+      pr="4"
     >
       <Link href={`/u/${session?.user?.uid}`}>
         <Button  size="sm">
@@ -28,7 +31,7 @@ const UserNav = ({ board }) => {
       </Link>
       <Spacer />
       <Link href="/">
-        <Image src="/svg/agenda.svg" h="auto" w="40" p="2" alt="Agenda Logo" />
+        <Image src="/svg/agenda.svg" h="50px" p="2" alt="Agenda Logo" />
       </Link>
       <Spacer />
       <AvatarMenu />
