@@ -25,14 +25,14 @@ export default async function handler(req, res) {
     }
 
     case 'PATCH': {
-      const { sequence, name, assignedTo, description, listId } = req.body
+      const { sequence, name, assignedTo, description, listId, start, end, attributes } = req.body
       const updatedCard = await Card.findOneAndUpdate(
         {
           id: cID,
           boardId: bID,
           workspaceId: wID
         },
-        { name, sequence, assignedTo, description, listId },
+        { name, sequence, assignedTo, description, listId, start, end, attributes },
         { new: true }
       )
       console.log(updatedCard)

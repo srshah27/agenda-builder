@@ -20,8 +20,9 @@ export default async function handler(req, res) {
     }
 
     case 'POST': {
-      const { id, name, createdBy, createdAt, sequence } = req.body
+      const { id, name, createdBy, createdAt, sequence, start, end } = req.body
       const count = await List.find({ boardId: bID, workspaceId: wID }).count()
+      const { activityAttributes } = await Board.findOne({ id: bID, workspaceId: wID }, 'activityAttributes')
       const data = {
         id,
         workspaceId: wID,
@@ -29,7 +30,10 @@ export default async function handler(req, res) {
         name,
         createdAt,
         createdBy,
-        sequence: sequence || count + 1
+        sequence: sequence || count + 1,
+        start,
+        end,
+        activityAttributes
       }
       const list = await List.create(data)
       return res.status(201).json({ list })

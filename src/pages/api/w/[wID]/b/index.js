@@ -21,13 +21,21 @@ export default async function handler(req, res) {
     case 'POST': {
       const { id, name, createdBy, createdAt, backgroundImage } = req.body
       console.log(name)
+      const start = new Date()
+      start.setHours(10, 0, 0)
+      const end = new Date()
+      end.setHours(17, 0, 0)
       const data = {
         id,
         workspaceId: wID,
         name,
         createdAt,
         createdBy,
-        backgroundImage: backgroundImage || 'default'
+        backgroundImage: backgroundImage || 'default',
+        start,
+        end,
+        activityAttributes: [{ name: 'Title', type: 'text', show: true, options: [] },
+          { name: 'Details', type: 'text', show: false, options: [] }]
       }
       const board = await Board.create(data)
       return res.status(201).json({ board })

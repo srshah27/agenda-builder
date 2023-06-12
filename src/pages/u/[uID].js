@@ -48,7 +48,7 @@ export async function getServerSideProps(context) {
   if (uID != session.user.uid)
     return {
       redirect: {
-        destination: '/u/' + session.user.user_id / hash / is_admin / email
+        destination: '/u/' + session.user.user_id
       }
     }
   let res = await fetch(`${process.env.BASE_URL}/api/u/${uID}`)

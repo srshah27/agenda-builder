@@ -1,5 +1,5 @@
 import { Schema, model, models } from 'mongoose'
-
+import { AttributeSchema } from './Attribute'
 const CardsSchema = new Schema({
   id: String,
   name: String,
@@ -13,7 +13,10 @@ const CardsSchema = new Schema({
   workspaceId: { type: String, ref: 'Workspace' },
   sequence: Number,
   assignedTo: { type: String, ref: 'User' },
-  description: String
+  description: String,
+  start: Date,
+  end: Date,
+  attributes: [AttributeSchema],
 })
 
 module.exports = models.Card || model('Card', CardsSchema)

@@ -27,12 +27,12 @@ export default async function handler(req, res) {
     }
 
     case 'PATCH': {
-      const { name, backgroundImage } = req.body
+      const { name, backgroundImage, start, end, activityAttributes } = req.body
       const updatedBoard = await Board.findOneAndUpdate(
         {
           id: bID
         },
-        { name, backgroundImage },
+        { name, backgroundImage, start, end, activityAttributes },
         { new: true }
       )
       return res.status(202).json({ updatedBoard })

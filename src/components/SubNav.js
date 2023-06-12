@@ -17,8 +17,13 @@ const SubNav = ({ board }) => {
       bgColor={useColorModeValue('gray.200', 'gray.500')}
       display="flex">
 
-      {/* <Text fontSize="md" p="2">{ board.name }</Text> */}
+      <Text fontSize="md" p="2">{ board.name }</Text>
+      <button>Timings</button>
+      <button>Sections</button>
+      <button>Activities</button>
+      <button>Attributes</button>
       <Spacer />
+      button
       <Menu>
         <MenuButton
           as={IconButton}

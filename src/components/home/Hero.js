@@ -23,12 +23,12 @@ function Hero() {
               Add tasks, deadlines and collaborate with your colleagues. Lets
               get oraganized together.
             </p>
+              <Link href='/u'>
             <button className="btn bg-blue-900 max-w-md">
-              <Link href={session ? `/u/${session.user.uid}` : '/login'}>
                 {' '}
                 Get Started{' '}
-              </Link>{' '}
             </button>
+              </Link>{' '}
           </div>
         </div>
       </div>

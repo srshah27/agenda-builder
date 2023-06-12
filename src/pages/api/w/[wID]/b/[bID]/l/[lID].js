@@ -27,12 +27,12 @@ export default async function handler(req, res) {
     }
 
     case 'PATCH': {
-      const { sequence, name } = req.body
+      const { sequence, name, start, end, activityAttributes } = req.body
       const updatedList = await List.findOneAndUpdate(
         {
           id: lID
         },
-        { name, sequence },
+        { name, sequence, start, end, activityAttributes },
         { new: true }
       )
       return res.status(202).json({ updatedList })

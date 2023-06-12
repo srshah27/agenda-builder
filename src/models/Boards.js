@@ -1,5 +1,5 @@
 import { Schema, model, models } from 'mongoose'
-
+import { AttributeSchema } from './Attribute'
 const BoardsSchema = new Schema({
   id: String,
   name: String,
@@ -11,7 +11,10 @@ const BoardsSchema = new Schema({
   createdBy: { type: String, ref: 'User' },
   backgroundImage: String,
   lastViewedAt: Date,
-  favorite: Boolean
+  favorite: Boolean,
+  start: Date,
+  end: Date,
+  activityAttributes: [AttributeSchema],
 })
 
 module.exports = models.Board || model('Board', BoardsSchema)
