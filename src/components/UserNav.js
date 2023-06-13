@@ -1,16 +1,15 @@
 import React from 'react'
 import {
   Button,
-  Box,
   Spacer,
   HStack,
-  Image,
   useColorModeValue
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { useSession } from 'next-auth/react'
 import AvatarMenu from './Avatar/AvatarMenu'
+import Image from 'next/image'
 import agendaImage from '../../public/svg/agenda.svg'
 
 const UserNav = ({ board }) => {
@@ -31,7 +30,7 @@ const UserNav = ({ board }) => {
       </Link>
       <Spacer />
       <Link href="/">
-        <Image src={agendaImage} alt="Agenda Logo" />
+        <Image src={agendaImage} alt="Agenda Logo" className='w-48'/>
       </Link>
       <Spacer />
       <AvatarMenu />

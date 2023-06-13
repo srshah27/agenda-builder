@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "eslint": "eslint . --report-unused-disable-directives"
   },
   "dependencies": {
     "@chakra-ui/icons": "^2.0.17",

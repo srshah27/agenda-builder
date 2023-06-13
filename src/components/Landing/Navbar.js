@@ -62,7 +62,7 @@ function Navbar() {
                   </button>
                 ) : (
                   <button
-                    className="btn-active w-32 h-12 rounded-md text md:bg-neutral md:text-gray-50 md:hover:bg-blue-900 "
+                    className="btn w-32 h-12 rounded-md text md:bg-neutral md:text-gray-50 md:hover:bg-blue-900 "
                     onClick={() => signOut()}
                   >
                     Sign Out

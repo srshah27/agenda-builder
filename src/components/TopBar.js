@@ -2,7 +2,6 @@ import {
   Box,
   Flex,
   Text,
-  Image,
   IconButton,
   Button,
   Stack,
@@ -27,6 +26,7 @@ import {
 import AvatarMenu from './Avatar/AvatarMenu'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
+import Image from 'next/image'
 import agendaImage from '../../public/svg/agenda.svg'
 
 export default function WithSubnavigation({ asCreator, asCollaborator }) {
@@ -58,7 +58,7 @@ export default function WithSubnavigation({ asCreator, asCollaborator }) {
   const { data: session } = useSession()
 
   return (
-    <Box>
+    <Box className='fixed w-full'>
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
@@ -89,9 +89,8 @@ export default function WithSubnavigation({ asCreator, asCollaborator }) {
           <Link href="/">
             <Image
               src={agendaImage}
-              textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-              fontFamily={'heading'}
               alt="Agenda Logo"
+              className='w-48'
             />
           </Link>
 
