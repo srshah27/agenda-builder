@@ -11,7 +11,7 @@ import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { useSession } from 'next-auth/react'
 import AvatarMenu from './Avatar/AvatarMenu'
-import agendaImage from '../public/svg/agenda.svg'
+import agendaImage from '../../public/svg/agenda.svg'
 
 const UserNav = ({ board }) => {
   const { data: session } = useSession()

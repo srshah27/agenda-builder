@@ -27,7 +27,7 @@ import {
 import AvatarMenu from './Avatar/AvatarMenu'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import agendaImage from '../public/svg/agenda.svg'
+import agendaImage from '../../public/svg/agenda.svg'
 
 export default function WithSubnavigation({ asCreator, asCollaborator }) {
   const [navWorkspaces, setNavWorkspaces] = useState([
