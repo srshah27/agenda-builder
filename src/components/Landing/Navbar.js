@@ -23,7 +23,7 @@ function Navbar() {
           </Link>
           <div className="md:hidden">
             <button
-              className="text-gray-700 right-8 absolute top-4" //rounded-md outline-none focus:border-gray-400 focus:border
+              className="btn right-8 absolute top-4" //rounded-md outline-none focus:border-gray-400 focus:border
               onClick={() => setNavbar(!navbar)}
             >
               {navbar ? (
@@ -57,7 +57,7 @@ function Navbar() {
               </li>
               <li className="text-xl text-neutral py-2 px-6 text-center md:absolute right-5">
                 {!session ? (
-                  <button className="btn-active w-32 h-12 rounded-md text md:bg-neutral md:text-gray-50 md:hover:bg-blue-900">
+                  <button className="btn rounded-md text md:bg-neutral md:text-gray-50 md:hover:bg-blue-900">
                     <Link href="/signup"> Sign Up </Link>
                   </button>
                 ) : (
