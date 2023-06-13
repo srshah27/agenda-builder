@@ -93,7 +93,6 @@ function Signup({ providers }) {
   return (
     <FormikProvider value={formik}>
       <div className="mt-10 flex flex-col">
-        {/* <div className="flex items-center justify-center mx-52 bg-red-400"> */}
         <div className="max-w-full mx-auto my-6 sm:block">
           <Image
             className=""

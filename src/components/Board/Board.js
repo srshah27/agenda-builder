@@ -19,8 +19,10 @@ const Board = ({ board, cards, lists }) => {
     cards,
     lists: lists.sort((a, b) => a.sequence - b.sequence)
   })
+
   const [refresh, setRefresh] = useState(false)
   const { data: session } = useSession()
+
   useEffect(() => {
     setBoardData({
       ...boardData,
@@ -28,7 +30,6 @@ const Board = ({ board, cards, lists }) => {
       cards: boardData.cards.sort((a, b) => a.sequence - b.sequence)
     })
   }, [refresh])
-  let _color = useColorModeValue('gray.100', 'gray.700')
 
   const updateDb = (url, body, cardsOrLists) => {
     fetch(url, {
@@ -53,6 +54,7 @@ const Board = ({ board, cards, lists }) => {
         setBoardData(data)
       })
   }
+
   const addCard = (listId) => {
     let sequence = boardData.cards.filter(card => card.listId === listId).length
     const data = {
@@ -92,6 +94,7 @@ const Board = ({ board, cards, lists }) => {
     let newLists = [...boardData.lists, data]
     setBoardData({ ...boardData, lists: newLists })
   }
+
   const handleDelete = async (e, data) => {
     if (data.type === 'list') {
       fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${data.list.id}`, { method: 'DELETE' })
@@ -129,6 +132,7 @@ const Board = ({ board, cards, lists }) => {
       }
 
     })
+
     currentList.sequence = destination.index // Upadte query currentList
     console.log(oldData === data);
     data.lists.forEach(list => {
@@ -209,7 +213,7 @@ const Board = ({ board, cards, lists }) => {
     >
       <div className='flex justify-around outline-double m-2'>
         {/* <Heading className='text-center'>The Summit</Heading> */}
-        <input type="text" className='bg-transparent'/>
+        <input type="text" className='bg-transparent' />
         <Text fontSize='3xl'>Start Time:</Text>
         <Text fontSize='3xl'>End Time:</Text>
       </div>
@@ -247,7 +251,7 @@ const Board = ({ board, cards, lists }) => {
                   )
                 })}
                 {droppableProvided.placeholder}
-                <Box bgColor={_color}
+                <Box
                   className={`m-4 border rounded shadow-md `}
                   h='fit-content'
                   w={250}

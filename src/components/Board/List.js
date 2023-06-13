@@ -2,8 +2,10 @@ import React from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import TaskList from './TaskList'
 import { useColorModeValue, Box, Spacer, Flex, Text } from '@chakra-ui/react'
-import { AddIcon } from '@chakra-ui/icons'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
+import { AddIcon } from '@chakra-ui/icons'
+
+
 const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
   let _color = useColorModeValue('gray.100', 'gray.700')
   // let textColor = useColorModeValue('gray.700', 'gray.50')
@@ -13,25 +15,26 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
     <Draggable draggableId={list.id} index={index}>
       {(draggableProvided, draggableSnapshot) => (
 
-        <Flex bgColor={_color}
-          {...draggableProvided.draggableProps}a
+        <div
+          {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
-          className={`m-4 border rounded shadow-md `}
-          h="fit-content"
-          w={"80%"}
-          flexDirection={'row'}
+          className={`m-4 border rounded shadow-md bg-red-400 w-4/5 h-fit flex flex-col`}
         >
           <ContextMenuTrigger key={list.id} id={list.id}>
             <Flex {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'} direction={'column'}>
-              <Text fontSize={'2xl'} fontWeight={'600'}>{list.name} </Text><Spacer />{list.sequence}<Spacer />8:30<Spacer />9:30
+              <input value={list.name} />
+              <Spacer />{list.sequence}<Spacer />
+              <input placeholder='Enter Start Time' type='time' />
+              <Spacer />
+              <input placeholder='Enter End Time' type='time'/>
             </Flex>
           </ContextMenuTrigger>
 
 
           <TaskList tasks={tasks} list={list} deleteListOrCard={deleteListOrCard} />
           <Box className='px-2'>
-            <Box bgColor={_color}
-              className={`flex p-2 mb-2 w-full shadow-md `}
+            <Box
+              className={`flex p-2 mb-2 w-full shadow-md bg-indigo-200`}
               as='button'
               alignItems={'center'}
               onClick={() => addCard(list.id)}
@@ -52,7 +55,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               </MenuItem>
             </Box>
           </ContextMenu>
-        </Flex>
+        </div>
 
       )}
     </Draggable>

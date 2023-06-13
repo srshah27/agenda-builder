@@ -36,7 +36,6 @@ function Login() {
     <FormikProvider value={formik}>
       <Toaster />
       <div className="mt-20 flex flex-col">
-        {/* <div className="flex shrink-0 items-center justify-center mx-52 bg-red-400"> */}
         <div className="max-w-full mx-auto my-6 sm:block">
           <Image
             className=""
