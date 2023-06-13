@@ -56,6 +56,7 @@ const Board = ({ board, cards, lists }) => {
   }
 
   const addCard = (listId) => {
+    let list = boardData.lists.find(list => list.id === listId)
     let sequence = boardData.cards.filter(card => card.listId === listId).length
     const data = {
       id: nanoid(),
@@ -65,6 +66,9 @@ const Board = ({ board, cards, lists }) => {
       listId,
       workspaceId: boardData.board.workspaceId,
       boardId: boardData.board.id,
+      start: boardData.board.start,
+      end: boardData.board.end,
+      attributes: list.attributes,
       sequence
     }
     fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c`, {
@@ -84,6 +88,9 @@ const Board = ({ board, cards, lists }) => {
       createdBy: session.user.uid,
       workspaceId: boardData.board.workspaceId,
       boardId: boardData.board.id,
+      start: boardData.board.start,
+      end: boardData.board.end,
+      attributes: boardData.board.attributes,
       sequence
     }
     fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l`, {
