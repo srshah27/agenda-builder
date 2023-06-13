@@ -1,55 +1,42 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useSession } from 'next-auth/react'
+import TrelloHero from '../../../public/img/Trello.webp'
+import AnimateBG from './AnimateBG'
+
 
 function Hero() {
-  const { data: session, status } = useSession()
   return (
     <>
-      <div className="hero min-h-screen" id="home">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="container mt-16 h-screen" id="home">
+        <div className='flex flex-col h-[calc(100svh-64px)] items-center lg:flex lg:flex-row-reverse lg:justify-around'>
+        <div className='relative'>
+          <AnimateBG />
+        </div>
           <Image
-            src="/img/trackv2.png"
-            alt="track"
-            width={380}
-            height={380}
-            className="max-w-sm"
+            src={TrelloHero}
+            alt="An Illustration of persons working on computers"
+            className="max-w-sm p-12"
+            priority={true}
           />
-          <div className="text-center md:text-left font-mono  text-gray-50">
-            <h1 className=" text-4xl md:text-6xl font-bold  text-blue-900">
-              Welcome to Agenda Builder, Manage & Create Tasks Together.
+          <div className="text-center max-w-[50%] md:text-left">
+            <h1 className="text-gray-800 text-4xl md:text-6xl font-serif">
+              Get aligned around your goals
             </h1>
-            <p className="py-6 text-md md:text-2xl">
-              Add tasks, deadlines and collaborate with your colleagues. Lets
-              get oraganized together.
+            <p className="text-gray-500 py-6 text-md md:text-2xl">
+              Simple & straightforward project management tool based on what really matters the most. Your goals.
             </p>
-              <Link href='/u'>
-            <button className="btn bg-blue-900 max-w-md">
+            <Link href='/u'>
+              <button className="btn bg-blue-900 max-w-md">
                 {' '}
                 Get Started{' '}
-            </button>
-              </Link>{' '}
+              </button>
+            </Link>{' '}
           </div>
         </div>
       </div>
     </>
   )
 }
-
-// export default function Home({ sess }) {
-//   const { data: session, status } = useSession()
-//   console.log(sess);
-//   console.log(session);
-//   return (
-//     <>
-//       <div className="flex justify-center h-screen">
-//         <h1 className="my-auto font-semibold">Agenda Builder</h1>
-//         {session ? <button onClick={()=>signOut()} className="my-auto font-semibold text-primary"> &nbsp;Sign Out</button> : <Link href="/login" className="my-auto font-semibold text-primary">&nbsp;Login</Link>}
-
-//         {/* <button className="btn btn-primary">Button</button> */}
-//       </div>
-//     </>
-//   )
-// }
 
 export default Hero

@@ -27,6 +27,7 @@ import {
 import AvatarMenu from './Avatar/AvatarMenu'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
+import agendaImage from '../public/svg/agenda.svg'
 
 export default function WithSubnavigation({ asCreator, asCollaborator }) {
   const [navWorkspaces, setNavWorkspaces] = useState([
@@ -87,10 +88,7 @@ export default function WithSubnavigation({ asCreator, asCollaborator }) {
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
           <Link href="/">
             <Image
-              src="/svg/agenda.svg"
-              h="auto"
-              w="40"
-              m="1"
+              src={agendaImage}
               textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
               fontFamily={'heading'}
               alt="Agenda Logo"

@@ -1,7 +1,4 @@
-import React from 'react'
 import Task from './Task'
-import { useColorModeValue, Box, Text } from '@chakra-ui/react'
-import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 import { Droppable } from 'react-beautiful-dnd'
 
 const TaskList = ({ tasks, list, deleteListOrCard }) => {
@@ -17,7 +14,7 @@ const TaskList = ({ tasks, list, deleteListOrCard }) => {
 
           <div className="flex mt-8">
             {tasks.map((task, index) => (
-              <Task task={task} index={task.sequence} />
+              <Task task={task} index={task.sequence} key={task.index} />
             ))}
           </div>
         </div>

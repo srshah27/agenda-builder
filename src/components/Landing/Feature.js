@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import todoImage from '../../../public/svg/todo.svg'
 
 const Feature = () => {
   return (
@@ -9,10 +10,8 @@ const Feature = () => {
       </div>
       <div className="flex justify-around flex-wrap">
         <Image
-          src="/svg/todo.svg"
+          src={todoImage}
           alt="track"
-          width={480}
-          height={480}
           className="hidden lg:block"
         />
         <div className="text-xl text-primary text-left space-x-6 ml-4">

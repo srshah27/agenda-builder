@@ -5,9 +5,7 @@ import SideBar from '@/components/SideBar'
 import Work from '@/components/Work'
 import { ChakraProvider } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-const Dashboard = ({ user, Creator, Collaborator }) => {
-  
-  const { data: session, status } = useSession()
+const Dashboard = ({ Creator, Collaborator }) => {
   
   const router = useRouter()
   const { uID } = router.query
@@ -21,7 +19,6 @@ const Dashboard = ({ user, Creator, Collaborator }) => {
       .then(data => {
         setAsCreator(data.asCreator)
         setAsCollaborator(data.asCollaborator)
-        console.log('Updated')
       })
   }, [refreshKey, uID])
 

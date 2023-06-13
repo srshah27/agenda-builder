@@ -9,9 +9,9 @@ import {
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
-// import { useAppSelector } from "@/src/hooks"
 import { useSession } from 'next-auth/react'
 import AvatarMenu from './Avatar/AvatarMenu'
+import agendaImage from '../public/svg/agenda.svg'
 
 const UserNav = ({ board }) => {
   const { data: session } = useSession()
@@ -31,7 +31,7 @@ const UserNav = ({ board }) => {
       </Link>
       <Spacer />
       <Link href="/">
-        <Image src="/svg/agenda.svg" h="50px" p="2" alt="Agenda Logo" />
+        <Image src={agendaImage} alt="Agenda Logo" />
       </Link>
       <Spacer />
       <AvatarMenu />

@@ -4,17 +4,15 @@ import Feature from '@/components/Landing/Feature'
 import Use from '@/components/Landing/Use'
 import Navbar from '@/components/Landing/Navbar'
 import Footer from '@/components/Landing/Footer'
-import AvatarMenu from '@/components/Avatar/AvatarMenu'
 
 export default function Home({ sess }) {
   return (
-    <>
+    <div className='flex flex-col'>
       <Navbar />
-      <GradientBG />
       <Hero />
       <Feature />
       <Use />
       <Footer />
-    </>
+    </div>
   )
 }

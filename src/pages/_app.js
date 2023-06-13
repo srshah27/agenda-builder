@@ -6,9 +6,6 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 
 export default function App({ Component, pageProps, session }) {
-  <Head>
-    <link href="https://api.fontshare.com/v2/css?f[]=general-sans@500,600,400,700&display=swap" rel="stylesheet"></link>
-  </Head>
   return (
     <ChakraProvider>
       <SessionProvider session={session}>
@@ -18,9 +15,7 @@ export default function App({ Component, pageProps, session }) {
           stopDelayMs={200}
           height={4}
         />
-        <main className='myFont.className'>
-          <Component {...pageProps} />
-        </main>
+        <Component {...pageProps} />
       </SessionProvider>
     </ChakraProvider>
   )

@@ -1,0 +1,36 @@
+.animateBlob {
+  animation-name: blob;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px);
+    transform: scale(2.2);
+  }
+
+  33% {
+    transform: translate(30px, -50px);
+    transform: scale(1.5);
+  }
+
+  66% {
+    transform: translate(20px);
+    transform: scale(2);
+  }
+
+  100% {
+    transform: tranlate(0px, 0px);
+    transform: scale(2);
+  }
+
+}

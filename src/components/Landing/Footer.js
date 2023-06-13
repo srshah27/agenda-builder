@@ -2,12 +2,13 @@ import Image from 'next/image'
 import { BsTwitter, BsFacebook, BsYoutube } from 'react-icons/bs'
 import { SiGmail } from 'react-icons/si'
 import { IoCall } from 'react-icons/io5'
+import agendaImage from '../../../public/svg/agenda.svg'
 
 const Footer = () => {
   return (
     <footer className="footer p-10 bg-neutral text-neutral-content" id="footer">
       <div>
-        <Image src="/svg/agenda.svg" width={150} height={50} alt="i1" />
+        <Image src={agendaImage} alt="Agenda Builder Logo" />
         <p className="text-center lg:text-left">
           Agile Builder Ltd.
           <br />
