@@ -1,22 +1,17 @@
 import React from 'react'
 import { getSession } from 'next-auth/react'
-import BoardHorizontal from '@/components/Board/Board'
+import Board from '@/components/Board/Board'
 import UserNav from '@/components/UserNav'
 import SubNav from '@/components/SubNav'
 import { Box } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/react'
 const BoardPage = ({ workspace, board, cards, lists, user }) => {
   return (
-    <Box
-      backgroundPosition="center"
-      h="100vh"
-      backgroundRepeat="no-repeat"
-      backgroundSize="cover"
-    >
+    <div>
       <UserNav board={board} />
       <SubNav board={board} />
-      <BoardHorizontal board={board} cards={cards} lists={lists} />
-    </Box>
+      <Board board={board} cards={cards} lists={lists} />
+    </div>
   )
 }
 

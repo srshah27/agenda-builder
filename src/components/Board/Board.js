@@ -212,10 +212,10 @@ const Board = ({ board, cards, lists }) => {
     // complete outside box
     <Box
       display="block"
-      position="relative"
       overflowX="auto"
+      className='w-full'
       bg={
-        'linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);'
+        'linear-gradient(135.39deg, #342B53 24.83%, #733A67 96.81%);'
       }
     >
       <div className='flex justify-around outline-double m-2'>

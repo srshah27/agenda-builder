@@ -21,13 +21,14 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
           className={`m-4 border rounded shadow-md bg-red-400 w-4/5 h-fit flex flex-col`}
         >
           <ContextMenuTrigger key={list.id} id={list.id}>
-            <Flex {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'} direction={'column'}>
+            <div {...draggableProvided.dragHandleProps} className=" flex p-2 text-md justify-between">
               <input value={list.name} />
-              <Spacer />{list.sequence}<Spacer />
+              {/* <Spacer />{list.sequence}<Spacer /> */}
+
               <input placeholder='Enter Start Time' type='time' />
-              <Spacer />
+              {/* <Spacer /> */}
               <input placeholder='Enter End Time' type='time'/>
-            </Flex>
+            </div>
           </ContextMenuTrigger>
 
 

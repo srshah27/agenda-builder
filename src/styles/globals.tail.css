@@ -34,17 +34,18 @@ video {
   text-decoration: none;
   position: relative;
   border: none;
-  font-size: 14px;
+  padding: 0.25rem;
+  font-size: 0.875rem;
   font-family: inherit;
   color: #fff;
-  width: 8rem;
-  height: 2.5rem;
+  width: 6rem;
+  height: 3rem;
   line-height: 2em;
   text-align: center;
   background: -webkit-gradient(linear,left top, right top,from(#03a9f4),color-stop(#f441a5),color-stop(#ffeb3b),to(#03a9f4));
   background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
   background-size: 300%;
-  border-radius: 30px;
+  border-radius: 12px;
   z-index: 1;
   -webkit-animation: ani 8s linear infinite;
   animation: ani 8s linear infinite;
@@ -73,21 +74,22 @@ video {
  
   100% {
    background-position: 400%;
+   border-radius: 24px;
   }
  }
  
  .btn:before {
   content: '';
   position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
+  top: 0px;
+  left: 0px;
+  width: 6rem;
+  height: 3rem;
   z-index: -1;
   background: -webkit-gradient(linear,left top, right top,from(#03a9f4),color-stop(#f441a5),color-stop(#ffeb3b),to(#03a9f4));
   background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
   background-size: 400%;
-  border-radius: 35px;
+  border-radius: 12px;
   -webkit-transition: 1s;
   transition: 1s;
  }
@@ -98,6 +100,80 @@ video {
  }
  
  .btn:active {
+  background: linear-gradient(32deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+ }
+
+
+ .btnSmall {
+  text-decoration: none;
+  position: relative;
+  border: none;
+  padding: 0.25rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: #fff;
+  width: 5rem;
+  height: 2.25rem;
+  line-height: 2em;
+  text-align: center;
+  background: -webkit-gradient(linear,left top, right top,from(#03a9f4),color-stop(#f441a5),color-stop(#ffeb3b),to(#03a9f4));
+  background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+  background-size: 300%;
+  border-radius: 12px;
+  z-index: 1;
+  -webkit-animation: ani 8s linear infinite;
+  animation: ani 8s linear infinite;
+ }
+ 
+ .btnSmall:hover {
+  -webkit-animation: ani 8s linear infinite;
+          animation: ani 8s linear infinite;
+  border: none;
+ }
+ 
+ @-webkit-keyframes ani {
+  0% {
+   background-position: 0%;
+  }
+ 
+  100% {
+   background-position: 400%;
+  }
+ }
+ 
+ @keyframes ani {
+  0% {
+   background-position: 0%;
+  }
+ 
+  100% {
+   background-position: 400%;
+   border-radius: 24px;
+  }
+ }
+ 
+ .btnSmall:before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 5rem;
+  height: 2.25rem;
+  z-index: -1;
+  background: -webkit-gradient(linear,left top, right top,from(#03a9f4),color-stop(#f441a5),color-stop(#ffeb3b),to(#03a9f4));
+  background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+  background-size: 400%;
+  border-radius: 12px;
+  -webkit-transition: 1s;
+  transition: 1s;
+ }
+ 
+ .btnSmall:hover::before {
+  -webkit-filter: blur(20px);
+          filter: blur(20px);
+ }
+ 
+ .btnSmall:active {
   background: linear-gradient(32deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
  }
 
@@ -112,4 +188,9 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
   background-color: gray;
   outline: 1px solid gray;
+}
+
+
+body {
+  background: linear-gradient(135.39deg, #342B53 24.83%, #733A67 96.81%) !important;
 }
