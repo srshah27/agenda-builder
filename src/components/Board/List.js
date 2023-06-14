@@ -29,9 +29,9 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               <input value={list.name} />
               {/* <Spacer />{list.sequence}<Spacer /> */}
 
-              <input placeholder='Enter Start Time' type='time' />
-              {/* <Spacer /> */}
-              <input placeholder='Enter End Time' type='time'/>
+              <input type='time' value={start} min={'09:00:00'} max={'20:00:00'} onChange={(e) => setStart(e.target.value)} />
+              <Spacer />
+              <input type='time' value={end} onChange={(e) => setEnd(e.target.value)} />
             </div>
           </ContextMenuTrigger>
 
