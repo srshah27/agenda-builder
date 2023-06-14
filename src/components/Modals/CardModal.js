@@ -9,13 +9,10 @@ import {
 
 
 
-const CardModal = ({ board, card }) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+const CardModal = ({ task, onClose, isOpen, onOpen }) => {
   const initialRef = React.useRef(null)
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
-
       <Modal
         initialFocusRef={initialRef}
         isOpen={isOpen}
@@ -32,12 +29,12 @@ const CardModal = ({ board, card }) => {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>Card Name</FormLabel>
-              <Input ref={initialRef} placeholder='Snehil' />
+              <Input ref={initialRef} placeholder='Snehil' value={task.name} />
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Description</FormLabel>
-              <Textarea placeholder='Here is a sample placeholder' />
+              <Textarea placeholder='Here is a sample placeholder' value={task.description} />
             </FormControl>
           </ModalBody>
 
@@ -46,6 +43,7 @@ const CardModal = ({ board, card }) => {
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>
+            {JSON.stringify(task.attributes)}
           </ModalFooter>
         </ModalContent>
       </Modal>
