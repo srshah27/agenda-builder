@@ -1,17 +1,25 @@
 import React, { useState } from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import TaskList from './TaskList'
-import { useColorModeValue, Box, Spacer, Flex, Text } from '@chakra-ui/react'
+import { Box, Flex, Text } from '@chakra-ui/react'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 import { AddIcon } from '@chakra-ui/icons'
 import moment from 'moment';
+import CustomInput from '../utils/CustomInput'
 
 
 const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
-  let _color = useColorModeValue('gray.100', 'gray.700')
-  // let textColor = useColorModeValue('gray.700', 'gray.50')
-  let _c = useColorModeValue('gray.50', 'gray.900')
-  let invert = useColorModeValue('gray.900', 'gray.50')
+  const [listName, setListName] = useState(list.name)
+
+  async function handleListName(e) {
+    setListName(e.target.value)
+    let res = await fetch(`/api/w/${board.workspaceID}/b/${board.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name: e.target.value })
+    })
+    let data = await res.json()
+  }
   // const [start, setstart] = useState(`${new Date(list.start).getHours()}:${new Date(list.start).getMinutes()}`);
   const [start, setStart] = useState(moment(list.start).format('HH:mm'));
   const [end, setEnd] = useState(moment(list.end).format('HH:mm'));
@@ -25,11 +33,14 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
           className={`m-4 border rounded shadow-md bg-red-400 w-4/5 h-fit flex flex-col`}
         >
           <ContextMenuTrigger key={list.id} id={list.id}>
-            <div {...draggableProvided.dragHandleProps} className=" flex p-2 text-md justify-between">
-              <input value={list.name} />
-              <Spacer/>
-              <input type='time' value={start} min={'09:00:00'} max={'20:00:00'} onChange={(e) => setStart(e.target.value)} />
-              <input type='time' value={end} onChange={(e) => setEnd(e.target.value)} />
+            <div {...draggableProvided.dragHandleProps} className="p-2 flex justify-center">
+              {/* <input value={listName} className='text-center' onChange={handleListName} /> */}
+              <CustomInput center={true} placeholder='Title' />
+
+              {/* <Spacer /> */}
+              {/* <input type='time' value={start} min={'09:00:00'} max={'20:00:00'} onChange={(e) => setStart(e.target.value)} />
+              <input type='time' value={end} onChange={(e) => setEnd(e.target.value)} /> */}
+
             </div>
           </ContextMenuTrigger>
 

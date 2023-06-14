@@ -218,12 +218,12 @@ const Board = ({ board, cards, lists }) => {
         'linear-gradient(135.39deg, #342B53 24.83%, #733A67 96.81%);'
       }
     >
-      <div className='flex justify-around outline-double m-2'>
-        {/* <Heading className='text-center'>The Summit</Heading> */}
+      {/* <div className='flex justify-around outline-double m-2'>
+        <Heading className='text-center'>The Summit</Heading>
         <input type="text" className='bg-transparent' />
         <Text fontSize='3xl'>Start Time:</Text>
         <Text fontSize='3xl'>End Time:</Text>
-      </div>
+      </div> */}
       <DragDropContext onDragEnd={onDragEnd}>
         <React.StrictMode>
           {/* all the lists */}
