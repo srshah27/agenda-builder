@@ -9,12 +9,13 @@ import {
 } from '@chakra-ui/react'
 import { SettingsIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
+import styles from '../styles/SubNav.module.css'
 
 const SubNav = ({ board }) => {
-  
+
   const [boardName, setboardName] = useState(board.name)
 
-  async function handleBoardName(e){
+  async function handleBoardName(e) {
     setboardName(e.target.value)
     let res = await fetch(`/api/w/${board.workspaceID}/b/${board.id}`, {
       method: 'PATCH',
@@ -25,14 +26,11 @@ const SubNav = ({ board }) => {
     console.log(data);
   }
   return (
-    <HStack
-      boxShadow="sm"
-      bgColor={useColorModeValue('gray.200', 'gray.500')}
-      display="flex"
-      height="70px"
+    <div
+      className={`flex bg-opacity-80 ${styles.bgTranslucent}`}
     >
 
-      <input fontSize="md" p="2" value={boardName} onChange={handleBoardName} className='bg-transparent'/>
+      <input fontSize="md" p="2" value={boardName} onChange={handleBoardName} className='bg-transparent' />
       <button>Timings</button>
       <button>Sections</button>
       <button>Activities</button>
@@ -52,7 +50,7 @@ const SubNav = ({ board }) => {
           <MenuItem>Archive</MenuItem>
         </MenuList>
       </Menu>
-    </HStack>
+    </div>
 
   )
 }

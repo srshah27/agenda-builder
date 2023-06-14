@@ -1,9 +1,5 @@
-import React from 'react'
 import {
-  Button,
   Spacer,
-  HStack,
-  useColorModeValue
 } from '@chakra-ui/react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
@@ -15,26 +11,21 @@ import agendaImage from '../../public/svg/agenda.svg'
 const UserNav = ({ board }) => {
   const { data: session } = useSession()
   return (
-    <HStack
-      boxShadow="sm"
-      bgColor={useColorModeValue('gray.300', 'gray.700')}
-      display="flex"
-      height={'60px'}
-      pl="4"
-      pr="4"
+    <div
+      className='bg-[#1D2125] h-12 px-2 flex items-center'
     >
       <Link href={`/u/${session?.user?.uid}`}>
-        <Button  size="sm">
+        <button className='btnSmall'>
           Boards
-        </Button>
+        </button>
       </Link>
       <Spacer />
       <Link href="/">
-        <Image src={agendaImage} alt="Agenda Logo" className='w-48'/>
+        <Image src={agendaImage} alt="Agenda Logo" className='w-44' />
       </Link>
       <Spacer />
       <AvatarMenu />
-    </HStack>
+    </div>
   )
 }
 
