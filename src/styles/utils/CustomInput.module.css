@@ -1,0 +1,72 @@
+.waveGroup {
+  position: relative;
+}
+
+.waveGroup .input {
+  font-size: 16px;
+  padding: 10px 10px 10px 5px;
+  display: block;
+  width: 200px;
+  border: none;
+  border-bottom: 1px solid #515151;
+  background: transparent;
+}
+
+.waveGroup .input:focus {
+  outline: none;
+}
+
+.waveGroup .label {
+  color: #999;
+  font-size: 18px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 5px;
+  top: 10px;
+  display: flex;
+}
+
+.waveGroup .labelChar {
+  transition: 0.2s ease all;
+  transition-delay: calc(2 * .05s);
+}
+
+.waveGroup .labelChar,
+.waveGroup .labelChar {
+  transform: translateY(-20px);
+  font-size: 14px;
+  color: #5264AE;
+}
+
+.waveGroup .bar {
+  position: relative;
+  display: block;
+  width: 200px;
+}
+
+.waveGroup .bar:before,
+.waveGroup .bar:after {
+  content: '';
+  height: 2px;
+  width: 0;
+  bottom: 1px;
+  position: absolute;
+  background: #5264AE;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+
+.waveGroup .bar:before {
+  left: 50%;
+}
+
+.waveGroup .bar:after {
+  right: 50%;
+}
+
+.waveGroup .input:focus~.bar:before,
+.waveGroup .input:focus~.bar:after {
+  width: 50%;
+}
