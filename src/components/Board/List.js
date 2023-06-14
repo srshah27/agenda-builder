@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import TaskList from './TaskList'
 import { useColorModeValue, Box, Spacer, Flex, Text } from '@chakra-ui/react'
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 import { AddIcon } from '@chakra-ui/icons'
+import moment from 'moment';
 
 
 const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
@@ -11,6 +12,9 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
   // let textColor = useColorModeValue('gray.700', 'gray.50')
   let _c = useColorModeValue('gray.50', 'gray.900')
   let invert = useColorModeValue('gray.900', 'gray.50')
+  // const [start, setstart] = useState(`${new Date(list.start).getHours()}:${new Date(list.start).getMinutes()}`);
+  const [start, setStart] = useState(moment(list.start).format('HH:mm'));
+  const [end, setEnd] = useState(moment(list.end).format('HH:mm'));
   return (
     <Draggable draggableId={list.id} index={index}>
       {(draggableProvided, draggableSnapshot) => (
@@ -22,11 +26,11 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
         >
           <ContextMenuTrigger key={list.id} id={list.id}>
             <Flex {...draggableProvided.dragHandleProps} className="p-2 text-md " width={'full'} direction={'column'}>
-              <input value={list.name} />
+              <input value={list.name}  />
               <Spacer />{list.sequence}<Spacer />
-              <input placeholder='Enter Start Time' type='time' />
+              <input type='time' value={start} min={'09:00:00'} max={'20:00:00'} onChange={(e)=> setStart(e.target.value)}/>
               <Spacer />
-              <input placeholder='Enter End Time' type='time'/>
+              <input type='time' value={end} onChange={(e) => setEnd(e.target.value)} />
             </Flex>
           </ContextMenuTrigger>
 

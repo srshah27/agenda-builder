@@ -66,8 +66,8 @@ const Board = ({ board, cards, lists }) => {
       listId,
       workspaceId: boardData.board.workspaceId,
       boardId: boardData.board.id,
-      start: boardData.board.start,
-      end: boardData.board.end,
+      start: list.start,
+      end: list.end,
       attributes: list.attributes,
       sequence
     }
