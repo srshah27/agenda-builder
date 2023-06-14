@@ -8,9 +8,9 @@ const Task = ({ task, index }) => {
 
   const attrs = [
     { name: 'Session Title', type: 'text', value: 'WELCOME', options: [], show: true },
-    { name: 'Details', type: 'text', value: 'Some Detail', options: [], show: true },
+    { name: 'Details', type: 'text', value: 'Some Detail', options: [], show: false },
     { name: 'Speaker', type: 'multi', value: '["Akbar", "Amar", "Anthony"]', options: ["Akbar", "Amar", "Anthony", "Akshay", "Virat"], show: true },
-    { name: 'Status', type: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
+    // { name: 'Status', type: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
   ]
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [currentTask, setCurrentTask] = useState({ ...task, attributes: attrs });
