@@ -20,10 +20,8 @@ const Task = ({ task, index }) => {
           ref={draggableProvided.innerRef}
           className={`font-light p-2 mx-2 flex min-w-[150px] mb-2 border rounded-md shadow-md h-[100px] bg-blue-400`}
         >
-          {/* {task.name} */}
 
           <div className='flex flex-row w-full h-full'>
-            {/* Time */}
             <div className='flex flex-col h-full w-auto my-auto py-auto' >
               <span>
                 {new Date(task.start).toLocaleTimeString()}
@@ -41,7 +39,7 @@ const Task = ({ task, index }) => {
 
               {attrs.map((attribute, index) => {
                 return <div key={index} className='p-auto m-auto pr-16'>
-                  <Attribute attr={attribute} task={task}  />
+                  <Attribute attr={attribute} task={task} />
                 </div>
               })}
             </div>

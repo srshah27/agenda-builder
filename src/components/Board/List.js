@@ -27,10 +27,8 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
           <ContextMenuTrigger key={list.id} id={list.id}>
             <div {...draggableProvided.dragHandleProps} className=" flex p-2 text-md justify-between">
               <input value={list.name} />
-              {/* <Spacer />{list.sequence}<Spacer /> */}
-
+              <Spacer/>
               <input type='time' value={start} min={'09:00:00'} max={'20:00:00'} onChange={(e) => setStart(e.target.value)} />
-              <Spacer />
               <input type='time' value={end} onChange={(e) => setEnd(e.target.value)} />
             </div>
           </ContextMenuTrigger>
