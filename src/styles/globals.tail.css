@@ -1,8 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
-
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
 
 * {
   /* margin: 0; */
@@ -42,43 +41,51 @@ video {
   height: 3rem;
   line-height: 2em;
   text-align: center;
-  background: -webkit-gradient(linear,left top, right top,from(#03a9f4),color-stop(#f441a5),color-stop(#ffeb3b),to(#03a9f4));
-  background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#03a9f4),
+    color-stop(#f441a5),
+    color-stop(#ffeb3b),
+    to(#03a9f4)
+  );
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
   background-size: 300%;
   border-radius: 12px;
   z-index: 1;
   -webkit-animation: ani 8s linear infinite;
   animation: ani 8s linear infinite;
- }
- 
- .btn:hover {
+}
+
+.btn:hover {
   -webkit-animation: ani 8s linear infinite;
-          animation: ani 8s linear infinite;
+  animation: ani 8s linear infinite;
   border: none;
- }
- 
- @-webkit-keyframes ani {
+}
+
+@-webkit-keyframes ani {
   0% {
-   background-position: 0%;
+    background-position: 0%;
   }
- 
+
   100% {
-   background-position: 400%;
+    background-position: 400%;
   }
- }
- 
- @keyframes ani {
+}
+
+@keyframes ani {
   0% {
-   background-position: 0%;
+    background-position: 0%;
   }
- 
+
   100% {
-   background-position: 400%;
-   border-radius: 24px;
+    background-position: 400%;
+    border-radius: 24px;
   }
- }
- 
- .btn:before {
+}
+
+.btn:before {
   content: '';
   position: absolute;
   top: 0px;
@@ -86,25 +93,32 @@ video {
   width: 6rem;
   height: 3rem;
   z-index: -1;
-  background: -webkit-gradient(linear,left top, right top,from(#03a9f4),color-stop(#f441a5),color-stop(#ffeb3b),to(#03a9f4));
-  background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#03a9f4),
+    color-stop(#f441a5),
+    color-stop(#ffeb3b),
+    to(#03a9f4)
+  );
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
   background-size: 400%;
   border-radius: 12px;
   -webkit-transition: 1s;
   transition: 1s;
- }
- 
- .btn:hover::before {
+}
+
+.btn:hover::before {
   -webkit-filter: blur(20px);
-          filter: blur(20px);
- }
- 
- .btn:active {
-  background: linear-gradient(32deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
- }
+  filter: blur(20px);
+}
 
+.btn:active {
+  background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+}
 
- .btnSmall {
+.btnSmall {
   text-decoration: none;
   position: relative;
   border: none;
@@ -116,43 +130,51 @@ video {
   height: 2.25rem;
   line-height: 2em;
   text-align: center;
-  background: -webkit-gradient(linear,left top, right top,from(#03a9f4),color-stop(#f441a5),color-stop(#ffeb3b),to(#03a9f4));
-  background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#03a9f4),
+    color-stop(#f441a5),
+    color-stop(#ffeb3b),
+    to(#03a9f4)
+  );
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
   background-size: 300%;
   border-radius: 12px;
   z-index: 1;
   -webkit-animation: ani 8s linear infinite;
   animation: ani 8s linear infinite;
- }
- 
- .btnSmall:hover {
+}
+
+.btnSmall:hover {
   -webkit-animation: ani 8s linear infinite;
-          animation: ani 8s linear infinite;
+  animation: ani 8s linear infinite;
   border: none;
- }
- 
- @-webkit-keyframes ani {
+}
+
+@-webkit-keyframes ani {
   0% {
-   background-position: 0%;
+    background-position: 0%;
   }
- 
+
   100% {
-   background-position: 400%;
+    background-position: 400%;
   }
- }
- 
- @keyframes ani {
+}
+
+@keyframes ani {
   0% {
-   background-position: 0%;
+    background-position: 0%;
   }
- 
+
   100% {
-   background-position: 400%;
-   border-radius: 24px;
+    background-position: 400%;
+    border-radius: 24px;
   }
- }
- 
- .btnSmall:before {
+}
+
+.btnSmall:before {
   content: '';
   position: absolute;
   top: 0px;
@@ -160,22 +182,30 @@ video {
   width: 5rem;
   height: 2.25rem;
   z-index: -1;
-  background: -webkit-gradient(linear,left top, right top,from(#03a9f4),color-stop(#f441a5),color-stop(#ffeb3b),to(#03a9f4));
-  background: linear-gradient(90deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#03a9f4),
+    color-stop(#f441a5),
+    color-stop(#ffeb3b),
+    to(#03a9f4)
+  );
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
   background-size: 400%;
   border-radius: 12px;
   -webkit-transition: 1s;
   transition: 1s;
- }
- 
- .btnSmall:hover::before {
+}
+
+.btnSmall:hover::before {
   -webkit-filter: blur(20px);
-          filter: blur(20px);
- }
- 
- .btnSmall:active {
-  background: linear-gradient(32deg,#03a9f4,#f441a5,#ffeb3b,#03a9f4);
- }
+  filter: blur(20px);
+}
+
+.btnSmall:active {
+  background: linear-gradient(32deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+}
 
 body::-webkit-scrollbar {
   width: 4px;
@@ -190,7 +220,103 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid gray;
 }
 
-
 body {
-  background: linear-gradient(135.39deg, #342B53 24.83%, #733A67 96.81%) !important;
+  background: linear-gradient(
+    135.39deg,
+    #342b53 24.83%,
+    #733a67 96.81%
+  ) !important;
+}
+
+.card {
+  background: radial-gradient(
+        178.94% 106.41% at 26.42% 106.41%,
+        #fff7b1 0%,
+        rgba(255, 255, 255, 0) 71.88%
+      )
+      /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */,
+    #ffffff;
+  box-shadow: 0px 155px 62px rgba(0, 0, 0, 0.01),
+    0px 87px 52px rgba(0, 0, 0, 0.05), 0px 39px 39px rgba(0, 0, 0, 0.09),
+    0px 10px 21px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.glass,
+.glass:hover,
+.glass.btn-active {
+  border: none;
+  backdrop-filter: blur(var(--glass-blur, 40px));
+  background-color: transparent;
+  background-image: linear-gradient(
+      135deg,
+      rgb(255 255 255 / var(--glass-opacity, 30%)) 0%,
+      rgb(0 0 0 / 0%) 100%
+    ),
+    linear-gradient(
+      var(--glass-reflex-degree, 100deg),
+      rgb(255 255 255 / var(--glass-reflex-opacity, 10%)) 25%,
+      rgb(0 0 0 / 0%) 25%
+    );
+  box-shadow: 0 0 0 1px rgb(255 255 255 / var(--glass-border-opacity, 10%))
+      inset,
+    0 0 0 2px rgb(0 0 0 / 5%);
+  text-shadow: 0 1px rgb(0 0 0 / var(--glass-text-shadow-opacity, 5%));
+}
+
+.cssbuttons-io-button {
+  background: #a370f0;
+  color: white;
+  font-family: inherit;
+  padding: 0.35em;
+  padding-left: 1.2em;
+  font-size: 17px;
+  font-weight: 500;
+  border-radius: 0.9em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  box-shadow: inset 0 0 1.6em -0.6em #714da6;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+}
+
+.cssbuttons-io-button .icon {
+  background: white;
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.7em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: #7b52b9;
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
 }
