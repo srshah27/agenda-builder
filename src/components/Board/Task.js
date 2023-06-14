@@ -1,15 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { Box, useColorModeValue, Spacer } from '@chakra-ui/react'
 import Attribute from '@/components/Attributes/Attribute'
+import CardModal from '@/components/Modals/CardModal'
+import { useDisclosure } from '@chakra-ui/react'
 const Task = ({ task, index }) => {
 
   const attrs = [
     { name: 'Session Title', type: 'text', value: 'WELCOME', options: [], show: true },
-    { name: 'Details', type: 'text', value: 'Some Detail', options: [], show: false },
+    { name: 'Details', type: 'text', value: 'Some Detail', options: [], show: true },
     { name: 'Speaker', type: 'multi', value: '["Akbar", "Amar", "Anthony"]', options: ["Akbar", "Amar", "Anthony", "Akshay", "Virat"], show: true },
-    // { name: 'Status', type: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
+    { name: 'Status', type: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
   ]
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [currentTask, setCurrentTask] = useState({ ...task, attributes: attrs });
+  const initialRef = React.useRef(null)
 
   return (
     <Draggable draggableId={task.id} index={index} disableInteractiveElementBlocking >
@@ -18,6 +23,7 @@ const Task = ({ task, index }) => {
           {...draggableProvided.draggableProps}
           {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
+          onClick={onOpen}
           className={`font-light p-2 mx-2 flex min-w-[150px] mb-2 border rounded-md shadow-md h-[100px] bg-blue-400`}
         >
           {/* {task.name} */}
@@ -41,13 +47,14 @@ const Task = ({ task, index }) => {
 
               {attrs.map((attribute, index) => {
                 return <div key={index} className='p-auto m-auto pr-16'>
-                  <Attribute attr={attribute} task={task}  />
+                  <Attribute attr={attribute} task={task} />
                 </div>
               })}
             </div>
 
           </div>
 
+        <CardModal onOpen={onOpen} onClose={onClose} isOpen={isOpen} task={ currentTask } />
         </Box>
       )}
     </Draggable>
