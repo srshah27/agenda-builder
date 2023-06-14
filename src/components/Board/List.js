@@ -28,7 +28,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
         <div
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
-          className={`m-4 rounded-xl card shadow-md w-4/5 h-fit flex flex-col justify-center items-center`}
+          className={`m-4 rounded-xl card shadow-md w-4/5 h-fit flex flex-col justify-center `}
         >
           <ContextMenuTrigger key={list.id} id={list.id}>
             <div
