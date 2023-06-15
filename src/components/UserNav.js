@@ -12,7 +12,7 @@ const UserNav = ({ board }) => {
   const { data: session } = useSession()
   return (
     <div
-      className='bg-opacity-60 bg-slate-50 h-12 px-2 flex items-center'
+      className='bg-opacity-60 bg-black h-12 px-2 flex items-center'
     >
       <Link href={`/u/${session?.user?.uid}`}>
         <button className='btnSmall'>
