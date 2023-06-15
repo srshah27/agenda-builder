@@ -27,16 +27,18 @@ const SubNav = ({ board }) => {
   }
   return (
     <div
-      className={`flex bg-opacity-80 ${styles.bgTranslucent}`}
+      className={`flex bg-opacity-80 ${styles.bgTranslucent} px-4`}
     >
 
       <input fontSize="md" p="2" value={boardName} onChange={handleBoardName} className='bg-transparent' />
-      <button>Timings</button>
-      <button>Sections</button>
-      <button>Activities</button>
-      <button>Attributes</button>
       <Spacer />
-      button
+      <div className='my-3'>
+        <button className='mr-4'>Timings  </button>
+        <button className='mx-4' >Sections</button>
+        <button className='mx-4' >Activities</button>
+        <button className='mx-4'>Attributes</button>
+      </div>
+      <Spacer />
       <Menu>
         <MenuButton
           as={IconButton}
@@ -46,7 +48,7 @@ const SubNav = ({ board }) => {
           p="4"
         />
         <MenuList>
-          <MenuItem>Invite</MenuItem>
+          <MenuItem textColor={"blackAlpha.300"}>Invite</MenuItem>
           <MenuItem>Archive</MenuItem>
         </MenuList>
       </Menu>

@@ -45,7 +45,7 @@ const Task = ({ task, index }) => {
           {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
           onClick={onOpen}
-          className={`font-light p-2 mx-2 flex mb-2 border rounded-md shadow-md h-[144px] bg-blue-400`}
+          className={`font-light p-2 mx-2 flex mb-2 border rounded-md shadow-md h-[144px] bg-white-800`}
         >
           {/* <div className="flex flex-row w-full h-full bg-yellow-400"> */}
           {/* <div className="flex flex-col h-full w-auto my-auto py-auto bg-yellow-400"> */}
