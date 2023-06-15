@@ -27,7 +27,7 @@ const SubNav = ({ board }) => {
   }
   return (
     <div
-      className={`flex bg-opacity-80 ${styles.bgTranslucent} px-4`}
+      className={`flex bg-opacity-30 bg-slate-50 px-4`}
     >
 
       <input fontSize="md" p="2" value={boardName} onChange={handleBoardName} className='bg-transparent' />
