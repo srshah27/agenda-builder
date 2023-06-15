@@ -220,14 +220,6 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid gray;
 }
 
-body {
-  background: linear-gradient(
-    135.39deg,
-    #342b53 24.83%,
-    #733a67 96.81%
-  ) !important;
-}
-
 .card {
   background: radial-gradient(
         178.94% 106.41% at 26.42% 106.41%,

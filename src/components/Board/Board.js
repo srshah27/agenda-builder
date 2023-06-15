@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Flex, HStack, Heading, Spacer, Text, useColorModeValue } from '@chakra-ui/react'
+import {
+  Flex,
+  HStack,
+  Heading,
+  Spacer,
+  Text,
+  useColorModeValue
+} from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
 import { nanoid } from 'nanoid'
@@ -13,7 +20,6 @@ const List = dynamic(() => import('./List'), {
 })
 
 const Board = ({ board, cards, lists }) => {
-
   const [boardData, setBoardData] = useState({
     board,
     cards,
@@ -39,7 +45,6 @@ const Board = ({ board, cards, lists }) => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data.updatedList, data.updatedCard);
         if (data.updatedList === null) {
           setBoardData({ ...cardsOrLists })
           setRefresh(!refresh)
@@ -55,7 +60,7 @@ const Board = ({ board, cards, lists }) => {
       })
   }
 
-  const addCard = (listId) => {
+  const addCard = listId => {
     let list = boardData.lists.find(list => list.id === listId)
     let sequence = boardData.cards.filter(card => card.listId === listId).length
     const data = {
@@ -104,17 +109,29 @@ const Board = ({ board, cards, lists }) => {
 
   const handleDelete = async (e, data) => {
     if (data.type === 'list') {
-      fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${data.list.id}`, { method: 'DELETE' })
+      fetch(
+        `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${data.list.id}`,
+        { method: 'DELETE' }
+      )
         .then(res => res.json())
         .then(d => {
-          setBoardData({ ...boardData, lists: boardData.lists.filter(list => list.id != data.list.id) })
+          setBoardData({
+            ...boardData,
+            lists: boardData.lists.filter(list => list.id != data.list.id)
+          })
         })
     }
     if (data.type === 'card') {
-      fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${data.card.id}`, { method: 'DELETE' })
+      fetch(
+        `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c/${data.card.id}`,
+        { method: 'DELETE' }
+      )
         .then(res => res.json())
         .then(d => {
-          setBoardData({ ...boardData, cards: boardData.cards.filter(card => card.id != data.card.id) })
+          setBoardData({
+            ...boardData,
+            cards: boardData.cards.filter(card => card.id != data.card.id)
+          })
         })
     }
   }
@@ -129,28 +146,20 @@ const Board = ({ board, cards, lists }) => {
       oldData.push({ ...list })
       if (list.sequence > source.index) {
         list.sequence = list.sequence - 1 // Update query else
-        console.log(`rm ${list.id} ${list.sequence}`);
-
       }
       if (list.sequence >= destination.index) {
         list.sequence = list.sequence + 1 // Update query else
-        console.log(`add ${list.id} ${list.sequence}`);
-
       }
-
     })
 
     currentList.sequence = destination.index // Upadte query currentList
-    console.log(oldData === data);
     data.lists.forEach(list => {
-
       if (list.sequence !== oldData.find(l => l.id === list.id).sequence)
         updateDb(
           `/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l/${list.id}`,
           { sequence: list.sequence },
           ogiData
         )
-
     })
     return data
   }
@@ -194,7 +203,6 @@ const Board = ({ board, cards, lists }) => {
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result
     if (!destination) return
-    console.log(source.index, destination.index);
     let ogiData = { ...boardData }
     let updatedData = {}
     if (type === 'column') {
@@ -210,14 +218,7 @@ const Board = ({ board, cards, lists }) => {
 
   return (
     // complete outside box
-    <Box
-      display="block"
-      overflowX="auto"
-      className='w-full'
-      bg={
-        'linear-gradient(135.39deg, #342B53 24.83%, #733A67 96.81%);'
-      }
-    >
+    <Box display="block" overflowX="auto" className="w-full">
       {/* <div className='flex justify-around outline-double m-2'>
         <Heading className='text-center'>The Summit</Heading>
         <input type="text" className='bg-transparent' />
@@ -238,7 +239,7 @@ const Board = ({ board, cards, lists }) => {
                 px="4"
                 ref={droppableProvided.innerRef}
                 {...droppableProvided.droppableProps}
-                direction={"column"}
+                direction={'column'}
                 alignItems={'center'}
               >
                 {boardData.lists.map(list => {
@@ -260,19 +261,23 @@ const Board = ({ board, cards, lists }) => {
                 {droppableProvided.placeholder}
                 <Box
                   className={`m-4 border rounded shadow-md `}
-                  h='fit-content'
+                  h="fit-content"
                   w={250}
                   minW={250}
                 >
-                  <Box className="p-2 text-md flex" as='button' onClick={addList} w='full' alignItems={'center'}>
+                  <Box
+                    className="p-2 text-md flex"
+                    as="button"
+                    onClick={addList}
+                    w="full"
+                    alignItems={'center'}
+                  >
                     <AddIcon w={4} h={4} mr={3} /> Add another list
                   </Box>
-
                 </Box>
               </Flex>
             )}
           </Droppable>
-
         </React.StrictMode>
       </DragDropContext>
     </Box>
