@@ -218,7 +218,12 @@ const Board = ({ board, cards, lists }) => {
 
   return (
     // complete outside box
-    <Box display="block" overflowX="auto" className="w-full">
+    <Box
+      display="block"
+      overflowX="auto"
+      className="w-full"
+      bg={'linear-gradient(135.39deg, #342B53 24.83%, #733A67 96.81%);'}
+    >
       {/* <div className='flex justify-around outline-double m-2'>
         <Heading className='text-center'>The Summit</Heading>
         <input type="text" className='bg-transparent' />
@@ -264,16 +269,18 @@ const Board = ({ board, cards, lists }) => {
                   h="fit-content"
                   w={250}
                   minW={250}
-                  bgColor={"whiteAlpha.300"}
+                  bgColor={'whiteAlpha.300'}
                 >
                   <Box
                     className="p-2 text-md flex"
                     as="button"
-                    color={"white"}  onClick={addList}
+                    color={'white'}
+                    onClick={addList}
                     w="full"
                     alignItems={'center'}
                   >
-                    <AddIcon w={4} h={4} ml={16} />  <Text ml="4"> Add List</Text>
+                    <AddIcon w={4} h={4} ml={16} />{' '}
+                    <Text ml="4"> Add List</Text>
                   </Box>
                 </Box>
               </Flex>

@@ -237,7 +237,13 @@ body::-webkit-scrollbar-thumb {
 .card:hover {
   transform: scale(1.02);
 }
-
+body {
+  background: linear-gradient(
+    135.39deg,
+    #342b53 24.83%,
+    #733a67 96.81%
+  ) !important;
+}
 .glass,
 .glass:hover,
 .glass.btn-active {

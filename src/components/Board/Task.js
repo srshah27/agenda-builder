@@ -47,8 +47,6 @@ const Task = ({ task, index }) => {
           onClick={onOpen}
           className={`font-light p-2 mx-2 flex mb-2 border rounded-md shadow-md h-[144px] bg-white-800`}
         >
-          {/* <div className="flex flex-row w-full h-full bg-yellow-400"> */}
-          {/* <div className="flex flex-col h-full w-auto my-auto py-auto bg-yellow-400"> */}
           <div className="flex flex-col h-full min-w-fit justify-around items-baseline bg-yellow-400">
             <span className=''>
               <strong>From: </strong> {new Date(task.start).toLocaleTimeString()}
@@ -60,18 +58,20 @@ const Task = ({ task, index }) => {
               <strong>Duration: </strong>
             </span>
           </div>
-          {/* </div> */}
 
+          {task.name}
+          {task.description}
           {/* Attributes */}
           <div className="flex flex-row w-full bg-red-400">
             {attrs.map((attribute, index) => {
               return (
-                <div key={index} className="w-44">
+                <div key={index} className="">
                   <Attribute attr={attribute} task={task} />
                 </div>
               )
             })}
           </div>
+
           {/* </div> */}
 
           <CardModal
