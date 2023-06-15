@@ -47,7 +47,7 @@ const Task = ({ task, index }) => {
           onClick={onOpen}
           className={`font-light p-2 mx-2 flex mb-2 border rounded-md shadow-md h-[144px]`}
         >
-          <div className="flex flex-col h-full min-w-fit justify-around items-baseline bg-yellow-400">
+          <div className="flex flex-col h-full min-w-fit justify-around items-baseline">
             <span className=''>
               <strong>From: </strong> {new Date(task.start).toLocaleTimeString()}
             </span>
@@ -62,7 +62,7 @@ const Task = ({ task, index }) => {
           {task.name}
           {task.description}
           {/* Attributes */}
-          <div className="flex flex-row w-full bg-red-400">
+          <div className="flex flex-row w-full">
             {attrs.map((attribute, index) => {
               return (
                 <div key={index} className="">

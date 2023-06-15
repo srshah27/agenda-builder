@@ -45,13 +45,13 @@ const CardModal = ({ task, onClose, isOpen, onOpen }) => {
                 value={task.description}
               />
             </FormControl>
-            <div id="checklist" className=''>
-              <input checked="" value="1" name="r" type="checkbox" id="01" />
-              <label htmlFor="01">Bread</label>
-              <input value="2" name="r" type="checkbox" id="02" />
-              <label htmlFor="02">Cheese</label>
-              <input value="3" name="r" type="checkbox" id="03" />
-              <label htmlFor="03">Coffee</label>
+            <div id="checklist">
+              <input name="r" type="checkbox" id="01" />
+              <label htmlFor="01">Speaker</label>
+              <input name="r" type="checkbox" id="02" />
+              <label htmlFor="02">Status</label>
+              <input name="r" type="checkbox" id="03" />
+              <label htmlFor="03">Working</label>
             </div>
           </ModalBody>
 
