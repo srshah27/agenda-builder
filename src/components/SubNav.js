@@ -31,7 +31,7 @@ const SubNav = ({ board }) => {
     >
 
       <input fontSize="md" p="2" value={boardName} onChange={handleBoardName} className='bg-transparent' />
-      <button>Timings</button>
+      <button>Timings</button> <br/>
       <button>Sections</button>
       <button>Activities</button>
       <button>Attributes</button>

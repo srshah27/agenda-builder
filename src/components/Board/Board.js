@@ -263,9 +263,10 @@ const Board = ({ board, cards, lists }) => {
                   h='fit-content'
                   w={250}
                   minW={250}
+                  bgColor={"whiteAlpha.300"}
                 >
-                  <Box className="p-2 text-md flex" as='button' onClick={addList} w='full' alignItems={'center'}>
-                    <AddIcon w={4} h={4} mr={3} /> Add another list
+                  <Box className="p-2 text-md flex" as='button' color={"white"}  onClick={addList} w='full' alignItems={'center'}>
+                    <AddIcon w={4} h={4} ml={16} />  <Text ml="4"> Add List</Text>
                   </Box>
 
                 </Box>
