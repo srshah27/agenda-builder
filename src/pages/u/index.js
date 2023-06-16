@@ -9,11 +9,10 @@ export default function Home() {
 export  async function getServerSideProps(context) {
   const session = await getSession(context)
   if (session) {
-    console.log(session.user.uid);
     return {
       redirect: {
         destination: `/u/${session.user.uid}`,
-        permanent: false
+        permanent: false            // can go back to login page
       }
     }
   } else {

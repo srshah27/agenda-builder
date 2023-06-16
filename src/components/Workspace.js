@@ -17,8 +17,6 @@ import {
   Input,
   useColorModeValue,
   HStack,
-  Spacer,
-  textDecoration
 } from '@chakra-ui/react'
 import {
   Modal,
