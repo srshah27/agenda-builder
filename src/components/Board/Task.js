@@ -58,38 +58,34 @@ const Task = ({ task, index }) => {
           {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
           onClick={onOpen}
-          className={`mx-2 mb-2 flex h-[144px] rounded-md border p-2 font-light shadow-md bg-slate-200`}
+          className={`cardAnimation mx-2 mb-3 flex h-[144px] rounded-md border bg-slate-200 p-2 font-light shadow-md`}
         >
           <div className="flex h-full min-w-fit flex-col items-baseline justify-around">
-            <span className="">
-              <strong>From: </strong>{' '}
-              {new Date(currentTask.start).toLocaleTimeString()}
-            </span>
+            <strong>From: </strong>
+            <strong>To: </strong>
+            <strong>Dur: </strong>
+          </div>
+          <div className="ml-1 flex h-full min-w-fit flex-col items-baseline justify-around">
+            <span>{new Date(currentTask.start).toLocaleTimeString()}</span>
+            <span>{new Date(currentTask.end).toLocaleTimeString()}</span>
             <span>
-              <strong>To: </strong>{' '}
-              {new Date(currentTask.end).toLocaleTimeString()}
-            </span>
-            <span>
-              <strong>Duration: </strong> {duration.hours} hrs :{' '}
-              {duration.miniutes} mins
+              {duration.hours}hr {duration.miniutes}min
             </span>
           </div>
-
-          {currentTask.name}
-          {currentTask.description}
+          <div className="flex w-[50%] min-w-[50%] flex-col p-2">
+            <span className="w-full text-center text-xl font-semibold">
+              {currentTask.name}
+            </span>
+            <span className="block overflow-hidden text-ellipsis p-2 text-base">
+              {currentTask.description}
+            </span>
+          </div>
           {/* Attributes */}
-          <div className="flex w-full flex-row">
+          <div className="flex w-full max-w-full flex-row">
             {currentTask.attributes.map((attribute, index) => {
-              return (
-                <div key={index} className="">
-                  <Attribute attr={attribute} task={currentTask} />
-                </div>
-              )
+              return <Attribute attr={attribute} task={currentTask} />
             })}
           </div>
-
-          {/* </div> */}
-
           <CardModal
             onOpen={onOpen}
             onClose={onClose}

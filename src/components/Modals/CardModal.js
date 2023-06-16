@@ -108,8 +108,6 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
                   })
                 }}
               />
-            </FormControl>
-            <FormControl>
               <FormLabel>End Time</FormLabel>
               <Input
                 type="time"
@@ -142,8 +140,6 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
                   })
                 }}
               />
-            </FormControl>
-            <FormControl>
               <FormLabel>Duration</FormLabel>
               <Input
                 type="number"
@@ -177,9 +173,7 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
                   setEndTime(m.format('HH:mm'))
                 }}
               />
-            </FormControl>
 
-            <FormControl>
               <FormLabel>Activity Title</FormLabel>
               <Input
                 ref={initialRef}
@@ -189,9 +183,7 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
                   setName(e.target.value)
                 }}
               />
-            </FormControl>
 
-            <FormControl mt={4}>
               <FormLabel>Activity Description</FormLabel>
               <Textarea
                 placeholder="Description"

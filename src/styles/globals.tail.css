@@ -205,3 +205,43 @@ body::-webkit-scrollbar-thumb {
   background-color: gray;
   outline: 1px solid gray;
 }
+
+
+.cardAnimation{
+  transition: border-radius 0.5s, border 0.5s;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.22);
+}
+
+.cardAnimation:hover{
+ @apply rounded-2xl;
+ border: solid 1px black;
+}
+
+.innerCard {
+  background: rgba(217, 217, 217, 0.58);
+  margin: 0.5rem;
+  max-height: fit-content;
+  /* border: 1px solid white; */
+  max-width: fit-content;
+  backdrop-filter: blur(6px);
+  border-radius: 17px;
+  text-align: center;
+  transition: all 0.5s;
+  display: flex;
+  padding: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  color: black;
+  /* width: 100%; */
+  /* min-width: fit-content; */
+}
+
+.innerCard:hover {
+  border: 1px solid black;
+  transform: scale(1.01);
+}
+
+.innerCard:active {
+  transform: scale(0.95) rotateZ(1.7deg);
+}
