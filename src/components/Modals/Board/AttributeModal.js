@@ -17,12 +17,11 @@ import {
   useDisclosure
 } from '@chakra-ui/react'
 
-
 export const AttributeInput = ({ attributes, setAttributes, index }) => {
-  const [name, setName] = useState(attributes[index].name);
-  const [type, setType] = useState(attributes[index].attributeType);
-  const [show, setShow] = useState(attributes[index].show);
-  const [options, setOptions] = useState(attributes[index].options);
+  const [name, setName] = useState(attributes[index].name)
+  const [type, setType] = useState(attributes[index].attributeType)
+  const [show, setShow] = useState(attributes[index].show)
+  const [options, setOptions] = useState(attributes[index].options)
 
   return (
     <>
@@ -35,36 +34,43 @@ export const AttributeInput = ({ attributes, setAttributes, index }) => {
           setShow(!show)
         }}
       />
-      <Input type='text' value={name} onChange={(e) => {
-        let newAttributes = [...attributes];
-        newAttributes[index].name = e.target.value;
-        setAttributes(newAttributes);
-        setName(e.target.value);
-      }} />
+      <Input
+        type="text"
+        value={name}
+        onChange={e => {
+          let newAttributes = [...attributes]
+          newAttributes[index].name = e.target.value
+          setAttributes(newAttributes)
+          setName(e.target.value)
+        }}
+      />
 
-      <Select value={type} onChange={(e) => {
-        let newAttributes = [...attributes];
-        newAttributes[index].attributeType = e.target.value;
-        setAttributes(newAttributes);
-        setType(e.target.value);
-      }}>
+      <Select
+        value={type}
+        onChange={e => {
+          let newAttributes = [...attributes]
+          newAttributes[index].attributeType = e.target.value
+          setAttributes(newAttributes)
+          setType(e.target.value)
+        }}
+      >
         <option value="text">Text</option>
         <option value="multi">Multiple Select Option</option>
         <option value="option">Option</option>
       </Select>
       {/* Options if type== multi or option */}
 
-      <Button onClick={(e) => {
-        let newAttributes = attributes.filter((attr, i) => i !== index);
-        setAttributes(newAttributes);
-      }} >Delete
+      <Button
+        onClick={e => {
+          let newAttributes = attributes.filter((attr, i) => i !== index)
+          setAttributes(newAttributes)
+        }}
+      >
+        Delete
       </Button>
     </>
-
   )
-
 }
-
 
 const AttributeModal = ({ boardData, onClose, isOpen, onOpen }) => {
   const [oldAttrs, setOldAttrs] = useState(JSON.parse(JSON.stringify(boardData.board.activityAttributes)));
@@ -121,23 +127,22 @@ const AttributeModal = ({ boardData, onClose, isOpen, onOpen }) => {
   }
 
   const handleSubmit = async () => {
-
     for (let i = 0; i < attributes.length; i++) {
-      const attr1 = attributes[i];
+      const attr1 = attributes[i]
       for (let j = i + 1; j < attributes.length; j++) {
-        const attr2 = attributes[j];
+        const attr2 = attributes[j]
         if (attr1.name === attr2.name) {
-          alert("Attribute names should be unique");
-          return;
+          alert('Attribute names should be unique')
+          return
         }
       }
     }
     let addedAttributes = attributes.filter((attr) => attr._id === undefined);
     let deletedAttributes = oldAttrs.filter((attr) => {
       for (let i = 0; i < attributes.length; i++) {
-        const attr1 = attributes[i];
+        const attr1 = attributes[i]
         if (attr._id === attr1._id) {
-          return false;
+          return false
         }
       }
       return true;
@@ -182,24 +187,35 @@ const AttributeModal = ({ boardData, onClose, isOpen, onOpen }) => {
           <ModalBody pb={6}>
             {/* Board Details */}
             <FormControl>
-
               <FormLabel>Board Attributes</FormLabel>
               {attributes.map((attribute, index) => {
                 return (
-                  <AttributeInput attributes={attributes} setAttributes={setAttributes} index={index} key={index} />
+                  <AttributeInput
+                    attributes={attributes}
+                    setAttributes={setAttributes}
+                    index={index}
+                    key={index}
+                  />
                 )
               })}
 
-              <Button onClick={(e) => {
-                let newAttributes = [...attributes, {
-                  name: 'New Attribute',
-                  attributeType: 'text',
-                  value: '',
-                  options: [],
-                  show: false
-                }]
-                setAttributes(newAttributes);
-              }}>Add New Attribute</Button>
+              <Button
+                onClick={e => {
+                  let newAttributes = [
+                    ...attributes,
+                    {
+                      name: 'New Attribute',
+                      attributeType: 'text',
+                      value: '',
+                      options: [],
+                      show: false
+                    }
+                  ]
+                  setAttributes(newAttributes)
+                }}
+              >
+                Add New Attribute
+              </Button>
             </FormControl>
           </ModalBody>
           <ModalFooter>

@@ -20,12 +20,6 @@ const List = dynamic(() => import('./List'), {
 })
 
 const Board = ({ boardData, setBoardData }) => {
-  // const [boardData, setBoardData] = useState({
-  //   board,
-  //   cards,
-  //   lists: lists.sort((a, b) => a.sequence - b.sequence)
-  // })
-
   const [refresh, setRefresh] = useState(false)
   const { data: session } = useSession()
 
@@ -219,78 +213,44 @@ const Board = ({ boardData, setBoardData }) => {
   }
 
   return (
-    // complete outside box
-    <Box
-      display="block"
-      overflowX="auto"
-      className="w-full"
-      bg={'linear-gradient(135.39deg, #342B53 24.83%, #733A67 96.81%);'}
-    >
-      {/* <div className='flex justify-around outline-double m-2'>
-        <Heading className='text-center'>The Summit</Heading>
-        <input type="text" className='bg-transparent' />
-        <Text fontSize='3xl'>Start Time:</Text>
-        <Text fontSize='3xl'>End Time:</Text>
-      </div> */}
-      <DragDropContext onDragEnd={onDragEnd}>
-        <React.StrictMode>
-          {/* all the lists */}
-          <Droppable
-            droppableId="all-columns"
-            direction="vertical"
-            type="column"
-          >
-            {droppableProvided => (
-              // box with all lists
-              <Flex
-                px="4"
-                ref={droppableProvided.innerRef}
-                {...droppableProvided.droppableProps}
-                direction={'column'}
-                alignItems={'center'}
+    <DragDropContext onDragEnd={onDragEnd}>
+      <React.StrictMode>
+        <Droppable droppableId="all-columns" direction="vertical" type="column">
+          {droppableProvided => (
+            <div
+              ref={droppableProvided.innerRef}
+              {...droppableProvided.droppableProps}
+              className="flex flex-col items-center px-4 backgoundCustom"
+            >
+              {boardData.lists.map(list => {
+                const tasks = boardData.cards.filter(
+                  card => card.listId === list.id
+                )
+                tasks.sort((a, b) => a.sequence - b.sequence)
+                return (
+                  <List
+                    key={list.id}
+                    list={list}
+                    tasks={tasks}
+                    index={list.sequence}
+                    addCard={addCard}
+                    deleteListOrCard={handleDelete}
+                  />
+                )
+              })}
+              {droppableProvided.placeholder}
+              <button
+                onClick={addList}
+                className="text-md m-4 flex min-w-[250px] items-center justify-center rounded-md border p-2 shadow-md"
               >
-                {boardData.lists.map(list => {
-                  const tasks = boardData.cards.filter(
-                    card => card.listId === list.id
-                  )
-                  tasks.sort((a, b) => a.sequence - b.sequence)
-                  return (
-                    <List
-                      key={list.id}
-                      list={list}
-                      tasks={tasks}
-                      index={list.sequence}
-                      addCard={addCard}
-                      deleteListOrCard={handleDelete}
-                    />
-                  )
-                })}
-                {droppableProvided.placeholder}
-                <Box
-                  className={`m-4 border rounded shadow-md `}
-                  h="fit-content"
-                  w={250}
-                  minW={250}
-                  bgColor={'whiteAlpha.300'}
-                >
-                  <Box
-                    className="p-2 text-md flex"
-                    as="button"
-                    color={'white'}
-                    onClick={addList}
-                    w="full"
-                    alignItems={'center'}
-                  >
-                    <AddIcon w={4} h={4} ml={16} />{' '}
-                    <Text ml="4"> Add List</Text>
-                  </Box>
-                </Box>
-              </Flex>
-            )}
-          </Droppable>
-        </React.StrictMode>
-      </DragDropContext>
-    </Box>
+                <AddIcon />
+                <Text ml="4">Add List</Text>
+              </button>
+            </div>
+          )}
+        </Droppable>
+      </React.StrictMode>
+    </DragDropContext>
   )
 }
 

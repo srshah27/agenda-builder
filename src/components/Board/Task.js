@@ -58,9 +58,9 @@ const Task = ({ task, index }) => {
           {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
           onClick={onOpen}
-          className={`font-light p-2 mx-2 flex mb-2 border rounded-md shadow-md h-[144px]`}
+          className={`mx-2 mb-2 flex h-[144px] rounded-md border p-2 font-light shadow-md bg-slate-200`}
         >
-          <div className="flex flex-col h-full min-w-fit justify-around items-baseline">
+          <div className="flex h-full min-w-fit flex-col items-baseline justify-around">
             <span className="">
               <strong>From: </strong>{' '}
               {new Date(currentTask.start).toLocaleTimeString()}
@@ -78,7 +78,7 @@ const Task = ({ task, index }) => {
           {currentTask.name}
           {currentTask.description}
           {/* Attributes */}
-          <div className="flex flex-row w-full">
+          <div className="flex w-full flex-row">
             {currentTask.attributes.map((attribute, index) => {
               return (
                 <div key={index} className="">

@@ -7,8 +7,8 @@ import Image4 from '../../../public/img/image4.png'
 
 const Use = () => {
   return (
-    <div className="h-auto bg-primary w-full">
-      <div className="flex-col text-gray-200 font-mono pt-10 pb-32  text-center text-6xl font-extrabold">
+    <div className="bg-primary h-auto w-full">
+      <div className="flex-col pt-10 pb-32 text-center font-mono  text-6xl font-extrabold text-gray-200">
         <h1>Manage Your Work Smartly</h1>
       </div>
 

@@ -11,17 +11,17 @@ export const Timeline = ({ timeline, timelineKeys }) => {
           )}
           <div className="relative flex items-start space-x-3">
             <div className="relative">
-              <div className="h-12 w-12 rounded-full bg-indigo-500 flex items-center justify-center ring-8 ring-white">
-                <span className="text-white font-medium">v{version}</span>
+              <div className="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-500 ring-8 ring-white">
+                <span className="font-medium text-white">v{version}</span>
               </div>
             </div>
-            <div className="md:w-96 flex-1 max-sm:w-44">
+            <div className="flex-1 max-sm:w-44 md:w-96">
               <div>
                 <div className="text-sm text-gray-500 max-sm:hidden">
                   {timeline[version].title}
                 </div>
                 <div
-                  className={` absolute font-medium sm:hidden text-gray-900  ${
+                  className={` absolute font-medium text-gray-900 sm:hidden  ${
                     timeline[version].title.length > 22 ? 'top-0' : 'top-2.5'
                   }`}
                 >

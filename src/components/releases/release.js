@@ -4,7 +4,7 @@ export const Release = ({ release }) => {
   const { version, date, title, description, features } = release
 
   return (
-    <div className="bg-white rounded-lg shadow overflow-hidden max-w-4xl">
+    <div className="max-w-4xl overflow-hidden rounded-lg bg-white shadow">
       <div className="px-4 py-5 sm:p-6">
         <h2 className="text-lg font-medium text-gray-900">{title}</h2>
         <div className="mt-4">
@@ -13,7 +13,7 @@ export const Release = ({ release }) => {
           </p>
           <p className="mt-2 text-base text-gray-500">{description}</p>
           <div className="mt-6 w-fit">
-            <h3 className="text-lg leading-6 font-medium text-gray-900">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">
               Features
             </h3>
             <div className="mt-2 grid grid-cols-1 gap-5 lg:grid-cols-2">
@@ -30,7 +30,7 @@ export const Release = ({ release }) => {
                     } rounded-lg shadow lg:w-64`}
                   >
                     <div className="px-4 py-5 sm:p-6">
-                      <h4 className="text-md font-medium text-gray-900 capitalize">
+                      <h4 className="text-md font-medium capitalize text-gray-900">
                         {category}
                       </h4>
                       <ul className="mt-4 space-y-4 ">

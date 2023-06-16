@@ -32,12 +32,12 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
         <div
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
-          className={`m-4 rounded-xl card shadow-md w-4/5 h-fit flex flex-col justify-center `}
+          className={`m-4 flex h-fit w-4/5 flex-col justify-center rounded-xl bg-white shadow-md `}
         >
           {/* <ContextMenuTrigger key={list.id} id={list.id}> */}
           <div
             {...draggableProvided.dragHandleProps}
-            className="p-2 flex justify-center"
+            className="flex justify-center p-2"
           >
             {/* <input value={listName} className='text-center' onChange={handleListName} /> */}
             <CustomInput
@@ -59,7 +59,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
             deleteListOrCard={deleteListOrCard}
           />
           <button
-            className={`flex rounded-md p-2 m-2 justify-center items-center w-44 self-center`}
+            className={`m-2 flex w-44 items-center justify-center self-center rounded-md p-2`}
             onClick={() => addCard(list.id)}
           >
             <AddIcon w={3} h={3} mr={3} />

@@ -9,7 +9,7 @@ import agendaImage from '../../public/svg/agenda.svg'
 const UserNav = ({ board }) => {
   const { data: session } = useSession()
   return (
-    <div className="bg-opacity-60 bg-black h-12 px-2 flex items-center">
+    <div className="flex h-12 items-center bg-black bg-opacity-60 px-2">
       <Link href={`/u/${session?.user?.uid}`}>
         <button className="btnSmall">Boards</button>
       </Link>

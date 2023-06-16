@@ -56,8 +56,7 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
     let res = await UpdateTask(currentTask, body)
     setTask(res.updatedCard)
     setDuration(duration)
-    console.log(res)
-    // onClose();
+    onClose()
   }
 
   return (
@@ -66,12 +65,12 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
         initialFocusRef={initialRef}
         isOpen={isOpen}
         onClose={onClose}
-        blockScrollOnMount={false}
         isCentered
-        motionPreset="slideInBottom"
+        motionPreset="scale"
         size={'xl'}
+        scrollBehavior="inside"
       >
-        <ModalOverlay />
+        <ModalOverlay backdropFilter="blur(5px)" />
         <ModalContent>
           <ModalHeader>Edit Activity</ModalHeader>
           <ModalCloseButton />
