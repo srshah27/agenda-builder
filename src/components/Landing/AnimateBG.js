@@ -10,13 +10,13 @@ function AnimateBG({ top, left, right }) {
   return (
     <div className="absolute -z-10" style={position}>
       <div
-        className={`w-48 h-48 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 ${styles.animateBlob}`}
+        className={`h-48 w-48 rounded-full bg-purple-300 opacity-70 mix-blend-multiply blur-xl filter ${styles.animateBlob}`}
       ></div>
       <div
-        className={`relative right-28 w-48 h-48 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 ${styles.animateBlob} styles.animation-delay-2000`}
+        className={`relative right-28 h-48 w-48 rounded-full bg-yellow-300 opacity-70 mix-blend-multiply blur-xl filter ${styles.animateBlob} styles.animation-delay-2000`}
       ></div>
       <div
-        className={`relative left-24 bottom-32 w-48 h-48 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 ${styles.animateBlob} styles.animation-delay-4000`}
+        className={`relative left-24 bottom-32 h-48 w-48 rounded-full bg-pink-300 opacity-70 mix-blend-multiply blur-xl filter ${styles.animateBlob} styles.animation-delay-4000`}
       ></div>
     </div>
   )

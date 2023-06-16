@@ -70,9 +70,7 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
         size={'xl'}
         scrollBehavior="inside"
       >
-        <ModalOverlay
-          backdropFilter="blur(5px)"
-        />
+        <ModalOverlay backdropFilter="blur(5px)" />
         <ModalContent>
           <ModalHeader>Edit Activity</ModalHeader>
           <ModalCloseButton />

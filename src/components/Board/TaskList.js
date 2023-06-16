@@ -8,7 +8,7 @@ const TaskList = ({ tasks, list, deleteListOrCard }) => {
         <div
           ref={droppableProvided.innerRef}
           {...droppableProvided.droppableProps}
-          className={`w-full flex flex-col min-h-[50px]`}
+          className={`flex min-h-[50px] w-full flex-col`}
         >
           <div className="flex flex-col">
             {tasks.map((task, index) => (

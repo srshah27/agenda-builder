@@ -35,7 +35,7 @@ const SubNav = ({ boardData, setBoardData }) => {
     console.log(data)
   }
   return (
-    <div className={`flex bg-opacity-30 bg-black px-4`}>
+    <div className={`flex bg-black bg-opacity-30 px-4`}>
       <input
         fontSize="md"
         color="white"

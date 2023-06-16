@@ -11,9 +11,9 @@ function Navbar() {
   const [navbar, setNavbar] = useState(false)
 
   return (
-    <nav className="w-full fixed top-0 left-0 z-100 shadow-lg bg-white h-14">
-      <div className="justify-between mx-4 lg:max-w-7xl md:items-center md:flex md:px-8">
-        <div className="items-center py-3 sm:inline-block left-0 ">
+    <nav className="z-100 fixed top-0 left-0 h-14 w-full bg-white shadow-lg">
+      <div className="mx-4 justify-between md:flex md:items-center md:px-8 lg:max-w-7xl">
+        <div className="left-0 items-center py-3 sm:inline-block ">
           <Link href="/">
             <Image
               src={agendaImage}
@@ -23,13 +23,13 @@ function Navbar() {
           </Link>
           <div className="md:hidden">
             <button
-              className="btn right-8 absolute top-4" //rounded-md outline-none focus:border-gray-400 focus:border
+              className="btn absolute right-8 top-4" //rounded-md outline-none focus:border-gray-400 focus:border
               onClick={() => setNavbar(!navbar)}
             >
               {navbar ? (
-                <IoClose className=" text-primary  w-6 h-6 ml-[480px]" />
+                <IoClose className=" text-primary  ml-[480px] h-6 w-6" />
               ) : (
-                <HiMenu className="text-primary w-6 h-6 ml-[480px]" />
+                <HiMenu className="text-primary ml-[480px] h-6 w-6" />
               )}
             </button>
           </div>
@@ -37,33 +37,33 @@ function Navbar() {
         <div>
           <div
             className={`flex-1  md:block   ${
-              navbar ? 'md:p-0 block' : 'hidden'
+              navbar ? 'block md:p-0' : 'hidden'
             }`}
           >
-            <ul className="h-[50vh] md:h-auto items-center justify-center md:flex font-mono mt-20 md:mt-0">
-              <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-[23rem]">
+            <ul className="mt-20 h-[50vh] items-center justify-center font-mono md:mt-0 md:flex md:h-auto">
+              <li className="text-neutral border-primary md:hover:text-primary right-[23rem] border-b-2  py-2  px-6   text-center  text-xl md:absolute md:border-b-0 md:hover:underline">
                 <Link href="#home" onClick={() => setNavbar(!navbar)}>
                   Home
                 </Link>
               </li>
-              <li className="text-xl text-neutral py-2 text-primary-6 text-center  border-b-2 md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-52">
+              <li className="text-neutral text-primary-6 border-primary md:hover:text-primary right-52  border-b-2 py-2  text-center  text-xl md:absolute md:border-b-0 md:hover:underline">
                 <Link href="#footer" onClick={() => setNavbar(!navbar)}>
                   About
                 </Link>
               </li>
-              <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2 md:border-b-0  border-primary  md:hover:text-primary md:hover:underline md:absolute right-64">
+              <li className="text-neutral border-primary md:hover:text-primary right-64 border-b-2  py-2 px-6  text-center  text-xl md:absolute md:border-b-0 md:hover:underline">
                 <Link href="#footer" onClick={() => setNavbar(!navbar)}>
                   Contacts
                 </Link>
               </li>
-              <li className="text-xl text-neutral py-2 px-6 text-center md:absolute right-5">
+              <li className="text-neutral right-5 py-2 px-6 text-center text-xl md:absolute">
                 {!session ? (
-                  <button className="btn rounded-md text md:bg-neutral md:text-gray-50 md:hover:bg-blue-900">
+                  <button className="btn text md:bg-neutral rounded-md md:text-gray-50 md:hover:bg-blue-900">
                     <Link href="/signup"> Sign Up </Link>
                   </button>
                 ) : (
                   <button
-                    className="btn w-32 h-12 rounded-md text md:bg-neutral md:text-gray-50 md:hover:bg-blue-900 "
+                    className="btn text md:bg-neutral h-12 w-32 rounded-md md:text-gray-50 md:hover:bg-blue-900 "
                     onClick={() => signOut()}
                   >
                     Sign Out

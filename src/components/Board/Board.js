@@ -241,7 +241,7 @@ const Board = ({ boardData, setBoardData }) => {
               {droppableProvided.placeholder}
               <button
                 onClick={addList}
-                className="min-w-[250px] flex p-2 text-md m-4 border rounded-md shadow-md justify-center items-center bg-red-400"
+                className="text-md m-4 flex min-w-[250px] items-center justify-center rounded-md border bg-red-400 p-2 shadow-md"
               >
                 <AddIcon />
                 <Text ml="4">Add List</Text>

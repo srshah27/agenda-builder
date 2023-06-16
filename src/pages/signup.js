@@ -93,7 +93,7 @@ function Signup({ providers }) {
   return (
     <FormikProvider value={formik}>
       <div className="mt-10 flex flex-col">
-        <div className="max-w-full mx-auto my-6 sm:block">
+        <div className="mx-auto my-6 max-w-full sm:block">
           <Image
             className=""
             src="svg/agenda.svg"
@@ -105,17 +105,17 @@ function Signup({ providers }) {
         </div>
 
         <section className="w-full p-5">
-          <div className="mx-auto my-0 shadow-[0px_0px_50px_2px_rgb(0,0,0,0.2)] w-96 max-w-lg  py-[25px] px-[40px] rounded-sm bg-white">
-            <h1 className="text-center text-base mt-3 mb-4 font-mono font-semibold tracking-tight text-gray-500">
+          <div className="mx-auto my-0 w-96 max-w-lg rounded-sm  bg-white py-[25px] px-[40px] shadow-[0px_0px_50px_2px_rgb(0,0,0,0.2)]">
+            <h1 className="mt-3 mb-4 text-center font-mono text-base font-semibold tracking-tight text-gray-500">
               Sign Up for your account
             </h1>
             <div className="form-control ">
-              <form className="block mt-0 w-50" onSubmit={formik.handleSubmit}>
+              <form className="w-50 mt-0 block" onSubmit={formik.handleSubmit}>
                 <div>
                   <input
                     type="text"
                     placeholder="User Name*"
-                    className="input-md mt-2 transition-all duration-500 w-full h-10 rounded-sm border-gray-300 border-2 bg-gray-50"
+                    className="input-md mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
                     {...formik.getFieldProps('name')}
                   />
                   {formik.touched.name && formik.errors.name ? (
@@ -125,7 +125,7 @@ function Signup({ providers }) {
                 <input
                   type="text"
                   placeholder="Email*"
-                  className="input-md mt-2 transition-all duration-500 w-full h-10 rounded-sm border-gray-300 border-2 bg-gray-50"
+                  className="input-md mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
                   {...formik.getFieldProps('email')}
                 />
                 {formik.touched.email && formik.errors.email ? (
@@ -134,7 +134,7 @@ function Signup({ providers }) {
                 <input
                   type="password"
                   placeholder="Password*"
-                  className="input-md my-2 transition-all duration-500 input-bordered w-full h-10 rounded-sm  border-gray-300 border-2  bg-gray-50"
+                  className="input-md input-bordered my-2 h-10 w-full rounded-sm border-2 border-gray-300  bg-gray-50 transition-all  duration-500"
                   {...formik.getFieldProps('password')}
                 />
                 {formik.touched.password && formik.errors.password ? (
@@ -143,28 +143,28 @@ function Signup({ providers }) {
                 <input
                   type="password"
                   placeholder=" Confirm Password*"
-                  className="input-md my-2 transition-all duration-500 input-bordered w-full h-10 rounded-sm  border-gray-300 border-2  bg-gray-50"
+                  className="input-md input-bordered my-2 h-10 w-full rounded-sm border-2 border-gray-300  bg-gray-50 transition-all  duration-500"
                   {...formik.getFieldProps('cpassword')}
                 />
                 {formik.touched.cpassword && formik.errors.cpassword ? (
                   <div className="error">{formik.errors.cpassword}</div>
                 ) : null}
-                <button className="btn-active w-full h-10 rounded-md font-mono my-2 font-bold text-gray-100 bg-primary">
+                <button className="btn-active bg-primary my-2 h-10 w-full rounded-md font-mono font-bold text-gray-100">
                   Sign Up
                 </button>
               </form>
-              <div className="text-center text-gray-500 text-xs my-3"> OR </div>
+              <div className="my-3 text-center text-xs text-gray-500"> OR </div>
               <button
                 onClick={() => signIn('google', { callbackUrl: '/' })}
-                className="items-center justify-center w-full h-10 text-center border-2 rounded-sm shadow-lg border-gray-50"
+                className="h-10 w-full items-center justify-center rounded-sm border-2 border-gray-50 text-center shadow-lg"
               >
-                <FcGoogle className="inline w-5 h-auto mx-2 my-2 " />
+                <FcGoogle className="mx-2 my-2 inline h-auto w-5 " />
                 <div className="inline font-bold text-slate-600">
                   Continue with Google
                 </div>
               </button>
               <div className="divider my-6 h-1"></div>
-              <div className="inline mx-10 text-gray-400 text-sm">
+              <div className="mx-10 inline text-sm text-gray-400">
                 Already have an account?{' '}
                 <RxDotFilled className="inline text-gray-800" />{' '}
                 <Link className="text-blue-400 hover:underline" href={'/login'}>
@@ -178,7 +178,7 @@ function Signup({ providers }) {
           <Image
             src="svg/checklist.svg"
             alt="image1"
-            className="scale-y-[-1] scale-x-[-1] absolute  top-[-6.7px]  left-14 hidden md:hidden lg:block -z-10"
+            className="absolute top-[-6.7px] left-14  -z-10  hidden scale-y-[-1] scale-x-[-1] md:hidden lg:block"
             width={400}
             height={500}
           />
