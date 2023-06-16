@@ -15,18 +15,25 @@ import {
   useDisclosure
 } from '@chakra-ui/react'
 import Attribute from './AttributeInputs/Attributes'
+import moment from 'moment'
 
 
 
-const CardModal = ({ task, onClose, isOpen, onOpen }) => {
-  const [Task, setTask] = useState(task);
+const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
+  const [currentTask, setCurrentTask] = useState(task);
   const [name, setName] = useState(task.name);
   const [description, setDescription] = useState(task.description);
-  const [start, setStart] = useState(task.start);
-  const [end, setEnd] = useState(task.end);
-  const [duration, setDuration] = useState(task.duration);
+  const [start, setStart] = useState(new Date(task.start));
+  const [end, setEnd] = useState(new Date(task.end));
+  const [startTime, setStartTime] = useState(moment(task.start).format('HH:mm'));
+  const [endTime, setEndTime] = useState(moment(task.end).format('HH:mm'));
+  const [duration, setCurrentDuration] = useState({
+    hours: new moment(task.end).diff(new moment(task.start), 'hours'),
+    miniutes: new moment(task.end).diff(new moment(task.start), 'minutes') % 60
+  });
   const [attributes, setAttributes] = useState(task.attributes);
   const initialRef = React.useRef(null)
+  
   
   const UpdateTask = async (oldTask, body) => {
     let res = await fetch(`/api/w/${oldTask.workspaceId}/b/${oldTask.boardId}/c/${oldTask.id}`, {
@@ -44,10 +51,11 @@ const CardModal = ({ task, onClose, isOpen, onOpen }) => {
       description: description,
       start: start,
       end: end,
-      duration: duration,
       attributes: attributes
     }
-    let res = await UpdateTask(task, body);
+    let res = await UpdateTask(currentTask, body);
+    setTask(res.updatedCard)
+    setDuration(duration)
     console.log(res);
     // onClose();
   }
@@ -69,6 +77,49 @@ const CardModal = ({ task, onClose, isOpen, onOpen }) => {
           <ModalCloseButton />
           <ModalBody pb={6}>
             <FormControl>
+              <FormLabel>Start Time</FormLabel>
+              <Input type='time' value={startTime} onChange={(e) => {
+                setStartTime(e.target.value);
+                setStart(new Date(`${moment(start).format('YYYY-MM-DD')} ${e.target.value}`))
+                setCurrentDuration({
+                  hours: new moment(end).diff(new moment(`${moment(start).format('YYYY-MM-DD')} ${e.target.value}`), 'hours'),
+                  miniutes: new moment(end).diff(new moment(`${moment(start).format('YYYY-MM-DD')} ${e.target.value}`), 'minutes') % 60
+                })
+              }}/>
+            </FormControl>
+            <FormControl>
+              <FormLabel>End Time</FormLabel>
+              <Input type='time' value={endTime} onChange={(e) => {
+                setEndTime(e.target.value);
+                setEnd(new Date(`${moment(end).format('YYYY-MM-DD')} ${e.target.value}`))
+                setCurrentDuration({
+                  hours: new moment(end).diff(new moment(`${moment(start).format('YYYY-MM-DD')} ${e.target.value}`), 'hours'),
+                  miniutes: new moment(end).diff(new moment(`${moment(start).format('YYYY-MM-DD')} ${e.target.value}`), 'minutes') % 60
+                })
+              }}/>
+            </FormControl>
+            <FormControl>
+              <FormLabel>Duration</FormLabel>
+              <Input type='number' value={duration.hours} onChange={(e) => {
+                setCurrentDuration({
+                  hours: e.target.value,
+                  miniutes: duration.miniutes
+                })
+                setEnd(new moment(start).add(e.target.value, 'hours').add(duration.miniutes, 'minutes').toDate())
+                setEndTime(new moment(end).format('HH:mm'))
+              }}/>
+              <Input type='number' value={duration.miniutes} onChange={(e) => {
+                setCurrentDuration({
+                  hours: duration.hours,
+                  miniutes: e.target.value
+                })
+                setEnd(new moment(start).add(duration.hours, 'hours').add(e.target.value, 'minutes').toDate())
+                setEndTime(new moment(end).format('HH:mm'))
+                
+              }}/>
+            </FormControl>
+          
+            <FormControl>
               <FormLabel>Activity Title</FormLabel>
               <Input ref={initialRef} placeholder='Activity Title' value={name} onChange={(e)=> {setName(e.target.value)}}/>
             </FormControl>
@@ -82,17 +133,6 @@ const CardModal = ({ task, onClose, isOpen, onOpen }) => {
 
                 return <Attribute task={task} attributes={attributes} index={index} setAttributes={setAttributes} key={index} />
 
-                return <FormControl mt={4} key={index}>
-                  {/* <Attribute attr={attr} /> */}
-
-                  <FormLabel>{attr.name}</FormLabel>
-                  <Input placeholder={attr.name} value={attr.value} type={attr.attributeType} onChange={(e) => {
-                    let newAttrs = attributes;
-                    newAttrs[index].value = e.target.value;
-                    console.log(newAttrs[index]);
-                    setAttributes(newAttrs);
-                  }} />
-                </FormControl>
               })
             }
             

@@ -30,12 +30,15 @@ const Task = ({ task, index }) => {
     }
     // { name: 'Status', attributeType: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
   ]
-  
-  const [duration, setDuration] = useState(new moment(task.end).diff(new moment(task.start), 'minutes'));
-  
+
+
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [currentTask, setCurrentTask] = useState({ ...task});
+  const [currentTask, setCurrentTask] = useState(task);
   const initialRef = React.useRef(null)
+  const [duration, setDuration] = useState({
+    hours: new moment(currentTask.end).diff(new moment(currentTask.start), 'hours'),
+    miniutes: new moment(currentTask.end).diff(new moment(currentTask.start), 'minutes') % 60
+  });
 
   return (
     <Draggable
@@ -53,24 +56,24 @@ const Task = ({ task, index }) => {
         >
           <div className="flex flex-col h-full min-w-fit justify-around items-baseline">
             <span className=''>
-              <strong>From: </strong> {new Date(task.start).toLocaleTimeString()}
+              <strong>From: </strong> {new Date(currentTask.start).toLocaleTimeString()}
             </span>
             <span>
-              <strong>To: </strong> {new Date(task.end).toLocaleTimeString()}
+              <strong>To: </strong> {new Date(currentTask.end).toLocaleTimeString()}
             </span>
             <span>
-              <strong>Duration: </strong> {duration / 60} hrs : {duration % 60} mins
+              <strong>Duration: </strong> {JSON.stringify(duration.hours)} hrs : {JSON.stringify(duration.miniutes)} mins
             </span>
           </div>
 
-          {task.name}
-          {task.description}
+          {currentTask.name}
+          {currentTask.description}
           {/* Attributes */}
           <div className="flex flex-row w-full">
-            {task.attributes.map((attribute, index) => {
+            {currentTask.attributes.map((attribute, index) => {
               return (
                 <div key={index} className="">
-                  <Attribute attr={attribute} task={task} />
+                  <Attribute attr={attribute} task={currentTask} />
                 </div>
               )
             })}
@@ -83,6 +86,8 @@ const Task = ({ task, index }) => {
             onClose={onClose}
             isOpen={isOpen}
             task={currentTask}
+            setTask={setCurrentTask}
+            setDuration={setDuration}
           />
         </div>
       )}
