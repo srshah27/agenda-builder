@@ -1,22 +1,21 @@
 import React, { useState } from 'react'
 import {
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter,
-  ModalBody, ModalCloseButton,
-  Button, FormControl, FormLabel,
-  Input, Textarea,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
   useDisclosure
 } from '@chakra-ui/react'
 import Attribute from './AttributeInputs/Attributes'
 
-const UpdateTask = async (oldTask, body) => {
-  let res = await fetch(`/api/w/${oldTask.workspaceId}/b/${oldTask.boardId}/c/${oldTask.id}`, {
-    method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body)
-  })
-  let data = await res.json()
-  return data
-}
 
 
 const CardModal = ({ task, onClose, isOpen, onOpen }) => {
@@ -28,6 +27,16 @@ const CardModal = ({ task, onClose, isOpen, onOpen }) => {
   const [duration, setDuration] = useState(task.duration);
   const [attributes, setAttributes] = useState(task.attributes);
   const initialRef = React.useRef(null)
+  
+  const UpdateTask = async (oldTask, body) => {
+    let res = await fetch(`/api/w/${oldTask.workspaceId}/b/${oldTask.boardId}/c/${oldTask.id}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    })
+    let data = await res.json()
+    return data
+  }
   
   const handleSubmit = async () => {
     let body = {
@@ -51,7 +60,7 @@ const CardModal = ({ task, onClose, isOpen, onOpen }) => {
         onClose={onClose}
         blockScrollOnMount={false}
         isCentered
-        motionPreset='slideInBottom'
+        motionPreset="slideInBottom"
         size={'xl'}
       >
         <ModalOverlay />
@@ -70,14 +79,14 @@ const CardModal = ({ task, onClose, isOpen, onOpen }) => {
             </FormControl>
             {
               attributes.map((attr, index) => {
-                
-                return <Attribute task={task} attributes={attributes} index={index} setAttributes={setAttributes} key={ index } />
-                
+
+                return <Attribute task={task} attributes={attributes} index={index} setAttributes={setAttributes} key={index} />
+
                 return <FormControl mt={4} key={index}>
                   {/* <Attribute attr={attr} /> */}
-                
+
                   <FormLabel>{attr.name}</FormLabel>
-                  <Input placeholder={attr.name} value={attr.value} type={attr.attributeType } onChange={(e) => {
+                  <Input placeholder={attr.name} value={attr.value} type={attr.attributeType} onChange={(e) => {
                     let newAttrs = attributes;
                     newAttrs[index].value = e.target.value;
                     console.log(newAttrs[index]);
@@ -86,10 +95,11 @@ const CardModal = ({ task, onClose, isOpen, onOpen }) => {
                 </FormControl>
               })
             }
-          
-
+            
           </ModalBody>
             {/* {JSON.stringify(attributes)} */}
+            
+            
           <ModalFooter>
             <Button colorScheme='blue' mr={3} onClick={handleSubmit}>
               Save

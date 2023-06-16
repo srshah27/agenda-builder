@@ -31,19 +31,19 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
           ref={draggableProvided.innerRef}
           className={`m-4 rounded-xl card shadow-md w-4/5 h-fit flex flex-col justify-center `}
         >
-          <ContextMenuTrigger key={list.id} id={list.id}>
-            <div
-              {...draggableProvided.dragHandleProps}
-              className="p-2 flex justify-center"
-            >
-              {/* <input value={listName} className='text-center' onChange={handleListName} /> */}
-              <CustomInput center={true} placeholder="Title" value={listName} onChange={(e) => handleListName(e) } />
+          {/* <ContextMenuTrigger key={list.id} id={list.id}> */}
+          <div
+            {...draggableProvided.dragHandleProps}
+            className="p-2 flex justify-center"
+          >
+            {/* <input value={listName} className='text-center' onChange={handleListName} /> */}
+            <CustomInput center={true} placeholder="Title" value={listName} onChange={(e) => handleListName(e) } />
 
-              {/* <Spacer /> */}
-              {/* <input type='time' value={start} min={'09:00:00'} max={'20:00:00'} onChange={(e) => setStart(e.target.value)} />
+            {/* <Spacer /> */}
+            {/* <input type='time' value={start} min={'09:00:00'} max={'20:00:00'} onChange={(e) => setStart(e.target.value)} />
               <input type='time' value={end} onChange={(e) => setEnd(e.target.value)} /> */}
-            </div>
-          </ContextMenuTrigger>
+          </div>
+          {/* </ContextMenuTrigger> */}
 
           <TaskList
             tasks={tasks}
@@ -51,7 +51,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
             deleteListOrCard={deleteListOrCard}
           />
           <button
-            className={`flex rounded-md p-2 m-2 justify-center items-center glass`}
+            className={`flex rounded-md p-2 m-2 justify-center items-center w-44 self-center`}
             onClick={() => addCard(list.id)}
           >
             <AddIcon w={3} h={3} mr={3} />
@@ -65,7 +65,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               <AddIcon w={3} h={3} mr={3} />
             </div>
           </button> */}
-          <ContextMenu id={list.id}>
+          {/* <ContextMenu id={list.id}>
             <Box m={2} bg="gray.100" w={130} rounded={5}>
               <MenuItem
                 onClick={deleteListOrCard}
@@ -76,7 +76,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
                 </Box>
               </MenuItem>
             </Box>
-          </ContextMenu>
+          </ContextMenu> */}
         </div>
       )}
     </Draggable>
