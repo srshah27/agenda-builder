@@ -4,16 +4,20 @@ import { Box, useColorModeValue, Spacer } from '@chakra-ui/react'
 import Attribute from '@/components/Attributes/Attribute'
 import CardModal from '@/components/Modals/CardModal'
 import { useDisclosure } from '@chakra-ui/react'
+import moment from 'moment'
 const Task = ({ task, index }) => {
 
   const attrs = [
-    { name: 'Session Title', type: 'text', value: 'WELCOME', options: [], show: true },
-    { name: 'Details', type: 'text', value: 'Some Detail', options: [], show: false },
-    { name: 'Speaker', type: 'multi', value: '["Akbar", "Amar", "Anthony"]', options: ["Akbar", "Amar", "Anthony", "Akshay", "Virat"], show: true },
-    // { name: 'Status', type: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
+    { name: 'Session Title', attributeType: 'text', value: 'WELCOME', options: [], show: true },
+    { name: 'Details', attributeType: 'text', value: 'Some Detail', options: [], show: false },
+    { name: 'Speaker', attributeType: 'multi', value: '["Akbar", "Amar", "Anthony"]', options: ["Akbar", "Amar", "Anthony", "Akshay", "Virat"], show: true },
+    // { name: 'Status', attributeType: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
   ]
+  
+  const [duration, setDuration] = useState(new moment(task.end).diff(new moment(task.start), 'minutes'));
+  
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [currentTask, setCurrentTask] = useState({ ...task, attributes: attrs });
+  const [currentTask, setCurrentTask] = useState({ ...task});
   const initialRef = React.useRef(null)
 
   return (
@@ -33,17 +37,16 @@ const Task = ({ task, index }) => {
                 {new Date(task.start).toLocaleTimeString()}
               </span>
               <span>
-                Duration
+                { duration / 60 } hrs : { duration % 60 } mins
               </span>
               <span>
                 {new Date(task.end).toLocaleTimeString()}
               </span>
             </div>
-
             {/* Attributes */}
             <div className='flex flex-row p-auto, m-auto'>
 
-              {attrs.map((attribute, index) => {
+              {task.attributes.map((attribute, index) => {
                 return <div key={index} className='p-auto m-auto pr-16'>
                   <Attribute attr={attribute} task={task} />
                 </div>
