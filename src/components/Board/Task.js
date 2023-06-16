@@ -58,7 +58,7 @@ const Task = ({ task, index }) => {
           {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
           onClick={onOpen}
-          className={`mx-2 mb-2 flex h-[144px] rounded-md border p-2 font-light shadow-md`}
+          className={`mx-2 mb-2 flex h-[144px] rounded-md border p-2 font-light shadow-md bg-slate-200`}
         >
           <div className="flex h-full min-w-fit flex-col items-baseline justify-around">
             <span className="">

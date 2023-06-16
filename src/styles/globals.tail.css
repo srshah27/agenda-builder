@@ -223,3 +223,17 @@ body::-webkit-scrollbar-thumb {
     #733a67 96.81%
   ) !important;
 } */
+
+.backgoundCustom {
+  background-color: rgb(250, 232, 255);
+  background-image: radial-gradient(
+      at 27% 95%,
+      rgb(187, 247, 208) 0,
+      transparent 40%
+    ),
+    radial-gradient(at 71% 24%, rgb(103, 232, 249) 0, transparent 100%),
+    radial-gradient(at 21% 31%, rgb(254, 226, 226) 0, transparent 19%),
+    radial-gradient(at 20% 99%, rgb(228, 228, 231) 0, transparent 69%),
+    radial-gradient(at 77% 56%, rgb(207, 250, 254) 0, transparent 82%),
+    radial-gradient(at 40% 41%, rgb(34, 197, 94) 0, transparent 67%);
+}

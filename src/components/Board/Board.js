@@ -220,7 +220,7 @@ const Board = ({ boardData, setBoardData }) => {
             <div
               ref={droppableProvided.innerRef}
               {...droppableProvided.droppableProps}
-              className="flex flex-col items-center px-4"
+              className="flex flex-col items-center px-4 backgoundCustom"
             >
               {boardData.lists.map(list => {
                 const tasks = boardData.cards.filter(
@@ -241,7 +241,7 @@ const Board = ({ boardData, setBoardData }) => {
               {droppableProvided.placeholder}
               <button
                 onClick={addList}
-                className="text-md m-4 flex min-w-[250px] items-center justify-center rounded-md border bg-red-400 p-2 shadow-md"
+                className="text-md m-4 flex min-w-[250px] items-center justify-center rounded-md border p-2 shadow-md"
               >
                 <AddIcon />
                 <Text ml="4">Add List</Text>

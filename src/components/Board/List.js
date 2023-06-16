@@ -32,7 +32,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
         <div
           {...draggableProvided.draggableProps}
           ref={draggableProvided.innerRef}
-          className={`m-4 flex h-fit w-4/5 flex-col justify-center rounded-xl bg-red-300 shadow-md `}
+          className={`m-4 flex h-fit w-4/5 flex-col justify-center rounded-xl bg-white shadow-md `}
         >
           {/* <ContextMenuTrigger key={list.id} id={list.id}> */}
           <div

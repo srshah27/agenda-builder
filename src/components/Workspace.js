@@ -267,7 +267,7 @@ const Work = ({ asCreator, asCollaborator }) => {
 
   const color = useColorModeValue('gray.900', 'gray.50')
   return (
-    <Flex bg="red.900">
+    <Flex>
       <Stack
         ml={{ base: 0, md: 60 }}
         mt="16"
