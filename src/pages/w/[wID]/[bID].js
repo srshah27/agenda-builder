@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { getSession } from 'next-auth/react'
 import Board from '@/components/Board/Board'
 import UserNav from '@/components/UserNav'
@@ -6,10 +6,15 @@ import SubNav from '@/components/SubNav'
 import { Box } from '@chakra-ui/react'
 import { ChakraProvider } from '@chakra-ui/react'
 const BoardPage = ({ workspace, board, cards, lists, user }) => {
+  const [boardData, setBoardData] = useState({
+    board,
+    cards,
+    lists: lists.sort((a, b) => a.sequence - b.sequence)
+  })
   return (
     <div>
       <UserNav board={board} />
-      <SubNav board={board} />
+      <SubNav boardData={boardData} />
       <Board board={board} cards={cards} lists={lists} />
     </div>
   )

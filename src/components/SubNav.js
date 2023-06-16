@@ -10,14 +10,17 @@ import {
 import { SettingsIcon } from '@chakra-ui/icons'
 import { useState } from 'react'
 import styles from '../styles/SubNav.module.css'
+import { useDisclosure } from '@chakra-ui/react'
+import AttributeModal from '@/components/Modals/Board/AttributeModal'
 
-const SubNav = ({ board }) => {
+const SubNav = ({ boardData }) => {
 
-  const [boardName, setboardName] = useState(board.name)
+  const [boardName, setboardName] = useState(boardData.board.name)
+  const { isOpen: isOpenAttributes, onOpen: onOpenAttributes, onClose: onCloseAttributes } = useDisclosure()
 
   async function handleBoardName(e) {
     setboardName(e.target.value)
-    let res = await fetch(`/api/w/${board.workspaceID}/b/${board.id}`, {
+    let res = await fetch(`/api/w/${boardData.board.workspaceID}/b/${boardData.board.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: e.target.value })
@@ -35,8 +38,8 @@ const SubNav = ({ board }) => {
       <div className='my-3 text-slate-100'>
         <button className='mr-4'>Timings  </button>
         <button className='mx-4' >Sections</button>
-        <button className='mx-4' >Activities</button>
-        <button className='mx-4'>Attributes</button>
+        <button className='mx-4'>Activities</button>
+        <button className='mx-4' onClick={() => { }}>Attributes</button>
       </div>
       <Spacer />
       <Menu>
