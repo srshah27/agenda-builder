@@ -19,12 +19,12 @@ const List = dynamic(() => import('./List'), {
   ssr: false
 })
 
-const Board = ({ board, cards, lists }) => {
-  const [boardData, setBoardData] = useState({
-    board,
-    cards,
-    lists: lists.sort((a, b) => a.sequence - b.sequence)
-  })
+const Board = ({ boardData, setBoardData }) => {
+  // const [boardData, setBoardData] = useState({
+  //   board,
+  //   cards,
+  //   lists: lists.sort((a, b) => a.sequence - b.sequence)
+  // })
 
   const [refresh, setRefresh] = useState(false)
   const { data: session } = useSession()

@@ -13,7 +13,7 @@ import styles from '../styles/SubNav.module.css'
 import { useDisclosure } from '@chakra-ui/react'
 import AttributeModal from '@/components/Modals/Board/AttributeModal'
 
-const SubNav = ({ boardData }) => {
+const SubNav = ({ boardData, setBoardData }) => {
   const [boardName, setboardName] = useState(boardData.board.name)
   const {
     isOpen: isOpenAttributes,
@@ -49,7 +49,7 @@ const SubNav = ({ boardData }) => {
         <button className="mr-4">Timings </button>
         <button className="mx-4">Sections</button>
         <button className="mx-4">Activities</button>
-        <button className="mx-4" onClick={() => {}}>
+        <button className="mx-4" onClick={onOpenAttributes}>
           Attributes
         </button>
       </div>
@@ -68,6 +68,13 @@ const SubNav = ({ boardData }) => {
           <MenuItem>Archive</MenuItem>
         </MenuList>
       </Menu>
+      <AttributeModal
+        onOpen={isOpenAttributes}
+        onClose={onCloseAttributes}
+        isOpen={isOpenAttributes}
+        boardData={boardData}
+        setBoardData={setBoardData}
+      />
     </div>
   )
 }
