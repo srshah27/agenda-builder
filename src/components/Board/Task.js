@@ -72,7 +72,7 @@ const Task = ({ task, index }) => {
               {duration.hours}hr {duration.miniutes}min
             </span>
           </div>
-          <div className="flex w-[50%] min-w-[50%] flex-col p-2">
+          <div className="flex w-[50%] min-w-[40%] flex-col p-2">
             <span className="w-full text-center text-xl font-semibold">
               {currentTask.name}
             </span>
