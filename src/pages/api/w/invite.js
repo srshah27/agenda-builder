@@ -26,7 +26,7 @@ export default async function handler(req, res) {
       const workspace = await Workspace.findOne({ 'invite.link': inviteCode })
       if (!workspace)
         return res.status(404).json({ error: 'Workspace not found' })
-      console.log(workspace.invite.disabled);
+      console.log(workspace.invite.disabled)
       if (workspace.invite.disabled)
         return res.status(400).json({ error: 'Invite disabled' })
       if (workspace.invite.expiresAt < new Date())
@@ -35,13 +35,17 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'User already a collaborator' })
       let w = await Workspace.updateOne(
         { 'invite.link': inviteCode },
-        { $push: { collaborators: { user: uId, role: 'Member', creator: false } } }
+        {
+          $push: {
+            collaborators: { user: uId, role: 'Member', creator: false }
+          }
+        }
       )
       res.status(200).json({ workspace: w })
     }
     case 'PATCH': {
       const { wID } = req.body
-      console.log(wID);
+      console.log(wID)
       const inviteCode = nanoid(18)
       const expires = new Date()
       expires.setDate(expires.getDate() + 30)
@@ -52,10 +56,12 @@ export default async function handler(req, res) {
           'invite.disabled': false,
           'invite.expiresAt': expires
         }
-      );
+      )
       const work = await Workspace.findOne({ id: wID })
-      console.log(work);
-       return res.status(200).json({ inviteCode, expiresAt: expires, workspace: work })
+      console.log(work)
+      return res
+        .status(200)
+        .json({ inviteCode, expiresAt: expires, workspace: work })
     }
     case 'DELETE': {
       const { wID } = req.body

@@ -7,4 +7,3 @@ export const AttributeSchema = new Schema({
   options: [String],
   show: Boolean
 })
-

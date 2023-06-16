@@ -34,8 +34,10 @@ export default async function handler(req, res) {
         backgroundImage: backgroundImage || 'default',
         start,
         end,
-        activityAttributes: [{ name: 'Title', type: 'text', show: true, options: [] },
-          { name: 'Details', type: 'text', show: false, options: [] }]
+        activityAttributes: [
+          { name: 'Title', type: 'text', show: true, options: [] },
+          { name: 'Details', type: 'text', show: false, options: [] }
+        ]
       }
       const board = await Board.create(data)
       return res.status(201).json({ board })

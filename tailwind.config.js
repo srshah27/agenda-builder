@@ -10,7 +10,7 @@ module.exports = {
   ],
   theme: {
     container: {
-      center: true,
-    },
-  },
+      center: true
+    }
+  }
 }

@@ -16,18 +16,18 @@ import {
 } from '@chakra-ui/react'
 import Attribute from './AttributeInputs/Attributes'
 
-
-
-
 const CardModal = ({ board, onClose, isOpen, onOpen }) => {
-  const [oldBoard, setOldBoard] = useState(board);
+  const [oldBoard, setOldBoard] = useState(board)
 
   const UpdateAttributes = async (oldBoard, body) => {
-    let res = await fetch(`/api/w/${oldBoard.workspaceId}/b/${oldBoard.boardId}/c/${oldBoard.id}`, {
-      method: 'PATCH',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    })
+    let res = await fetch(
+      `/api/w/${oldBoard.workspaceId}/b/${oldBoard.boardId}/c/${oldBoard.id}`,
+      {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      }
+    )
     let data = await res.json()
     return data
   }
@@ -36,10 +36,10 @@ const CardModal = ({ board, onClose, isOpen, onOpen }) => {
     let body = {
       attributes: attributes
     }
-    let res = await UpdateTask(currentTask, body);
+    let res = await UpdateTask(currentTask, body)
     setTask(res.updatedCard)
     setDuration(duration)
-    console.log(res);
+    console.log(res)
     // onClose();
   }
 
@@ -60,20 +60,22 @@ const CardModal = ({ board, onClose, isOpen, onOpen }) => {
           <ModalCloseButton />
           <ModalBody pb={6}>
             {/* Board Details */}
-            {
-              attributes.map((attr, index) => {
-
-                return <Attribute task={task} attributes={attributes} index={index} setAttributes={setAttributes} key={index} />
-
-              })
-            }
-
+            {attributes.map((attr, index) => {
+              return (
+                <Attribute
+                  task={task}
+                  attributes={attributes}
+                  index={index}
+                  setAttributes={setAttributes}
+                  key={index}
+                />
+              )
+            })}
           </ModalBody>
           {/* {JSON.stringify(attributes)} */}
 
-
           <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={handleSubmit}>
+            <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>

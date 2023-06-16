@@ -7,10 +7,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'api.dicebear.com',
         port: '',
-        pathname: '/5.x/initials/svg',
-      },
-    ],
-  },
+        pathname: '/5.x/initials/svg'
+      }
+    ]
+  }
 }
 
 module.exports = nextConfig

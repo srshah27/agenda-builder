@@ -13,7 +13,7 @@ const ListsSchema = new Schema({
   workspaceId: { type: String, ref: 'Workspace' },
   start: Date,
   end: Date,
-  attributes:[AttributeSchema],
+  attributes: [AttributeSchema]
 })
 
 module.exports = models.List || model('List', ListsSchema)

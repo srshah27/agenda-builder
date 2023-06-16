@@ -1,6 +1,4 @@
-import {
-  Spacer,
-} from '@chakra-ui/react'
+import { Spacer } from '@chakra-ui/react'
 import Link from 'next/link'
 import PropTypes from 'prop-types'
 import { useSession } from 'next-auth/react'
@@ -11,17 +9,13 @@ import agendaImage from '../../public/svg/agenda.svg'
 const UserNav = ({ board }) => {
   const { data: session } = useSession()
   return (
-    <div
-      className='bg-opacity-60 bg-black h-12 px-2 flex items-center'
-    >
+    <div className="bg-opacity-60 bg-black h-12 px-2 flex items-center">
       <Link href={`/u/${session?.user?.uid}`}>
-        <button className='btnSmall'>
-          Boards
-        </button>
+        <button className="btnSmall">Boards</button>
       </Link>
       <Spacer />
       <Link href="/">
-        <Image src={agendaImage} alt="Agenda Logo" className='w-44' />
+        <Image src={agendaImage} alt="Agenda Logo" className="w-44" />
       </Link>
       <Spacer />
       <AvatarMenu />

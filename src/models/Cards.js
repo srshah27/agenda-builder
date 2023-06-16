@@ -16,7 +16,7 @@ const CardsSchema = new Schema({
   description: String,
   start: Date,
   end: Date,
-  attributes: [AttributeSchema],
+  attributes: [AttributeSchema]
 })
 
 module.exports = models.Card || model('Card', CardsSchema)

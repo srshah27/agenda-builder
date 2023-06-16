@@ -1,18 +1,16 @@
-
 import { getSession } from 'next-auth/react'
 
 export default function Home() {
-  return (<>Redirecting...</>)
+  return <>Redirecting...</>
 }
 
-
-export  async function getServerSideProps(context) {
+export async function getServerSideProps(context) {
   const session = await getSession(context)
   if (session) {
     return {
       redirect: {
         destination: `/u/${session.user.uid}`,
-        permanent: false            // can go back to login page
+        permanent: false // can go back to login page
       }
     }
   } else {

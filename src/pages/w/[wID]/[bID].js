@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { getSession } from 'next-auth/react'
 import Board from '@/components/Board/Board'
 import UserNav from '@/components/UserNav'

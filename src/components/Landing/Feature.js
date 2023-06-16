@@ -9,11 +9,7 @@ const Feature = () => {
         <h1 className="text-6xl font-extrabold">Organise Your Task</h1>
       </div>
       <div className="flex justify-around flex-wrap">
-        <Image
-          src={todoImage}
-          alt="track"
-          className="hidden lg:block"
-        />
+        <Image src={todoImage} alt="track" className="hidden lg:block" />
         <div className="text-xl text-primary text-left space-x-6 ml-4">
           <h1 className="text-4xl font-semibold mb-6">Features:</h1>
           <li className="mb-4">

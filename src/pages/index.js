@@ -7,7 +7,7 @@ import Footer from '@/components/Landing/Footer'
 
 export default function Home({ sess }) {
   return (
-    <div className='flex flex-col'>
+    <div className="flex flex-col">
       <Navbar />
       <Hero />
       <Feature />

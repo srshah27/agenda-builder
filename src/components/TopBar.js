@@ -58,7 +58,7 @@ export default function WithSubnavigation({ asCreator, asCollaborator }) {
   const { data: session } = useSession()
 
   return (
-    <Box className='fixed w-full'>
+    <Box className="fixed w-full">
       <Flex
         bg={useColorModeValue('white', 'gray.800')}
         color={useColorModeValue('gray.600', 'white')}
@@ -87,11 +87,7 @@ export default function WithSubnavigation({ asCreator, asCollaborator }) {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
           <Link href="/">
-            <Image
-              src={agendaImage}
-              alt="Agenda Logo"
-              className='w-48'
-            />
+            <Image src={agendaImage} alt="Agenda Logo" className="w-48" />
           </Link>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>

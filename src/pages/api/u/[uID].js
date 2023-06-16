@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       .status(500)
       .json({ error: 'Database connection error', dberror: error })
   }
-  
+
   const { uID } = req.query
   const userdb = await User.findOne({ uid: uID }, '-password')
   if (!userdb) {

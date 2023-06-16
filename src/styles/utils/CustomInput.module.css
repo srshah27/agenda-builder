@@ -29,14 +29,14 @@
 
 .waveGroup .labelChar {
   transition: 0.2s ease all;
-  transition-delay: calc(2 * .05s);
+  transition-delay: calc(2 * 0.05s);
 }
 
 .waveGroup .labelChar,
 .waveGroup .labelChar {
   transform: translateY(-20px);
   font-size: 14px;
-  color: #5264AE;
+  color: #5264ae;
 }
 
 .waveGroup .bar {
@@ -52,7 +52,7 @@
   width: 0;
   bottom: 1px;
   position: absolute;
-  background: #5264AE;
+  background: #5264ae;
   transition: 0.2s ease all;
   -moz-transition: 0.2s ease all;
   -webkit-transition: 0.2s ease all;
@@ -66,7 +66,7 @@
   right: 50%;
 }
 
-.waveGroup .input:focus~.bar:before,
-.waveGroup .input:focus~.bar:after {
+.waveGroup .input:focus ~ .bar:before,
+.waveGroup .input:focus ~ .bar:after {
   width: 50%;
 }

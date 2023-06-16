@@ -18,7 +18,7 @@ function Navbar() {
             <Image
               src={agendaImage}
               alt="Agenda Builder Logo"
-              className='h-8 object-contain object-left'
+              className="h-8 object-contain object-left"
             />
           </Link>
           <div className="md:hidden">
@@ -36,8 +36,9 @@ function Navbar() {
         </div>
         <div>
           <div
-            className={`flex-1  md:block   ${navbar ? 'md:p-0 block' : 'hidden'
-              }`}
+            className={`flex-1  md:block   ${
+              navbar ? 'md:p-0 block' : 'hidden'
+            }`}
           >
             <ul className="h-[50vh] md:h-auto items-center justify-center md:flex font-mono mt-20 md:mt-0">
               <li className="text-xl text-neutral py-2 px-6 text-center  border-b-2  md:border-b-0   border-primary  md:hover:text-primary md:hover:underline md:absolute right-[23rem]">
