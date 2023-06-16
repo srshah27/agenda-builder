@@ -4,33 +4,37 @@ import { Box, useColorModeValue, Spacer } from '@chakra-ui/react'
 import Attribute from '@/components/Attributes/Attribute'
 import CardModal from '@/components/Modals/CardModal'
 import { useDisclosure } from '@chakra-ui/react'
+import moment from 'moment'
 const Task = ({ task, index }) => {
   const attrs = [
     {
       name: 'Session Title',
-      type: 'text',
+      attributeType: 'text',
       value: 'WELCOME',
       options: [],
       show: true
     },
     {
       name: 'Details',
-      type: 'text',
+      attributeType: 'text',
       value: 'Some Detail',
       options: [],
       show: false
     },
     {
       name: 'Speaker',
-      type: 'multi',
+      attributeType: 'multi',
       value: '["Akbar", "Amar", "Anthony"]',
       options: ['Akbar', 'Amar', 'Anthony', 'Akshay', 'Virat'],
       show: true
     }
-    // { name: 'Status', type: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
+    // { name: 'Status', attributeType: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
   ]
+  
+  const [duration, setDuration] = useState(new moment(task.end).diff(new moment(task.start), 'minutes'));
+  
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [currentTask, setCurrentTask] = useState({ ...task, attributes: attrs })
+  const [currentTask, setCurrentTask] = useState({ ...task});
   const initialRef = React.useRef(null)
 
   return (
@@ -55,7 +59,7 @@ const Task = ({ task, index }) => {
               <strong>To: </strong> {new Date(task.end).toLocaleTimeString()}
             </span>
             <span>
-              <strong>Duration: </strong>
+              <strong>Duration: </strong> {duration / 60} hrs : {duration % 60} mins
             </span>
           </div>
 
@@ -63,7 +67,7 @@ const Task = ({ task, index }) => {
           {task.description}
           {/* Attributes */}
           <div className="flex flex-row w-full">
-            {attrs.map((attribute, index) => {
+            {task.attributes.map((attribute, index) => {
               return (
                 <div key={index} className="">
                   <Attribute attr={attribute} task={task} />

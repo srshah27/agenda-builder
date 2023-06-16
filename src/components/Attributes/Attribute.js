@@ -2,7 +2,7 @@ import React from 'react'
 import { MultipleOption, Text, Option } from '@/components/Attributes/Types'
 const Attribute = ({ attr, task }) => {
   if (!attr.show) return <></>
-  switch (attr.type) {
+  switch (attr.attributeType) {
     case 'text':
       return <Text attr={attr} task={task} />
     case 'multi':

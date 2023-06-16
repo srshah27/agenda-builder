@@ -11,8 +11,9 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
   const [listName, setListName] = useState(list.name)
 
   async function handleListName(e) {
+    console.log(e.target.value);
     setListName(e.target.value)
-    let res = await fetch(`/api/w/${board.workspaceID}/b/${board.id}`, {
+    let res = await fetch(`/api/w/${list.workspaceID}/b/${list.boardId}/l/${list.id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: e.target.value })
@@ -36,7 +37,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
             className="p-2 flex justify-center"
           >
             {/* <input value={listName} className='text-center' onChange={handleListName} /> */}
-            <CustomInput center={true} placeholder="Title" />
+            <CustomInput center={true} placeholder="Title" value={listName} onChange={(e) => handleListName(e) } />
 
             {/* <Spacer /> */}
             {/* <input type='time' value={start} min={'09:00:00'} max={'20:00:00'} onChange={(e) => setStart(e.target.value)} />

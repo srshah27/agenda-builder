@@ -17,6 +17,7 @@
     "@emotion/styled": "^11.10.6",
     "@next-auth/mongodb-adapter": "^1.1.1",
     "bcryptjs": "^2.4.3",
+    "chakra-multiselect": "^0.4.2",
     "clsx": "^1.2.1",
     "eslint": "8.34.0",
     "eslint-config-next": "13.2.1",

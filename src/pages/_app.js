@@ -2,12 +2,18 @@ import '@/styles/globals.tail.css'
 import { SessionProvider } from 'next-auth/react'
 import NextNProgress from 'nextjs-progressbar'
 import Head from 'next/head'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, extendTheme } from '@chakra-ui/react'
+import { MultiSelectTheme } from 'chakra-multiselect'
 
+const theme = extendTheme({
+  components: {
+    MultiSelect: MultiSelectTheme
+  }
+})
 
 export default function App({ Component, pageProps, session }) {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <SessionProvider session={session}>
         <NextNProgress
           color="#0079bf"
