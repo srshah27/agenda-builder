@@ -2,11 +2,10 @@ import React, { useState, useEffect } from 'react'
 import { getSession, useSession } from 'next-auth/react'
 import TopBar from '@/components/TopBar'
 import SideBar from '@/components/SideBar'
-import Work from '@/components/Work'
+import Work from '@/components/Workspace'
 import { ChakraProvider } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 const Dashboard = ({ Creator, Collaborator }) => {
-  
   const router = useRouter()
   const { uID } = router.query
   const [asCreator, setAsCreator] = useState(Creator)
@@ -23,12 +22,12 @@ const Dashboard = ({ Creator, Collaborator }) => {
   }, [refreshKey, uID])
 
   return (
-    <ChakraProvider>
+    <>
       <TopBar asCreator={asCreator} asCollaborator={asCollaborator} />
       <SideBar updateRefresh={() => setRefreshKey(prev => prev + 1)}>
         <Work asCreator={asCreator} asCollaborator={asCollaborator} />
       </SideBar>
-    </ChakraProvider>
+    </>
   )
 }
 

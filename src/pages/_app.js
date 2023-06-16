@@ -12,8 +12,8 @@ export default function App({ Component, pageProps, session }) {
         <NextNProgress
           color="#0079bf"
           startPosition={0.3}
-          stopDelayMs={200}
-          height={4}
+          stopDelayMs={100}
+          height={6}
         />
         <Component {...pageProps} />
       </SessionProvider>
