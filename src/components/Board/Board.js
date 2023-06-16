@@ -20,11 +20,6 @@ const List = dynamic(() => import('./List'), {
 })
 
 const Board = ({ boardData, setBoardData }) => {
-  // const [boardData, setBoardData] = useState({
-  //   board,
-  //   cards,
-  //   lists: lists.sort((a, b) => a.sequence - b.sequence)
-  // })
 
   const [refresh, setRefresh] = useState(false)
   const { data: session } = useSession()
@@ -224,14 +219,7 @@ const Board = ({ boardData, setBoardData }) => {
       display="block"
       overflowX="auto"
       className="w-full"
-      bg={'linear-gradient(135.39deg, #342B53 24.83%, #733A67 96.81%);'}
     >
-      {/* <div className='flex justify-around outline-double m-2'>
-        <Heading className='text-center'>The Summit</Heading>
-        <input type="text" className='bg-transparent' />
-        <Text fontSize='3xl'>Start Time:</Text>
-        <Text fontSize='3xl'>End Time:</Text>
-      </div> */}
       <DragDropContext onDragEnd={onDragEnd}>
         <React.StrictMode>
           {/* all the lists */}
