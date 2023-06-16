@@ -35,9 +35,11 @@ const Board = ({ boardData, setBoardData }) => {
       lists: boardData.lists.sort((a, b) => a.sequence - b.sequence),
       cards: boardData.cards.sort((a, b) => a.sequence - b.sequence)
     })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh])
 
-  const updateDb = (url, body, cardsOrLists) => {
+  function updateDb(url, body, cardsOrLists) {
     fetch(url, {
       method: 'PATCH',
       headers: { 'content-type': 'application/json' },
