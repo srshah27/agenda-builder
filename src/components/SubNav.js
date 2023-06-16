@@ -32,7 +32,6 @@ const SubNav = ({ boardData, setBoardData }) => {
       }
     )
     let data = await res.json()
-    console.log(data)
   }
   return (
     <div className={`flex bg-black bg-opacity-30 px-4`}>

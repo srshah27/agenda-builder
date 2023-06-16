@@ -11,7 +11,6 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
   const [listName, setListName] = useState(list.name)
 
   async function handleListName(e) {
-    console.log(e.target.value)
     setListName(e.target.value)
     let res = await fetch(
       `/api/w/${list.workspaceID}/b/${list.boardId}/l/${list.id}`,

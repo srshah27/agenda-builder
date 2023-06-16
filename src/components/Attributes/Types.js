@@ -30,7 +30,6 @@ export const MultipleOption = ({ attr, task }) => {
             </div>
           )
         })}
-        {/* <button className='bg-green-300 rounded-3xl p-2 mx-5' onClick={()=>{console.log('ohh yeah');}}>+</button> */}
       </div>
       <span className="p-auto m-auto">{attr.name}</span>
     </div>

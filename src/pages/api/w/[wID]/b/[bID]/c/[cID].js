@@ -52,7 +52,6 @@ export default async function handler(req, res) {
         },
         { new: true }
       )
-      console.log(updatedCard)
       return res.status(202).json({ updatedCard })
     }
 

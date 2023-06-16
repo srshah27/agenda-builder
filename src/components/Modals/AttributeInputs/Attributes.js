@@ -5,8 +5,6 @@ import {
   OptionInput
 } from '@/components/Modals/AttributeInputs/Types'
 const Attribute = ({ task, attributes, index, setAttributes }) => {
-  // console.log("hi");
-  console.log()
   switch (attributes[index].attributeType) {
     case 'text':
       return (

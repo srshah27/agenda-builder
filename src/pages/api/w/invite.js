@@ -14,7 +14,6 @@ export default async function handler(req, res) {
   switch (reqType) {
     case 'GET': {
       const { inviteCode } = req.query
-      console.log('asdasd ' + inviteCode)
       const workspace = await Workspace.findOne({ 'invite.link': inviteCode })
       if (!workspace)
         return res.status(404).json({ error: 'Workspace not found' })
@@ -45,7 +44,6 @@ export default async function handler(req, res) {
     }
     case 'PATCH': {
       const { wID } = req.body
-      console.log(wID)
       const inviteCode = nanoid(18)
       const expires = new Date()
       expires.setDate(expires.getDate() + 30)
@@ -58,7 +56,6 @@ export default async function handler(req, res) {
         }
       )
       const work = await Workspace.findOne({ id: wID })
-      console.log(work)
       return res
         .status(200)
         .json({ inviteCode, expiresAt: expires, workspace: work })

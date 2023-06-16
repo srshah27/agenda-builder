@@ -59,28 +59,23 @@ const Workspace = ({ id, workspace }) => {
       })
   }
   const submitBoard = async e => {
-    console.log(boardName)
     const res = await fetch(`/api/w/${id}/b`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: boardName, id: nanoid(), creator: uId })
     })
     const data = await res.json()
-    console.log(data)
     setBoardName('')
     onClose()
   }
 
   const createLink = async () => {
-    console.log(workspace)
-    console.log('create link')
     const res = await fetch(`/api/w/invite`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ wID: workspace.id })
     })
     const data = await res.json()
-    console.log(data)
     workspace.invite = data.workspace.invite
   }
 
@@ -262,7 +257,6 @@ const Work = ({ asCreator, asCollaborator }) => {
   useEffect(() => {
     setCreatorWorkspace(asCreator)
     setCollabWorkspace(asCollaborator)
-    console.log(asCreator, asCollaborator)
   }, [asCreator, asCollaborator])
 
   const color = useColorModeValue('gray.900', 'gray.50')

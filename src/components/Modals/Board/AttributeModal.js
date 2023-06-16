@@ -77,7 +77,6 @@ const AttributeModal = ({ boardData, onClose, isOpen, onOpen }) => {
   const [attributes, setAttributes] = useState(
     boardData.board.activityAttributes
   )
-  console.log(attributes)
   const UpdateAttributes = async (oldBoard, body) => {
     let res = await fetch(
       `/api/w/${oldBoard.workspaceId}/b/${oldBoard.boardId}/c/${oldBoard.id}`,
@@ -113,14 +112,10 @@ const AttributeModal = ({ boardData, onClose, isOpen, onOpen }) => {
       return true
     })
 
-    console.log(addedAttributes)
-    console.log(deletedAttributes)
-
     let body = {
       attributes: attributes
     }
     // let res = await UpdateTask(currentTask, body)
-    // console.log(body)
     // onClose();
   }
   const initialRef = React.useRef(null)

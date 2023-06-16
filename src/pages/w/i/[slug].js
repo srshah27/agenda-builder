@@ -15,12 +15,10 @@ const Invite = ({ workspace, session, notFound }) => {
       })
     })
     let data = await res.json()
-    console.log(data)
     if (res.status === 200) {
       router.push(`/w/${workspace.id}`)
     }
   }
-  console.log(workspace)
   const alreadyMember = workspace?.collaborators.find(
     c => c.user === session.user.uid
   )

@@ -51,7 +51,7 @@ const Board = ({ boardData, setBoardData }) => {
         }
       })
       .catch(error => {
-        console.log(error)
+        console.log('Error:', error)
         setBoardData(data)
       })
   }
@@ -220,7 +220,7 @@ const Board = ({ boardData, setBoardData }) => {
             <div
               ref={droppableProvided.innerRef}
               {...droppableProvided.droppableProps}
-              className="flex flex-col items-center px-4 backgoundCustom"
+              className="flex flex-col items-center px-4 bg-[url(../../public/img/boardbg.png)] bg-cover"
             >
               {boardData.lists.map(list => {
                 const tasks = boardData.cards.filter(
