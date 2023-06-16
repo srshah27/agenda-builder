@@ -100,21 +100,23 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
             </FormControl>
             <FormControl>
               <FormLabel>Duration</FormLabel>
-              <Input type='number' value={duration.hours} onChange={(e) => {
+              <Input type='number' value={duration.hours} step={1} onChange={(e) => {
                 setCurrentDuration({
                   hours: e.target.value,
                   miniutes: duration.miniutes
                 })
-                setEnd(new moment(start).add(e.target.value, 'hours').add(duration.miniutes, 'minutes').toDate())
-                setEndTime(new moment(end).format('HH:mm'))
+                let m = new moment(start).add(e.target.value, 'hours').add(duration.miniutes, 'minutes')
+                setEnd(m.toDate())
+                setEndTime(m.format('HH:mm'))
               }}/>
-              <Input type='number' value={duration.miniutes} onChange={(e) => {
+              <Input type='number' value={duration.miniutes} step={1} onChange={(e) => {
                 setCurrentDuration({
                   hours: duration.hours,
                   miniutes: e.target.value
                 })
-                setEnd(new moment(start).add(duration.hours, 'hours').add(e.target.value, 'minutes').toDate())
-                setEndTime(new moment(end).format('HH:mm'))
+                let m = new moment(start).add(duration.hours, 'hours').add(e.target.value, 'minutes')
+                setEnd(m.toDate())
+                setEndTime(m.format('HH:mm'))
                 
               }}/>
             </FormControl>

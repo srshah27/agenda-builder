@@ -36,8 +36,8 @@ const Task = ({ task, index }) => {
   const [currentTask, setCurrentTask] = useState(task);
   const initialRef = React.useRef(null)
   const [duration, setDuration] = useState({
-    hours: new moment(currentTask.end).diff(new moment(currentTask.start), 'hours'),
-    miniutes: new moment(currentTask.end).diff(new moment(currentTask.start), 'minutes') % 60
+    hours: JSON.stringify(  moment(currentTask.end).diff(new moment(currentTask.start), 'hours')),
+    miniutes: JSON.stringify( new moment(currentTask.end).diff(new moment(currentTask.start), 'minutes') % 60)
   });
 
   return (
@@ -62,7 +62,7 @@ const Task = ({ task, index }) => {
               <strong>To: </strong> {new Date(currentTask.end).toLocaleTimeString()}
             </span>
             <span>
-              <strong>Duration: </strong> {JSON.stringify(duration.hours)} hrs : {JSON.stringify(duration.miniutes)} mins
+              <strong>Duration: </strong> {duration.hours} hrs : {duration.miniutes} mins
             </span>
           </div>
 
