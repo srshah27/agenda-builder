@@ -14,7 +14,7 @@ const BoardPage = ({ workspace, board, cards, lists, user }) => {
   return (
     <div>
       <UserNav board={board} />
-      <SubNav boardData={boardData} />
+      <SubNav boardData={boardData} setBoardData={setBoardData} />
       <Board boardData={boardData} setBoardData={setBoardData} />
     </div>
   )

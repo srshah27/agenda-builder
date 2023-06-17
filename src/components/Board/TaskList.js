@@ -12,7 +12,7 @@ const TaskList = ({ tasks, list, deleteListOrCard }) => {
         >
           <div className="flex flex-col">
             {tasks.map((task, index) => (
-              <Task task={task} index={task.sequence} key={task.index} />
+              <Task task={task} index={task.sequence} key={index} />
             ))}
           </div>
         </div>

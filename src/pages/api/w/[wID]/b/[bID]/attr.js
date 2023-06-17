@@ -22,49 +22,55 @@ export default async function handler(req, res) {
     case 'POST': {
       const { attributes } = req.body
       console.log(bID);
-      const updatedBoard = await Board.findOneAndUpdate(
-        {
-          id: bID
-        },
-        { $push: { activityAttributes: { $each: attributes } } },
-        { new: true }
-      )
-      return res.status(202).json({ updatedBoard })
+      const updatedBoard = await Board.findOneAndUpdate({ id: bID }, { $push: { activityAttributes: { $each: attributes } } }, { new: true })
+      const updatedLists = await List.updateMany({ boardId: bID }, { $push: { activityAttributes: { $each: attributes } } }, { new: true })
+      const updatedCards = await Card.updateMany({ boardId: bID }, { $push: { attributes: { $each: attributes } } }, { new: true })
+      return res.status(202).json({ updatedBoard, updatedLists, updatedCards })
     }
     case 'PATCH': {
       const { attributes, modify } = req.body
       if (modify) {
         const updatedBoards = []
         for (let i = 0; i < attributes.length; i++) {
-          const { _id, ...props } = attributes[i];
-
+          const { id, ...props } = attributes[i];
           const updatedBoard = await Board.findOneAndUpdate(
-            {
-              id: bID,
-              'activityAttributes._id': ObjectId(_id)
-            },
-            {
-              $set: { [`activityAttributes.$.${Object.keys(props)[0]}`]: Object.values(props)[0] }
-            },{
-              new: true
-            })
-          updatedBoards.push(updatedBoard)
+            { id: bID, 'activityAttributes.id': id },
+            { $set: { [`activityAttributes.$.${Object.keys(props)[0]}`]: Object.values(props)[0] },
+              $set: { 'activityAttributes.$.options': props.options } },
+            { new: true })
+          const updatedLists = await List.updateMany(
+            { boardId: bID, 'activityAttributes.id': id },
+            { $set: { [`activityAttributes.$.${Object.keys(props)[0]}`]: Object.values(props)[0] },
+              $set: { 'activityAttributes.$.options': props.options } },
+            { new: true })
+          const updatedCards = await Card.updateMany(
+            { boardId: bID, 'attributes.id': id },
+            { $set: { [`attributes.$.${Object.keys(props)[0]}`]: Object.values(props)[0] },
+              $set: { 'attributes.$.options': props.options } },
+            { new: true })
+          console.log(updatedCards);
+          updatedBoards.push({updatedBoard, updatedLists, updatedCards})
         }
         return res.status(202).json({ updatedBoards })
       } else {
         const ids = []
         attributes.forEach(attribute => {
-          ids.push(ObjectId(attribute._id))
+          ids.push(attribute.id)
         });
         console.log(ids);
         const updatedBoard = await Board.findOneAndUpdate(
-          {
-            id: bID
-          },
-          { $pull: { activityAttributes: { _id: { $in: ids } } } },
-          { new: true, multi: true }
-        )
-        return res.status(202).json({ updatedBoard })
+          { id: bID },
+          { $pull: { activityAttributes: { id: { $in: ids } } } },
+          { new: true, multi: true })
+        const updatedLists = await List.findOneAndUpdate(
+          { boardId: bID },
+          { $pull: { activityAttributes: { id: { $in: ids } } } },
+          { new: true, multi: true })
+        const updatedCards = await Card.findOneAndUpdate(
+          { boardId: bID },
+          { $pull: { attributes: { id: { $in: ids } } } },
+          { new: true, multi: true })
+        return res.status(202).json({ updatedBoard, updatedLists, updatedCards })
       }
     }
 

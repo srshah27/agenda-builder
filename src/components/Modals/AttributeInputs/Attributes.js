@@ -4,9 +4,9 @@ import {
   TextInput,
   OptionInput
 } from '@/components/Modals/AttributeInputs/Types'
-const Attribute = ({ task, attributes, index, setAttributes }) => {
+const Attribute = ({ task, attributes, index, setAttributes, setTask }) => {
   // console.log("hi");
-  console.log()
+  console.log(attributes)
   switch (attributes[index].attributeType) {
     case 'text':
       return (
@@ -15,6 +15,7 @@ const Attribute = ({ task, attributes, index, setAttributes }) => {
           attributes={attributes}
           index={index}
           setAttributes={setAttributes}
+          setTask={setTask}
         />
       )
     case 'multi':
@@ -24,6 +25,7 @@ const Attribute = ({ task, attributes, index, setAttributes }) => {
           attributes={attributes}
           index={index}
           setAttributes={setAttributes}
+          setTask={setTask}
         />
       )
     // case 'option':

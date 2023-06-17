@@ -16,13 +16,15 @@ import {
   Switch,
   useDisclosure
 } from '@chakra-ui/react'
+import { nanoid } from 'nanoid'
+import { MultiSelect, useMultiSelect } from 'chakra-multiselect'
 
 export const AttributeInput = ({ attributes, setAttributes, index }) => {
   const [name, setName] = useState(attributes[index].name)
   const [type, setType] = useState(attributes[index].attributeType)
   const [show, setShow] = useState(attributes[index].show)
   const [options, setOptions] = useState(attributes[index].options)
-
+  
   return (
     <>
       <Switch
@@ -59,6 +61,24 @@ export const AttributeInput = ({ attributes, setAttributes, index }) => {
         <option value="option">Option</option>
       </Select>
       {/* Options if type== multi or option */}
+      {(type === 'multi' || type === 'option') ? 
+       <span>
+          <MultiSelect
+            // options={[]}
+            value={options}
+            label="Choose or create items"
+            onChange={e => {
+              let newAttrs = attributes
+              newAttrs[index].options = e
+              setOptions(e)
+              setAttributes(newAttrs)
+              console.log(e)
+              
+            }}
+            create
+          />
+       </span> 
+       : <></>}
 
       <Button
         onClick={e => {
@@ -72,12 +92,31 @@ export const AttributeInput = ({ attributes, setAttributes, index }) => {
   )
 }
 
-const AttributeModal = ({ boardData, onClose, isOpen, onOpen }) => {
+const AttributeModal = ({ boardData, setBoardData, onClose, isOpen, onOpen }) => {
   const [oldAttrs, setOldAttrs] = useState(JSON.parse(JSON.stringify(boardData.board.activityAttributes)));
   const [oldBoard, setOldBoard] = useState(boardData.board)
   const [attributes, setAttributes] = useState(boardData.board.activityAttributes)
   // console.log(attributes);
-  console.log(oldBoard);
+  // console.log(oldBoard);
+  
+  const updateBoardData = async () => {
+    let res
+    res = await fetch(`/api/w/${oldBoard.workspaceId}/b/${oldBoard.id}`)
+    let { board } = await res.json()
+    res = await fetch(`/api/w/${oldBoard.workspaceId}/b/${oldBoard.id}/c`)
+    let { cards } = await res.json()
+    res = await fetch(`/api/w/${oldBoard.workspaceId}/b/${oldBoard.id}/l`)
+    let { lists } = await res.json()
+    
+    setBoardData({
+      board,
+      cards,
+      lists: lists.sort((a, b) => a.sequence - b.sequence)
+    })
+    setOldBoard(board)
+    
+  }
+  
   const UpdateAttributes = async (body) => {
     
     let resAdd, resDel, resMod;
@@ -105,7 +144,7 @@ const AttributeModal = ({ boardData, onClose, isOpen, onOpen }) => {
 
     }
     if (body.modifiedAttributes.length > 0) {
-      resDel = await fetch(
+      resMod = await fetch(
         `/api/w/${oldBoard.workspaceId}/b/${oldBoard.id}/attr`,
         {
           method: 'PATCH',
@@ -127,35 +166,36 @@ const AttributeModal = ({ boardData, onClose, isOpen, onOpen }) => {
   }
 
   const handleSubmit = async () => {
-    for (let i = 0; i < attributes.length; i++) {
-      const attr1 = attributes[i]
-      for (let j = i + 1; j < attributes.length; j++) {
-        const attr2 = attributes[j]
-        if (attr1.name === attr2.name) {
-          alert('Attribute names should be unique')
-          return
-        }
-      }
-    }
+    // for (let i = 0; i < attributes.length; i++) {
+    //   const attr1 = attributes[i]
+    //   for (let j = i + 1; j < attributes.length; j++) {
+    //     const attr2 = attributes[j]
+    //     if (attr1.name === attr2.name) {
+    //       alert('Attribute names should be unique')
+    //       return
+    //     }
+    //   }
+    // }
+    
     let addedAttributes = attributes.filter((attr) => attr._id === undefined);
     let deletedAttributes = oldAttrs.filter((attr) => {
       for (let i = 0; i < attributes.length; i++) {
         const attr1 = attributes[i]
-        if (attr._id === attr1._id) {
+        if (attr.id === attr1.id) {
           return false
         }
       }
       return true;
     });
     let modifiedAttributes = attributes.filter((attr) => {
-      let oldAttr = oldAttrs.find((oldAttr) => oldAttr._id === attr._id);
+      let oldAttr = oldAttrs.find((oldAttr) => oldAttr.id === attr.id);
       if (oldAttr === undefined) return false;
       if (JSON.stringify(oldAttr) == JSON.stringify(attr)) return false;
       return true
     });
-    // console.log(addedAttributes);
-    // console.log(deletedAttributes);
-    // console.log(modifiedAttributes);
+    console.log(addedAttributes.length);
+    console.log(deletedAttributes.length);
+    console.log(modifiedAttributes.length);
 
 
     let body = {
@@ -163,9 +203,13 @@ const AttributeModal = ({ boardData, onClose, isOpen, onOpen }) => {
       modifiedAttributes: modifiedAttributes,
       deletedAttributes: deletedAttributes
     }
+    console.log(modifiedAttributes);
     let res = await UpdateAttributes(body)
     console.log(res)
     // onClose();
+    
+    updateBoardData()
+    
   }
   const initialRef = React.useRef(null)
 
@@ -204,6 +248,7 @@ const AttributeModal = ({ boardData, onClose, isOpen, onOpen }) => {
                   let newAttributes = [
                     ...attributes,
                     {
+                      id: nanoid(),
                       name: 'New Attribute',
                       attributeType: 'text',
                       value: '',

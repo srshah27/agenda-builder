@@ -45,7 +45,7 @@ const Task = ({ task, index }) => {
       ) % 60
     )
   })
-
+  console.log(task.attributes)
   return (
     <Draggable
       draggableId={task.id}

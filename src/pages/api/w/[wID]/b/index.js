@@ -35,8 +35,6 @@ export default async function handler(req, res) {
         start,
         end,
         activityAttributes: [
-          { name: 'Title', type: 'text', show: true, options: [] },
-          { name: 'Details', type: 'text', show: false, options: [] }
         ]
       }
       const board = await Board.create(data)

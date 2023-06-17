@@ -69,7 +69,7 @@ const Board = ({ boardData, setBoardData }) => {
       boardId: boardData.board.id,
       start: list.start,
       end: list.end,
-      attributes: list.attributes,
+      attributes: list.activityAttributes,
       sequence
     }
     fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c`, {
@@ -91,7 +91,7 @@ const Board = ({ boardData, setBoardData }) => {
       boardId: boardData.board.id,
       start: boardData.board.start,
       end: boardData.board.end,
-      attributes: boardData.board.attributes,
+      activityAttributes: boardData.board.activityAttributes,
       sequence
     }
     fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l`, {
@@ -100,6 +100,7 @@ const Board = ({ boardData, setBoardData }) => {
       body: JSON.stringify(data)
     })
     let newLists = [...boardData.lists, data]
+    console.log(data);
     setBoardData({ ...boardData, lists: newLists })
   }
 

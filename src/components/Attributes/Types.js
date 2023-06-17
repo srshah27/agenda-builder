@@ -18,7 +18,7 @@ export const Option = ({ attr, task }) => {
 }
 
 export const MultipleOption = ({ attr, task }) => {
-  let values = JSON.parse(attr.value)
+  let values = attr.value? JSON.parse(attr.value) : []
   let options = attr.options
   return (
     <div className="flex flex-col">
