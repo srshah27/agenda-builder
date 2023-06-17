@@ -39,6 +39,7 @@ export const AttributeInput = ({ attributes, setAttributes, index }) => {
       <Input
         type="text"
         value={name}
+        placeholder='Attribute Name'
         onChange={e => {
           let newAttributes = [...attributes]
           newAttributes[index].name = e.target.value
@@ -114,6 +115,7 @@ const AttributeModal = ({ boardData, setBoardData, onClose, isOpen, onOpen }) =>
       lists: lists.sort((a, b) => a.sequence - b.sequence)
     })
     setOldBoard(board)
+    setAttributes(board.activityAttributes)
     
   }
   
@@ -249,7 +251,7 @@ const AttributeModal = ({ boardData, setBoardData, onClose, isOpen, onOpen }) =>
                     ...attributes,
                     {
                       id: nanoid(),
-                      name: 'New Attribute',
+                      name: '',
                       attributeType: 'text',
                       value: '',
                       options: [],

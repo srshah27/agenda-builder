@@ -33,23 +33,50 @@ export default async function handler(req, res) {
         const updatedBoards = []
         for (let i = 0; i < attributes.length; i++) {
           const { id, ...props } = attributes[i];
-          const updatedBoard = await Board.findOneAndUpdate(
+          console.log(Object.keys(props)[0]);
+          console.log(props);
+          const updatedBoard = await Board.updateOne(
             { id: bID, 'activityAttributes.id': id },
-            { $set: { [`activityAttributes.$.${Object.keys(props)[0]}`]: Object.values(props)[0] },
-              $set: { 'activityAttributes.$.options': props.options } },
+            {
+              $set: {
+                'activityAttributes.$.name': props.name,
+                // 'activityAttributes.$.value': props.value,
+                'activityAttributes.$.show': props.show,
+                'activityAttributes.$.attributeType': props.attributeType,
+                'activityAttributes.$.options': props.options
+              }
+            },
             { new: true })
+          const b =  await Board.findOne({ id: bID })
+          console.log("updatedBoard");
+          console.log(b); 
+          console.log(updatedBoard);
           const updatedLists = await List.updateMany(
             { boardId: bID, 'activityAttributes.id': id },
-            { $set: { [`activityAttributes.$.${Object.keys(props)[0]}`]: Object.values(props)[0] },
-              $set: { 'activityAttributes.$.options': props.options } },
+            {
+              $set: {
+                'activityAttributes.$.name': props.name,
+                // 'activityAttributes.$.value': props.value,
+                'activityAttributes.$.show': props.show,
+                'activityAttributes.$.attributeType': props.attributeType,
+                'activityAttributes.$.options': props.options
+              }
+            },
             { new: true })
           const updatedCards = await Card.updateMany(
             { boardId: bID, 'attributes.id': id },
-            { $set: { [`attributes.$.${Object.keys(props)[0]}`]: Object.values(props)[0] },
-              $set: { 'attributes.$.options': props.options } },
+            {
+              $set: {
+                'attributes.$.name': props.name,
+                // 'attributes.$.value': props.value,
+                'attributes.$.show': props.show,
+                'attributes.$.attributeType': props.attributeType,
+                'attributes.$.options': props.options
+              }
+            },
             { new: true })
-          console.log(updatedCards);
-          updatedBoards.push({updatedBoard, updatedLists, updatedCards})
+          // console.log(updatedCards);
+          updatedBoards.push({ updatedBoard, updatedLists, updatedCards })
         }
         return res.status(202).json({ updatedBoards })
       } else {

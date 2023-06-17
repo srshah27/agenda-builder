@@ -69,8 +69,6 @@ function Signup({ providers }) {
         password: values.password
       })
     })
-    console.log(res)
-    console.log(res)
     if (res.ok) {
       const status = await signIn('credentials', {
         email: values.email,

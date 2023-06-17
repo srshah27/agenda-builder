@@ -1,17 +1,15 @@
 import React, { useState } from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
 import TaskList from './TaskList'
-import { Box, Flex, Text } from '@chakra-ui/react'
-import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu'
 import { AddIcon } from '@chakra-ui/icons'
 import moment from 'moment'
 import CustomInput from '../utils/CustomInput'
+import { Spacer } from '@chakra-ui/react'
 
 const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
   const [listName, setListName] = useState(list.name)
 
   async function handleListName(e) {
-    console.log(e.target.value)
     setListName(e.target.value)
     let res = await fetch(
       `/api/w/${list.workspaceID}/b/${list.boardId}/l/${list.id}`,
@@ -46,12 +44,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
               value={listName}
               onChange={e => handleListName(e)}
             />
-
-            {/* <Spacer /> */}
-            {/* <input type='time' value={start} min={'09:00:00'} max={'20:00:00'} onChange={(e) => setStart(e.target.value)} />
-              <input type='time' value={end} onChange={(e) => setEnd(e.target.value)} /> */}
           </div>
-          {/* </ContextMenuTrigger> */}
 
           <TaskList
             tasks={tasks}
@@ -59,7 +52,7 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
             deleteListOrCard={deleteListOrCard}
           />
           <button
-            className={`m-2 flex w-44 items-center justify-center self-center rounded-md p-2`}
+            className={`m-2 flex w-44 items-center justify-center self-center rounded-md border p-2`}
             onClick={() => addCard(list.id)}
           >
             <AddIcon w={3} h={3} mr={3} />

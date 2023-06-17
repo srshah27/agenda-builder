@@ -20,7 +20,6 @@ export default async function handler(req, res) {
 
     case 'POST': {
       const { id, name, createdBy, createdAt, backgroundImage } = req.body
-      console.log(name)
       const start = new Date()
       start.setHours(10, 0, 0)
       const end = new Date()

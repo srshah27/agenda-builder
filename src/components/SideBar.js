@@ -70,7 +70,6 @@ const SidebarContent = ({ onClose1, update, ...rest }) => {
       body: JSON.stringify({ workspaceName: workspaceName, userId: uID })
     })
     const data = await res.json()
-    console.log(data)
     setWorkspaceName('')
     update()
     onClose()
