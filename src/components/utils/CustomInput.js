@@ -2,7 +2,7 @@ import styles from '../../styles/utils/CustomInput.module.css'
 import clsx from 'clsx'
 
 const CustomInput = ({
-  required = 'false',
+  required = false,
   placeholder = '',
   center = false,
   value,

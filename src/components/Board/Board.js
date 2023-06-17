@@ -57,6 +57,7 @@ const Board = ({ boardData, setBoardData }) => {
 
   const addCard = listId => {
     let list = boardData.lists.find(list => list.id === listId)
+    console.log(list);
     let sequence = boardData.cards.filter(card => card.listId === listId).length
     const data = {
       id: nanoid(),
@@ -68,7 +69,7 @@ const Board = ({ boardData, setBoardData }) => {
       boardId: boardData.board.id,
       start: list.start,
       end: list.end,
-      attributes: list.attributes,
+      attributes: list.activityAttributes,
       sequence
     }
     fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c`, {
@@ -81,6 +82,7 @@ const Board = ({ boardData, setBoardData }) => {
   }
   const addList = () => {
     let sequence = boardData.lists.length
+    console.log(boardData.board.activityAttributes);
     const data = {
       id: nanoid(),
       name: 'New List',
@@ -90,7 +92,7 @@ const Board = ({ boardData, setBoardData }) => {
       boardId: boardData.board.id,
       start: boardData.board.start,
       end: boardData.board.end,
-      attributes: boardData.board.attributes,
+      activityAttributes: boardData.board.activityAttributes,
       sequence
     }
     fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l`, {
@@ -99,6 +101,7 @@ const Board = ({ boardData, setBoardData }) => {
       body: JSON.stringify(data)
     })
     let newLists = [...boardData.lists, data]
+    console.log(data);
     setBoardData({ ...boardData, lists: newLists })
   }
 

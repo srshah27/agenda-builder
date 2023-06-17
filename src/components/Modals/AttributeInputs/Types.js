@@ -28,7 +28,7 @@ export const ShowButton = ({ attr, index, attributes, setAttributes }) => {
   )
 }
 
-export const TextInput = ({ task, attributes, index, setAttributes }) => {
+export const TextInput = ({ task, attributes, index, setAttributes, setTask}) => {
   const [value, setValue] = useState(attributes[index].value)
   const attr = attributes[index]
   return (
@@ -40,7 +40,7 @@ export const TextInput = ({ task, attributes, index, setAttributes }) => {
           index={index}
           setAttributes={setAttributes}
         />
-        <FormLabel FormLabel className="ml-5">
+        <FormLabel className="ml-5">
           {' '}
           {attr.name}
         </FormLabel>
@@ -54,6 +54,7 @@ export const TextInput = ({ task, attributes, index, setAttributes }) => {
           newAttrs[index].value = e.target.value
           setValue(e.target.value)
           setAttributes(newAttrs)
+          setTask({ ...task, attributes: newAttrs })
         }}
       />
     </FormControl>
@@ -63,13 +64,14 @@ export const MultipleOptionInput = ({
   task,
   attributes,
   index,
-  setAttributes
+  setAttributes,
+  setTask
 }) => {
-  const [value, setValue] = useState(JSON.parse(attributes[index].value))
+  const [value, setValue] = useState(attributes[index].value ? JSON.parse(attributes[index].value) : [])
   // const [options, setOption] = useState(attributes[index].options);
   // https://bmartel.github.io/chakra-multiselect/docs/
   let { options, onChange } = useMultiSelect({
-    value: JSON.parse(attributes[index].value),
+    value: value,
     options: attributes[index].options
   })
 
@@ -83,7 +85,7 @@ export const MultipleOptionInput = ({
           index={index}
           setAttributes={setAttributes}
         />
-        <FormLabel FormLabel className="ml-5">
+        <FormLabel  className="ml-5">
           {' '}
           {attr.name}
         </FormLabel>
@@ -96,15 +98,18 @@ export const MultipleOptionInput = ({
           let newAttrs = attributes
           newAttrs[index].value = JSON.stringify(e)
           setValue(e)
-          e.forEach(Input => {
-            if (!options.includes(Input)) {
-              options.push(Input)
-            }
-          })
+          // options.forEach((option, index) => {
+          //   e.forEach(Input => {
+          //     if (option.value === Input) {
+                
+          //     }
+          //   });
+          // })
           console.log(options)
           setAttributes(newAttrs)
+          setTask({ ...task, attributes: newAttrs })
         }}
-        create
+        // create
       />
     </FormControl>
   )

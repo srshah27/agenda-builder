@@ -5,7 +5,7 @@ import Attribute from '@/components/Attributes/Attribute'
 import CardModal from '@/components/Modals/CardModal'
 import { useDisclosure } from '@chakra-ui/react'
 import moment from 'moment'
-const Task = ({ task, index }) => {
+const Task = ({ task, index, deleteListOrCard }) => {
   const attrs = [
     {
       name: 'Session Title',
@@ -45,7 +45,7 @@ const Task = ({ task, index }) => {
       ) % 60
     )
   })
-
+  console.log(task.attributes)
   return (
     <Draggable
       draggableId={task.id}
@@ -83,7 +83,7 @@ const Task = ({ task, index }) => {
           {/* Attributes */}
           <div className="flex w-full max-w-full flex-row">
             {currentTask.attributes.map((attribute, index) => {
-              return <Attribute attr={attribute} task={currentTask} />
+              return <Attribute attr={attribute} task={currentTask} key={index}/>
             })}
           </div>
           <CardModal
@@ -93,6 +93,8 @@ const Task = ({ task, index }) => {
             task={currentTask}
             setTask={setCurrentTask}
             setDuration={setDuration}
+            deleteListOrCard={deleteListOrCard}
+            
           />
         </div>
       )}

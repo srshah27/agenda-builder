@@ -18,7 +18,7 @@ export const Option = ({ attr, task }) => {
 }
 
 export const MultipleOption = ({ attr, task }) => {
-  let values = JSON.parse(attr.value)
+  let values = attr.value ? JSON.parse(attr.value) : []
   let options = attr.options
   return (
     <div className="innerCard flex-col">
@@ -26,13 +26,13 @@ export const MultipleOption = ({ attr, task }) => {
       <div className="flex flex-wrap justify-evenly">
         {values.map((value, index) => {
           return (
-            // <span key="index" className="">
-            <span className='m-1'>
+
+            <span key={index} className='m-1'>
               {value}
               <br />
             </span>
 
-            // </span>
+
           )
         })}
       </div>

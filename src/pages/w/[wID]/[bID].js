@@ -13,7 +13,7 @@ const BoardPage = ({ board, cards, lists }) => {
   return (
     <div>
       <UserNav board={board} />
-      <SubNav boardData={boardData} />
+      <SubNav boardData={boardData} setBoardData={setBoardData} />
       <Board boardData={boardData} setBoardData={setBoardData} />
     </div>
   )

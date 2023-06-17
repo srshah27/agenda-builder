@@ -24,7 +24,7 @@ export default async function handler(req, res) {
       const count = await List.find({ boardId: bID, workspaceId: wID }).count()
       const { activityAttributes } = await Board.findOne(
         { id: bID, workspaceId: wID },
-        'activityAttributes'
+        { activityAttributes: 1 }
       )
       const data = {
         id,

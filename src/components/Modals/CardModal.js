@@ -17,7 +17,7 @@ import {
 import Attribute from './AttributeInputs/Attributes'
 import moment from 'moment'
 
-const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
+const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration, deleteListOrCard }) => {
   const [currentTask, setCurrentTask] = useState(task)
   const [name, setName] = useState(task.name)
   const [description, setDescription] = useState(task.description)
@@ -56,6 +56,18 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
     let res = await UpdateTask(currentTask, body)
     setTask(res.updatedCard)
     setDuration(duration)
+    onClose()
+  }
+  
+  const handleDelete = async () => {
+    let res = await fetch(
+      `/api/w/${task.workspaceId}/b/${task.boardId}/c/${task.id}`,
+      {
+        method: 'DELETE'
+      }
+    )
+    let data = await res.json()
+    
     onClose()
   }
 
@@ -200,6 +212,7 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
                   attributes={attributes}
                   index={index}
                   setAttributes={setAttributes}
+                  setTask={setTask}
                   key={index}
                 />
               )
@@ -208,6 +221,9 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration }) => {
           {/* {JSON.stringify(attributes)} */}
 
           <ModalFooter>
+            <Button colorScheme="red" mr={3} onClick={(e) => {
+              deleteListOrCard(e, { card: task, type: 'card' } )
+            }} > Delete </Button>
             <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
               Save
             </Button>
