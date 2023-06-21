@@ -32,7 +32,6 @@ export default NextAuth({
         let checkPassword = await compare(credentials.password, user.password)
         // if (!checkPassword) return null
         if (!checkPassword) throw new Error('Incorrect Credentials')
-        console.log('asdasd', user)
         return {
           id: user._id,
           name: user.name,

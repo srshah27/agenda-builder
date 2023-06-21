@@ -6,7 +6,7 @@ import agendaImage from '../../../public/svg/agenda.svg'
 
 const Footer = () => {
   return (
-    <footer className="footer p-10 bg-neutral text-neutral-content" id="footer">
+    <footer className="footer bg-neutral text-neutral-content p-10" id="footer">
       <div>
         <Image src={agendaImage} alt="Agenda Builder Logo" />
         <p className="text-center lg:text-left">
@@ -32,12 +32,12 @@ const Footer = () => {
         <span className="footer-title text-center lg:text-left">Contact</span>
         <div className="grid grid-flow-row gap-4">
           <a className="flex">
-            <SiGmail className="w-4 h-4" />
-            <p className="px-2 -mt-1"> agendabuilder@gmail.com</p>
+            <SiGmail className="h-4 w-4" />
+            <p className="-mt-1 px-2"> agendabuilder@gmail.com</p>
           </a>
           <a className="flex">
-            <IoCall className="w-4 h-4" />
-            <p className="px-2 -mt-1"> +91 0000000</p>
+            <IoCall className="h-4 w-4" />
+            <p className="-mt-1 px-2"> +91 0000000</p>
           </a>
         </div>
       </div>
@@ -46,13 +46,13 @@ const Footer = () => {
         <span className="footer-title text-center lg:text-left">Social</span>
         <div className="grid grid-flow-col gap-4">
           <a>
-            <BsTwitter className="w-6 h-6" />
+            <BsTwitter className="h-6 w-6" />
           </a>
           <a>
-            <BsFacebook className="w-6 h-6" />
+            <BsFacebook className="h-6 w-6" />
           </a>
           <a>
-            <BsYoutube className="w-6 h-6" />
+            <BsYoutube className="h-6 w-6" />
           </a>
         </div>
       </div>

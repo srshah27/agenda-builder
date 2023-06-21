@@ -15,7 +15,9 @@ export async function getServerSideProps(context) {
   }
   const { wID } = context.params
 
-  let res = await fetch(`${process.env.BASE_URL}/api/w/${wID}`, {cache: "no-cache"})
+  let res = await fetch(`${process.env.BASE_URL}/api/w/${wID}`, {
+    cache: 'no-cache'
+  })
   let { workspace } = await res.json()
 
   if (

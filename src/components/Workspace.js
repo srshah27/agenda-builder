@@ -16,7 +16,7 @@ import {
   Button,
   Input,
   useColorModeValue,
-  HStack,
+  HStack
 } from '@chakra-ui/react'
 import {
   Modal,
@@ -42,7 +42,11 @@ const Workspace = ({ id, workspace }) => {
       })
   }, [boards, id])
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { isOpen: isOpenInvite, onOpen: onOpenInvite, onClose: onCloseInvite } = useDisclosure()
+  const {
+    isOpen: isOpenInvite,
+    onOpen: onOpenInvite,
+    onClose: onCloseInvite
+  } = useDisclosure()
 
   const router = useRouter()
   const { uId } = router.query
@@ -55,31 +59,25 @@ const Workspace = ({ id, workspace }) => {
       })
   }
   const submitBoard = async e => {
-    console.log(boardName)
     const res = await fetch(`/api/w/${id}/b`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: boardName, id: nanoid(), creator: uId })
     })
     const data = await res.json()
-    console.log(data)
     setBoardName('')
     onClose()
   }
 
   const createLink = async () => {
-    console.log(workspace);
-    console.log('create link');
     const res = await fetch(`/api/w/invite`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ wID: workspace.id })
     })
     const data = await res.json()
-    console.log(data);
-    workspace.invite = data.workspace.invite;
+    workspace.invite = data.workspace.invite
   }
-
 
   return (
     <Flex p="5">
@@ -122,23 +120,53 @@ const Workspace = ({ id, workspace }) => {
             <Modal isOpen={isOpenInvite} onClose={onCloseInvite}>
               <ModalOverlay />
               <ModalContent>
-                <ModalHeader color="cyan.100">Invite Members to {workspace?.name} Workspace</ModalHeader>
-                {workspace.invite.link != "" && new Date() < new Date(workspace.invite.expiresAt) ? (<>{process.env.NEXT_PUBLIC_BASE_URL +'/w/i/' + workspace?.invite?.link }</>) : <></>}
-                {workspace.invite.link == "" || new Date() >= new Date(workspace.invite.expiresAt) ? (<>Link is not Created or Expired</>) : <></>}
+                <ModalHeader color="cyan.100">
+                  Invite Members to {workspace?.name} Workspace
+                </ModalHeader>
+                {workspace.invite.link != '' &&
+                new Date() < new Date(workspace.invite.expiresAt) ? (
+                  <>
+                    {process.env.NEXT_PUBLIC_BASE_URL +
+                      '/w/i/' +
+                      workspace?.invite?.link}
+                  </>
+                ) : (
+                  <></>
+                )}
+                {workspace.invite.link == '' ||
+                new Date() >= new Date(workspace.invite.expiresAt) ? (
+                  <>Link is not Created or Expired</>
+                ) : (
+                  <></>
+                )}
                 <ModalCloseButton />
-                <ModalBody>
-
-                </ModalBody>
+                <ModalBody></ModalBody>
                 <ModalFooter>
-                  {workspace.invite.link != "" && new Date() < new Date(workspace.invite.expiresAt) ?
-                    (<Button mr={3} onClick={(e) => {
-                      navigator.clipboard.writeText(process.env.NEXT_PUBLIC_BASE_URL +'/w/i/' + workspace?.invite?.link)
-                    }}>
-                      Copy Invite Link 
-                    </Button>) : <></>}
-                  {workspace.invite.link == "" || new Date() >= new Date(workspace.invite.expiresAt) ? (<Button mr={3} onClick={() => createLink()} >
-                    Create Invite Link
-                  </Button>) : <></>}
+                  {workspace.invite.link != '' &&
+                  new Date() < new Date(workspace.invite.expiresAt) ? (
+                    <Button
+                      mr={3}
+                      onClick={e => {
+                        navigator.clipboard.writeText(
+                          process.env.NEXT_PUBLIC_BASE_URL +
+                            '/w/i/' +
+                            workspace?.invite?.link
+                        )
+                      }}
+                    >
+                      Copy Invite Link
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
+                  {workspace.invite.link == '' ||
+                  new Date() >= new Date(workspace.invite.expiresAt) ? (
+                    <Button mr={3} onClick={() => createLink()}>
+                      Create Invite Link
+                    </Button>
+                  ) : (
+                    <></>
+                  )}
                 </ModalFooter>
               </ModalContent>
             </Modal>
@@ -194,7 +222,9 @@ const Workspace = ({ id, workspace }) => {
                   <Button mr={3} onClick={submitBoard}>
                     Create
                   </Button>
-                  <Button variant="ghost" onClick={onClose}>Close</Button>
+                  <Button variant="ghost" onClick={onClose}>
+                    Close
+                  </Button>
                 </ModalFooter>
               </ModalContent>
             </Modal>
@@ -227,12 +257,11 @@ const Work = ({ asCreator, asCollaborator }) => {
   useEffect(() => {
     setCreatorWorkspace(asCreator)
     setCollabWorkspace(asCollaborator)
-    console.log(asCreator, asCollaborator)
   }, [asCreator, asCollaborator])
 
   const color = useColorModeValue('gray.900', 'gray.50')
   return (
-    <Flex bg="red.900">
+    <Flex>
       <Stack
         ml={{ base: 0, md: 60 }}
         mt="16"

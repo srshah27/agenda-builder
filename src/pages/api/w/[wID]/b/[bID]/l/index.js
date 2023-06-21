@@ -22,7 +22,10 @@ export default async function handler(req, res) {
     case 'POST': {
       const { id, name, createdBy, createdAt, sequence, start, end } = req.body
       const count = await List.find({ boardId: bID, workspaceId: wID }).count()
-      const { activityAttributes } = await Board.findOne({ id: bID, workspaceId: wID }, 'activityAttributes')
+      const { activityAttributes } = await Board.findOne(
+        { id: bID, workspaceId: wID },
+        { activityAttributes: 1 }
+      )
       const data = {
         id,
         workspaceId: wID,

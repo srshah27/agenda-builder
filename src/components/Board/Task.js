@@ -5,7 +5,7 @@ import Attribute from '@/components/Attributes/Attribute'
 import CardModal from '@/components/Modals/CardModal'
 import { useDisclosure } from '@chakra-ui/react'
 import moment from 'moment'
-const Task = ({ task, index }) => {
+const Task = ({ task, index, deleteListOrCard }) => {
   const attrs = [
     {
       name: 'Session Title',
@@ -31,15 +31,21 @@ const Task = ({ task, index }) => {
     // { name: 'Status', attributeType: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
   ]
 
-
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [currentTask, setCurrentTask] = useState(task);
+  const [currentTask, setCurrentTask] = useState(task)
   const initialRef = React.useRef(null)
   const [duration, setDuration] = useState({
-    hours: JSON.stringify(  moment(currentTask.end).diff(new moment(currentTask.start), 'hours')),
-    miniutes: JSON.stringify( new moment(currentTask.end).diff(new moment(currentTask.start), 'minutes') % 60)
-  });
-
+    hours: JSON.stringify(
+      moment(currentTask.end).diff(new moment(currentTask.start), 'hours')
+    ),
+    miniutes: JSON.stringify(
+      new moment(currentTask.end).diff(
+        new moment(currentTask.start),
+        'minutes'
+      ) % 60
+    )
+  })
+  console.log(task.attributes)
   return (
     <Draggable
       draggableId={task.id}
@@ -52,35 +58,34 @@ const Task = ({ task, index }) => {
           {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
           onClick={onOpen}
-          className={`font-light p-2 mx-2 flex mb-2 border rounded-md shadow-md h-[144px]`}
+          className={`cardAnimation mx-2 mb-3 flex h-[144px] rounded-md border bg-slate-200 p-2 font-light shadow-md`}
         >
-          <div className="flex flex-col h-full min-w-fit justify-around items-baseline">
-            <span className=''>
-              <strong>From: </strong> {new Date(currentTask.start).toLocaleTimeString()}
-            </span>
+          <div className="flex h-full min-w-fit flex-col items-baseline justify-around">
+            <strong>From: </strong>
+            <strong>To: </strong>
+            <strong>Dur: </strong>
+          </div>
+          <div className="ml-1 flex h-full min-w-fit flex-col items-baseline justify-around">
+            <span>{new Date(currentTask.start).toLocaleTimeString()}</span>
+            <span>{new Date(currentTask.end).toLocaleTimeString()}</span>
             <span>
-              <strong>To: </strong> {new Date(currentTask.end).toLocaleTimeString()}
-            </span>
-            <span>
-              <strong>Duration: </strong> {duration.hours} hrs : {duration.miniutes} mins
+              {duration.hours}hr {duration.miniutes}min
             </span>
           </div>
-
-          {currentTask.name}
-          {currentTask.description}
+          <div className="flex w-[50%] min-w-[40%] flex-col p-2">
+            <span className="w-full text-center text-xl font-semibold">
+              {currentTask.name}
+            </span>
+            <span className="block overflow-hidden text-ellipsis p-2 text-base">
+              {currentTask.description}
+            </span>
+          </div>
           {/* Attributes */}
-          <div className="flex flex-row w-full">
+          <div className="flex w-full max-w-full flex-row">
             {currentTask.attributes.map((attribute, index) => {
-              return (
-                <div key={index} className="">
-                  <Attribute attr={attribute} task={currentTask} />
-                </div>
-              )
+              return <Attribute attr={attribute} task={currentTask} key={index}/>
             })}
           </div>
-
-          {/* </div> */}
-
           <CardModal
             onOpen={onOpen}
             onClose={onClose}
@@ -88,6 +93,8 @@ const Task = ({ task, index }) => {
             task={currentTask}
             setTask={setCurrentTask}
             setDuration={setDuration}
+            deleteListOrCard={deleteListOrCard}
+            
           />
         </div>
       )}

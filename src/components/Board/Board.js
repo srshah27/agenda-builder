@@ -14,18 +14,11 @@ import { Box } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { AddIcon } from '@chakra-ui/icons'
 
-// import { initialData } from '../../data/InitialData'
 const List = dynamic(() => import('./List'), {
   ssr: false
 })
 
-const Board = ({ board, cards, lists }) => {
-  const [boardData, setBoardData] = useState({
-    board,
-    cards,
-    lists: lists.sort((a, b) => a.sequence - b.sequence)
-  })
-
+const Board = ({ boardData, setBoardData }) => {
   const [refresh, setRefresh] = useState(false)
   const { data: session } = useSession()
 
@@ -35,9 +28,11 @@ const Board = ({ board, cards, lists }) => {
       lists: boardData.lists.sort((a, b) => a.sequence - b.sequence),
       cards: boardData.cards.sort((a, b) => a.sequence - b.sequence)
     })
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refresh])
 
-  const updateDb = (url, body, cardsOrLists) => {
+  function updateDb(url, body, cardsOrLists) {
     fetch(url, {
       method: 'PATCH',
       headers: { 'content-type': 'application/json' },
@@ -55,13 +50,14 @@ const Board = ({ board, cards, lists }) => {
         }
       })
       .catch(error => {
-        console.log(error)
+        console.log('Error:', error)
         setBoardData(data)
       })
   }
 
   const addCard = listId => {
     let list = boardData.lists.find(list => list.id === listId)
+    console.log(list);
     let sequence = boardData.cards.filter(card => card.listId === listId).length
     const data = {
       id: nanoid(),
@@ -73,7 +69,7 @@ const Board = ({ board, cards, lists }) => {
       boardId: boardData.board.id,
       start: list.start,
       end: list.end,
-      attributes: list.attributes,
+      attributes: list.activityAttributes,
       sequence
     }
     fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c`, {
@@ -86,6 +82,7 @@ const Board = ({ board, cards, lists }) => {
   }
   const addList = () => {
     let sequence = boardData.lists.length
+    console.log(boardData.board.activityAttributes);
     const data = {
       id: nanoid(),
       name: 'New List',
@@ -95,7 +92,7 @@ const Board = ({ board, cards, lists }) => {
       boardId: boardData.board.id,
       start: boardData.board.start,
       end: boardData.board.end,
-      attributes: boardData.board.attributes,
+      activityAttributes: boardData.board.activityAttributes,
       sequence
     }
     fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l`, {
@@ -104,6 +101,7 @@ const Board = ({ board, cards, lists }) => {
       body: JSON.stringify(data)
     })
     let newLists = [...boardData.lists, data]
+    console.log(data);
     setBoardData({ ...boardData, lists: newLists })
   }
 
@@ -217,78 +215,44 @@ const Board = ({ board, cards, lists }) => {
   }
 
   return (
-    // complete outside box
-    <Box
-      display="block"
-      overflowX="auto"
-      className="w-full"
-      bg={'linear-gradient(135.39deg, #342B53 24.83%, #733A67 96.81%);'}
-    >
-      {/* <div className='flex justify-around outline-double m-2'>
-        <Heading className='text-center'>The Summit</Heading>
-        <input type="text" className='bg-transparent' />
-        <Text fontSize='3xl'>Start Time:</Text>
-        <Text fontSize='3xl'>End Time:</Text>
-      </div> */}
-      <DragDropContext onDragEnd={onDragEnd}>
-        <React.StrictMode>
-          {/* all the lists */}
-          <Droppable
-            droppableId="all-columns"
-            direction="vertical"
-            type="column"
-          >
-            {droppableProvided => (
-              // box with all lists
-              <Flex
-                px="4"
-                ref={droppableProvided.innerRef}
-                {...droppableProvided.droppableProps}
-                direction={'column'}
-                alignItems={'center'}
+    <DragDropContext onDragEnd={onDragEnd}>
+      <React.StrictMode>
+        <Droppable droppableId="all-columns" direction="vertical" type="column">
+          {droppableProvided => (
+            <div
+              ref={droppableProvided.innerRef}
+              {...droppableProvided.droppableProps}
+              className="flex flex-col items-center px-4 bg-[url(../../public/img/boardbg.png)] bg-cover"
+            >
+              {boardData.lists.map(list => {
+                const tasks = boardData.cards.filter(
+                  card => card.listId === list.id
+                )
+                tasks.sort((a, b) => a.sequence - b.sequence)
+                return (
+                  <List
+                    key={list.id}
+                    list={list}
+                    tasks={tasks}
+                    index={list.sequence}
+                    addCard={addCard}
+                    deleteListOrCard={handleDelete}
+                  />
+                )
+              })}
+              {droppableProvided.placeholder}
+              <button
+                onClick={addList}
+                className="text-md m-4 flex min-w-[250px] items-center justify-center rounded-md border p-2 shadow-md"
               >
-                {boardData.lists.map(list => {
-                  const tasks = boardData.cards.filter(
-                    card => card.listId === list.id
-                  )
-                  tasks.sort((a, b) => a.sequence - b.sequence)
-                  return (
-                    <List
-                      key={list.id}
-                      list={list}
-                      tasks={tasks}
-                      index={list.sequence}
-                      addCard={addCard}
-                      deleteListOrCard={handleDelete}
-                    />
-                  )
-                })}
-                {droppableProvided.placeholder}
-                <Box
-                  className={`m-4 border rounded shadow-md `}
-                  h="fit-content"
-                  w={250}
-                  minW={250}
-                  bgColor={'whiteAlpha.300'}
-                >
-                  <Box
-                    className="p-2 text-md flex"
-                    as="button"
-                    color={'white'}
-                    onClick={addList}
-                    w="full"
-                    alignItems={'center'}
-                  >
-                    <AddIcon w={4} h={4} ml={16} />{' '}
-                    <Text ml="4"> Add List</Text>
-                  </Box>
-                </Box>
-              </Flex>
-            )}
-          </Droppable>
-        </React.StrictMode>
-      </DragDropContext>
-    </Box>
+                <AddIcon />
+                <Text ml="4">Add List</Text>
+              </button>
+            </div>
+          )}
+        </Droppable>
+      </React.StrictMode>
+    </DragDropContext>
   )
 }
 

@@ -4,30 +4,27 @@ import { useSession } from 'next-auth/react'
 import TrelloHero from '../../../public/img/Trello.webp'
 import AnimateBG from './AnimateBG'
 
-
 function Hero() {
   return (
     <div className="container mt-16 h-screen" id="home">
-      <div className='flex flex-col h-[calc(100svh-64px)] items-center lg:flex lg:flex-row-reverse lg:justify-around'>
+      <div className="flex h-[calc(100svh-64px)] flex-col items-center lg:flex lg:flex-row-reverse lg:justify-around">
         <AnimateBG top={100} right={200} />
         <Image
           src={TrelloHero}
           alt="An Illustration of persons working on computers"
-          className="p-4 max-w-md lg:max-w-xl lg:p-12"
+          className="max-w-md p-4 lg:max-w-xl lg:p-12"
           priority={true}
         />
-        <div className="text-center max-w-[50%] md:text-left">
-          <h1 className="text-gray-800 text-4xl md:text-6xl font-serif">
+        <div className="max-w-[50%] text-center md:text-left">
+          <h1 className="font-serif text-4xl text-gray-800 md:text-6xl">
             Get aligned around your goals
           </h1>
-          <p className="text-gray-500 py-6 text-md md:text-2xl">
-            Simple & straightforward project management tool based on what really matters the most. Your goals.
+          <p className="text-md py-6 text-gray-500 md:text-2xl">
+            Simple & straightforward project management tool based on what
+            really matters the most. Your goals.
           </p>
-          <Link href='/u'>
-            <button className="btn bg-blue-900 max-w-md">
-              {' '}
-              Get Started{' '}
-            </button>
+          <Link href="/u">
+            <button className="btn max-w-md bg-blue-900"> Get Started </button>
           </Link>{' '}
         </div>
       </div>

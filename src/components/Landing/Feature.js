@@ -3,19 +3,15 @@ import todoImage from '../../../public/svg/todo.svg'
 
 const Feature = () => {
   return (
-    <div className="h-screen bg-white w-full">
-      <div className="flex-col text-primary font-mono p-16 text-center">
+    <div className="h-screen w-full bg-white">
+      <div className="text-primary flex-col p-16 text-center font-mono">
         <h4 className="text-md text-neutral">Agenda Builder 101 </h4>
         <h1 className="text-6xl font-extrabold">Organise Your Task</h1>
       </div>
-      <div className="flex justify-around flex-wrap">
-        <Image
-          src={todoImage}
-          alt="track"
-          className="hidden lg:block"
-        />
-        <div className="text-xl text-primary text-left space-x-6 ml-4">
-          <h1 className="text-4xl font-semibold mb-6">Features:</h1>
+      <div className="flex flex-wrap justify-around">
+        <Image src={todoImage} alt="track" className="hidden lg:block" />
+        <div className="text-primary ml-4 space-x-6 text-left text-xl">
+          <h1 className="mb-6 text-4xl font-semibold">Features:</h1>
           <li className="mb-4">
             {' '}
             To seamlessly help people involved collaborate and <br /> build an

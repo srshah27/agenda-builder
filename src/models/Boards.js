@@ -14,7 +14,7 @@ const BoardsSchema = new Schema({
   favorite: Boolean,
   start: Date,
   end: Date,
-  activityAttributes: [AttributeSchema],
+  activityAttributes: [AttributeSchema]
 })
 
 module.exports = models.Board || model('Board', BoardsSchema)

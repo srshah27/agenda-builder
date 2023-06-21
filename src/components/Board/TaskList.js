@@ -3,21 +3,20 @@ import { Droppable } from 'react-beautiful-dnd'
 
 const TaskList = ({ tasks, list, deleteListOrCard }) => {
   return (
-    <Droppable droppableId={list.id} type="task" direction='vertical'>
+    <Droppable droppableId={list.id} type="task" direction="vertical">
       {(droppableProvided, droppableSnapshot) => (
         <div
           ref={droppableProvided.innerRef}
           {...droppableProvided.droppableProps}
-          className={`w-full flex flex-col min-h-[50px]`}
+          className={`flex min-h-[50px] w-full flex-col`}
         >
           <div className="flex flex-col">
             {tasks.map((task, index) => (
-              <Task task={task} index={task.sequence} key={task.index} />
+              <Task task={task} index={task.sequence} key={index} deleteListOrCard={deleteListOrCard} />
             ))}
           </div>
         </div>
       )}
-
     </Droppable>
   )
 }

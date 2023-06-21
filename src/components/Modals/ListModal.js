@@ -1,13 +1,19 @@
 import React from 'react'
 import {
-  Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter,
-  ModalBody, ModalCloseButton,
-  Button, FormControl, FormLabel,
-  Input, Textarea,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  Button,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
   useDisclosure
 } from '@chakra-ui/react'
-
-
 
 const ListModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -22,7 +28,7 @@ const ListModal = () => {
         onClose={onClose}
         blockScrollOnMount={false}
         isCentered
-        motionPreset='slideInBottom'
+        motionPreset="slideInBottom"
         size={'xl'}
       >
         <ModalOverlay />
@@ -32,12 +38,12 @@ const ListModal = () => {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>List Name</FormLabel>
-              <Input ref={initialRef} placeholder='Snehil' />
+              <Input ref={initialRef} placeholder="Snehil" />
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Description</FormLabel>
-              <Textarea placeholder='Here is a sample placeholder' />
+              <Textarea placeholder="Here is a sample placeholder" />
             </FormControl>
 
             {/* <FormControl mt={4}>
@@ -47,7 +53,7 @@ const ListModal = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='blue' mr={3}>
+            <Button colorScheme="blue" mr={3}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>
