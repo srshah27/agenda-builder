@@ -14,7 +14,6 @@ import { Box } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { AddIcon } from '@chakra-ui/icons'
 
-// import { initialData } from '../../data/InitialData'
 const List = dynamic(() => import('./List'), {
   ssr: false
 })
