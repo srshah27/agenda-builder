@@ -23,15 +23,15 @@ const Board = ({ boardData, setBoardData }) => {
   const [refresh, setRefresh] = useState(false)
   const { data: session } = useSession()
 
-  useEffect(() => {
-    setBoardData({
-      ...boardData,
-      lists: boardData.lists.sort((a, b) => a.sequence - b.sequence),
-      cards: boardData.cards.sort((a, b) => a.sequence - b.sequence)
-    })
+  // useEffect(() => {
+  //   setBoardData({
+  //     ...boardData,
+  //     lists: boardData.lists.sort((a, b) => a.sequence - b.sequence),
+  //     cards: boardData.cards.sort((a, b) => a.sequence - b.sequence)
+  //   })
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [refresh])
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [refresh])
 
   function updateDb(url, body, cardsOrLists) {
     fetch(url, {
@@ -83,6 +83,7 @@ const Board = ({ boardData, setBoardData }) => {
   }
   const addList = () => {
     let sequence = boardData.lists.length
+    console.log('asdasdasdads');
     console.log(boardData.board.activityAttributes);
     const data = {
       id: nanoid(),
@@ -238,6 +239,8 @@ const Board = ({ boardData, setBoardData }) => {
                     index={list.sequence}
                     addCard={addCard}
                     deleteListOrCard={handleDelete}
+                    boardData={boardData}
+                    setBoardData={setBoardData}
                   />
                 )
               })}

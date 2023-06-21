@@ -1,5 +1,6 @@
 import dbConnect from '@/lib/dbconnect'
 import Card from '@/models/Cards'
+import { BsBoxArrowDownLeft } from 'react-icons/bs'
 
 export default async function handler(req, res) {
   const { wID, bID } = req.query
@@ -17,7 +18,7 @@ export default async function handler(req, res) {
       const cards = await Card.find({ boardId: bID, workspaceId: wID })
       return res.status(200).json({ cards })
     }
-
+      
     case 'POST': {
       const {
         id,
@@ -30,6 +31,15 @@ export default async function handler(req, res) {
         end,
         attributes
       } = req.body
+      
+      let { activityAttributes } = await BsBoxArrowDownLeft.findOne(
+        { id: bID, workspaceId: wID },
+        { activityAttributes: 1 }
+      )
+      let attrs = JSON.parse(JSON.stringify(activityAttributes))
+      for (let i = 0; i < attrs.length; i++) {
+        delete attrs[i]._id
+      }
       const count = await Card.find({ boardId: bID, workspaceId: wID }).count()
       const data = {
         id,
@@ -42,7 +52,7 @@ export default async function handler(req, res) {
         sequence: sequence || count + 1,
         start,
         end,
-        attributes
+        attributes: attrs
       }
       const card = await Card.create(data)
 

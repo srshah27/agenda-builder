@@ -23,8 +23,8 @@ export default async function handler(req, res) {
       const { attributes } = req.body
       console.log(bID);
       const updatedBoard = await Board.findOneAndUpdate({ id: bID }, { $push: { activityAttributes: { $each: attributes } } }, { new: true })
-      const updatedLists = await List.updateMany({ boardId: bID }, { $push: { activityAttributes: { $each: attributes } } }, { new: true })
-      const updatedCards = await Card.updateMany({ boardId: bID }, { $push: { attributes: { $each: attributes } } }, { new: true })
+      const updatedLists = await List.updateMany({ boardId: bID }, { $push: { activityAttributes: { $each: attributes } } }, { new: true, multi: true })
+      const updatedCards = await Card.updateMany({ boardId: bID }, { $push: { attributes: { $each: attributes } } }, { new: true, multi: true })
       return res.status(202).json({ updatedBoard, updatedLists, updatedCards })
     }
     case 'PATCH': {
@@ -62,7 +62,7 @@ export default async function handler(req, res) {
                 'activityAttributes.$.options': props.options
               }
             },
-            { new: true })
+            { new: true, multi: true })
           const updatedCards = await Card.updateMany(
             { boardId: bID, 'attributes.id': id },
             {
@@ -74,7 +74,7 @@ export default async function handler(req, res) {
                 'attributes.$.options': props.options
               }
             },
-            { new: true })
+            { new: true, multi: true })
           // console.log(updatedCards);
           updatedBoards.push({ updatedBoard, updatedLists, updatedCards })
         }

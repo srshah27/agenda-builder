@@ -5,34 +5,35 @@ import Attribute from '@/components/Attributes/Attribute'
 import CardModal from '@/components/Modals/CardModal'
 import { useDisclosure } from '@chakra-ui/react'
 import moment from 'moment'
-const Task = ({ task, index, deleteListOrCard }) => {
-  const attrs = [
-    {
-      name: 'Session Title',
-      attributeType: 'text',
-      value: 'WELCOME',
-      options: [],
-      show: true
-    },
-    {
-      name: 'Details',
-      attributeType: 'text',
-      value: 'Some Detail',
-      options: [],
-      show: false
-    },
-    {
-      name: 'Speaker',
-      attributeType: 'multi',
-      value: '["Akbar", "Amar", "Anthony"]',
-      options: ['Akbar', 'Amar', 'Anthony', 'Akshay', 'Virat'],
-      show: true
-    }
-    // { name: 'Status', attributeType: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
-  ]
+const Task = ({ task, index, deleteListOrCard, boardData, setBoardData }) => {
+  // const attrs = [
+  //   {
+  //     name: 'Session Title',
+  //     attributeType: 'text',
+  //     value: 'WELCOME',
+  //     options: [],
+  //     show: true
+  //   },
+  //   {
+  //     name: 'Details',
+  //     attributeType: 'text',
+  //     value: 'Some Detail',
+  //     options: [],
+  //     show: false
+  //   },
+  //   {
+  //     name: 'Speaker',
+  //     attributeType: 'multi',
+  //     value: '["Akbar", "Amar", "Anthony"]',
+  //     options: ['Akbar', 'Amar', 'Anthony', 'Akshay', 'Virat'],
+  //     show: true
+  //   }
+  //   // { name: 'Status', attributeType: 'option', value: 'Doing', options: ["Pending", "Doing"], show: true },
+  // ]
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const [currentTask, setCurrentTask] = useState(task)
+  if(!currentTask.attributes) setCurrentTask({...currentTask, attributes: [] }) 
   const initialRef = React.useRef(null)
   const [duration, setDuration] = useState({
     hours: JSON.stringify(

@@ -22,10 +22,16 @@ export default async function handler(req, res) {
     case 'POST': {
       const { id, name, createdBy, createdAt, sequence, start, end } = req.body
       const count = await List.find({ boardId: bID, workspaceId: wID }).count()
-      const { activityAttributes } = await Board.findOne(
+      let { activityAttributes } = await Board.findOne(
         { id: bID, workspaceId: wID },
         { activityAttributes: 1 }
       )
+      let attrs = JSON.parse(JSON.stringify(activityAttributes))
+      for (let i = 0; i < attrs.length; i++) {
+        delete attrs[i]._id
+      }
+      console.log("attrs");
+      console.log(attrs);
       const data = {
         id,
         workspaceId: wID,
@@ -36,7 +42,7 @@ export default async function handler(req, res) {
         sequence: sequence || count + 1,
         start,
         end,
-        activityAttributes
+        activityAttributes: attrs
       }
       const list = await List.create(data)
       return res.status(201).json({ list })

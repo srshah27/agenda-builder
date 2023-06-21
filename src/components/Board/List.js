@@ -6,7 +6,7 @@ import moment from 'moment'
 import CustomInput from '../utils/CustomInput'
 import { Spacer } from '@chakra-ui/react'
 
-const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
+const List = ({ list, tasks, index, addCard, deleteListOrCard, boardData, setBoardData }) => {
   const [listName, setListName] = useState(list.name)
 
   async function handleListName(e) {
@@ -50,6 +50,8 @@ const List = ({ list, tasks, index, addCard, deleteListOrCard }) => {
             tasks={tasks}
             list={list}
             deleteListOrCard={deleteListOrCard}
+            boardData={boardData}
+            setBoardData={setBoardData}
           />
           <button
             className={`m-2 flex w-44 items-center justify-center self-center rounded-md border p-2`}

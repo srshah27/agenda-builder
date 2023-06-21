@@ -1,7 +1,7 @@
 import Task from './Task'
 import { Droppable } from 'react-beautiful-dnd'
 
-const TaskList = ({ tasks, list, deleteListOrCard }) => {
+const TaskList = ({ tasks, list, deleteListOrCard, boardData, setBoardData }) => {
   return (
     <Droppable droppableId={list.id} type="task" direction="vertical">
       {(droppableProvided, droppableSnapshot) => (
@@ -12,7 +12,13 @@ const TaskList = ({ tasks, list, deleteListOrCard }) => {
         >
           <div className="flex flex-col">
             {tasks.map((task, index) => (
-              <Task task={task} index={task.sequence} key={index} deleteListOrCard={deleteListOrCard} />
+              <Task
+                task={task}
+                index={task.sequence}
+                key={index}
+                deleteListOrCard={deleteListOrCard}
+                boardData={boardData}
+                setBoardData={setBoardData} />
             ))}
           </div>
         </div>
