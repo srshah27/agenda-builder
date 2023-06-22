@@ -4,14 +4,14 @@ import NextNProgress from 'nextjs-progressbar'
 import Head from 'next/head'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { MultiSelectTheme } from 'chakra-multiselect'
-import { wrapper, store } from '@/store/store'
+import store from '@/store/store'
 import { Provider } from 'react-redux'
-import { createContext } from 'react';
 const theme = extendTheme({
   components: {
     MultiSelect: MultiSelectTheme
   }
 })
+
 
 
 const App = ({ Component, pageProps, session }) => {
