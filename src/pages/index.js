@@ -6,23 +6,25 @@ import Navbar from '@/components/Landing/Navbar'
 import Footer from '@/components/Landing/Footer'
 import { useSession } from 'next-auth/react'
 import { useDispatch } from 'react-redux'
-// import {login} from '@/store/userSlice'
+import { login } from '@/store/userSlice'
 import store from '@/store/store'
 
 export default function Home({ sess }) {
   const { data: session, status } = useSession()
   const dispatch = useDispatch()
-  console.log(session);
-  
-  if(session) {
-    dispatch(login({
-      uid: session.user.uid,
-      name: session.user.name,
-      image: session.user.image,
-      email: session.user.email,
-    }))
+  console.log(session)
+
+  if (session) {
+    dispatch(
+      login({
+        uid: session.user.uid,
+        name: session.user.name,
+        image: session.user.image,
+        email: session.user.email
+      })
+    )
   }
-  
+
   return (
     <div className="flex flex-col">
       <Navbar />
