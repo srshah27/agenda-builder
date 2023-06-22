@@ -1,14 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit'
-import { createWrapper } from 'next-redux-wrapper'
+// import { createWrapper } from 'next-redux-wrapper'
+
+import userReducer from './userSlice'
 
 
-const combinedReducer = combineReducers({})
+export const store = configureStore({
+  reducer: {
+    user: userReducer
+  },
+})
 
+// export const makeStore = () => {
+//   configureStore({
+    // reducer: combinedReducer,
+//   })
+// }
 
-export const makeStore = () => {
-  configureStore({
-    reducer: {},
-  })
-}
-
-export const wrapper = createWrapper(makeStore, { debug: true })
+// export const wrapper = createWrapper(makeStore, { debug: true })
