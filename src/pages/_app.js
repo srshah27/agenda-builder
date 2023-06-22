@@ -4,6 +4,7 @@ import NextNProgress from 'nextjs-progressbar'
 import Head from 'next/head'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { MultiSelectTheme } from 'chakra-multiselect'
+import { wrapper } from '@/store/store'
 
 const theme = extendTheme({
   components: {
@@ -11,7 +12,8 @@ const theme = extendTheme({
   }
 })
 
-export default function App({ Component, pageProps, session }) {
+
+const App = ({ Component, pageProps, session }) => {
   return (
     <ChakraProvider theme={theme}>
       <SessionProvider session={session}>
@@ -26,3 +28,5 @@ export default function App({ Component, pageProps, session }) {
     </ChakraProvider>
   )
 }
+
+export default wrapper.withRedux(App)
