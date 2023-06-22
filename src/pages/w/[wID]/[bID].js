@@ -3,13 +3,24 @@ import { getSession } from 'next-auth/react'
 import Board from '@/components/Board/Board'
 import UserNav from '@/components/UserNav'
 import SubNav from '@/components/SubNav'
+import { useDispatch, useSelector } from "react-redux"
+import { initializeBoard } from '@/redux/boardSlice'
+import { initializeLists } from '@/redux/listsSlice'
+import { initializeCards } from '@/redux/cardsSlice'
 
 const BoardPage = ({ board, cards, lists }) => {
+  const dispatch = useDispatch()
   const [boardData, setBoardData] = useState({
     board,
     cards,
     lists: lists.sort((a, b) => a.sequence - b.sequence)
   })
+  if(useSelector(state => state.board.id) === null) {
+    dispatch(initializeBoard(board))
+    dispatch(initializeLists(lists.sort((a, b) => a.sequence - b.sequence)))
+    dispatch(initializeCards(cards))
+  }
+  
   return (
     <div>
       <UserNav board={board} />
