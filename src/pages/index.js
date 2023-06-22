@@ -6,8 +6,8 @@ import Navbar from '@/components/Landing/Navbar'
 import Footer from '@/components/Landing/Footer'
 import { useSession } from 'next-auth/react'
 import { useDispatch } from 'react-redux'
-// import {login} from '@/store/userSlice'
-import store from '@/store/store'
+import {login} from '@/store/userSlice'
+
 
 export default function Home({ sess }) {
   const { data: session, status } = useSession()
