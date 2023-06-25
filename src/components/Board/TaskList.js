@@ -16,9 +16,10 @@ const TaskList = ({ tasks, list, deleteListOrCard, boardData, setBoardData }) =>
                 task={task}
                 index={task.sequence}
                 key={index}
-                deleteListOrCard={deleteListOrCard}
-                boardData={boardData}
-                setBoardData={setBoardData} />
+                // deleteListOrCard={deleteListOrCard}
+                // boardData={boardData}
+                // setBoardData={setBoardData}
+                 />
             ))}
           </div>
         </div>

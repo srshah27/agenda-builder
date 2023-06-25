@@ -4,26 +4,21 @@ import {
   TextInput,
   OptionInput
 } from '@/components/Modals/AttributeInputs/Types'
-const Attribute = ({ task, attributes, index, setAttributes, setTask }) => {
+const Attribute = ({ taskId, index }) => {
+  const attributes = useSelector(state => state.cards.cards.find(card => card.id === taskId)).attributes
   switch (attributes[index].attributeType) {
     case 'text':
       return (
         <TextInput
-          task={task}
-          attributes={attributes}
+          taskID={taskId}
           index={index}
-          setAttributes={setAttributes}
-          setTask={setTask}
         />
       )
     case 'multi':
       return (
         <MultipleOptionInput
-          task={task}
-          attributes={attributes}
+          taskID={taskId}
           index={index}
-          setAttributes={setAttributes}
-          setTask={setTask}
         />
       )
     // case 'option':

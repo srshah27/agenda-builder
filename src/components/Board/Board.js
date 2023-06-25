@@ -13,6 +13,7 @@ import { nanoid } from 'nanoid'
 import { Box } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { AddIcon } from '@chakra-ui/icons'
+import { useDispatch, useSelector } from "react-redux"
 
 const List = dynamic(() => import('./List'), {
   ssr: false
@@ -21,17 +22,10 @@ const List = dynamic(() => import('./List'), {
 const Board = ({ boardData, setBoardData }) => {
   const [refresh, setRefresh] = useState(false)
   const { data: session } = useSession()
-
-  // useEffect(() => {
-  //   setBoardData({
-  //     ...boardData,
-  //     lists: boardData.lists.sort((a, b) => a.sequence - b.sequence),
-  //     cards: boardData.cards.sort((a, b) => a.sequence - b.sequence)
-  //   })
-
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [refresh])
-
+  const dispatch = useDispatch()
+  const lists = useSelector(state => state.lists.lists)
+  // console.log(lists);
+  
   function updateDb(url, body, cardsOrLists) {
     fetch(url, {
       method: 'PATCH',
@@ -54,7 +48,6 @@ const Board = ({ boardData, setBoardData }) => {
         setBoardData(data)
       })
   }
-
   const addCard = listId => {
     let list = boardData.lists.find(list => list.id === listId)
     console.log(list);
@@ -105,7 +98,6 @@ const Board = ({ boardData, setBoardData }) => {
     console.log(data);
     setBoardData({ ...boardData, lists: newLists })
   }
-
   const handleDelete = async (e, data) => {
     if (data.type === 'list') {
       fetch(
@@ -134,7 +126,6 @@ const Board = ({ boardData, setBoardData }) => {
         })
     }
   }
-
   const handleColumnDrag = (data, destination, source, draggableId) => {
     let ogiData = JSON.parse(JSON.stringify(data))
     let id = draggableId
@@ -198,7 +189,6 @@ const Board = ({ boardData, setBoardData }) => {
     )
     return data
   }
-
   const onDragEnd = result => {
     const { destination, source, draggableId, type } = result
     if (!destination) return
@@ -214,7 +204,6 @@ const Board = ({ boardData, setBoardData }) => {
 
     setBoardData(updatedData)
   }
-
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <React.StrictMode>
@@ -225,7 +214,7 @@ const Board = ({ boardData, setBoardData }) => {
               {...droppableProvided.droppableProps}
               className="flex flex-col items-center px-4 bg-[url(../../public/img/boardbg.png)] bg-cover"
             >
-              {boardData.lists.map(list => {
+              {/* {boardData.lists.map(list => {
                 const tasks = boardData.cards.filter(
                   card => card.listId === list.id
                 )
@@ -242,7 +231,14 @@ const Board = ({ boardData, setBoardData }) => {
                     setBoardData={setBoardData}
                   />
                 )
-              })}
+              })} */}
+              {
+                lists.map((list, index) => {
+                  return (
+                    <List key={index} listId={list.id} index={index} />
+                  )
+                })
+              }
               {droppableProvided.placeholder}
               <button
                 onClick={addList}

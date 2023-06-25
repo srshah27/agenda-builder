@@ -16,20 +16,17 @@ import {
 } from '@chakra-ui/react'
 import Attribute from './AttributeInputs/Attributes'
 import moment from 'moment'
-
-const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration, deleteListOrCard }) => {
-  const [currentTask, setCurrentTask] = useState(task)
-  const [name, setName] = useState(task.name)
-  const [description, setDescription] = useState(task.description)
-  const [start, setStart] = useState(new Date(task.start))
-  const [end, setEnd] = useState(new Date(task.end))
-  const [startTime, setStartTime] = useState(moment(task.start).format('HH:mm'))
-  const [endTime, setEndTime] = useState(moment(task.end).format('HH:mm'))
+import { useDispatch, useSelector } from 'react-redux'
+const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
+  // const [currentTask, setCurrentTask] = useState(task)
+  const currentTask = useSelector(state => state.cards.cards.find(card => card.id === taskId))
+ 
+  const [startTime, setStartTime] = useState(moment(currentTask.start).format('HH:mm'))
+  const [endTime, setEndTime] = useState(moment(currentTask.end).format('HH:mm'))
   const [duration, setCurrentDuration] = useState({
-    hours: new moment(task.end).diff(new moment(task.start), 'hours'),
-    miniutes: new moment(task.end).diff(new moment(task.start), 'minutes') % 60
+    hours: new moment(currentTask.end).diff(new moment(currentTask.start), 'hours'),
+    miniutes: new moment(currentTask.end).diff(new moment(currentTask.start), 'minutes') % 60
   })
-  const [attributes, setAttributes] = useState(task.attributes)
   const initialRef = React.useRef(null)
 
   const UpdateTask = async (oldTask, body) => {
@@ -61,7 +58,7 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration, delete
   
   const handleDelete = async () => {
     let res = await fetch(
-      `/api/w/${task.workspaceId}/b/${task.boardId}/c/${task.id}`,
+      `/api/w/${currentTask.workspaceId}/b/${currentTask.boardId}/c/${currentTask.id}`,
       {
         method: 'DELETE'
       }
@@ -70,7 +67,7 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration, delete
     
     onClose()
   }
-
+  if (!currentTask) return null
   return (
     <>
       <Modal
@@ -91,27 +88,29 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration, delete
               <FormLabel>Start Time</FormLabel>
               <Input
                 type="time"
-                value={startTime}
+                value={moment(currentTask.start).format('HH:mm')}
                 onChange={e => {
-                  setStartTime(e.target.value)
-                  setStart(
-                    new Date(
-                      `${moment(start).format('YYYY-MM-DD')} ${e.target.value}`
-                    )
-                  )
+                  
+                  
+                  // setStartTime(e.target.value)
+                  // setStart(
+                  //   new Date(
+                  //     `${moment(currentTask.start).format('YYYY-MM-DD')} ${e.target.value}`
+                  //   )
+                  // )
                   setCurrentDuration({
                     hours: new moment(end).diff(
                       new moment(
-                        `${moment(start).format('YYYY-MM-DD')} ${
+                        `${moment(currentTask.start).format('YYYY-MM-DD')} ${
                           e.target.value
                         }`
                       ),
                       'hours'
                     ),
                     miniutes:
-                      new moment(end).diff(
+                      new moment(currentTask.end).diff(
                         new moment(
-                          `${moment(start).format('YYYY-MM-DD')} ${
+                          `${moment(currentTask.start).format('YYYY-MM-DD')} ${
                             e.target.value
                           }`
                         ),
@@ -123,18 +122,20 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration, delete
               <FormLabel>End Time</FormLabel>
               <Input
                 type="time"
-                value={endTime}
+                value={moment(currentTask.end).format('HH:mm') }
                 onChange={e => {
-                  setEndTime(e.target.value)
-                  setEnd(
-                    new Date(
-                      `${moment(end).format('YYYY-MM-DD')} ${e.target.value}`
-                    )
-                  )
+                  
+                  
+                  // setEndTime(e.target.value)
+                  // setEnd(
+                  //   new Date(
+                  //     `${moment(currentTask.end).format('YYYY-MM-DD')} ${e.target.value}`
+                  //   )
+                  // )
                   setCurrentDuration({
                     hours: new moment(end).diff(
                       new moment(
-                        `${moment(start).format('YYYY-MM-DD')} ${
+                        `${moment(currentTask.start).format('YYYY-MM-DD')} ${
                           e.target.value
                         }`
                       ),
@@ -165,8 +166,8 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration, delete
                   let m = new moment(start)
                     .add(e.target.value, 'hours')
                     .add(duration.miniutes, 'minutes')
-                  setEnd(m.toDate())
-                  setEndTime(m.format('HH:mm'))
+                  // setEnd(m.toDate())
+                  // setEndTime(m.format('HH:mm'))
                 }}
               />
               <Input
@@ -181,8 +182,8 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration, delete
                   let m = new moment(start)
                     .add(duration.hours, 'hours')
                     .add(e.target.value, 'minutes')
-                  setEnd(m.toDate())
-                  setEndTime(m.format('HH:mm'))
+                  // setEnd(m.toDate())
+                  // setEndTime(m.format('HH:mm'))
                 }}
               />
 
@@ -190,29 +191,26 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration, delete
               <Input
                 ref={initialRef}
                 placeholder="Activity Title"
-                value={name}
+                value={currentTask.name}
                 onChange={e => {
-                  setName(e.target.value)
+                  // setName(e.target.value)
                 }}
               />
 
               <FormLabel>Activity Description</FormLabel>
               <Textarea
                 placeholder="Description"
-                value={description}
+                value={currentTask.description}
                 onChange={e => {
-                  setDescription(e.target.value)
+                  // setDescription(e.target.value)
                 }}
               />
             </FormControl>
-            {attributes.map((attr, index) => {
+            {currentTask.attributes.map((attr, index) => {
               return (
                 <Attribute
-                  task={task}
-                  attributes={attributes}
+                  taskId={taskId}
                   index={index}
-                  setAttributes={setAttributes}
-                  setTask={setTask}
                   key={index}
                 />
               )
@@ -222,7 +220,7 @@ const CardModal = ({ task, setTask, onClose, isOpen, onOpen, setDuration, delete
 
           <ModalFooter>
             <Button colorScheme="red" mr={3} onClick={(e) => {
-              deleteListOrCard(e, { card: task, type: 'card' } )
+              // deleteListOrCard(e, { card: task, type: 'card' } )
             }} > Delete </Button>
             <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
               Save

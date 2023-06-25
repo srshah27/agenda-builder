@@ -9,36 +9,37 @@ import {
   Switch
 } from '@chakra-ui/react'
 import { MultiSelect, useMultiSelect } from 'chakra-multiselect'
+import { useDispatch, useSelector } from 'react-redux'
 
-export const ShowButton = ({ attr, index, attributes, setAttributes }) => {
-  const [Show, setShow] = useState(attr.show)
+export const ShowButton = ({ taskID, index }) => {
+  const attribute = useSelector(state => state.cards.cards.find(card => card.id === taskID)).attributes[index]
   return (
     <>
       {/* <FormLabel FormLabel > Show </FormLabel> */}
       <Switch
-        isChecked={Show}
+        isChecked={attribute.show}
         onChange={() => {
-          let newAttrs = attributes
-          newAttrs[index].show = !newAttrs[index].show
-          setAttributes(newAttrs)
-          setShow(!Show)
+          // let newAttrs = attributes
+          // newAttrs[index].show = !newAttrs[index].show
+          // setAttributes(newAttrs)
+          // setShow(!Show)
         }}
       />
     </>
   )
 }
 
-export const TextInput = ({ task, attributes, index, setAttributes, setTask}) => {
-  const [value, setValue] = useState(attributes[index].value)
-  const attr = attributes[index]
+export const TextInput = ({ taskID, index }) => {
+  const attribute = useSelector(state => state.cards.cards.find(card => card.id === taskID)).attributes[index]
+  // const [value, setValue] = useState(attributes[index].value)
+  // const attr = attributes[index]
   return (
     <FormControl mt={4} key={index}>
       <div className="flex flex-row">
         <ShowButton
-          attr={attr}
-          attributes={attributes}
+          taskID={taskID}
           index={index}
-          setAttributes={setAttributes}
+
         />
         <FormLabel className="ml-5">
           {' '}
@@ -46,70 +47,61 @@ export const TextInput = ({ task, attributes, index, setAttributes, setTask}) =>
         </FormLabel>
       </div>
       <Input
-        placeholder={attr.name}
-        value={value}
+        placeholder={attribute.name}
+        value={attribute.value}
         type="text"
         onChange={e => {
-          let newAttrs = attributes
-          newAttrs[index].value = e.target.value
-          setValue(e.target.value)
-          setAttributes(newAttrs)
-          setTask({ ...task, attributes: newAttrs })
+          // let newAttrs = attributes
+          // newAttrs[index].value = e.target.value
+          // setValue(e.target.value)
+          // setAttributes(newAttrs)
+          // setTask({ ...task, attributes: newAttrs })
         }}
       />
     </FormControl>
   )
 }
-export const MultipleOptionInput = ({
-  task,
-  attributes,
-  index,
-  setAttributes,
-  setTask
-}) => {
-  const [value, setValue] = useState(attributes[index].value ? JSON.parse(attributes[index].value) : [])
+export const MultipleOptionInput = ({ taskID, index }) => {
+  const attribute = useSelector(state => state.cards.cards.find(card => card.id === taskID)).attributes[index]
   // const [options, setOption] = useState(attributes[index].options);
   // https://bmartel.github.io/chakra-multiselect/docs/
   let { options, onChange } = useMultiSelect({
-    value: value,
-    options: attributes[index].options
+    value: JSON.parse(attribute.value),
+    options: attribute.options
   })
 
-  const attr = attributes[index]
   return (
     <FormControl mt={4} key={index}>
       <div className="flex flex-row">
         <ShowButton
-          attr={attr}
-          attributes={attributes}
+          taskID={taskID}
           index={index}
-          setAttributes={setAttributes}
         />
-        <FormLabel  className="ml-5">
+        <FormLabel className="ml-5">
           {' '}
-          {attr.name}
+          {attribute.name}
         </FormLabel>
       </div>
       <MultiSelect
         options={options}
-        value={value}
+        value={attribute.value}
         label="Choose or create items"
         onChange={e => {
-          let newAttrs = attributes
-          newAttrs[index].value = JSON.stringify(e)
-          setValue(e)
-          // options.forEach((option, index) => {
-          //   e.forEach(Input => {
-          //     if (option.value === Input) {
-                
-          //     }
-          //   });
-          // })
-          console.log(options)
-          setAttributes(newAttrs)
-          setTask({ ...task, attributes: newAttrs })
+          // let newAttrs = attributes
+          // newAttrs[index].value = JSON.stringify(e)
+          // setValue(e)
+          // // options.forEach((option, index) => {
+          // //   e.forEach(Input => {
+          // //     if (option.value === Input) {
+
+          // //     }
+          // //   });
+          // // })
+          // console.log(options)
+          // setAttributes(newAttrs)
+          // setTask({ ...task, attributes: newAttrs })
         }}
-        // create
+      // create
       />
     </FormControl>
   )

@@ -18,43 +18,41 @@ import {
 } from '@chakra-ui/react'
 import { nanoid } from 'nanoid'
 import { MultiSelect, useMultiSelect } from 'chakra-multiselect'
+import { useDispatch, useSelector } from 'react-redux'
 
-export const AttributeInput = ({ attributes, setAttributes, index }) => {
-  const [name, setName] = useState(attributes[index].name)
-  const [type, setType] = useState(attributes[index].attributeType)
-  const [show, setShow] = useState(attributes[index].show)
-  const [options, setOptions] = useState(attributes[index].options)
+export const AttributeInput = ({ index }) => {
+  const attributes = useSelector(state => state.board.activityAttributes[index])
   
   return (
     <>
       <Switch
-        isChecked={show}
+        isChecked={attributes.show}
         onChange={() => {
-          let newAttrs = attributes
-          newAttrs[index].show = !newAttrs[index].show
-          setAttributes(newAttrs)
-          setShow(!show)
+          // let newAttrs = attributes
+          // newAttrs[index].show = !newAttrs[index].show
+          // setAttributes(newAttrs)
+          // setShow(!show)
         }}
       />
       <Input
         type="text"
-        value={name}
+        value={attributes.name}
         placeholder='Attribute Name'
         onChange={e => {
-          let newAttributes = [...attributes]
-          newAttributes[index].name = e.target.value
-          setAttributes(newAttributes)
-          setName(e.target.value)
+          // let newAttributes = [...attributes]
+          // newAttributes[index].name = e.target.value
+          // setAttributes(newAttributes)
+          // setName(e.target.value)
         }}
       />
 
       <Select
-        value={type}
+        value={attributes.type}
         onChange={e => {
-          let newAttributes = [...attributes]
-          newAttributes[index].attributeType = e.target.value
-          setAttributes(newAttributes)
-          setType(e.target.value)
+          // let newAttributes = [...attributes]
+          // newAttributes[index].attributeType = e.target.value
+          // setAttributes(newAttributes)
+          // setType(e.target.value)
         }}
       >
         <option value="text">Text</option>
@@ -62,18 +60,18 @@ export const AttributeInput = ({ attributes, setAttributes, index }) => {
         <option value="option">Option</option>
       </Select>
       {/* Options if type== multi or option */}
-      {(type === 'multi' || type === 'option') ? 
+      {(attributes.type === 'multi' || attributes.type === 'option') ? 
        <span>
           <MultiSelect
             // options={[]}
-            value={options}
+            value={attributes.options}
             label="Choose or create items"
             onChange={e => {
-              let newAttrs = attributes
-              newAttrs[index].options = e
-              setOptions(e)
-              setAttributes(newAttrs)
-              console.log(e)
+              // let newAttrs = attributes
+              // newAttrs[index].options = e
+              // setOptions(e)
+              // setAttributes(newAttrs)
+              // console.log(e)
               
             }}
             create
@@ -83,8 +81,8 @@ export const AttributeInput = ({ attributes, setAttributes, index }) => {
 
       <Button
         onClick={e => {
-          let newAttributes = attributes.filter((attr, i) => i !== index)
-          setAttributes(newAttributes)
+          // let newAttributes = attributes.filter((attr, i) => i !== index)
+          // setAttributes(newAttributes)
         }}
       >
         Delete
@@ -93,12 +91,13 @@ export const AttributeInput = ({ attributes, setAttributes, index }) => {
   )
 }
 
-const AttributeModal = ({ boardData, setBoardData, onClose, isOpen, onOpen }) => {
-  const [oldAttrs, setOldAttrs] = useState(JSON.parse(JSON.stringify(boardData.board.activityAttributes)));
-  const [oldBoard, setOldBoard] = useState(boardData.board)
-  const [attributes, setAttributes] = useState(boardData.board.activityAttributes)
+const AttributeModal = ({ onClose, isOpen, onOpen }) => {
+  // const [oldAttrs, setOldAttrs] = useState(JSON.parse(JSON.stringify(boardData.board.activityAttributes)));
+  // const [oldBoard, setOldBoard] = useState(boardData.board)
+  // const [attributes, setAttributes] = useState(boardData.board.activityAttributes)
   // console.log(attributes);
   // console.log(oldBoard);
+  const attributes = useSelector(state => state.board.activityAttributes)
   
   const updateBoardData = async () => {
     let res
@@ -109,13 +108,13 @@ const AttributeModal = ({ boardData, setBoardData, onClose, isOpen, onOpen }) =>
     res = await fetch(`/api/w/${oldBoard.workspaceId}/b/${oldBoard.id}/l`)
     let { lists } = await res.json()
     
-    setBoardData({
-      board,
-      cards,
-      lists: lists.sort((a, b) => a.sequence - b.sequence)
-    })
-    setOldBoard(board)
-    setAttributes(board.activityAttributes)
+    // setBoardData({
+    //   board,
+    //   cards,
+    //   lists: lists.sort((a, b) => a.sequence - b.sequence)
+    // })
+    // setOldBoard(board)
+    // setAttributes(board.activityAttributes)
     
   }
   
@@ -237,8 +236,6 @@ const AttributeModal = ({ boardData, setBoardData, onClose, isOpen, onOpen }) =>
               {attributes.map((attribute, index) => {
                 return (
                   <AttributeInput
-                    attributes={attributes}
-                    setAttributes={setAttributes}
                     index={index}
                     key={index}
                   />

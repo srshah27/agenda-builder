@@ -32,11 +32,11 @@ const boardSlice = createSlice({
       state.end = action.payload.end;
       state.activityAttributes = action.payload.activityAttributes;
     },
-    update: (state, action) => {
+    updateBoard: (state, action) => {
       state[action.payload.field] = action.payload.value;
       
     },
-    addAttributes: (state, action) => {
+    addBoardAttributes: (state, action) => {
       action.payload.forEach(attr => {
       state.activityAttributes.push(attr);
       });

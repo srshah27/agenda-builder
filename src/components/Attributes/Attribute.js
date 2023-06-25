@@ -1,14 +1,15 @@
 import React from 'react'
 import { MultipleOption, Text, Option } from '@/components/Attributes/Types'
-const Attribute = ({ attr, task }) => {
-  if (!attr.show) return <></>
-  switch (attr.attributeType) {
+const Attribute = ({ taskId, index }) => {
+  const attribute = useSelector(state => state.cards.cards.find(card => card.id === taskId)).attributes[index]
+  if (!attribute.show) return <></>
+  switch (attribute.attributeType) {
     case 'text':
-      return <Text attr={attr} task={task} />
+      return <Text taskId={taskId} index={index} />
     case 'multi':
-      return <MultipleOption attr={attr} task={task} />
+      return <MultipleOption taskId={taskId} index={index} />
     case 'option':
-      return <Option attr={attr} task={task} />
+      return <Option taskId={taskId} index={index} />
     default:
       return <>Error</>
   }
