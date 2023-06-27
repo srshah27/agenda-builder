@@ -41,6 +41,23 @@ const boardSlice = createSlice({
       state.activityAttributes.push(attr);
       });
     },
+    deleteBoardAttribute: (state, action) => {
+      state.activityAttributes = state.activityAttributes.filter(attr => attr.id !== action.payload);
+    },
+    modifyBoardAttribute: (state, action) => {
+      let index = state.activityAttributes.findIndex(attr => attr.id === action.payload.new.id);
+      let newAttr = action.payload.new;
+      
+      for (const key in newAttr) {
+        if (Object.hasOwnProperty.call(newAttr, key)) {
+          const element = newAttr[key];
+          if (key === "id" || key === "_id")
+            continue;
+          state.activityAttributes[index][key] = element;
+
+        }
+      }
+    }
   }
 });
 
