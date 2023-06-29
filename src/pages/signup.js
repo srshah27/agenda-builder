@@ -18,7 +18,7 @@ function Signup({ providers }) {
       password: '',
       cpassword: ''
     },
-    validate: async values => {
+    validate: async (values) => {
       const errors = {}
       if (!values.email) {
         errors.email = 'Please enter valid email address'

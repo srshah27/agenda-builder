@@ -21,8 +21,10 @@ import { MultiSelect, useMultiSelect } from 'chakra-multiselect'
 import { useDispatch, useSelector } from 'react-redux'
 
 export const AttributeInput = ({ index }) => {
-  const attributes = useSelector(state => state.board.activityAttributes[index])
-  
+  const attributes = useSelector(
+    (state) => state.board.activityAttributes[index]
+  )
+
   return (
     <>
       <Switch
@@ -37,8 +39,8 @@ export const AttributeInput = ({ index }) => {
       <Input
         type="text"
         value={attributes.name}
-        placeholder='Attribute Name'
-        onChange={e => {
+        placeholder="Attribute Name"
+        onChange={(e) => {
           // let newAttributes = [...attributes]
           // newAttributes[index].name = e.target.value
           // setAttributes(newAttributes)
@@ -48,7 +50,7 @@ export const AttributeInput = ({ index }) => {
 
       <Select
         value={attributes.type}
-        onChange={e => {
+        onChange={(e) => {
           // let newAttributes = [...attributes]
           // newAttributes[index].attributeType = e.target.value
           // setAttributes(newAttributes)
@@ -60,27 +62,28 @@ export const AttributeInput = ({ index }) => {
         <option value="option">Option</option>
       </Select>
       {/* Options if type== multi or option */}
-      {(attributes.type === 'multi' || attributes.type === 'option') ? 
-       <span>
+      {attributes.type === 'multi' || attributes.type === 'option' ? (
+        <span>
           <MultiSelect
             // options={[]}
             value={attributes.options}
             label="Choose or create items"
-            onChange={e => {
+            onChange={(e) => {
               // let newAttrs = attributes
               // newAttrs[index].options = e
               // setOptions(e)
               // setAttributes(newAttrs)
               // console.log(e)
-              
             }}
             create
           />
-       </span> 
-       : <></>}
+        </span>
+      ) : (
+        <></>
+      )}
 
       <Button
-        onClick={e => {
+        onClick={(e) => {
           // let newAttributes = attributes.filter((attr, i) => i !== index)
           // setAttributes(newAttributes)
         }}
@@ -97,8 +100,8 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
   // const [attributes, setAttributes] = useState(boardData.board.activityAttributes)
   // console.log(attributes);
   // console.log(oldBoard);
-  const attributes = useSelector(state => state.board.activityAttributes)
-  
+  const attributes = useSelector((state) => state.board.activityAttributes)
+
   const updateBoardData = async () => {
     let res
     res = await fetch(`/api/w/${oldBoard.workspaceId}/b/${oldBoard.id}`)
@@ -107,7 +110,7 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
     let { cards } = await res.json()
     res = await fetch(`/api/w/${oldBoard.workspaceId}/b/${oldBoard.id}/l`)
     let { lists } = await res.json()
-    
+
     // setBoardData({
     //   board,
     //   cards,
@@ -115,12 +118,10 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
     // })
     // setOldBoard(board)
     // setAttributes(board.activityAttributes)
-    
   }
-  
+
   const UpdateAttributes = async (body) => {
-    
-    let resAdd, resDel, resMod;
+    let resAdd, resDel, resMod
     if (body.addedAttributes.length > 0) {
       resAdd = await fetch(
         `/api/w/${oldBoard.workspaceId}/b/${oldBoard.id}/attr`,
@@ -130,19 +131,20 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
           body: JSON.stringify({ attributes: body.addedAttributes })
         }
       )
-
     }
     if (body.deletedAttributes.length > 0) {
-      console.log(body.deletedAttributes);
+      console.log(body.deletedAttributes)
       resDel = await fetch(
         `/api/w/${oldBoard.workspaceId}/b/${oldBoard.id}/attr`,
         {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ attributes: body.deletedAttributes, modify: false })
+          body: JSON.stringify({
+            attributes: body.deletedAttributes,
+            modify: false
+          })
         }
       )
-
     }
     if (body.modifiedAttributes.length > 0) {
       resMod = await fetch(
@@ -150,19 +152,20 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
         {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ attributes: body.modifiedAttributes, modify: true })
+          body: JSON.stringify({
+            attributes: body.modifiedAttributes,
+            modify: true
+          })
         }
       )
-
     }
 
-    
     let data = {
       addedAttributes: resAdd ? await resAdd.json() : [],
       deletedAttributes: resDel ? await resDel.json() : [],
       modifiedAttributes: resMod ? await resMod.json() : []
     }
-    
+
     return data
   }
 
@@ -177,8 +180,8 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
     //     }
     //   }
     // }
-    
-    let addedAttributes = attributes.filter((attr) => attr._id === undefined);
+
+    let addedAttributes = attributes.filter((attr) => attr._id === undefined)
     let deletedAttributes = oldAttrs.filter((attr) => {
       for (let i = 0; i < attributes.length; i++) {
         const attr1 = attributes[i]
@@ -186,31 +189,29 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
           return false
         }
       }
-      return true;
-    });
-    let modifiedAttributes = attributes.filter((attr) => {
-      let oldAttr = oldAttrs.find((oldAttr) => oldAttr.id === attr.id);
-      if (oldAttr === undefined) return false;
-      if (JSON.stringify(oldAttr) == JSON.stringify(attr)) return false;
       return true
-    });
-    console.log(addedAttributes.length);
-    console.log(deletedAttributes.length);
-    console.log(modifiedAttributes.length);
-
+    })
+    let modifiedAttributes = attributes.filter((attr) => {
+      let oldAttr = oldAttrs.find((oldAttr) => oldAttr.id === attr.id)
+      if (oldAttr === undefined) return false
+      if (JSON.stringify(oldAttr) == JSON.stringify(attr)) return false
+      return true
+    })
+    console.log(addedAttributes.length)
+    console.log(deletedAttributes.length)
+    console.log(modifiedAttributes.length)
 
     let body = {
       addedAttributes: addedAttributes,
       modifiedAttributes: modifiedAttributes,
       deletedAttributes: deletedAttributes
     }
-    console.log(modifiedAttributes);
+    console.log(modifiedAttributes)
     let res = await UpdateAttributes(body)
     console.log(res)
     // onClose();
-    
+
     updateBoardData()
-    
   }
   const initialRef = React.useRef(null)
 
@@ -234,16 +235,11 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
             <FormControl>
               <FormLabel>Board Attributes</FormLabel>
               {attributes.map((attribute, index) => {
-                return (
-                  <AttributeInput
-                    index={index}
-                    key={index}
-                  />
-                )
+                return <AttributeInput index={index} key={index} />
               })}
 
               <Button
-                onClick={e => {
+                onClick={(e) => {
                   let newAttributes = [
                     ...attributes,
                     {

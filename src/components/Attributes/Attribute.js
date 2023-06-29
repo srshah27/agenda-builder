@@ -1,7 +1,9 @@
 import React from 'react'
 import { MultipleOption, Text, Option } from '@/components/Attributes/Types'
 const Attribute = ({ taskId, index }) => {
-  const attribute = useSelector(state => state.cards.cards.find(card => card.id === taskId)).attributes[index]
+  const attribute = useSelector((state) =>
+    state.cards.cards.find((card) => card.id === taskId)
+  ).attributes[index]
   if (!attribute.show) return <></>
   switch (attribute.attributeType) {
     case 'text':

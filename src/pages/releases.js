@@ -21,7 +21,7 @@ const ReleasesPage = () => {
             All Releases
           </h2>
           <hr className="mb-8 mt-6 h-0.5 w-full border-t-0 bg-indigo-600 opacity-100 dark:opacity-50 lg:w-1/3" />
-          {releasesKeys.map(releaseTitle => (
+          {releasesKeys.map((releaseTitle) => (
             <div key={releaseTitle}>
               <Release release={releases[releaseTitle]} />
             </div>

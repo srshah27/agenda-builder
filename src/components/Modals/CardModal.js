@@ -19,13 +19,26 @@ import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
   // const [currentTask, setCurrentTask] = useState(task)
-  const currentTask = useSelector(state => state.cards.cards.find(card => card.id === taskId))
- 
-  const [startTime, setStartTime] = useState(moment(currentTask.start).format('HH:mm'))
-  const [endTime, setEndTime] = useState(moment(currentTask.end).format('HH:mm'))
+  const currentTask = useSelector((state) =>
+    state.cards.cards.find((card) => card.id === taskId)
+  )
+
+  const [startTime, setStartTime] = useState(
+    moment(currentTask.start).format('HH:mm')
+  )
+  const [endTime, setEndTime] = useState(
+    moment(currentTask.end).format('HH:mm')
+  )
   const [duration, setCurrentDuration] = useState({
-    hours: new moment(currentTask.end).diff(new moment(currentTask.start), 'hours'),
-    miniutes: new moment(currentTask.end).diff(new moment(currentTask.start), 'minutes') % 60
+    hours: new moment(currentTask.end).diff(
+      new moment(currentTask.start),
+      'hours'
+    ),
+    miniutes:
+      new moment(currentTask.end).diff(
+        new moment(currentTask.start),
+        'minutes'
+      ) % 60
   })
   const initialRef = React.useRef(null)
 
@@ -55,7 +68,7 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
     setDuration(duration)
     onClose()
   }
-  
+
   const handleDelete = async () => {
     let res = await fetch(
       `/api/w/${currentTask.workspaceId}/b/${currentTask.boardId}/c/${currentTask.id}`,
@@ -64,7 +77,7 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
       }
     )
     let data = await res.json()
-    
+
     onClose()
   }
   if (!currentTask) return null
@@ -89,9 +102,7 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
               <Input
                 type="time"
                 value={moment(currentTask.start).format('HH:mm')}
-                onChange={e => {
-                  
-                  
+                onChange={(e) => {
                   // setStartTime(e.target.value)
                   // setStart(
                   //   new Date(
@@ -122,10 +133,8 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
               <FormLabel>End Time</FormLabel>
               <Input
                 type="time"
-                value={moment(currentTask.end).format('HH:mm') }
-                onChange={e => {
-                  
-                  
+                value={moment(currentTask.end).format('HH:mm')}
+                onChange={(e) => {
                   // setEndTime(e.target.value)
                   // setEnd(
                   //   new Date(
@@ -158,7 +167,7 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                 type="number"
                 value={duration.hours}
                 step={1}
-                onChange={e => {
+                onChange={(e) => {
                   setCurrentDuration({
                     hours: e.target.value,
                     miniutes: duration.miniutes
@@ -174,7 +183,7 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                 type="number"
                 value={duration.miniutes}
                 step={1}
-                onChange={e => {
+                onChange={(e) => {
                   setCurrentDuration({
                     hours: duration.hours,
                     miniutes: e.target.value
@@ -192,7 +201,7 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                 ref={initialRef}
                 placeholder="Activity Title"
                 value={currentTask.name}
-                onChange={e => {
+                onChange={(e) => {
                   // setName(e.target.value)
                 }}
               />
@@ -201,27 +210,28 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
               <Textarea
                 placeholder="Description"
                 value={currentTask.description}
-                onChange={e => {
+                onChange={(e) => {
                   // setDescription(e.target.value)
                 }}
               />
             </FormControl>
             {currentTask.attributes.map((attr, index) => {
-              return (
-                <Attribute
-                  taskId={taskId}
-                  index={index}
-                  key={index}
-                />
-              )
+              return <Attribute taskId={taskId} index={index} key={index} />
             })}
           </ModalBody>
           {/* {JSON.stringify(attributes)} */}
 
           <ModalFooter>
-            <Button colorScheme="red" mr={3} onClick={(e) => {
-              // deleteListOrCard(e, { card: task, type: 'card' } )
-            }} > Delete </Button>
+            <Button
+              colorScheme="red"
+              mr={3}
+              onClick={(e) => {
+                // deleteListOrCard(e, { card: task, type: 'card' } )
+              }}
+            >
+              {' '}
+              Delete{' '}
+            </Button>
             <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
               Save
             </Button>

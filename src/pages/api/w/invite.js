@@ -30,7 +30,7 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Invite disabled' })
       if (workspace.invite.expiresAt < new Date())
         return res.status(400).json({ error: 'Invite expired' })
-      if (workspace.collaborators.find(c => c.user === uId))
+      if (workspace.collaborators.find((c) => c.user === uId))
         return res.status(400).json({ error: 'User already a collaborator' })
       let w = await Workspace.updateOne(
         { 'invite.link': inviteCode },

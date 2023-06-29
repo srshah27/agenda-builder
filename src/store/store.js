@@ -8,8 +8,8 @@ const store = configureStore({
   reducer: {
     board: boardReducer,
     lists: listsReducer,
-    cards: cardsReducer,
-  },
+    cards: cardsReducer
+  }
 })
 
 export default store

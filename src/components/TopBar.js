@@ -39,10 +39,10 @@ export default function WithSubnavigation({ asCreator, asCollaborator }) {
 
   useEffect(() => {
     let temp = []
-    asCreator.map(item => {
+    asCreator.map((item) => {
       temp.push({ label: item.name, href: `/w/${item.id}` })
     })
-    asCollaborator.map(item => {
+    asCollaborator.map((item) => {
       temp.push({ label: item.name, href: `/w/${item.id}` })
     })
     setNavWorkspaces([
@@ -120,10 +120,10 @@ export default function WithSubnavigation({ asCreator, asCollaborator }) {
 const DesktopNav = ({ navWorkspaces }) => {
   return (
     <Stack direction={'row'} spacing={4}>
-      {navWorkspaces.map(navItem => (
+      {navWorkspaces.map((navItem) => (
         <NavLink navItem={navItem} key={navItem.label} />
       ))}
-      {NAV_TEMPLATES.map(navItem => (
+      {NAV_TEMPLATES.map((navItem) => (
         <NavLink navItem={navItem} key={navItem.label} />
       ))}
     </Stack>
@@ -164,7 +164,7 @@ const NavLink = ({ navItem }) => {
             minW={'sm'}
           >
             <Stack>
-              {navItem.children.map(child => (
+              {navItem.children.map((child) => (
                 <DesktopSubNav key={child.label} {...child} />
               ))}
             </Stack>
@@ -216,10 +216,10 @@ const MobileNav = ({ navWorkspaces }) => {
       p={4}
       display={{ md: 'none' }}
     >
-      {navWorkspaces.map(navItem => (
+      {navWorkspaces.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
-      {NAV_TEMPLATES.map(navItem => (
+      {NAV_TEMPLATES.map((navItem) => (
         <MobileNavItem key={navItem.label} {...navItem} />
       ))}
     </Stack>
@@ -268,7 +268,7 @@ const MobileNavItem = ({ label, children, href }) => {
           align={'start'}
         >
           {children &&
-            children.map(child => (
+            children.map((child) => (
               <Link key={child.label} py={2} href={child.href}>
                 {child.label}
               </Link>

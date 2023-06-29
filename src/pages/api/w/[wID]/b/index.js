@@ -33,8 +33,7 @@ export default async function handler(req, res) {
         backgroundImage: backgroundImage || 'default',
         start,
         end,
-        activityAttributes: [
-        ]
+        activityAttributes: []
       }
       const board = await Board.create(data)
       return res.status(201).json({ board })

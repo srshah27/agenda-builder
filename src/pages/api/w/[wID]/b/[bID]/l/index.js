@@ -30,8 +30,8 @@ export default async function handler(req, res) {
       for (let i = 0; i < attrs.length; i++) {
         delete attrs[i]._id
       }
-      console.log("attrs");
-      console.log(attrs);
+      console.log('attrs')
+      console.log(attrs)
       const data = {
         id,
         workspaceId: wID,

@@ -14,8 +14,8 @@ const Dashboard = ({ Creator, Collaborator }) => {
 
   useEffect(() => {
     fetch(`/api/u/${uID}`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setAsCreator(data.asCreator)
         setAsCollaborator(data.asCollaborator)
       })
@@ -24,7 +24,7 @@ const Dashboard = ({ Creator, Collaborator }) => {
   return (
     <>
       <TopBar asCreator={asCreator} asCollaborator={asCollaborator} />
-      <SideBar updateRefresh={() => setRefreshKey(prev => prev + 1)}>
+      <SideBar updateRefresh={() => setRefreshKey((prev) => prev + 1)}>
         <Work asCreator={asCreator} asCollaborator={asCollaborator} />
       </SideBar>
     </>

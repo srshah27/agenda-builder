@@ -3,7 +3,7 @@ import { getSession } from 'next-auth/react'
 import Board from '@/components/Board/Board'
 import UserNav from '@/components/UserNav'
 import SubNav from '@/components/SubNav'
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch, useSelector } from 'react-redux'
 import { initalizeBoard } from '@/store/boardSlice'
 import { initalizeLists } from '@/store/listsSlice'
 import { initalizeCards } from '@/store/cardsSlice'
@@ -16,7 +16,7 @@ const BoardPage = (props) => {
     lists: props.lists
   })
   // console.log(useSelector(state => state));
-  const board = useSelector(state => state.board)
+  const board = useSelector((state) => state.board)
   // console.log("asdasd11");
   // console.log(useSelector(state => state.board.id));
   useEffect(() => {
@@ -24,11 +24,13 @@ const BoardPage = (props) => {
     if (board.id === null) {
       // console.log(props.board);
       dispatch(initalizeBoard({ ...props.board }))
-      dispatch(initalizeLists(props.lists.sort((a, b) => a.sequence - b.sequence)))
+      dispatch(
+        initalizeLists(props.lists.sort((a, b) => a.sequence - b.sequence))
+      )
       dispatch(initalizeCards(props.cards))
       // console.log("Dispatched");
     }
-  }, [board.id, dispatch, props.board, props.cards, props.lists]);
+  }, [board.id, dispatch, props.board, props.cards, props.lists])
 
   return (
     <div>
@@ -55,7 +57,7 @@ export async function getServerSideProps(context) {
   if (
     workspace === null ||
     workspace.collaborators.findIndex(
-      collaborator => collaborator.user === session.user.uid
+      (collaborator) => collaborator.user === session.user.uid
     ) === -1
   )
     return {

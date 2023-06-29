@@ -63,7 +63,7 @@ const SidebarContent = ({ onClose1, update, ...rest }) => {
   const [workspaceName, setWorkspaceName] = useState('')
   const router = useRouter()
   const { uID } = router.query
-  const submitWorkspace = async e => {
+  const submitWorkspace = async (e) => {
     const res = await fetch(`/api/w/`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -114,7 +114,7 @@ const SidebarContent = ({ onClose1, update, ...rest }) => {
                 <Input
                   placeholder="Workspace Name"
                   value={workspaceName}
-                  onChange={e => setWorkspaceName(e.target.value)}
+                  onChange={(e) => setWorkspaceName(e.target.value)}
                 />
               </ModalBody>
               <ModalFooter>

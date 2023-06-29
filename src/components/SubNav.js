@@ -15,7 +15,7 @@ import AttributeModal from '@/components/Modals/Board/AttributeModal'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateBoard } from '@/store/boardSlice'
 const SubNav = ({ boardData, setBoardData }) => {
-  const board = useSelector(state => state.board)
+  const board = useSelector((state) => state.board)
   const [boardName, setboardName] = useState(boardData.board.name)
   const {
     isOpen: isOpenAttributes,
@@ -35,7 +35,7 @@ const SubNav = ({ boardData, setBoardData }) => {
     )
     let data = await res.json()
   }
-  if(!boardData.board) return null
+  if (!boardData.board) return null
   return (
     <div className={`flex bg-black bg-opacity-30 px-4`}>
       <input

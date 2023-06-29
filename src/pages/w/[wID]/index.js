@@ -23,7 +23,7 @@ export async function getServerSideProps(context) {
   if (
     workspace !== null &&
     workspace.collaborators.findIndex(
-      collaborator => collaborator.user === session.user.uid
+      (collaborator) => collaborator.user === session.user.uid
     ) !== -1
   ) {
     let res = await fetch(`${process.env.BASE_URL}/api/w/${wID}/b`)

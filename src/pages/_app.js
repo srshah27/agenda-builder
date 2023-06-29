@@ -12,22 +12,20 @@ const theme = extendTheme({
   }
 })
 
-
-
 const App = ({ Component, pageProps, session }) => {
   return (
     <Provider store={store}>
-    <ChakraProvider theme={theme}>
-      <SessionProvider session={session}>
-        <NextNProgress
-          color="#0079bf"
-          startPosition={0.3}
-          stopDelayMs={100}
-          height={6}
-        />
-        <Component {...pageProps} />
-      </SessionProvider>
-    </ChakraProvider>
+      <ChakraProvider theme={theme}>
+        <SessionProvider session={session}>
+          <NextNProgress
+            color="#0079bf"
+            startPosition={0.3}
+            stopDelayMs={100}
+            height={6}
+          />
+          <Component {...pageProps} />
+        </SessionProvider>
+      </ChakraProvider>
     </Provider>
   )
 }

@@ -18,7 +18,7 @@ export default async function handler(req, res) {
       const cards = await Card.find({ boardId: bID, workspaceId: wID })
       return res.status(200).json({ cards })
     }
-      
+
     case 'POST': {
       const {
         id,
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
         end,
         attributes
       } = req.body
-      
+
       let { activityAttributes } = await BsBoxArrowDownLeft.findOne(
         { id: bID, workspaceId: wID },
         { activityAttributes: 1 }

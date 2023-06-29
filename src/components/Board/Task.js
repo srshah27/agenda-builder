@@ -7,8 +7,9 @@ import { useDisclosure } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import moment from 'moment'
 const Task = ({ taskId, index }) => {
-
-  const currentTask = useSelector(state => state.cards.cards.find(card => card.id === taskId))
+  const currentTask = useSelector((state) =>
+    state.cards.cards.find((card) => card.id === taskId)
+  )
   const { isOpen, onOpen, onClose } = useDisclosure()
   // const [currentTask, setCurrentTask] = useState(task)
   const initialRef = React.useRef(null)
@@ -24,7 +25,7 @@ const Task = ({ taskId, index }) => {
     )
   })
   // console.log(currentTask.attributes)
-  if(!currentTask) return null
+  if (!currentTask) return null
   return (
     <Draggable
       draggableId={currentTask.id}
@@ -62,7 +63,7 @@ const Task = ({ taskId, index }) => {
           {/* Attributes */}
           <div className="flex w-full max-w-full flex-row">
             {currentTask.attributes.map((attribute, index) => {
-              return <Attribute taskId={taskId} key={index}/>
+              return <Attribute taskId={taskId} key={index} />
             })}
           </div>
           <CardModal
@@ -71,7 +72,6 @@ const Task = ({ taskId, index }) => {
             isOpen={isOpen}
             taskId={taskId}
             setDuration={setDuration}
-            
           />
         </div>
       )}

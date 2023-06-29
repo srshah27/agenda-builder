@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 const Invite = ({ workspace, session, notFound }) => {
   const router = useRouter()
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     const res = await fetch(`/api/w/invite`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -20,7 +20,7 @@ const Invite = ({ workspace, session, notFound }) => {
     }
   }
   const alreadyMember = workspace?.collaborators.find(
-    c => c.user === session.user.uid
+    (c) => c.user === session.user.uid
   )
     ? true
     : false

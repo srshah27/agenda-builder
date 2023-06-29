@@ -206,15 +206,14 @@ body::-webkit-scrollbar-thumb {
   outline: 1px solid gray;
 }
 
-
-.cardAnimation{
+.cardAnimation {
   transition: border-radius 0.5s, border 0.5s;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.22);
 }
 
-.cardAnimation:hover{
- @apply rounded-2xl;
- border: solid 1px black;
+.cardAnimation:hover {
+  @apply rounded-2xl;
+  border: solid 1px black;
 }
 
 .innerCard {

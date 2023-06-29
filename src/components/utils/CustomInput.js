@@ -16,7 +16,7 @@ const CustomInput = ({
         className={clsx(styles.input, center && 'text-center')}
         placeholder={placeholder}
         value={value}
-        onChange={e => onChange(e)}
+        onChange={(e) => onChange(e)}
       />
       <span className={styles.bar}></span>
     </div>

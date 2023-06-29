@@ -12,8 +12,12 @@ import { useDispatch, useSelector } from 'react-redux'
 const List = ({ listId, index }) => {
   const dispatch = useDispatch()
   // console.log(listId);
-  const currentList = useSelector(state => state.lists.lists.find(l => l.id === listId))
-  const tasks = useSelector(state => state.cards.cards.filter(card => card.listId === listId))
+  const currentList = useSelector((state) =>
+    state.lists.lists.find((l) => l.id === listId)
+  )
+  const tasks = useSelector((state) =>
+    state.cards.cards.filter((card) => card.listId === listId)
+  )
   const [listName, setListName] = useState(currentList?.name)
 
   // console.log("cL" + currentList);
@@ -51,11 +55,15 @@ const List = ({ listId, index }) => {
               center={true}
               placeholder="Title"
               value={currentList.name}
-              onChange={e => handleListName(e)}
+              onChange={(e) => handleListName(e)}
             />
           </div>
 
-          <Droppable droppableId={currentList.id} type="task" direction="vertical">
+          <Droppable
+            droppableId={currentList.id}
+            type="task"
+            direction="vertical"
+          >
             {(droppableProvided, droppableSnapshot) => (
               <div
                 ref={droppableProvided.innerRef}
@@ -64,17 +72,13 @@ const List = ({ listId, index }) => {
               >
                 <div className="flex flex-col">
                   {tasks.map((task, index) => (
-                    <Task
-                      key={index}
-                      taskId={task.id}
-                      index={task.sequence}
-                      />
+                    <Task key={index} taskId={task.id} index={task.sequence} />
                   ))}
                 </div>
               </div>
             )}
           </Droppable>
-         
+
           <button
             className={`m-2 flex w-44 items-center justify-center self-center rounded-md border p-2`}
             onClick={() => addCard(currentList.id)}

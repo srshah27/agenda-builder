@@ -5,7 +5,6 @@ import Use from '@/components/Landing/Use'
 import Navbar from '@/components/Landing/Navbar'
 import Footer from '@/components/Landing/Footer'
 
-
 export default function Home({ sess }) {
   return (
     <div className="flex flex-col">

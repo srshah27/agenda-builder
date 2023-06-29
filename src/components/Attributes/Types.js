@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 export const Text = ({ taskId, index }) => {
-  const attribute = useSelector(state => state.cards.cards.find(card => card.id === taskId)).attributes[index]
+  const attribute = useSelector((state) =>
+    state.cards.cards.find((card) => card.id === taskId)
+  ).attributes[index]
   return (
     <div className="innerCard flex-col">
       <span className="p-auto m-auto text-xl">{attribute.value}</span>
@@ -10,8 +12,10 @@ export const Text = ({ taskId, index }) => {
     </div>
   )
 }
-export const Option = ({taskId, index }) => {
-  const attribute = useSelector(state => state.cards.cards.find(card => card.id === taskId)).attributes[index]
+export const Option = ({ taskId, index }) => {
+  const attribute = useSelector((state) =>
+    state.cards.cards.find((card) => card.id === taskId)
+  ).attributes[index]
   return (
     <div className="innerCard flex-col">
       <span className="p-auto m-auto text-xl">{attribute.value}</span>
@@ -20,8 +24,10 @@ export const Option = ({taskId, index }) => {
   )
 }
 
-export const MultipleOption = ({taskId, index }) => {
-  const attribute = useSelector(state => state.cards.cards.find(card => card.id === taskId)).attributes[index]
+export const MultipleOption = ({ taskId, index }) => {
+  const attribute = useSelector((state) =>
+    state.cards.cards.find((card) => card.id === taskId)
+  ).attributes[index]
   let values = attribute.value ? JSON.parse(attribute.value) : []
   let options = attribute.options
   return (
@@ -30,13 +36,10 @@ export const MultipleOption = ({taskId, index }) => {
       <div className="flex flex-wrap justify-evenly">
         {values.map((value, index) => {
           return (
-
-            <span key={index} className='m-1'>
+            <span key={index} className="m-1">
               {value}
               <br />
             </span>
-
-
           )
         })}
       </div>

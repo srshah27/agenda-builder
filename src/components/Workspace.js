@@ -36,8 +36,8 @@ const Workspace = ({ id, workspace }) => {
   const [boards, setBoards] = useState([])
   useEffect(() => {
     fetch(`/api/w/${id}/b`)
-      .then(res => res.json())
-      .then(data => {
+      .then((res) => res.json())
+      .then((data) => {
         setBoards(data.boards)
       })
   }, [boards, id])
@@ -53,12 +53,12 @@ const Workspace = ({ id, workspace }) => {
   const [boardName, setBoardName] = useState('')
   const handleDelete = async (e, data) => {
     fetch(`/api/w/${data.wID}/b/${data.bID}`, { method: 'DELETE' })
-      .then(res => res.json())
-      .then(data => {
-        setBoards(boards.filter(board => board.id != data.bID))
+      .then((res) => res.json())
+      .then((data) => {
+        setBoards(boards.filter((board) => board.id != data.bID))
       })
   }
-  const submitBoard = async e => {
+  const submitBoard = async (e) => {
     const res = await fetch(`/api/w/${id}/b`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -146,7 +146,7 @@ const Workspace = ({ id, workspace }) => {
                   new Date() < new Date(workspace.invite.expiresAt) ? (
                     <Button
                       mr={3}
-                      onClick={e => {
+                      onClick={(e) => {
                         navigator.clipboard.writeText(
                           process.env.NEXT_PUBLIC_BASE_URL +
                             '/w/i/' +
@@ -184,7 +184,7 @@ const Workspace = ({ id, workspace }) => {
         </HStack>
         <Wrap>
           {boards.length > 0 &&
-            boards.map(board => (
+            boards.map((board) => (
               <ContextMenuTrigger key={board.id} id={board.id}>
                 <WrapItem pr="4">
                   <Link href={`/w/${id}/${board.id}`} textDecoration="none">
@@ -213,7 +213,7 @@ const Workspace = ({ id, workspace }) => {
                   <Input
                     placeholder="Board Name"
                     value={boardName}
-                    onChange={e => {
+                    onChange={(e) => {
                       setBoardName(e.target.value)
                     }}
                   />
@@ -232,7 +232,7 @@ const Workspace = ({ id, workspace }) => {
         </Wrap>
       </Stack>
       {boards.length > 0 &&
-        boards.map(board => (
+        boards.map((board) => (
           <ContextMenu key={board.id} id={board.id}>
             <Box m={5} bg="gray.100" p={5} w={130} rounded={5}>
               <MenuItem
@@ -282,7 +282,7 @@ const Work = ({ asCreator, asCollaborator }) => {
             </Text>{' '}
           </HStack>
         )}
-        {creatorWorkspace.map(workspace => (
+        {creatorWorkspace.map((workspace) => (
           <Workspace
             key={workspace.id}
             id={workspace.id}
@@ -300,7 +300,7 @@ const Work = ({ asCreator, asCollaborator }) => {
             </Text>{' '}
           </HStack>
         )}
-        {collabWorkspace.map(workspace => (
+        {collabWorkspace.map((workspace) => (
           <Workspace
             key={workspace.id}
             id={workspace.id}

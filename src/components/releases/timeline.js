@@ -1,7 +1,7 @@
 export const Timeline = ({ timeline, timelineKeys }) => {
   return (
     <div className="mt-6 mb-36">
-      {Object.keys(timeline).map(version => (
+      {Object.keys(timeline).map((version) => (
         <div key={version} className="relative pb-8">
           {version !== timelineKeys[timelineKeys.length - 1] && (
             <span
