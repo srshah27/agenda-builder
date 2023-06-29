@@ -5,12 +5,10 @@ import moment from 'moment'
 import CustomInput from '../utils/CustomInput'
 import Task from './Task'
 import { addCard } from '@/store/cardsSlice'
-// import { Droppable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
 
 const List = ({ listId, index }) => {
   const dispatch = useDispatch()
-  // console.log(listId);
   const currentList = useSelector((state) =>
     state.lists.lists.find((l) => l.id === listId)
   )
@@ -19,7 +17,6 @@ const List = ({ listId, index }) => {
   )
   const [listName, setListName] = useState(currentList?.name)
 
-  // console.log("cL" + currentList);
   async function handleListName(e) {
     setListName(e.target.value)
     let res = await fetch(
@@ -88,26 +85,6 @@ const List = ({ listId, index }) => {
             <AddIcon w={3} h={3} mr={3} />
             Add a card
           </button>
-
-          {/* <button class="cssbuttons-io-button">
-            {' '}
-            Get started
-            <div class="icon">
-              <AddIcon w={3} h={3} mr={3} />
-            </div>
-          </button> */}
-          {/* <ContextMenu id={currentList?.id}>
-            <Box m={2} bg="gray.100" w={130} rounded={5}>
-              <MenuItem
-                onClick={deleteListOrCard}
-                data={{ list: list, type: 'list' }}
-              >
-                <Box bg="gray.300" p={3} rounded={5}>
-                  Delete
-                </Box>
-              </MenuItem>
-            </Box>
-          </ContextMenu> */}
         </div>
       )}
     </Draggable>

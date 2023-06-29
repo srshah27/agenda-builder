@@ -15,8 +15,8 @@ const Board = ({ boardData, setBoardData }) => {
   const { data: session } = useSession()
   const dispatch = useDispatch()
   const lists = useSelector((state) => state.lists.lists)
-  // console.log(lists);
 
+  // TORemove
   function updateDb(url, body, cardsOrLists) {
     fetch(url, {
       method: 'PATCH',
@@ -39,9 +39,7 @@ const Board = ({ boardData, setBoardData }) => {
         setBoardData(data)
       })
   }
-  const addCard = (listId) => {
 
-  }
   const addList = () => {
     let sequence = boardData.lists.length
     console.log('asdasdasdads')
@@ -158,6 +156,7 @@ const Board = ({ boardData, setBoardData }) => {
     )
     return data
   }
+  
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result
     if (!destination) return

@@ -15,20 +15,14 @@ const BoardPage = (props) => {
     cards: props.cards,
     lists: props.lists
   })
-  // console.log(useSelector(state => state));
   const board = useSelector((state) => state.board)
-  // console.log("asdasd11");
-  // console.log(useSelector(state => state.board.id));
   useEffect(() => {
-    // console.log("board id: " + board.id);
     if (board.id === null) {
-      // console.log(props.board);
       dispatch(initalizeBoard({ ...props.board }))
       dispatch(
         initalizeLists(props.lists.sort((a, b) => a.sequence - b.sequence))
       )
       dispatch(initalizeCards(props.cards))
-      // console.log("Dispatched");
     }
   }, [board.id, dispatch, props.board, props.cards, props.lists])
 

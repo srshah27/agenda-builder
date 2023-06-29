@@ -16,15 +16,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateBoard } from '@/store/boardSlice'
 const SubNav = ({ boardData, setBoardData }) => {
   const board = useSelector((state) => state.board)
-  const [boardName, setboardName] = useState(boardData.board.name)
   const {
     isOpen: isOpenAttributes,
     onOpen: onOpenAttributes,
     onClose: onCloseAttributes
   } = useDisclosure()
 
+  const dispatch = useDispatch()
+
   async function handleBoardName(e) {
-    setboardName(e.target.value)
     let res = await fetch(
       `/api/w/${boardData.board.workspaceID}/b/${boardData.board.id}`,
       {
@@ -43,7 +43,9 @@ const SubNav = ({ boardData, setBoardData }) => {
         color="white"
         p="2"
         value={board.name}
-        onChange={handleBoardName}
+        onChange={(e) => {
+          dispatch(updateBoard({ field: 'name', value: e.target.value }))
+        }}
         className="bg-transparent text-slate-50"
       />
       <Spacer />
