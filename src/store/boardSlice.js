@@ -119,11 +119,11 @@ const boardSlice = createSlice({
           })
         }
       }
-    }
+    },
 
 
     // ==================================CARDS==================================
-    
+
     initalizeCards: (state, action) => {
       state.cards = action.payload
     },
@@ -175,7 +175,7 @@ const boardSlice = createSlice({
       console.log(state.cards)
       let list = state.lists.find((list) => list.id === listId)
       console.log(list)
-      let sequence = state.cards.cards.filter(
+      let sequence = state.cards.filter(
         (card) => card.listId === listId
       ).length
       const data = {
@@ -197,11 +197,24 @@ const boardSlice = createSlice({
         body: JSON.stringify(data)
       })
     }
-    
+
   }
 })
 
-export const { initalizeBoard, updateBoard, addBoardAttributes } =
-  boardSlice.actions
+export const {
+  //  =========BOARD==========
+  initalizeBoard,
+  updateBoard,
+  addBoardAttributes,
+  // ==========LISTS==========
+  initalizeLists,
+  updateList,
+  addListAttributes,
+  // ==========CARDS==========
+  initalizeCards,
+  update,
+  addAttributes,
+  addCard
+} = boardSlice.actions
 
 export default boardSlice.reducer

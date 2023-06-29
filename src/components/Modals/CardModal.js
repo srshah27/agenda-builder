@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux'
 const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
   // const [currentTask, setCurrentTask] = useState(task)
   const currentTask = useSelector((state) =>
-    state.cards.cards.find((card) => card.id === taskId)
+    state.board.cards.find((card) => card.id === taskId)
   )
 
   const [startTime, setStartTime] = useState(
@@ -112,8 +112,7 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                   setCurrentDuration({
                     hours: new moment(end).diff(
                       new moment(
-                        `${moment(currentTask.start).format('YYYY-MM-DD')} ${
-                          e.target.value
+                        `${moment(currentTask.start).format('YYYY-MM-DD')} ${e.target.value
                         }`
                       ),
                       'hours'
@@ -121,8 +120,7 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                     miniutes:
                       new moment(currentTask.end).diff(
                         new moment(
-                          `${moment(currentTask.start).format('YYYY-MM-DD')} ${
-                            e.target.value
+                          `${moment(currentTask.start).format('YYYY-MM-DD')} ${e.target.value
                           }`
                         ),
                         'minutes'
@@ -144,8 +142,7 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                   setCurrentDuration({
                     hours: new moment(end).diff(
                       new moment(
-                        `${moment(currentTask.start).format('YYYY-MM-DD')} ${
-                          e.target.value
+                        `${moment(currentTask.start).format('YYYY-MM-DD')} ${e.target.value
                         }`
                       ),
                       'hours'
@@ -153,8 +150,7 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                     miniutes:
                       new moment(end).diff(
                         new moment(
-                          `${moment(start).format('YYYY-MM-DD')} ${
-                            e.target.value
+                          `${moment(start).format('YYYY-MM-DD')} ${e.target.value
                           }`
                         ),
                         'minutes'

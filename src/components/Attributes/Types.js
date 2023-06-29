@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 export const Text = ({ taskId, index }) => {
   const attribute = useSelector((state) =>
-    state.cards.cards.find((card) => card.id === taskId)
+    state.board.cards.find((card) => card.id === taskId)
   ).attributes[index]
   return (
     <div className="innerCard flex-col">
@@ -14,7 +14,7 @@ export const Text = ({ taskId, index }) => {
 }
 export const Option = ({ taskId, index }) => {
   const attribute = useSelector((state) =>
-    state.cards.cards.find((card) => card.id === taskId)
+    state.board.cards.find((card) => card.id === taskId)
   ).attributes[index]
   return (
     <div className="innerCard flex-col">
@@ -26,7 +26,7 @@ export const Option = ({ taskId, index }) => {
 
 export const MultipleOption = ({ taskId, index }) => {
   const attribute = useSelector((state) =>
-    state.cards.cards.find((card) => card.id === taskId)
+    state.board.cards.find((card) => card.id === taskId)
   ).attributes[index]
   let values = attribute.value ? JSON.parse(attribute.value) : []
   let options = attribute.options

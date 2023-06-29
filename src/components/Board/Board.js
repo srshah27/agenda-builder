@@ -14,7 +14,7 @@ const Board = ({ boardData, setBoardData }) => {
   const [refresh, setRefresh] = useState(false)
   const { data: session } = useSession()
   const dispatch = useDispatch()
-  const lists = useSelector((state) => state.lists.lists)
+  const lists = useSelector((state) => state.board.lists)
 
   // TORemove
   function updateDb(url, body, cardsOrLists) {
@@ -156,7 +156,7 @@ const Board = ({ boardData, setBoardData }) => {
     )
     return data
   }
-  
+
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result
     if (!destination) return

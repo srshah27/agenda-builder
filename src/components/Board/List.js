@@ -4,16 +4,16 @@ import { AddIcon } from '@chakra-ui/icons'
 import moment from 'moment'
 import CustomInput from '../utils/CustomInput'
 import Task from './Task'
-import { addCard } from '@/store/cardsSlice'
+import { addCard } from '@/store/boardSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 const List = ({ listId, index }) => {
   const dispatch = useDispatch()
   const currentList = useSelector((state) =>
-    state.lists.lists.find((l) => l.id === listId)
+    state.board.lists.find((l) => l.id === listId)
   )
   const tasks = useSelector((state) =>
-    state.cards.cards.filter((card) => card.listId === listId)
+    state.board.cards.filter((card) => card.listId === listId)
   )
   const [listName, setListName] = useState(currentList?.name)
 

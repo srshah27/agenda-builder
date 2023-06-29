@@ -5,8 +5,8 @@ import UserNav from '@/components/UserNav'
 import SubNav from '@/components/SubNav'
 import { useDispatch, useSelector } from 'react-redux'
 import { initalizeBoard } from '@/store/boardSlice'
-import { initalizeLists } from '@/store/listsSlice'
-import { initalizeCards } from '@/store/cardsSlice'
+import { initalizeLists } from '@/store/boardSlice'
+import { initalizeCards } from '@/store/boardSlice'
 
 const BoardPage = (props) => {
   const dispatch = useDispatch()

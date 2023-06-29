@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 export const ShowButton = ({ taskID, index }) => {
   const attribute = useSelector((state) =>
-    state.cards.cards.find((card) => card.id === taskID)
+    state.board.cards.find((card) => card.id === taskID)
   ).attributes[index]
   return (
     <>
@@ -33,7 +33,7 @@ export const ShowButton = ({ taskID, index }) => {
 
 export const TextInput = ({ taskID, index }) => {
   const attribute = useSelector((state) =>
-    state.cards.cards.find((card) => card.id === taskID)
+    state.board.cards.find((card) => card.id === taskID)
   ).attributes[index]
   // const [value, setValue] = useState(attributes[index].value)
   // const attr = attributes[index]
@@ -60,7 +60,7 @@ export const TextInput = ({ taskID, index }) => {
 }
 export const MultipleOptionInput = ({ taskID, index }) => {
   const attribute = useSelector((state) =>
-    state.cards.cards.find((card) => card.id === taskID)
+    state.board.cards.find((card) => card.id === taskID)
   ).attributes[index]
   // const [options, setOption] = useState(attributes[index].options);
   // https://bmartel.github.io/chakra-multiselect/docs/
@@ -93,7 +93,7 @@ export const MultipleOptionInput = ({ taskID, index }) => {
           // setAttributes(newAttrs)
           // setTask({ ...task, attributes: newAttrs })
         }}
-        // create
+      // create
       />
     </FormControl>
   )
