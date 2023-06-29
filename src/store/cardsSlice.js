@@ -59,7 +59,7 @@ const cardsSlice = createSlice({
     },
     addCard: (state, action) => {
       let listId = action.payload
-      console.log(state)
+      console.log(state.cards)
       let list = state.lists.find((list) => list.id === listId)
       console.log(list)
       let sequence = state.cards.cards.filter(
