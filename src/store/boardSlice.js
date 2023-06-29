@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { stringify } from 'postcss'
 
 const initialState = {
   _id: null,
@@ -38,6 +39,13 @@ const boardSlice = createSlice({
     },
     updateBoard: (state, action) => {
       state[action.payload.field] = action.payload.value
+      let body = {}
+      body[action.payload.field] = action.payload.value
+      fetch(`/api/w/${state.workspaceID}/b/${state.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      })
     },
     addBoardAttributes: (state, action) => {
       action.payload.forEach((attr) => {
@@ -193,6 +201,7 @@ const boardSlice = createSlice({
   }
 })
 
-export const { initalizeBoard, update, addAttributes } = boardSlice.actions
+export const { initalizeBoard, updateBoard, addBoardAttributes } =
+  boardSlice.actions
 
 export default boardSlice.reducer
