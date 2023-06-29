@@ -58,7 +58,7 @@ const listsSlice = createSlice({
         }
       }
     }
-  }
+  },
 })
 
 export const { initalizeLists, update, addAttributes } = listsSlice.actions

@@ -56,10 +56,37 @@ const cardsSlice = createSlice({
           })
         }
       }
+    },
+    addCard: (state, action) => {
+      let listId = action.payload
+      console.log(state)
+      let list = state.lists.find((list) => list.id === listId)
+      console.log(list)
+      let sequence = state.cards.cards.filter(
+        (card) => card.listId === listId
+      ).length
+      const data = {
+        id: nanoid(),
+        name: 'New Card',
+        createdAt: new Date().toISOString(),
+        createdBy: session.user.uid,
+        listId,
+        workspaceId: boardData.board.workspaceId,
+        boardId: boardData.board.id,
+        start: list.start,
+        end: list.end,
+        attributes: list.activityAttributes,
+        sequence
+      }
+      fetch(`/api/w/${state.board.workspaceId}/b/${state.board.id}/c`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data)
+      })
     }
   }
 })
 
-export const { initalizeCards, update, addAttributes } = cardsSlice.actions
+export const { initalizeCards, update, addAttributes, addCard } = cardsSlice.actions
 
 export default cardsSlice.reducer

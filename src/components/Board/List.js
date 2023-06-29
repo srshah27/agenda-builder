@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { Droppable, Draggable } from 'react-beautiful-dnd'
-import TaskList from './TaskList'
 import { AddIcon } from '@chakra-ui/icons'
 import moment from 'moment'
 import CustomInput from '../utils/CustomInput'
-import { Spacer } from '@chakra-ui/react'
 import Task from './Task'
+import { addCard } from '@/store/cardsSlice'
 // import { Droppable } from 'react-beautiful-dnd'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -81,7 +80,10 @@ const List = ({ listId, index }) => {
 
           <button
             className={`m-2 flex w-44 items-center justify-center self-center rounded-md border p-2`}
-            onClick={() => addCard(currentList.id)}
+            onClick={() => {
+              console.log(currentList.id)
+              dispatch(addCard(currentList.id))
+            }}
           >
             <AddIcon w={3} h={3} mr={3} />
             Add a card

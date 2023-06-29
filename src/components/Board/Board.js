@@ -1,16 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import {
-  Flex,
-  HStack,
-  Heading,
-  Spacer,
-  Text,
-  useColorModeValue
-} from '@chakra-ui/react'
 import dynamic from 'next/dynamic'
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
 import { nanoid } from 'nanoid'
-import { Box } from '@chakra-ui/react'
 import { useSession } from 'next-auth/react'
 import { AddIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
@@ -49,31 +40,7 @@ const Board = ({ boardData, setBoardData }) => {
       })
   }
   const addCard = (listId) => {
-    let list = boardData.lists.find((list) => list.id === listId)
-    console.log(list)
-    let sequence = boardData.cards.filter(
-      (card) => card.listId === listId
-    ).length
-    const data = {
-      id: nanoid(),
-      name: 'New Card',
-      createdAt: new Date().toISOString(),
-      createdBy: session.user.uid,
-      listId,
-      workspaceId: boardData.board.workspaceId,
-      boardId: boardData.board.id,
-      start: list.start,
-      end: list.end,
-      attributes: list.activityAttributes,
-      sequence
-    }
-    fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/c`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    let newCards = [...boardData.cards, data]
-    setBoardData({ ...boardData, cards: newCards })
+
   }
   const addList = () => {
     let sequence = boardData.lists.length
@@ -243,7 +210,7 @@ const Board = ({ boardData, setBoardData }) => {
                 className="text-md m-4 flex min-w-[250px] items-center justify-center rounded-md border p-2 shadow-md"
               >
                 <AddIcon />
-                <Text ml="4">Add List</Text>
+                <p ml="4">Add List</p>
               </button>
             </div>
           )}
