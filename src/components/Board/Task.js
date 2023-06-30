@@ -63,7 +63,7 @@ const Task = ({ taskId, index }) => {
           {/* Attributes */}
           <div className="flex w-full max-w-full flex-row">
             {currentTask.attributes.map((attribute, index) => {
-              return <Attribute taskId={taskId} key={index} />
+              return <Attribute taskId={taskId} index={ index } key={index} />
             })}
           </div>
           <CardModal

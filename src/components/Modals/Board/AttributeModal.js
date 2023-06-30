@@ -19,8 +19,10 @@ import {
 import { nanoid } from 'nanoid'
 import { MultiSelect, useMultiSelect } from 'chakra-multiselect'
 import { useDispatch, useSelector } from 'react-redux'
+import { modifyBoardAttribute, addBoardAttributes, deleteBoardAttribute } from '@/store/boardSlice'
 
 export const AttributeInput = ({ index }) => {
+  const dispatch = useDispatch()
   const attributes = useSelector(
     (state) => state.board.activityAttributes[index]
   )
@@ -30,6 +32,11 @@ export const AttributeInput = ({ index }) => {
       <Switch
         isChecked={attributes.show}
         onChange={() => {
+          let updated = {
+            id: attributes.id,
+            show: !attributes.show,
+          }
+          dispatch(modifyBoardAttribute({ new: updated }))
           // let newAttrs = attributes
           // newAttrs[index].show = !newAttrs[index].show
           // setAttributes(newAttrs)
@@ -41,6 +48,12 @@ export const AttributeInput = ({ index }) => {
         value={attributes.name}
         placeholder="Attribute Name"
         onChange={(e) => {
+          let updated = {
+            id: attributes.id,
+            name: e.target.value,
+          }
+          dispatch(modifyBoardAttribute({new: updated}))
+          
           // let newAttributes = [...attributes]
           // newAttributes[index].name = e.target.value
           // setAttributes(newAttributes)
@@ -51,6 +64,11 @@ export const AttributeInput = ({ index }) => {
       <Select
         value={attributes.type}
         onChange={(e) => {
+          let updated = {
+            id: attributes.id,
+            type: e.target.value,
+          }
+          dispatch(modifyBoardAttribute({ new: updated }))
           // let newAttributes = [...attributes]
           // newAttributes[index].attributeType = e.target.value
           // setAttributes(newAttributes)
@@ -69,6 +87,11 @@ export const AttributeInput = ({ index }) => {
             value={attributes.options}
             label="Choose or create items"
             onChange={(e) => {
+              let updated = {
+                id: attributes.id,
+                options: e,
+              }
+              dispatch(modifyBoardAttribute({ new: updated }))
               // let newAttrs = attributes
               // newAttrs[index].options = e
               // setOptions(e)
@@ -84,6 +107,7 @@ export const AttributeInput = ({ index }) => {
 
       <Button
         onClick={(e) => {
+          dispatch(deleteBoardAttribute(attributes.id))
           // let newAttributes = attributes.filter((attr, i) => i !== index)
           // setAttributes(newAttributes)
         }}
@@ -101,7 +125,7 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
   // console.log(attributes);
   // console.log(oldBoard);
   const attributes = useSelector((state) => state.board.activityAttributes)
-
+  const dispatch = useDispatch()
   const updateBoardData = async () => {
     let res
     res = await fetch(`/api/w/${oldBoard.workspaceId}/b/${oldBoard.id}`)
@@ -241,7 +265,6 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
               <Button
                 onClick={(e) => {
                   let newAttributes = [
-                    ...attributes,
                     {
                       id: nanoid(),
                       name: '',
@@ -251,7 +274,8 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
                       show: false
                     }
                   ]
-                  setAttributes(newAttributes)
+                  dispatch(addBoardAttributes(newAttributes))
+                  // setAttributes(newAttributes)
                 }}
               >
                 Add New Attribute
@@ -259,10 +283,10 @@ const AttributeModal = ({ onClose, isOpen, onOpen }) => {
             </FormControl>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={handleSubmit}>
-              Save
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Done
             </Button>
-            <Button onClick={onClose}>Cancel</Button>
+            {/* <Button onClick={onClose}>Cancel</Button> */}
           </ModalFooter>
         </ModalContent>
       </Modal>

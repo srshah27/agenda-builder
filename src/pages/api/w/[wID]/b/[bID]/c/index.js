@@ -1,6 +1,7 @@
 import dbConnect from '@/lib/dbconnect'
 import Card from '@/models/Cards'
-import { BsBoxArrowDownLeft } from 'react-icons/bs'
+import Board from '@/models/Boards'
+
 
 export default async function handler(req, res) {
   const { wID, bID } = req.query
@@ -32,7 +33,7 @@ export default async function handler(req, res) {
         attributes
       } = req.body
 
-      let { activityAttributes } = await BsBoxArrowDownLeft.findOne(
+      let { activityAttributes } = await Board.findOne(
         { id: bID, workspaceId: wID },
         { activityAttributes: 1 }
       )

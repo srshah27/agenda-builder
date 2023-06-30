@@ -24,17 +24,7 @@ const SubNav = ({ boardData, setBoardData }) => {
 
   const dispatch = useDispatch()
 
-  async function handleBoardName(e) {
-    let res = await fetch(
-      `/api/w/${boardData.board.workspaceID}/b/${boardData.board.id}`,
-      {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: e.target.value })
-      }
-    )
-    let data = await res.json()
-  }
+ 
   if (!boardData.board) return null
   return (
     <div className={`flex bg-black bg-opacity-30 px-4`}>
@@ -42,7 +32,7 @@ const SubNav = ({ boardData, setBoardData }) => {
         fontSize="md"
         color="white"
         p="2"
-        value={board.name}
+        value={ board.name == undefined ? "": board.name}
         onChange={(e) => {
           dispatch(updateBoard({ field: 'name', value: e.target.value }))
         }}

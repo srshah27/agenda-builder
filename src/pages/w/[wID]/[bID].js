@@ -4,11 +4,12 @@ import Board from '@/components/Board/Board'
 import UserNav from '@/components/UserNav'
 import SubNav from '@/components/SubNav'
 import { useDispatch, useSelector } from 'react-redux'
-import { initalizeBoard } from '@/store/boardSlice'
-import { initalizeLists } from '@/store/boardSlice'
-import { initalizeCards } from '@/store/boardSlice'
-
+import { initializeBoard } from '@/store/boardSlice'
+import { initializeLists } from '@/store/boardSlice'
+import { initializeCards } from '@/store/boardSlice'
+import { initializeUser } from '@/store/boardSlice'
 const BoardPage = (props) => {
+  
   const dispatch = useDispatch()
   const [boardData, setBoardData] = useState({
     board: props.board,
@@ -17,14 +18,15 @@ const BoardPage = (props) => {
   })
   const board = useSelector((state) => state.board)
   useEffect(() => {
-    if (board.id === null) {
-      dispatch(initalizeBoard({ ...props.board }))
+    if (board.id === null || board.id !== props.board.id) {
+      dispatch(initializeBoard({ ...props.board }))
       dispatch(
-        initalizeLists(props.lists.sort((a, b) => a.sequence - b.sequence))
+        initializeLists(props.lists.sort((a, b) => a.sequence - b.sequence))
       )
-      dispatch(initalizeCards(props.cards))
+      dispatch(initializeCards(props.cards))
+      dispatch(initializeUser(props.user))
     }
-  }, [board.id, dispatch, props.board, props.cards, props.lists])
+  }, [board.id, dispatch, props.board, props.cards, props.lists, props.user])
 
   return (
     <div>
@@ -69,7 +71,8 @@ export async function getServerSideProps(context) {
     props: {
       board,
       cards,
-      lists
+      lists,
+      user: session.user
     }
   }
 }

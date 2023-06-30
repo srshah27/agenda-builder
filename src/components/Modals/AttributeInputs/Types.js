@@ -41,7 +41,7 @@ export const TextInput = ({ taskID, index }) => {
     <FormControl mt={4} key={index}>
       <div className="flex flex-row">
         <ShowButton taskID={taskID} index={index} />
-        <FormLabel className="ml-5"> {attr.name}</FormLabel>
+        <FormLabel className="ml-5"> {attribute.name}</FormLabel>
       </div>
       <Input
         placeholder={attribute.name}
@@ -64,8 +64,9 @@ export const MultipleOptionInput = ({ taskID, index }) => {
   ).attributes[index]
   // const [options, setOption] = useState(attributes[index].options);
   // https://bmartel.github.io/chakra-multiselect/docs/
+  console.log(attribute);
   let { options, onChange } = useMultiSelect({
-    value: JSON.parse(attribute.value),
+    value: attribute.value!= "" ? JSON.parse(attribute.value): [],
     options: attribute.options
   })
 
@@ -77,7 +78,7 @@ export const MultipleOptionInput = ({ taskID, index }) => {
       </div>
       <MultiSelect
         options={options}
-        value={attribute.value}
+        value={attribute.value != "" ? JSON.parse(attribute.value) : []}
         label="Choose or create items"
         onChange={(e) => {
           // let newAttrs = attributes

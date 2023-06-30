@@ -1,11 +1,13 @@
 import React from 'react'
 import { MultipleOption, Text, Option } from '@/components/Attributes/Types'
+import { useSelector } from 'react-redux'
 const Attribute = ({ taskId, index }) => {
-  const attribute = useSelector((state) =>
+  const card = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
-  ).attributes[index]
-  if (!attribute.show) return <></>
-  switch (attribute.attributeType) {
+  )
+  const attribute = card?.attributes[index]
+  if (attribute && !attribute.show) return <></>
+  switch (attribute?.attributeType) {
     case 'text':
       return <Text taskId={taskId} index={index} />
     case 'multi':

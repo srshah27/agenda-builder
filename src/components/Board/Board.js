@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid'
 import { useSession } from 'next-auth/react'
 import { AddIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { addList } from '@/store/boardSlice'
 const List = dynamic(() => import('./List'), {
   ssr: false
 })
@@ -40,31 +40,31 @@ const Board = ({ boardData, setBoardData }) => {
       })
   }
 
-  const addList = () => {
-    let sequence = boardData.lists.length
-    console.log('asdasdasdads')
-    console.log(boardData.board.activityAttributes)
-    const data = {
-      id: nanoid(),
-      name: 'New List',
-      createdAt: new Date().toISOString(),
-      createdBy: session.user.uid,
-      workspaceId: boardData.board.workspaceId,
-      boardId: boardData.board.id,
-      start: boardData.board.start,
-      end: boardData.board.end,
-      activityAttributes: boardData.board.activityAttributes,
-      sequence
-    }
-    fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(data)
-    })
-    let newLists = [...boardData.lists, data]
-    console.log(data)
-    setBoardData({ ...boardData, lists: newLists })
-  }
+  // const addList = () => {
+  //   let sequence = boardData.lists.length
+  //   console.log('asdasdasdads')
+  //   console.log(boardData.board.activityAttributes)
+  //   const data = {
+  //     id: nanoid(),
+  //     name: 'New List',
+  //     createdAt: new Date().toISOString(),
+  //     createdBy: session.user.uid,
+  //     workspaceId: boardData.board.workspaceId,
+  //     boardId: boardData.board.id,
+  //     start: boardData.board.start,
+  //     end: boardData.board.end,
+  //     activityAttributes: boardData.board.activityAttributes,
+  //     sequence
+  //   }
+  //   fetch(`/api/w/${boardData.board.workspaceId}/b/${boardData.board.id}/l`, {
+  //     method: 'POST',
+  //     headers: { 'content-type': 'application/json' },
+  //     body: JSON.stringify(data)
+  //   })
+  //   let newLists = [...boardData.lists, data]
+  //   console.log(data)
+  //   setBoardData({ ...boardData, lists: newLists })
+  // }
   const handleDelete = async (e, data) => {
     if (data.type === 'list') {
       fetch(
@@ -205,7 +205,7 @@ const Board = ({ boardData, setBoardData }) => {
               })}
               {droppableProvided.placeholder}
               <button
-                onClick={addList}
+                onClick={() => dispatch(addList())}
                 className="text-md m-4 flex min-w-[250px] items-center justify-center rounded-md border p-2 shadow-md"
               >
                 <AddIcon />

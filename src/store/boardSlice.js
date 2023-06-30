@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { stringify } from 'postcss'
+import { nanoid } from 'nanoid'
 
 const initialState = {
   _id: null,
@@ -15,6 +16,7 @@ const initialState = {
   status: 'idle',
   isLoading: false,
   error: '',
+  user: null,
   lists: [],
   cards: []
 }
@@ -23,9 +25,12 @@ const boardSlice = createSlice({
   name: 'board',
   initialState,
   reducers: {
-
+    // ===================================USER===================================
+    initializeUser: (state, action)=>{
+      state.user = action.payload
+    },
     //  ==================================BOARD==================================
-    initalizeBoard: (state, action) => {
+    initializeBoard: (state, action) => {
       state._id = action.payload._id
       state.id = action.payload.id
       state.name = action.payload.name
@@ -41,7 +46,7 @@ const boardSlice = createSlice({
       state[action.payload.field] = action.payload.value
       let body = {}
       body[action.payload.field] = action.payload.value
-      fetch(`/api/w/${state.workspaceID}/b/${state.id}`, {
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
@@ -50,12 +55,42 @@ const boardSlice = createSlice({
     addBoardAttributes: (state, action) => {
       action.payload.forEach((attr) => {
         state.activityAttributes.push(attr)
+        state.lists.forEach((list) => {
+          list.activityAttributes.push(attr)
+        })
+        state.cards.forEach((card) => {
+          card.attributes.push(attr)
+        })
       })
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}/attr`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ attributes: action.payload })
+      }).then((res) => res.json())
+      .then((d) => console.log(d))
     },
     deleteBoardAttribute: (state, action) => {
       state.activityAttributes = state.activityAttributes.filter(
         (attr) => attr.id !== action.payload
       )
+      state.lists.forEach((list) => {
+        list.activityAttributes = list.activityAttributes.filter(
+          (attr) => attr.id !== action.payload
+        )
+      })
+      state.cards.forEach((card) => {
+        card.attributes = card.attributes.filter(
+          (attr) => attr.id !== action.payload
+        )
+      })
+      
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}/attr`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ attributes: [{id: action.payload}], modify: false })
+      }).then((res) => res.json())
+        .then((d) => console.log(d))
+      
     },
     modifyBoardAttribute: (state, action) => {
       let index = state.activityAttributes.findIndex(
@@ -68,14 +103,52 @@ const boardSlice = createSlice({
           const element = newAttr[key]
           if (key === 'id' || key === '_id') continue
           state.activityAttributes[index][key] = element
+          state.lists.forEach((list) => {
+            index = list.activityAttributes.findIndex((attr) => attr.id === newAttr.id)
+            list.activityAttributes[index][key] = element
+          })
+          state.cards.forEach((card) => {
+            index = card.attributes.findIndex((attr) => attr.id === newAttr.id)
+            card.attributes[index][key] = element
+          })
         }
       }
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}/attr`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ attributes: [newAttr], modify: true })
+      }).then((res) => res.json())
+        .then((d) => console.log(d))
+      
     },
 
     //  ==================================LISTS==================================
-    initalizeLists: (state, action) => {
+    initializeLists: (state, action) => {
       state.lists = action.payload
     },
+    
+    addList: (state, action) => {
+      let sequence = state.lists.length
+      const data = {
+        id: nanoid(),
+        name: 'New List',
+        createdAt: new Date().toISOString(),
+        createdBy: state.user.uid,
+        workspaceId: state.workspaceId,
+        boardId: state.id,
+        start: state.start,
+        end: state.end,
+        activityAttributes: state.activityAttributes,
+        sequence
+      }
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}/l`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data)
+      })
+      state.lists.push(data)
+    },
+    
     updateLists: (state, action) => {
       state.lists[action.payload.field] = action.payload.value
     },
@@ -124,9 +197,39 @@ const boardSlice = createSlice({
 
     // ==================================CARDS==================================
 
-    initalizeCards: (state, action) => {
+    initializeCards: (state, action) => {
       state.cards = action.payload
     },
+    addCard: (state, action) => {
+      let listId = action.payload
+      console.log(state.cards)
+      let list = state.lists.find((list) => list.id === listId)
+      console.log(list)
+      let sequence = state.cards.filter(
+        (card) => card.listId === listId
+      ).length
+      const data = {
+        id: nanoid(),
+        name: 'New Card',
+        createdAt: new Date().toISOString(),
+        createdBy: state.user.uid,
+        listId,
+        workspaceId: state.workspaceId,
+        boardId: state.id,
+        start: list.start,
+        end: list.end,
+        attributes: list.activityAttributes,
+        sequence
+      }
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}/c`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then((res) => res.json())
+      .then((d) => console.log(d))
+      state.cards.push(data)
+    },
+    
     updateCards: (state, action) => {
       state.cards[action.payload.field] = action.payload.value
     },
@@ -170,51 +273,28 @@ const boardSlice = createSlice({
         }
       }
     },
-    addCard: (state, action) => {
-      let listId = action.payload
-      console.log(state.cards)
-      let list = state.lists.find((list) => list.id === listId)
-      console.log(list)
-      let sequence = state.cards.filter(
-        (card) => card.listId === listId
-      ).length
-      const data = {
-        id: nanoid(),
-        name: 'New Card',
-        createdAt: new Date().toISOString(),
-        createdBy: session.user.uid,
-        listId,
-        workspaceId: boardData.board.workspaceId,
-        boardId: boardData.board.id,
-        start: list.start,
-        end: list.end,
-        attributes: list.activityAttributes,
-        sequence
-      }
-      fetch(`/api/w/${state.board.workspaceId}/b/${state.board.id}/c`, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(data)
-      })
-    }
 
   }
 })
 
 export const {
+  initializeUser,
   //  =========BOARD==========
-  initalizeBoard,
+  initializeBoard,
   updateBoard,
   addBoardAttributes,
+  modifyBoardAttribute,
+  deleteBoardAttribute,
   // ==========LISTS==========
-  initalizeLists,
+  initializeLists,
+  addList,
   updateList,
   addListAttributes,
   // ==========CARDS==========
-  initalizeCards,
+  initializeCards,
   update,
   addAttributes,
-  addCard
+  addCard,
 } = boardSlice.actions
 
 export default boardSlice.reducer

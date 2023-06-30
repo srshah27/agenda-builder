@@ -4,6 +4,7 @@ import {
   TextInput,
   OptionInput
 } from '@/components/Modals/AttributeInputs/Types'
+import { useSelector } from 'react-redux'
 const Attribute = ({ taskId, index }) => {
   const attributes = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
