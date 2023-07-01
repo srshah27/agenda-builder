@@ -23,7 +23,7 @@ function Hero() {
             Simple & straightforward project management tool based on what
             really matters the most. Your goals.
           </p>
-          <Link href="/u">
+          <Link href="/u" passHref>
             <button className="btn max-w-md bg-blue-900"> Get Started </button>
           </Link>{' '}
         </div>

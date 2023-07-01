@@ -31,7 +31,6 @@ const SubNav = ({ boardData, setBoardData }) => {
       <input
         fontSize="md"
         color="white"
-        p="2"
         value={ board.name == undefined ? "": board.name}
         onChange={(e) => {
           dispatch(updateBoard({ field: 'name', value: e.target.value }))

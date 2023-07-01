@@ -191,7 +191,7 @@ const Board = ({ boardData, setBoardData }) => {
                 className="text-md m-4 flex min-w-[250px] items-center justify-center rounded-md border p-2 shadow-md"
               >
                 <AddIcon />
-                <p ml="4">Add List</p>
+                <p >Add List</p>
               </button>
             </div>
           )}
