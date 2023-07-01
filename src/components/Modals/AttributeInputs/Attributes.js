@@ -5,17 +5,17 @@ import {
   OptionInput
 } from '@/components/Modals/AttributeInputs/Types'
 import { useSelector } from 'react-redux'
-const Attribute = ({ taskId, index }) => {
-  const attributes = useSelector((state) =>
+const Attribute = ({ taskId, attrId }) => {
+  const attribute = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
-  ).attributes
-  switch (attributes[index].attributeType) {
+  ).attributes.find((attr) => attr.id === attrId)
+  switch (attribute.attributeType) {
     case 'text':
-      return <TextInput taskID={taskId} index={index} />
+      return <TextInput taskID={taskId} attrId={attrId} />
     case 'multi':
-      return <MultipleOptionInput taskID={taskId} index={index} />
+      return <MultipleOptionInput taskID={taskId} attrId={attrId} />
     // case 'option':
-    //   return (<OptionInput task={task} attributes={attributes} index={ index } setAttributes={setAttributes} />)
+    //   return (<OptionInput task={task} attributes={attributes} attrId={ attrId } setAttributes={setAttributes} />)
     default:
       return <>Error</>
   }

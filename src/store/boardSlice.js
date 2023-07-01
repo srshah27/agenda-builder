@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { stringify } from 'postcss'
+import { list, stringify } from 'postcss'
 import { nanoid } from 'nanoid'
 
 const initialState = {
@@ -67,7 +67,6 @@ const boardSlice = createSlice({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ attributes: action.payload })
       }).then((res) => res.json())
-      .then((d) => console.log(d))
     },
     deleteBoardAttribute: (state, action) => {
       state.activityAttributes = state.activityAttributes.filter(
@@ -89,7 +88,6 @@ const boardSlice = createSlice({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ attributes: [{id: action.payload}], modify: false })
       }).then((res) => res.json())
-        .then((d) => console.log(d))
       
     },
     modifyBoardAttribute: (state, action) => {
@@ -118,7 +116,6 @@ const boardSlice = createSlice({
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ attributes: [newAttr], modify: true })
       }).then((res) => res.json())
-        .then((d) => console.log(d))
       
     },
 
@@ -149,10 +146,23 @@ const boardSlice = createSlice({
       state.lists.push(data)
     },
     
-    updateLists: (state, action) => {
-      state.lists[action.payload.field] = action.payload.value
+    updateList: (state, action) => {
+      state.lists.find((list) => list.id === action.payload.id)[action.payload.field] = action.payload.value
+      let body = {}
+      body[action.payload.field] = action.payload.value
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}/l/${action.payload.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      })
     },
-
+    deleteList: (state, action) => {
+      state.lists = state.lists.filter((list) => list.id !== action.payload)
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}/l/${action.payload}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      })
+    },
     addAllListAttributes: (state, action) => {
       for (let i = 0; i < state.lists; i++) {
         state.lists[i].activityAttributes.push(action.payload)
@@ -202,9 +212,7 @@ const boardSlice = createSlice({
     },
     addCard: (state, action) => {
       let listId = action.payload
-      console.log(state.cards)
       let list = state.lists.find((list) => list.id === listId)
-      console.log(list)
       let sequence = state.cards.filter(
         (card) => card.listId === listId
       ).length
@@ -226,12 +234,25 @@ const boardSlice = createSlice({
         headers: { 'content-type': 'application/json' },
         body: JSON.stringify(data)
       }).then((res) => res.json())
-      .then((d) => console.log(d))
       state.cards.push(data)
     },
     
-    updateCards: (state, action) => {
-      state.cards[action.payload.field] = action.payload.value
+    updateCard: (state, action) => {
+      state.cards.find((card) => card.id === action.payload.id)[action.payload.field] = action.payload.value
+      let body = {}
+      body[action.payload.field] = action.payload.value
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}/c/${action.payload.id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      })
+    },
+    deleteCard: (state, action) => {
+      state.cards = state.cards.filter((card) => card.id !== action.payload)
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}/c/${action.payload}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+      })
     },
     addAllCardAttributes: (state, action) => {
       for (let i = 0; i < state.cards; i++) {
@@ -245,19 +266,17 @@ const boardSlice = createSlice({
         )
       }
     },
-    modifyCardAttribute: (state, action) => {
-      let newAttr = action.payload.new
-      let attrId = newAttr.id
-      let index = state.cards[index].attributes.findIndex(
-        (attr) => attr.id === attrId
-      )
-      for (const key in newAttr) {
-        if (Object.hasOwnProperty.call(newAttr, key)) {
-          const element = newAttr[key]
-          if (key === 'id') continue
-          state.cards[action.payload.index].attributes[attrId][key] = element
-        }
-      }
+    modifyCardAttributes: (state, action) => {
+      let {newAttr} = action.payload
+      let cardIndex = state.cards.findIndex((card) => card.id = action.payload.cardId)
+      let attrIndex = state.cards[cardIndex].attributes.findIndex((attr)=> attr.id == newAttr.id)
+      state.cards[cardIndex].attributes[attrIndex] = {...newAttr}
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}/c/${action.payload.cardId}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ attributes: state.cards[cardIndex].attributes })
+      })
+      
     },
     modifyAllCardAttribute: (state, action) => {
       let newAttr = action.payload.new
@@ -289,12 +308,15 @@ export const {
   initializeLists,
   addList,
   updateList,
+  deleteList,
   addListAttributes,
   // ==========CARDS==========
   initializeCards,
-  update,
-  addAttributes,
   addCard,
+  updateCard,
+  deleteCard,
+  addAttributes,
+  modifyCardAttributes,
 } = boardSlice.actions
 
 export default boardSlice.reducer

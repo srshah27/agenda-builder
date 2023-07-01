@@ -182,24 +182,6 @@ const Board = ({ boardData, setBoardData }) => {
               {...droppableProvided.droppableProps}
               className="flex flex-col items-center bg-[url(../../public/img/boardbg.png)] bg-cover px-4"
             >
-              {/* {boardData.lists.map(list => {
-                const tasks = boardData.cards.filter(
-                  card => card.listId === list.id
-                )
-                tasks.sort((a, b) => a.sequence - b.sequence)
-                return (
-                  <List
-                    key={list.id}
-                    list={list}
-                    tasks={tasks}
-                    index={list.sequence}
-                    addCard={addCard}
-                    deleteListOrCard={handleDelete}
-                    boardData={boardData}
-                    setBoardData={setBoardData}
-                  />
-                )
-              })} */}
               {lists.map((list, index) => {
                 return <List key={index} listId={list.id} index={index} />
               })}

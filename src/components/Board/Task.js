@@ -42,28 +42,36 @@ const Task = ({ taskId, index }) => {
         >
           <div className="flex h-full min-w-fit flex-col items-baseline justify-around">
             <strong>From: </strong>
-            <strong>To: </strong>
             <strong>Dur: </strong>
+            <strong>To: </strong>
           </div>
           <div className="ml-1 flex h-full min-w-fit flex-col items-baseline justify-around">
             <span>{new Date(currentTask.start).toLocaleTimeString()}</span>
-            <span>{new Date(currentTask.end).toLocaleTimeString()}</span>
             <span>
-              {duration.hours}hr {duration.miniutes}min
+              {JSON.stringify(
+                moment(currentTask.end).diff(new moment(currentTask.start), 'hours')
+              )} {' '} hr {' '} : {' '}
+              {JSON.stringify(
+                new moment(currentTask.end).diff(
+                  new moment(currentTask.start),
+                  'minutes'
+                ) % 60
+              )} {' '} min
             </span>
+            <span>{new Date(currentTask.end).toLocaleTimeString()}</span>
           </div>
           <div className="flex w-[50%] min-w-[40%] flex-col p-2">
             <span className="w-full text-center text-xl font-semibold">
               {currentTask.name}
             </span>
-            <span className="block overflow-hidden text-ellipsis p-2 text-base">
+            <span className="block overflow-hidden text-center text-ellipsis p-2 text-base">
               {currentTask.description}
             </span>
           </div>
           {/* Attributes */}
           <div className="flex w-full max-w-full flex-row">
             {currentTask.attributes.map((attribute, index) => {
-              return <Attribute taskId={taskId} index={ index } key={index} />
+              return <Attribute taskId={taskId} attrId={ attribute.id } key={index} />
             })}
           </div>
           <CardModal

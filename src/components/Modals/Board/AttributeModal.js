@@ -23,18 +23,18 @@ import { modifyBoardAttribute, addBoardAttributes, deleteBoardAttribute } from '
 
 export const AttributeInput = ({ index }) => {
   const dispatch = useDispatch()
-  const attributes = useSelector(
+  const attribute = useSelector(
     (state) => state.board.activityAttributes[index]
   )
 
   return (
     <>
       <Switch
-        isChecked={attributes.show}
+        isChecked={attribute.show}
         onChange={() => {
           let updated = {
-            id: attributes.id,
-            show: !attributes.show,
+            id: attribute.id,
+            show: !attribute.show,
           }
           dispatch(modifyBoardAttribute({ new: updated }))
           // let newAttrs = attributes
@@ -45,11 +45,11 @@ export const AttributeInput = ({ index }) => {
       />
       <Input
         type="text"
-        value={attributes.name}
+        value={attribute.name}
         placeholder="Attribute Name"
         onChange={(e) => {
           let updated = {
-            id: attributes.id,
+            id: attribute.id,
             name: e.target.value,
           }
           dispatch(modifyBoardAttribute({new: updated}))
@@ -62,11 +62,11 @@ export const AttributeInput = ({ index }) => {
       />
 
       <Select
-        value={attributes.type}
+        value={attribute.attributeType}
         onChange={(e) => {
           let updated = {
-            id: attributes.id,
-            type: e.target.value,
+            id: attribute.id,
+            attributeType: e.target.value,
           }
           dispatch(modifyBoardAttribute({ new: updated }))
           // let newAttributes = [...attributes]
@@ -80,15 +80,15 @@ export const AttributeInput = ({ index }) => {
         <option value="option">Option</option>
       </Select>
       {/* Options if type== multi or option */}
-      {attributes.type === 'multi' || attributes.type === 'option' ? (
+      {attribute.attributeType === 'multi' || attribute.attributeType === 'option' ? (
         <span>
           <MultiSelect
             // options={[]}
-            value={attributes.options}
+            value={attribute.options}
             label="Choose or create items"
             onChange={(e) => {
               let updated = {
-                id: attributes.id,
+                id: attribute.id,
                 options: e,
               }
               dispatch(modifyBoardAttribute({ new: updated }))
@@ -107,7 +107,7 @@ export const AttributeInput = ({ index }) => {
 
       <Button
         onClick={(e) => {
-          dispatch(deleteBoardAttribute(attributes.id))
+          dispatch(deleteBoardAttribute(attribute.id))
           // let newAttributes = attributes.filter((attr, i) => i !== index)
           // setAttributes(newAttributes)
         }}

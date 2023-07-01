@@ -4,7 +4,7 @@ import { AddIcon } from '@chakra-ui/icons'
 import moment from 'moment'
 import CustomInput from '../utils/CustomInput'
 import Task from './Task'
-import { addCard } from '@/store/boardSlice'
+import { addCard, updateList, deleteList } from '@/store/boardSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
 const List = ({ listId, index }) => {
@@ -51,7 +51,7 @@ const List = ({ listId, index }) => {
               center={true}
               placeholder="Title"
               value={currentList.name}
-              onChange={(e) => handleListName(e)}
+              onChange={(e)=> dispatch(updateList({id: currentList.id, field: 'name', value: e.target.value}))}
             />
           </div>
 
@@ -74,17 +74,27 @@ const List = ({ listId, index }) => {
               </div>
             )}
           </Droppable>
-
+          <div className=' flex flex-row items-center justify-center self-center' >
           <button
-            className={`m-2 flex w-44 items-center justify-center self-center rounded-md border p-2`}
+            className={`m-2  w-44  rounded-md border p-2`}
             onClick={() => {
-              console.log(currentList.id)
+              
               dispatch(addCard(currentList.id))
             }}
           >
             <AddIcon w={3} h={3} mr={3} />
             Add a card
           </button>
+          <button
+              className={`m-2  w-44 margin-left: auto;  rounded-md border p-2 bg-red-500 text-white`}
+            onClick={() => {
+              dispatch(deleteList(currentList.id))
+            }}
+          >
+          
+            Delete List
+          </button>
+          </div>
         </div>
       )}
     </Draggable>

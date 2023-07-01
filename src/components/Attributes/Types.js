@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 
-export const Text = ({ taskId, index }) => {
+export const Text = ({ taskId, attrId }) => {
   const attribute = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
-  ).attributes[index]
+  ).attributes.find((attr) => attr.id == attrId)
   return (
     <div className="innerCard flex-col">
       <span className="p-auto m-auto text-xl">{attribute.value}</span>
@@ -12,10 +12,10 @@ export const Text = ({ taskId, index }) => {
     </div>
   )
 }
-export const Option = ({ taskId, index }) => {
+export const Option = ({ taskId, attrId }) => {
   const attribute = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
-  ).attributes[index]
+  ).attributes.find((attr) => attr.id == attrId)
   return (
     <div className="innerCard flex-col">
       <span className="p-auto m-auto text-xl">{attribute.value}</span>
@@ -24,25 +24,25 @@ export const Option = ({ taskId, index }) => {
   )
 }
 
-export const MultipleOption = ({ taskId, index }) => {
+export const MultipleOption = ({ taskId, attrId }) => {
   const attribute = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
-  ).attributes[index]
+  ).attributes.find((attr) => attr.id == attrId)
   let values = attribute.value ? JSON.parse(attribute.value) : []
   let options = attribute.options
   return (
     <div className="innerCard flex-col">
-      <span className="text-xl">{attribute.name}</span>
       <div className="flex flex-wrap justify-evenly">
         {values.map((value, index) => {
           return (
-            <span key={index} className="m-1">
+            <span key={index} className="m-1 text-xl">
               {value}
               <br />
             </span>
           )
         })}
       </div>
+      <span className="text-sm">{attribute.name}</span>
     </div>
   )
 }
