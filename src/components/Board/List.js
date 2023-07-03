@@ -42,6 +42,42 @@ const List = ({ listId, index }) => {
           className={`m-4 flex h-fit w-4/5 flex-col justify-center rounded-xl bg-white shadow-md `}
         >
           {/* <ContextMenuTrigger key={currentList?.id} id={currentList?.id}> */}
+          {/* <div className={`cardAnimation mx-2 mb-3 flex h-[144px] rounded-md border bg-slate-200 p-2 font-light shadow-md`} >
+            <div className="flex h-full min-w-fit flex-col items-baseline justify-around">
+              <strong>From: </strong>
+              <strong>Dur: </strong>
+              <strong>To: </strong>
+            </div>
+            <div className="ml-1 flex h-full min-w-fit flex-col items-baseline justify-around">
+              <span>{new Date(currentList.start).toLocaleTimeString()}</span>
+              <span>
+                {JSON.stringify(
+                  moment(currentList.end).diff(new moment(currentList.start), 'hours')
+                )} {' '} hr {' '} : {' '}
+                {JSON.stringify(
+                  new moment(currentList.end).diff(
+                    new moment(currentList.start),
+                    'minutes'
+                  ) % 60
+                )} {' '} min
+              </span>
+              <span>{new Date(currentList.end).toLocaleTimeString()}</span>
+            </div>
+          </div> */}
+          
+          <span>{new Date(currentList.start).toLocaleTimeString()}</span>
+          <span>
+            {JSON.stringify(
+              moment(currentList.end).diff(new moment(currentList.start), 'hours')
+            )} {' '} hr {' '} : {' '}
+            {JSON.stringify(
+              new moment(currentList.end).diff(
+                new moment(currentList.start),
+                'minutes'
+              ) % 60
+            )} {' '} min
+          </span>
+          <span>{new Date(currentList.end).toLocaleTimeString()}</span>
           <div
             {...draggableProvided.dragHandleProps}
             className="flex justify-center p-2"
@@ -51,8 +87,18 @@ const List = ({ listId, index }) => {
               center={true}
               placeholder="Title"
               value={currentList.name}
-              onChange={(e)=> dispatch(updateList({id: currentList.id, field: 'name', value: e.target.value}))}
+              onChange={(e) => dispatch(updateList({ id: currentList.id, field: 'name', value: e.target.value }))}
             />
+
+            <button
+              className={`m-2  w-44 margin-left: auto;  rounded-md border p-2 bg-red-500 text-white`}
+              onClick={() => {
+                dispatch(deleteList(currentList.id))
+              }}
+            >
+
+              Delete List
+            </button>
           </div>
 
           <Droppable
@@ -75,25 +121,17 @@ const List = ({ listId, index }) => {
             )}
           </Droppable>
           <div className=' flex flex-row items-center justify-center self-center' >
-          <button
-            className={`m-2  w-44  rounded-md border p-2`}
-            onClick={() => {
-              
-              dispatch(addCard(currentList.id))
-            }}
-          >
-            <AddIcon w={3} h={3} mr={3} />
-            Add a card
-          </button>
-          <button
-              className={`m-2  w-44 margin-left: auto;  rounded-md border p-2 bg-red-500 text-white`}
-            onClick={() => {
-              dispatch(deleteList(currentList.id))
-            }}
-          >
-          
-            Delete List
-          </button>
+            <button
+              className={`m-2  w-44  rounded-md border p-2`}
+              onClick={() => {
+
+                dispatch(addCard(currentList.id))
+              }}
+            >
+              <AddIcon w={3} h={3} mr={3} />
+              Add a card
+            </button>
+            
           </div>
         </div>
       )}
