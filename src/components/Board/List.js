@@ -65,19 +65,21 @@ const List = ({ listId, index }) => {
             </div>
           </div> */}
           
-          <span>{new Date(currentList.start).toLocaleTimeString()}</span>
-          <span>
-            {JSON.stringify(
-              moment(currentList.end).diff(new moment(currentList.start), 'hours')
-            )} {' '} hr {' '} : {' '}
-            {JSON.stringify(
-              new moment(currentList.end).diff(
-                new moment(currentList.start),
-                'minutes'
-              ) % 60
-            )} {' '} min
-          </span>
-          <span>{new Date(currentList.end).toLocaleTimeString()}</span>
+          <div className="flex mx-auto gap-12">
+            <span>{new Date(currentList.start).toLocaleTimeString()}</span>
+            <span>
+              {JSON.stringify(
+                moment(currentList.end).diff(new moment(currentList.start), 'hours')
+              )} {' '} hr {' '} : {' '}
+              {JSON.stringify(
+                new moment(currentList.end).diff(
+                  new moment(currentList.start),
+                  'minutes'
+                ) % 60
+              )} {' '}
+            </span>
+            <span>{new Date(currentList.end).toLocaleTimeString()}</span>
+          </div>
           <div
             {...draggableProvided.dragHandleProps}
             className="flex justify-center p-2"
