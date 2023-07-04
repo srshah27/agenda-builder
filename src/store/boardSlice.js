@@ -212,6 +212,7 @@ const boardSlice = createSlice({
     },
     addCard: (state, action) => {
       let listId = action.payload
+      console.log(listId)
       let list = state.lists.find((list) => list.id === listId)
       let sequence = state.cards.filter(
         (card) => card.listId === listId

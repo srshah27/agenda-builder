@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {saveCard, addCard} from '@/store/boardSlice'
 
 const doDispatch = (dispatch,  listId, startLimit, endLimit) => {
-  dispatch(addCard({ listId, startLimit, endLimit }))
+  // dispatch(addCard({ listId, startLimit, endLimit }))
 }
 
 const AddCardModal = ({ listId, onClose, isOpen, onOpen }) => {
