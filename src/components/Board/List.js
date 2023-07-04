@@ -5,8 +5,9 @@ import moment from 'moment'
 import CustomInput from '../utils/CustomInput'
 import Task from './Task'
 import { addCard, updateList, deleteList } from '@/store/boardSlice'
+import AddCardModal from '@/components/Modals/AddCardModal'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { useDisclosure } from '@chakra-ui/react'
 const List = ({ listId, index }) => {
   const dispatch = useDispatch()
   const currentList = useSelector((state) =>
@@ -15,6 +16,10 @@ const List = ({ listId, index }) => {
   const tasks = useSelector((state) =>
     state.board.cards.filter((card) => card.listId === listId)
   )
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  let sortedTasks = tasks.sort((a, b) => new Date(a.start) < new Date(b.start) ? -1 : 1)
+
+
   const [listName, setListName] = useState(currentList?.name)
 
   async function handleListName(e) {
@@ -64,7 +69,7 @@ const List = ({ listId, index }) => {
               <span>{new Date(currentList.end).toLocaleTimeString()}</span>
             </div>
           </div> */}
-          
+
           <span>{new Date(currentList.start).toLocaleTimeString()}</span>
           <span>
             {JSON.stringify(
@@ -127,13 +132,20 @@ const List = ({ listId, index }) => {
 
                 dispatch(addCard(currentList.id))
               }}
+              // onClick={onOpen}
             >
               <AddIcon w={3} h={3} mr={3} />
               Add a card
             </button>
-            
-          </div>
+
+          <AddCardModal
+            onOpen={onOpen}
+            onClose={ onClose}
+            isOpen={isOpen}
+            listId={listId}
+          />
         </div>
+          </div>
       )}
     </Draggable>
   )

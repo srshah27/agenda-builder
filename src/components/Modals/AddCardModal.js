@@ -17,27 +17,43 @@ import {
 import Attribute from './AttributeInputs/Attributes'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
-import {updateCard, deleteCard} from '@/store/boardSlice'
-const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
+import {saveCard, addCard} from '@/store/boardSlice'
+
+const doDispatch = (dispatch,  listId, startLimit, endLimit) => {
+  dispatch(addCard({ listId, startLimit, endLimit }))
+}
+
+const AddCardModal = ({ listId, onClose, isOpen, onOpen }) => {
   const dispatch = useDispatch()
+  const currentList = useSelector((state) =>
+    state.board.lists.find((l) => l.id === listId)
+  )
+  const toAddCard = useSelector((state) => state.board.toAddCard)
+  if(toAddCard == null)
+    doDispatch(dispatch, listId, currentList.start, currentList.end)
+
+  const taskId = useSelector((state) => state.board.toAddCard)
   // const [currentTask, setCurrentTask] = useState(task)
   const currentTask = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
   )
-  const [duration, setCurrentDuration] = useState({
-    hours: new moment(currentTask.end).diff(
-      new moment(currentTask.start),
-      'hours'
-    ),
-    miniutes:
-      new moment(currentTask.end).diff(
-        new moment(currentTask.start),
-        'minutes'
-      ) % 60
-  })
+  console.log(toAddCard, currentTask);
+  console.log();
+  const [duration, setCurrentDuration] = useState({})
   const initialRef = React.useRef(null)
-
   if (!currentTask) return null
+  if (setCurrentDuration === {})
+    setCurrentDuration({
+      hours: new moment(currentTask.end).diff(
+        new moment(currentTask.start),
+        'hours'
+      ),
+      miniutes:
+        new moment(currentTask.end).diff(
+          new moment(currentTask.start),
+          'minutes'
+        ) % 60
+    })
   
   return (
     <>
@@ -177,18 +193,11 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
           {/* {JSON.stringify(attributes)} */}
 
           <ModalFooter>
-            <Button
-              colorScheme="red"
-              mr={3}
-              onClick={(e) => {
-                dispatch(deleteCard(taskId))
-              }}
-            >
-              {' '}
-              Delete{' '}
+            <Button colorScheme="red" mr={3} onClick={onClose}>
+              Close
             </Button>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
-              Done
+            <Button colorScheme="blue" mr={3} onClick={() => {dispatch(saveCard())}}>
+              Save
             </Button>
           </ModalFooter>
         </ModalContent>
@@ -197,4 +206,4 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
   )
 }
 
-export default CardModal
+export default AddCardModal
