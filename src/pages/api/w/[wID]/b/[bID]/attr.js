@@ -21,8 +21,8 @@ export default async function handler(req, res) {
   switch (reqType) {
     case 'POST': {
       const { attributes } = req.body
-      
-      console.log('bid'+bID)
+
+      console.log('bid' + bID)
       const updatedBoard = await Board.findOneAndUpdate(
         { id: bID },
         { $push: { activityAttributes: { $each: attributes } } },

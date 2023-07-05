@@ -49,14 +49,19 @@ const Task = ({ taskId, index }) => {
             <span>{new Date(currentTask.start).toLocaleTimeString()}</span>
             <span>
               {JSON.stringify(
-                moment(currentTask.end).diff(new moment(currentTask.start), 'hours')
-              )} {' '} hr {' '} : {' '}
+                moment(currentTask.end).diff(
+                  new moment(currentTask.start),
+                  'hours'
+                )
+              )}{' '}
+              hr :{' '}
               {JSON.stringify(
                 new moment(currentTask.end).diff(
                   new moment(currentTask.start),
                   'minutes'
                 ) % 60
-              )} {' '} min
+              )}{' '}
+              min
             </span>
             <span>{new Date(currentTask.end).toLocaleTimeString()}</span>
           </div>
@@ -64,14 +69,16 @@ const Task = ({ taskId, index }) => {
             <span className="w-full text-center text-xl font-semibold">
               {currentTask.name}
             </span>
-            <span className="block overflow-hidden text-center text-ellipsis p-2 text-base">
+            <span className="block overflow-hidden text-ellipsis p-2 text-center text-base">
               {currentTask.description}
             </span>
           </div>
           {/* Attributes */}
           <div className="flex w-full max-w-full flex-row">
             {currentTask.attributes.map((attribute, index) => {
-              return <Attribute taskId={taskId} attrId={ attribute.id } key={index} />
+              return (
+                <Attribute taskId={taskId} attrId={attribute.id} key={index} />
+              )
             })}
           </div>
           <CardModal

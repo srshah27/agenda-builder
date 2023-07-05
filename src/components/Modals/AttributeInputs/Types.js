@@ -12,7 +12,6 @@ import { MultiSelect, useMultiSelect } from 'chakra-multiselect'
 import { useDispatch, useSelector } from 'react-redux'
 import { modifyCardAttributes } from '@/store/boardSlice'
 
-
 export const ShowButton = ({ taskID, attrId }) => {
   const dispatch = useDispatch()
   const attribute = useSelector((state) =>
@@ -24,8 +23,12 @@ export const ShowButton = ({ taskID, attrId }) => {
       <Switch
         isChecked={attribute.show}
         onChange={() => {
-          dispatch(modifyCardAttributes({ cardId: taskID, newAttr: { ...attribute, show: !attribute.show } }))
-
+          dispatch(
+            modifyCardAttributes({
+              cardId: taskID,
+              newAttr: { ...attribute, show: !attribute.show }
+            })
+          )
         }}
       />
     </>
@@ -50,7 +53,12 @@ export const TextInput = ({ taskID, attrId }) => {
         value={attribute.value}
         type="text"
         onChange={(e) => {
-          dispatch(modifyCardAttributes({ cardId: taskID, newAttr: { ...attribute, value: e.target.value } }))
+          dispatch(
+            modifyCardAttributes({
+              cardId: taskID,
+              newAttr: { ...attribute, value: e.target.value }
+            })
+          )
         }}
       />
     </FormControl>
@@ -65,7 +73,7 @@ export const MultipleOptionInput = ({ taskID, attrId }) => {
   // https://bmartel.github.io/chakra-multiselect/docs/
   // console.log(attribute);
   let { options, onChange } = useMultiSelect({
-    value: attribute.value != "" ? JSON.parse(attribute.value) : [],
+    value: attribute.value != '' ? JSON.parse(attribute.value) : [],
     options: attribute.options
   })
 
@@ -77,10 +85,15 @@ export const MultipleOptionInput = ({ taskID, attrId }) => {
       </div>
       <MultiSelect
         options={options}
-        value={attribute.value != "" ? JSON.parse(attribute.value) : []}
+        value={attribute.value != '' ? JSON.parse(attribute.value) : []}
         label="Choose or create items"
         onChange={(e) => {
-          dispatch(modifyCardAttributes({ cardId: taskID, newAttr: { ...attribute, value: JSON.stringify(e) } }))
+          dispatch(
+            modifyCardAttributes({
+              cardId: taskID,
+              newAttr: { ...attribute, value: JSON.stringify(e) }
+            })
+          )
           // let newAttrs = attributes
           // newAttrs[index].value = JSON.stringify(e)
           // setValue(e)
@@ -94,7 +107,7 @@ export const MultipleOptionInput = ({ taskID, attrId }) => {
           // setAttributes(newAttrs)
           // setTask({ ...task, attributes: newAttrs })
         }}
-      // create
+        // create
       />
     </FormControl>
   )

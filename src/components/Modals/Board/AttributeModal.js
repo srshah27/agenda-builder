@@ -19,7 +19,11 @@ import {
 import { nanoid } from 'nanoid'
 import { MultiSelect, useMultiSelect } from 'chakra-multiselect'
 import { useDispatch, useSelector } from 'react-redux'
-import { modifyBoardAttribute, addBoardAttributes, deleteBoardAttribute } from '@/store/boardSlice'
+import {
+  modifyBoardAttribute,
+  addBoardAttributes,
+  deleteBoardAttribute
+} from '@/store/boardSlice'
 
 export const AttributeInput = ({ index }) => {
   const dispatch = useDispatch()
@@ -34,7 +38,7 @@ export const AttributeInput = ({ index }) => {
         onChange={() => {
           let updated = {
             id: attribute.id,
-            show: !attribute.show,
+            show: !attribute.show
           }
           dispatch(modifyBoardAttribute({ new: updated }))
           // let newAttrs = attributes
@@ -50,10 +54,10 @@ export const AttributeInput = ({ index }) => {
         onChange={(e) => {
           let updated = {
             id: attribute.id,
-            name: e.target.value,
+            name: e.target.value
           }
-          dispatch(modifyBoardAttribute({new: updated}))
-          
+          dispatch(modifyBoardAttribute({ new: updated }))
+
           // let newAttributes = [...attributes]
           // newAttributes[index].name = e.target.value
           // setAttributes(newAttributes)
@@ -66,7 +70,7 @@ export const AttributeInput = ({ index }) => {
         onChange={(e) => {
           let updated = {
             id: attribute.id,
-            attributeType: e.target.value,
+            attributeType: e.target.value
           }
           dispatch(modifyBoardAttribute({ new: updated }))
           // let newAttributes = [...attributes]
@@ -80,7 +84,8 @@ export const AttributeInput = ({ index }) => {
         <option value="option">Option</option>
       </Select>
       {/* Options if type== multi or option */}
-      {attribute.attributeType === 'multi' || attribute.attributeType === 'option' ? (
+      {attribute.attributeType === 'multi' ||
+      attribute.attributeType === 'option' ? (
         <span>
           <MultiSelect
             // options={[]}
@@ -89,7 +94,7 @@ export const AttributeInput = ({ index }) => {
             onChange={(e) => {
               let updated = {
                 id: attribute.id,
-                options: e,
+                options: e
               }
               dispatch(modifyBoardAttribute({ new: updated }))
               // let newAttrs = attributes

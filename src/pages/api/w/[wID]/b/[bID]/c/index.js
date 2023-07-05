@@ -2,7 +2,6 @@ import dbConnect from '@/lib/dbconnect'
 import Card from '@/models/Cards'
 import Board from '@/models/Boards'
 
-
 export default async function handler(req, res) {
   const { wID, bID } = req.query
   try {

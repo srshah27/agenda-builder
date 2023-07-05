@@ -17,7 +17,7 @@ import {
 import Attribute from './AttributeInputs/Attributes'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
-import {updateCard, deleteCard} from '@/store/boardSlice'
+import { updateCard, deleteCard } from '@/store/boardSlice'
 const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
   const dispatch = useDispatch()
   // const [currentTask, setCurrentTask] = useState(task)
@@ -38,7 +38,7 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
   const initialRef = React.useRef(null)
 
   if (!currentTask) return null
-  
+
   return (
     <>
       <Modal
@@ -61,13 +61,18 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                 type="time"
                 value={moment(currentTask.start).format('HH:mm')}
                 onChange={(e) => {
-                  let value = new Date(`${moment(currentTask.start).format('YYYY-MM-DD')} ${e.target.value}`).toISOString()
-                  dispatch(updateCard({ id: taskId, field: 'start', value}))
-                  
+                  let value = new Date(
+                    `${moment(currentTask.start).format('YYYY-MM-DD')} ${
+                      e.target.value
+                    }`
+                  ).toISOString()
+                  dispatch(updateCard({ id: taskId, field: 'start', value }))
+
                   setCurrentDuration({
                     hours: new moment(currentTask.end).diff(
                       new moment(
-                        `${moment(currentTask.start).format('YYYY-MM-DD')} ${e.target.value
+                        `${moment(currentTask.start).format('YYYY-MM-DD')} ${
+                          e.target.value
                         }`
                       ),
                       'hours'
@@ -75,7 +80,8 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                     miniutes:
                       new moment(currentTask.end).diff(
                         new moment(
-                          `${moment(currentTask.start).format('YYYY-MM-DD')} ${e.target.value
+                          `${moment(currentTask.start).format('YYYY-MM-DD')} ${
+                            e.target.value
                           }`
                         ),
                         'minutes'
@@ -88,13 +94,18 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                 type="time"
                 value={moment(currentTask.end).format('HH:mm')}
                 onChange={(e) => {
-                  let value = new Date(`${moment(currentTask.end).format('YYYY-MM-DD')} ${e.target.value}`).toISOString()
+                  let value = new Date(
+                    `${moment(currentTask.end).format('YYYY-MM-DD')} ${
+                      e.target.value
+                    }`
+                  ).toISOString()
                   dispatch(updateCard({ id: taskId, field: 'end', value }))
-                  
+
                   setCurrentDuration({
                     hours: new moment(currentTask.end).diff(
                       new moment(
-                        `${moment(currentTask.start).format('YYYY-MM-DD')} ${e.target.value
+                        `${moment(currentTask.start).format('YYYY-MM-DD')} ${
+                          e.target.value
                         }`
                       ),
                       'hours'
@@ -102,7 +113,8 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                     miniutes:
                       new moment(currentTask.end).diff(
                         new moment(
-                          `${moment(currentTask.start).format('YYYY-MM-DD')} ${e.target.value
+                          `${moment(currentTask.start).format('YYYY-MM-DD')} ${
+                            e.target.value
                           }`
                         ),
                         'minutes'
@@ -125,7 +137,13 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                   let m = new moment(currentTask.start)
                     .add(e.target.value, 'hours')
                     .add(duration.miniutes, 'minutes')
-                  dispatch(updateCard({ id: taskId, field: 'end', value: m.toDate().toISOString() }))
+                  dispatch(
+                    updateCard({
+                      id: taskId,
+                      field: 'end',
+                      value: m.toDate().toISOString()
+                    })
+                  )
                   // setEndTime(m.format('HH:mm'))
                 }}
               />
@@ -143,7 +161,13 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                   let m = new moment(currentTask.start)
                     .add(duration.hours, 'hours')
                     .add(e.target.value, 'minutes')
-                  dispatch(updateCard({ id: taskId, field: 'end', value: m.toDate().toISOString() }))
+                  dispatch(
+                    updateCard({
+                      id: taskId,
+                      field: 'end',
+                      value: m.toDate().toISOString()
+                    })
+                  )
                   // setEnd(m.toDate())
                   // setEndTime(m.format('HH:mm'))
                 }}
@@ -156,7 +180,13 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                 value={currentTask.name}
                 onChange={(e) => {
                   // setName(e.target.value)
-                  dispatch(updateCard({id:taskId, field: "name", value: e.target.value}))
+                  dispatch(
+                    updateCard({
+                      id: taskId,
+                      field: 'name',
+                      value: e.target.value
+                    })
+                  )
                 }}
               />
 
@@ -166,7 +196,13 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                 value={currentTask.description}
                 onChange={(e) => {
                   // setDescription(e.target.value)
-                  dispatch(updateCard({ id: taskId, field: "description", value: e.target.value }))
+                  dispatch(
+                    updateCard({
+                      id: taskId,
+                      field: 'description',
+                      value: e.target.value
+                    })
+                  )
                 }}
               />
             </FormControl>

@@ -24,14 +24,13 @@ const SubNav = ({ boardData, setBoardData }) => {
 
   const dispatch = useDispatch()
 
- 
   if (!boardData.board) return null
   return (
     <div className={`flex bg-black bg-opacity-30 px-4`}>
       <input
         fontSize="md"
         color="white"
-        value={ board.name == undefined ? "": board.name}
+        value={board.name == undefined ? '' : board.name}
         onChange={(e) => {
           dispatch(updateBoard({ field: 'name', value: e.target.value }))
         }}

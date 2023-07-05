@@ -9,16 +9,15 @@ import { initializeLists } from '@/store/boardSlice'
 import { initializeCards } from '@/store/boardSlice'
 import { initializeUser } from '@/store/boardSlice'
 const BoardPage = (props) => {
-  
   const dispatch = useDispatch()
   const [boardData, setBoardData] = useState({
     board: props.board,
     cards: props.cards,
     lists: props.lists
   })
-  const [wID, setWID] = useState(props.board.workspaceId);
-  const [bID, setBID] = useState(props.board.id);
-  
+  const [wID, setWID] = useState(props.board.workspaceId)
+  const [bID, setBID] = useState(props.board.id)
+
   const board = useSelector((state) => state.board)
   useEffect(() => {
     if (board.id === null || board.id !== props.board.id) {
@@ -30,12 +29,10 @@ const BoardPage = (props) => {
       dispatch(initializeUser(props.user))
     }
   }, [board.id, dispatch, props.board, props.cards, props.lists, props.user])
-  
+
   useEffect(() => {
     setInterval(async () => {
-      
-      if(wID === null && bID === null)
-        return
+      if (wID === null && bID === null) return
       let res
       res = await fetch(`/api/w/${wID}/b/${bID}`) // fetch the current board
       let { board } = await res.json()
@@ -44,12 +41,10 @@ const BoardPage = (props) => {
       res = await fetch(`/api/w/${wID}/b/${bID}/c`) // fetch all cards in current board
       let { cards } = await res.json()
       dispatch(initializeBoard({ ...board }))
-      dispatch(
-        initializeLists(lists.sort((a, b) => a.sequence - b.sequence))
-      )
+      dispatch(initializeLists(lists.sort((a, b) => a.sequence - b.sequence)))
       dispatch(initializeCards(cards))
-    }, 5000);
-  }, [bID, dispatch, wID]);
+    }, 5000)
+  }, [bID, dispatch, wID])
 
   return (
     <div>

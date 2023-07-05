@@ -6,14 +6,13 @@ import boardReducer from './boardSlice'
 // import cardsReducer from './cardsSlice'
 
 const rootReducer = combineReducers({
-  board: boardReducer,
+  board: boardReducer
   // lists: listsReducer,
   // cards: cardsReducer
 })
 
 const store = configureStore({
-  reducer: rootReducer,
-  
+  reducer: rootReducer
 })
 
 export default store

@@ -17,8 +17,9 @@ const List = ({ listId, index }) => {
     state.board.cards.filter((card) => card.listId === listId)
   )
   const { isOpen, onOpen, onClose } = useDisclosure()
-  let sortedTasks = tasks.sort((a, b) => new Date(a.start) < new Date(b.start) ? -1 : 1)
-
+  let sortedTasks = tasks.sort((a, b) =>
+    new Date(a.start) < new Date(b.start) ? -1 : 1
+  )
 
   const [listName, setListName] = useState(currentList?.name)
 
@@ -69,19 +70,23 @@ const List = ({ listId, index }) => {
               <span>{new Date(currentList.end).toLocaleTimeString()}</span>
             </div>
           </div> */}
-          
-          <div className="flex mx-auto gap-12">
+
+          <div className="mx-auto flex gap-12">
             <span>{new Date(currentList.start).toLocaleTimeString()}</span>
             <span>
               {JSON.stringify(
-                moment(currentList.end).diff(new moment(currentList.start), 'hours')
-              )} {' '} hr {' '} : {' '}
+                moment(currentList.end).diff(
+                  new moment(currentList.start),
+                  'hours'
+                )
+              )}{' '}
+              hr :{' '}
               {JSON.stringify(
                 new moment(currentList.end).diff(
                   new moment(currentList.start),
                   'minutes'
                 ) % 60
-              )} {' '}
+              )}{' '}
             </span>
             <span>{new Date(currentList.end).toLocaleTimeString()}</span>
           </div>
@@ -94,16 +99,23 @@ const List = ({ listId, index }) => {
               center={true}
               placeholder="Title"
               value={currentList.name}
-              onChange={(e) => dispatch(updateList({ id: currentList.id, field: 'name', value: e.target.value }))}
+              onChange={(e) =>
+                dispatch(
+                  updateList({
+                    id: currentList.id,
+                    field: 'name',
+                    value: e.target.value
+                  })
+                )
+              }
             />
 
             <button
-              className={`m-2  w-44 margin-left: auto;  rounded-md border p-2 bg-red-500 text-white`}
+              className={`margin-left:  auto; m-2 w-44  rounded-md border bg-red-500 p-2 text-white`}
               onClick={() => {
                 dispatch(deleteList(currentList.id))
               }}
             >
-
               Delete List
             </button>
           </div>
@@ -127,11 +139,10 @@ const List = ({ listId, index }) => {
               </div>
             )}
           </Droppable>
-          <div className=' flex flex-row items-center justify-center self-center' >
+          <div className=" flex flex-row items-center justify-center self-center">
             <button
               className={`m-2  w-44  rounded-md border p-2`}
               onClick={() => {
-
                 dispatch(addCard(currentList.id))
               }}
               // onClick={onOpen}
@@ -140,14 +151,14 @@ const List = ({ listId, index }) => {
               Add a card
             </button>
 
-          <AddCardModal
-            onOpen={onOpen}
-            onClose={ onClose}
-            isOpen={isOpen}
-            listId={listId}
-          />
-        </div>
+            <AddCardModal
+              onOpen={onOpen}
+              onClose={onClose}
+              isOpen={isOpen}
+              listId={listId}
+            />
           </div>
+        </div>
       )}
     </Draggable>
   )
