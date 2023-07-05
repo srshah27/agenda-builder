@@ -1,6 +1,5 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
 import TrelloHero from '../../../public/img/Trello.webp'
 import AnimateBG from './AnimateBG'
 

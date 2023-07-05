@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
-import { nanoid } from 'nanoid'
 import { useSession } from 'next-auth/react'
 import { AddIcon } from '@chakra-ui/icons'
 import { useDispatch, useSelector } from 'react-redux'

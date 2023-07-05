@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
-import { Box, useColorModeValue, Spacer } from '@chakra-ui/react'
 import Attribute from '@/components/Attributes/Attribute'
 import CardModal from '@/components/Modals/CardModal'
 import { useDisclosure } from '@chakra-ui/react'
