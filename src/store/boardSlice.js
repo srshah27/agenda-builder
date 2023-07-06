@@ -211,6 +211,33 @@ const boardSlice = createSlice({
         }
       }
     },
+    handleListDragEnd: (state, action) => {
+      let source = action.payload.source
+      let destination = action.payload.destination
+      let id = action.payload.draggableId
+      let currentList = state.lists.find((list) => list.id === id)
+      let oldData = []
+
+      state.lists.forEach((list) => {
+        oldData.push({ ...list })
+        if (list.sequence > source.index) {
+          list.sequence = list.sequence - 1 // Update query else
+        }
+        if (list.sequence >= destination.index) {
+          list.sequence = list.sequence + 1 // Update query else
+        }
+      })
+
+      currentList.sequence = destination.index // Upadte query currentList
+      state.lists.forEach((list) => {
+        if (list.sequence !== oldData.find((l) => l.id === list.id).sequence)
+          fetch(`/api/w/${state.workspaceId}/b/${state.id}/l/${list.id}`, {
+            method: 'PATCH',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ sequence: list.sequence })
+          })
+      })
+    },
 
     // ==================================CARDS==================================
 
@@ -310,6 +337,43 @@ const boardSlice = createSlice({
           })
         }
       }
+    },
+    handleCardDragEnd: (state, action) => {
+      let source = action.payload.source
+      let destination = action.payload.destination
+      let id = action.payload.draggableId
+      let currentCard = state.cards.find((card) => card.id === id)
+      let oldData = []
+
+      // handle remove from source
+      state.cards.forEach((card) => {
+        oldData.push({ ...card })
+        if (card.listId === source.droppableId) {
+          if (card.sequence > source.index) {
+            card.sequence = card.sequence - 1
+          }
+        }
+        if (card.listId === destination.droppableId) {
+          if (card.sequence >= destination.index) {
+            card.sequence = card.sequence + 1
+          }
+        }
+      })
+      currentCard.listId = destination.droppableId
+      currentCard.sequence = destination.index // Upadte query currentCard
+      state.cards.forEach((card) => {
+        if (card.sequence !== oldData.find((c) => c.id === card.id).sequence)
+          fetch(`/api/w/${state.workspaceId}/b/${state.id}/c/${card.id}`, {
+            method: 'PATCH',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ sequence: card.sequence })
+          })
+      })
+      fetch(`/api/w/${state.workspaceId}/b/${state.id}/c/${currentCard.id}`, {
+        method: 'PATCH',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ listId: currentCard.listId })
+      })
     }
   }
 })
@@ -328,13 +392,15 @@ export const {
   updateList,
   deleteList,
   addListAttributes,
+  handleListDragEnd,
   // ==========CARDS==========
   initializeCards,
   addCard,
   updateCard,
   deleteCard,
   addAttributes,
-  modifyCardAttributes
+  modifyCardAttributes,
+  handleCardDragEnd
 } = boardSlice.actions
 
 export default boardSlice.reducer

@@ -72,6 +72,7 @@ const List = ({ listId, index }) => {
           </div> */}
 
           <div className="mx-auto flex gap-12">
+            {currentList.sequence}
             <span>{new Date(currentList.start).toLocaleTimeString()}</span>
             <span>
               {JSON.stringify(
