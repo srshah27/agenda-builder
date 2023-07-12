@@ -71,54 +71,56 @@ const List = ({ listId, index }) => {
             </div>
           </div> */}
 
-          <div className="mx-auto flex gap-12">
-            {currentList.sequence}
-            <span>{new Date(currentList.start).toLocaleTimeString()}</span>
-            <span>
-              {JSON.stringify(
-                moment(currentList.end).diff(
-                  new moment(currentList.start),
-                  'hours'
-                )
-              )}{' '}
-              hr :{' '}
-              {JSON.stringify(
-                new moment(currentList.end).diff(
-                  new moment(currentList.start),
-                  'minutes'
-                ) % 60
-              )}{' '}
-            </span>
-            <span>{new Date(currentList.end).toLocaleTimeString()}</span>
-          </div>
           <div
             {...draggableProvided.dragHandleProps}
-            className="flex justify-center p-2"
+            className=""
           >
+            <div className="mx-auto flex gap-12">
+              {currentList.sequence}
+              <span>{new Date(currentList.start).toLocaleTimeString()}</span>
+              <span>
+                {JSON.stringify(
+                  moment(currentList.end).diff(
+                    new moment(currentList.start),
+                    'hours'
+                  )
+                )}{' '}
+                hr :{' '}
+                {JSON.stringify(
+                  new moment(currentList.end).diff(
+                    new moment(currentList.start),
+                    'minutes'
+                  ) % 60
+                )}{' '}
+              </span>
+              <span>{new Date(currentList.end).toLocaleTimeString()}</span>
+            </div>
             {/* <input value={listName} className='text-center' onChange={handleListName} /> */}
-            <CustomInput
-              center={true}
-              placeholder="Title"
-              value={currentList.name}
-              onChange={(e) =>
-                dispatch(
-                  updateList({
-                    id: currentList.id,
-                    field: 'name',
-                    value: e.target.value
-                  })
-                )
-              }
-            />
+            <div className='flex justify-center p-2'>
+              <CustomInput
+                center={true}
+                placeholder="Title"
+                value={currentList.name}
+                onChange={(e) =>
+                  dispatch(
+                    updateList({
+                      id: currentList.id,
+                      field: 'name',
+                      value: e.target.value
+                    })
+                  )
+                }
+              />
 
-            <button
-              className={`margin-left:  auto; m-2 w-44  rounded-md border bg-red-500 p-2 text-white`}
-              onClick={() => {
-                dispatch(deleteList(currentList.id))
-              }}
-            >
-              Delete List
-            </button>
+              <button
+                className={`margin-left:  auto; m-2 w-44  rounded-md border bg-red-500 p-2 text-white`}
+                onClick={() => {
+                  dispatch(deleteList(currentList.id))
+                }}
+              >
+                Delete List
+              </button>
+            </div>
           </div>
 
           <Droppable
@@ -137,6 +139,7 @@ const List = ({ listId, index }) => {
                     <Task key={index} taskId={task.id} index={task.sequence} />
                   ))}
                 </div>
+                {droppableProvided.placeholder}
               </div>
             )}
           </Droppable>
@@ -146,7 +149,7 @@ const List = ({ listId, index }) => {
               onClick={() => {
                 dispatch(addCard(currentList.id))
               }}
-              // onClick={onOpen}
+            // onClick={onOpen}
             >
               <AddIcon w={3} h={3} mr={3} />
               Add a card

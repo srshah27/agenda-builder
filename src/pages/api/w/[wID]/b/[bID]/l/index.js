@@ -22,6 +22,7 @@ export default async function handler(req, res) {
     case 'POST': {
       const { id, name, createdBy, createdAt, sequence, start, end } = req.body
       const count = await List.find({ boardId: bID, workspaceId: wID }).count()
+      console.log(count);
       let { activityAttributes } = await Board.findOne(
         { id: bID, workspaceId: wID },
         { activityAttributes: 1 }
@@ -39,7 +40,7 @@ export default async function handler(req, res) {
         name,
         createdAt,
         createdBy,
-        sequence: sequence || count + 1,
+        sequence: sequence || count,
         start,
         end,
         activityAttributes: attrs

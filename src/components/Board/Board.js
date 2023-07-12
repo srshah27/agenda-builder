@@ -41,7 +41,7 @@ const Board = ({ boardData, setBoardData }) => {
               className="flex flex-col items-center bg-[url(../../public/img/boardbg.png)] bg-cover px-4"
             >
               {lists.map((list, index) => {
-                return <List key={index} listId={list.id} index={index} />
+                return <List key={index} listId={list.id} index={list.sequence} />
               })}
               {droppableProvided.placeholder}
               <button

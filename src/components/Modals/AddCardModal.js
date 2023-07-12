@@ -37,8 +37,8 @@ const AddCardModal = ({ listId, onClose, isOpen, onOpen }) => {
   const currentTask = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
   )
-  console.log(toAddCard, currentTask)
-  console.log()
+  // console.log(toAddCard, currentTask)
+  // console.log()
   const [duration, setCurrentDuration] = useState({})
   const initialRef = React.useRef(null)
   if (!currentTask) return null

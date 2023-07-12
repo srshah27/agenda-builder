@@ -214,23 +214,30 @@ const boardSlice = createSlice({
     handleListDragEnd: (state, action) => {
       let source = action.payload.source
       let destination = action.payload.destination
+      console.log(source, destination);
       let id = action.payload.draggableId
       let currentList = state.lists.find((list) => list.id === id)
       let oldData = []
-
+      console.log(source.index, destination.index);
       state.lists.forEach((list) => {
         oldData.push({ ...list })
         if (list.sequence > source.index) {
           list.sequence = list.sequence - 1 // Update query else
+          // state.lists.find((l) => l.id === list.id)['sequence'] = list.sequence - 1
         }
         if (list.sequence >= destination.index) {
           list.sequence = list.sequence + 1 // Update query else
+          // state.lists.find((l) => l.id === list.id)['sequence'] = list.sequence + 1
         }
       })
 
       currentList.sequence = destination.index // Upadte query currentList
+      state.lists.find((list) => list.id === id)['sequence'] = destination.index
+      // oldData.push({ ...currentList })
+      console.log(oldData);
       state.lists.forEach((list) => {
         if (list.sequence !== oldData.find((l) => l.id === list.id).sequence)
+          console.log(list.id);
           fetch(`/api/w/${state.workspaceId}/b/${state.id}/l/${list.id}`, {
             method: 'PATCH',
             headers: { 'content-type': 'application/json' },
