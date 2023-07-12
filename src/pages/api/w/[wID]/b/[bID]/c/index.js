@@ -49,7 +49,7 @@ export default async function handler(req, res) {
         name,
         createdAt,
         createdBy,
-        sequence: sequence || count + 1,
+        sequence: sequence || count,
         start,
         end,
         attributes: attrs
