@@ -20,7 +20,7 @@ const List = ({ listId, index }) => {
   let sortedTasks = tasks.sort((a, b) =>
     new Date(a.start) < new Date(b.start) ? -1 : 1
   )
-
+  console.log("name: ", currentList?.name, "sequence: ", currentList?.sequence);
   const [listName, setListName] = useState(currentList?.name)
 
   async function handleListName(e) {
@@ -40,10 +40,11 @@ const List = ({ listId, index }) => {
   const [end, setEnd] = useState(moment(currentList?.end).format('HH:mm'))
   if (!currentList) return null
   return (
-    <Draggable draggableId={currentList.id} index={index}>
+    <Draggable draggableId={currentList.id} index={currentList.sequence}>
       {(draggableProvided, draggableSnapshot) => (
         <div
           {...draggableProvided.draggableProps}
+          {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
           className={`m-4 flex h-fit w-4/5 flex-col justify-center rounded-xl bg-white shadow-md `}
         >
@@ -72,11 +73,12 @@ const List = ({ listId, index }) => {
           </div> */}
 
           <div
-            {...draggableProvided.dragHandleProps}
             className=""
           >
+          
             <div className="mx-auto flex gap-12">
               {currentList.sequence}
+              {currentList.id}
               <span>{new Date(currentList.start).toLocaleTimeString()}</span>
               <span>
                 {JSON.stringify(
@@ -136,7 +138,7 @@ const List = ({ listId, index }) => {
               >
                 <div className="flex flex-col">
                   {tasks.map((task, index) => (
-                    <Task key={index} taskId={task.id} index={task.sequence} />
+                    <Task key={task.id} taskId={task.id} index={task.sequence} />
                   ))}
                 </div>
                 {droppableProvided.placeholder}

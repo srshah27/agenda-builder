@@ -18,7 +18,6 @@ const Board = ({ boardData, setBoardData }) => {
   const { data: session } = useSession()
   const dispatch = useDispatch()
   const lists = useSelector((state) => state.board.lists)
-
   const onDragEnd = (result) => {
     const { destination, source, draggableId, type } = result
     if (!destination) return
@@ -41,7 +40,7 @@ const Board = ({ boardData, setBoardData }) => {
               className="flex flex-col items-center bg-[url(../../public/img/boardbg.png)] bg-cover px-4 min-h-screen"
             >
               {lists.map((list, index) => {
-                return <List key={index} listId={list.id} index={list.sequence} />
+                return <List key={list.id} listId={list.id} index={list.sequence} />
               })}
               {droppableProvided.placeholder}
               <button

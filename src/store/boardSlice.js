@@ -124,7 +124,7 @@ const boardSlice = createSlice({
 
     //  ==================================LISTS==================================
     initializeLists: (state, action) => {
-      state.lists = action.payload
+      state.lists = action.payload.sort((a, b) => a.sequence - b.sequence)
     },
 
     addList: (state, action) => {
@@ -221,6 +221,7 @@ const boardSlice = createSlice({
       console.log(source.index, destination.index);
       state.lists.forEach((list) => {
         oldData.push({ ...list })
+        console.log(list.sequence);
         if (list.sequence > source.index) {
           list.sequence = list.sequence - 1 // Update query else
           // state.lists.find((l) => l.id === list.id)['sequence'] = list.sequence - 1
@@ -234,10 +235,12 @@ const boardSlice = createSlice({
       currentList.sequence = destination.index // Upadte query currentList
       state.lists.find((list) => list.id === id)['sequence'] = destination.index
       // oldData.push({ ...currentList })
-      console.log(oldData);
+      // console.log(oldData);
+      
+      state.lists.sort((a, b) => a.sequence - b.sequence)
       state.lists.forEach((list) => {
         if (list.sequence !== oldData.find((l) => l.id === list.id).sequence)
-          console.log(list.id);
+          // console.log(list.id);
           fetch(`/api/w/${state.workspaceId}/b/${state.id}/l/${list.id}`, {
             method: 'PATCH',
             headers: { 'content-type': 'application/json' },
@@ -368,6 +371,7 @@ const boardSlice = createSlice({
       })
       currentCard.listId = destination.droppableId
       currentCard.sequence = destination.index // Upadte query currentCard
+      state.cards.sort((a, b) => a.sequence - b.sequence)
       state.cards.forEach((card) => {
         if (card.sequence !== oldData.find((c) => c.id === card.id).sequence)
           fetch(`/api/w/${state.workspaceId}/b/${state.id}/c/${card.id}`, {
