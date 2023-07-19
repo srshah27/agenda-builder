@@ -4,11 +4,17 @@ import Attribute from '@/components/Attributes/Attribute'
 import CardModal from '@/components/Modals/CardModal'
 import { useDisclosure } from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
+import { computeBgCard } from '@/store/boardSlice'
 import moment from 'moment'
 const Task = ({ taskId, index }) => {
+  const dispatch = useDispatch()
+  dispatch(computeBgCard(taskId))
   const currentTask = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
   )
+  console.log(currentTask);
+  const bg = currentTask.bg ? currentTask.bg == 'default' ? 'bg-slate-200' : currentTask.bg == 'red' ? 'bg-red-200' : 'bg-slate-200' : 'bg-slate-200' 
+  
   const { isOpen, onOpen, onClose } = useDisclosure()
   // const [currentTask, setCurrentTask] = useState(task)
   const initialRef = React.useRef(null)
@@ -28,7 +34,7 @@ const Task = ({ taskId, index }) => {
   return (
     <Draggable
       draggableId={currentTask.id}
-      index={index}
+      index={currentTask.sequence}
       disableInteractiveElementBlocking
     >
       {(draggableProvided, draggableSnapshot) => (
@@ -37,7 +43,7 @@ const Task = ({ taskId, index }) => {
           {...draggableProvided.dragHandleProps}
           ref={draggableProvided.innerRef}
           onClick={onOpen}
-          className={`cardAnimation mx-2 mb-3 flex h-[144px] rounded-md border bg-slate-200 p-2 font-light shadow-md`}
+          className={`cardAnimation mx-2 mb-3 flex h-[144px] rounded-md border p-2 font-light shadow-md ${bg}`}
         >
           <div className="flex h-full min-w-fit flex-col items-baseline justify-around">
             <strong>From: </strong>

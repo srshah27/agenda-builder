@@ -6,7 +6,7 @@ import CustomInput from '../utils/CustomInput'
 import Task from './Task'
 import { addCard, updateList, deleteList } from '@/store/boardSlice'
 import AddCardModal from '@/components/Modals/AddCardModal'
-import { useDispatch, useSelector } from 'react-redux'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { useDisclosure } from '@chakra-ui/react'
 const List = ({ listId, index }) => {
   const dispatch = useDispatch()
@@ -14,7 +14,8 @@ const List = ({ listId, index }) => {
     state.board.lists.find((l) => l.id === listId)
   )
   const tasks = useSelector((state) =>
-    state.board.cards.filter((card) => card.listId === listId)
+    state.board.cards.filter((card) => card.listId === listId),
+    shallowEqual
   )
   const { isOpen, onOpen, onClose } = useDisclosure()
   let sortedTasks = tasks.sort((a, b) =>

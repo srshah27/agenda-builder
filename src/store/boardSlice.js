@@ -21,7 +21,7 @@ const initialState = {
   cards: []
 }
 
-const boardSlice = createSlice({
+export const boardSlice = createSlice({
   name: 'board',
   initialState,
   reducers: {
@@ -218,10 +218,9 @@ const boardSlice = createSlice({
       let id = action.payload.draggableId
       let currentList = state.lists.find((list) => list.id === id)
       let oldData = []
-      console.log(source.index, destination.index);
+      
       state.lists.forEach((list) => {
         oldData.push({ ...list })
-        console.log(list.sequence);
         if (list.sequence > source.index) {
           list.sequence = list.sequence - 1 // Update query else
           // state.lists.find((l) => l.id === list.id)['sequence'] = list.sequence - 1
@@ -253,6 +252,11 @@ const boardSlice = createSlice({
 
     initializeCards: (state, action) => {
       state.cards = action.payload
+      
+      state.cards.forEach(card => {
+        boardSlice.caseReducers.computeBgCard(state,{payload: card.id})
+      });
+      
     },
     addCard: (state, action) => {
       let listId = action.payload
@@ -295,6 +299,29 @@ const boardSlice = createSlice({
         }
       )
     },
+    computeBgCard: (state, action) => {
+      let currCard = state.cards.find((card) => card.id === action.payload)
+      console.log("Called");
+      if(!currCard) return
+      let currentStart = new Date(currCard.start)
+      let currentEnd = new Date(currCard.end)
+      let bg = 'default'
+      state.cards.forEach(card => {
+        if(card.id !== action.payload && currCard.listId === card.listId) {
+          let otherStart = new Date(card.start)
+          let otherEnd = new Date(card.end)
+          
+          if ((currentStart > otherStart && currentStart < otherEnd) || (currentStart < otherStart && currentStart > otherEnd)) {
+            bg = 'red'
+          }
+          if ((currentEnd > otherStart && currentEnd < otherEnd) || (currentEnd > otherStart && currentEnd < otherEnd)) {
+            bg = 'red'
+          }
+        }
+      });
+      currCard.bg = bg
+    },
+    
     deleteCard: (state, action) => {
       state.cards = state.cards.filter((card) => card.id !== action.payload)
       fetch(`/api/w/${state.workspaceId}/b/${state.id}/c/${action.payload}`, {
@@ -371,6 +398,8 @@ const boardSlice = createSlice({
       })
       currentCard.listId = destination.droppableId
       currentCard.sequence = destination.index // Upadte query currentCard
+      state.cards.find((card) => card.id === id)['listId'] = destination.droppableId
+      state.cards.find((card) => card.id === id)['sequence'] = destination.index
       state.cards.sort((a, b) => a.sequence - b.sequence)
       state.cards.forEach((card) => {
         if (card.sequence !== oldData.find((c) => c.id === card.id).sequence)
@@ -402,6 +431,7 @@ export const {
   addList,
   updateList,
   deleteList,
+  computeBgCard,
   addListAttributes,
   handleListDragEnd,
   // ==========CARDS==========
@@ -413,5 +443,7 @@ export const {
   modifyCardAttributes,
   handleCardDragEnd
 } = boardSlice.actions
+
+
 
 export default boardSlice.reducer
