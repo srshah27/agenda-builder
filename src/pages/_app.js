@@ -1,15 +1,21 @@
 import '@/styles/globals.tail.css'
 import { SessionProvider } from 'next-auth/react'
 import NextNProgress from 'nextjs-progressbar'
-import Head from 'next/head'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { MultiSelectTheme } from 'chakra-multiselect'
 import store from '@/store/store'
 import { Provider } from 'react-redux'
+import localFont from 'next/font/local'
+
 const theme = extendTheme({
   components: {
     MultiSelect: MultiSelectTheme
   }
+})
+
+const sans = localFont({
+  src: '../../public/fonts/PilcrowRounded_Complete/PilcrowRounded_Complete/fonts/Variable/PilcrowRounded-Variable.ttf'
+  // variable: "--font-supreme",
 })
 
 const App = ({ Component, pageProps, session }) => {
