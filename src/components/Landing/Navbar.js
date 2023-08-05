@@ -40,7 +40,7 @@ function Navbar() {
               navbar ? 'block md:p-0' : 'hidden'
             }`}
           >
-            <ul className="mt-20 h-[50vh] items-center justify-center font-mono md:mt-0 md:flex md:h-auto">
+            <ul className="mt-20 h-[50vh] items-center justify-center md:mt-0 md:flex md:h-auto">
               <li className="text-neutral border-primary md:hover:text-primary right-[23rem] border-b-2  py-2  px-6   text-center  text-xl md:absolute md:border-b-0 md:hover:underline">
                 <Link href="#home" onClick={() => setNavbar(!navbar)}>
                   Home

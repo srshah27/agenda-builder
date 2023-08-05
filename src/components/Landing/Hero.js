@@ -15,7 +15,7 @@ function Hero() {
           priority={true}
         />
         <div className="max-w-[50%] text-center md:text-left">
-          <h1 className="font-serif text-4xl text-gray-800 md:text-6xl">
+          <h1 className="text-4xl text-gray-800 md:text-6xl">
             Get aligned around your goals
           </h1>
           <p className="text-md py-6 text-gray-500 md:text-2xl">

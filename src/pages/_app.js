@@ -13,8 +13,8 @@ const theme = extendTheme({
   }
 })
 
-const sans = localFont({
-  src: '../../public/fonts/PilcrowRounded_Complete/PilcrowRounded_Complete/fonts/Variable/PilcrowRounded-Variable.ttf'
+const cabinet = localFont({
+  src: '../../public/fonts/cabinet/WEB/fonts/CabinetGrotesk-Regular.ttf'
   // variable: "--font-supreme",
 })
 
@@ -29,7 +29,9 @@ const App = ({ Component, pageProps, session }) => {
             stopDelayMs={100}
             height={6}
           />
-          <Component {...pageProps} />
+          <main className={`${cabinet.className}`}>
+            <Component {...pageProps} />
+          </main>
         </SessionProvider>
       </ChakraProvider>
     </Provider>
