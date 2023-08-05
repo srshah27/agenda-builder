@@ -57,27 +57,27 @@ function Login() {
                 <input
                   type="text"
                   placeholder="Enter Email"
-                  className="input-md mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
+                  className="p-2 mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
                   {...formik.getFieldProps('email')}
                 />
                 {formik.touched.email && formik.errors.email ? (
-                  <span>{formik.errors.email}</span>
+                  <span className='text-red-400 text-xs'>{formik.errors.email}</span>
                 ) : (
                   <></>
                 )}
                 <input
                   type="password"
                   placeholder="Password"
-                  className="input-md input-bordered my-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
+                  className="p-2 mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
                   {...formik.getFieldProps('password')}
                 />
                 {formik.touched.password && formik.errors.password ? (
-                  <span>{formik.errors.password}</span>
+                  <span className='text-red-400 text-xs'>{formik.errors.password}</span>
                 ) : (
                   <></>
                 )}
                 <button
-                  className="btn-active bg-primary my-2 h-10 w-full rounded-md font-mono font-bold text-gray-100"
+                  className="bg-emerald-400 my-2 h-10 w-full rounded-md font-mono font-bold"
                   type="submit"
                 >
                   Log In
