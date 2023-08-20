@@ -1,6 +1,5 @@
 import dbConnect from '@/lib/dbconnect'
 import Workspace from '@/models/Workspaces'
-import sessionUser from '@/middleware/getSessionUser'
 
 export default async function handler(req, res) {
   // const { user, error, dberror } = await sessionUser({ req })

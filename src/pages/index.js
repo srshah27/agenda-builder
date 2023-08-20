@@ -6,12 +6,8 @@ import Footer from '@/components/Landing/Footer'
 
 export default function Home() {
   return (
-    <main className="">
-      {/* <Navbar /> */}
+    <main>
       <Hero />
-      {/* <Feature /> */}
-      {/* <Use /> */}
-      {/* <Footer /> */}
     </main>
   )
 }

@@ -1,7 +1,7 @@
 import { getSession } from 'next-auth/react'
 
 export default function Home() {
-  return <>Redirecting...</>
+  return <h1>Redirecting...</h1>
 }
 
 export async function getServerSideProps(context) {
