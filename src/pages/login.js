@@ -49,7 +49,7 @@ function Login() {
 
         <section className="w-full p-5">
           <div className="mx-auto my-0 w-96 max-w-lg rounded-sm  bg-white py-[25px] px-[40px] shadow-[0px_0px_50px_2px_rgb(0,0,0,0.2)]">
-            <h1 className="mt-3 mb-6 text-center font-mono text-base font-semibold tracking-tight text-gray-500">
+            <h1 className="mt-3 mb-6 text-center text-base font-semibold tracking-tight text-gray-500">
               Log in to Agile Builder
             </h1>
             <div className="">
@@ -77,7 +77,7 @@ function Login() {
                   <></>
                 )}
                 <button
-                  className="bg-emerald-400 my-2 h-10 w-full rounded-md font-mono font-bold"
+                  className="bg-emerald-400 my-2 h-10 w-full rounded-md font-bold"
                   type="submit"
                 >
                   Log In

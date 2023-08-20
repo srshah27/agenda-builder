@@ -4,7 +4,7 @@ import todoImage from '../../../public/svg/todo.svg'
 const Feature = () => {
   return (
     <div className="h-screen w-full bg-white">
-      <div className="text-primary flex-col p-16 text-center font-mono">
+      <div className="text-primary flex-col p-16 text-center">
         <h4 className="text-md text-neutral">Agenda Builder 101 </h4>
         <h1 className="text-6xl font-extrabold">Organise Your Task</h1>
       </div>

@@ -104,7 +104,7 @@ function Signup({ providers }) {
 
         <section className="w-full p-5">
           <div className="mx-auto my-0 w-96 max-w-lg rounded-sm  bg-white py-[25px] px-[40px] shadow-[0px_0px_50px_2px_rgb(0,0,0,0.2)]">
-            <h1 className="mt-3 mb-4 text-center font-mono text-base font-semibold tracking-tight text-gray-500">
+            <h1 className="mt-3 mb-4 text-center text-base font-semibold tracking-tight text-gray-500">
               Sign Up for your account
             </h1>
             <div className="form-control ">
@@ -147,7 +147,7 @@ function Signup({ providers }) {
                 {formik.touched.cpassword && formik.errors.cpassword ? (
                   <span className="text-red-400 text-xs">{formik.errors.cpassword}</span>
                 ) : null}
-                <button className="bg-emerald-400 my-2 h-10 w-full rounded-md font-mono font-bold text-gray-100">
+                <button className="bg-emerald-400 my-2 h-10 w-full rounded-md font-bold text-gray-100">
                   Sign Up
                 </button>
               </form>
