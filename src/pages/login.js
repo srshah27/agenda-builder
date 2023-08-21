@@ -45,11 +45,10 @@ function Login() {
             height={200}
           />
         </div>
-        {/* </div> */}
 
         <section className="w-full p-5">
           <div className="mx-auto my-0 w-96 max-w-lg rounded-sm  bg-white py-[25px] px-[40px] shadow-[0px_0px_50px_2px_rgb(0,0,0,0.2)]">
-            <h1 className="mt-3 mb-6 text-center font-mono text-base font-semibold tracking-tight text-gray-500">
+            <h1 className="mt-3 mb-6 text-center text-base font-semibold tracking-tight text-gray-500">
               Log in to Agile Builder
             </h1>
             <div className="">
@@ -57,42 +56,37 @@ function Login() {
                 <input
                   type="text"
                   placeholder="Enter Email"
-                  className="input-md mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
+                  className="mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 p-2 transition-all duration-500"
                   {...formik.getFieldProps('email')}
                 />
                 {formik.touched.email && formik.errors.email ? (
-                  <span>{formik.errors.email}</span>
+                  <span className="text-xs text-red-400">
+                    {formik.errors.email}
+                  </span>
                 ) : (
                   <></>
                 )}
                 <input
                   type="password"
                   placeholder="Password"
-                  className="input-md input-bordered my-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
+                  className="mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 p-2 transition-all duration-500"
                   {...formik.getFieldProps('password')}
                 />
                 {formik.touched.password && formik.errors.password ? (
-                  <span>{formik.errors.password}</span>
+                  <span className="text-xs text-red-400">
+                    {formik.errors.password}
+                  </span>
                 ) : (
                   <></>
                 )}
                 <button
-                  className="btn-active bg-primary my-2 h-10 w-full rounded-md font-mono font-bold text-gray-100"
+                  className="my-2 h-10 w-full rounded-md bg-emerald-400 font-bold"
                   type="submit"
                 >
                   Log In
                 </button>
               </form>
               <div className="my-3 text-center text-xs text-gray-500"> OR </div>
-              {/* <button className="items-center justify-center w-full h-10 text-center border-2 rounded-sm shadow-lg border-gray-50"
-                  onClick={() => {
-                    signIn('Google')
-                  }}>
-                  <FcGoogle className="inline w-5 h-auto mx-2 my-2 " />
-                  <div className="inline font-bold text-slate-600">
-                    Continue with Google
-                  </div>
-                </button> */}
               <button
                 onClick={() => signIn('google', { callbackUrl: '/' })}
                 className="h-10 w-full items-center justify-center rounded-sm border-2 border-gray-50 text-center shadow-lg"
@@ -132,7 +126,6 @@ function Login() {
             height={600}
           />
         </div>
-        {/* <ErrorAlert message='Task Failed Successfully' /> */}
       </div>
     </FormikProvider>
   )
@@ -140,14 +133,6 @@ function Login() {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
-  if (session) {
-    return {
-      redirect: {
-        destination: '/api/w/get',
-        permanent: false
-      }
-    }
-  }
   return {
     props: {}
   }

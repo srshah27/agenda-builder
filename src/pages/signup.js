@@ -104,7 +104,7 @@ function Signup({ providers }) {
 
         <section className="w-full p-5">
           <div className="mx-auto my-0 w-96 max-w-lg rounded-sm  bg-white py-[25px] px-[40px] shadow-[0px_0px_50px_2px_rgb(0,0,0,0.2)]">
-            <h1 className="mt-3 mb-4 text-center font-mono text-base font-semibold tracking-tight text-gray-500">
+            <h1 className="mt-3 mb-4 text-center text-base font-semibold tracking-tight text-gray-500">
               Sign Up for your account
             </h1>
             <div className="form-control ">
@@ -113,41 +113,41 @@ function Signup({ providers }) {
                   <input
                     type="text"
                     placeholder="User Name*"
-                    className="input-md mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
+                    className="p-2 mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
                     {...formik.getFieldProps('name')}
                   />
                   {formik.touched.name && formik.errors.name ? (
-                    <div className="error">{formik.errors.name}</div>
+                    <div className="text-red-400 text-xs">{formik.errors.name}</div>
                   ) : null}
                 </div>
                 <input
                   type="text"
                   placeholder="Email*"
-                  className="input-md mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
+                  className="p-2 mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
                   {...formik.getFieldProps('email')}
                 />
                 {formik.touched.email && formik.errors.email ? (
-                  <div className="error">{formik.errors.email}</div>
+                  <div className="text-red-400 text-xs">{formik.errors.email}</div>
                 ) : null}
                 <input
                   type="password"
                   placeholder="Password*"
-                  className="input-md input-bordered my-2 h-10 w-full rounded-sm border-2 border-gray-300  bg-gray-50 transition-all  duration-500"
+                  className="p-2 my-2 h-10 w-full rounded-sm border-2 border-gray-300  bg-gray-50 transition-all  duration-500"
                   {...formik.getFieldProps('password')}
                 />
                 {formik.touched.password && formik.errors.password ? (
-                  <div className="error">{formik.errors.password}</div>
+                  <div className="text-red-400 text-xs">{formik.errors.password}</div>
                 ) : null}
                 <input
                   type="password"
                   placeholder=" Confirm Password*"
-                  className="input-md input-bordered my-2 h-10 w-full rounded-sm border-2 border-gray-300  bg-gray-50 transition-all  duration-500"
+                  className="p-2 my-2 h-10 w-full rounded-sm border-2 border-gray-300  bg-gray-50 transition-all  duration-500"
                   {...formik.getFieldProps('cpassword')}
                 />
                 {formik.touched.cpassword && formik.errors.cpassword ? (
-                  <div className="error">{formik.errors.cpassword}</div>
+                  <span className="text-red-400 text-xs">{formik.errors.cpassword}</span>
                 ) : null}
-                <button className="btn-active bg-primary my-2 h-10 w-full rounded-md font-mono font-bold text-gray-100">
+                <button className="bg-emerald-400 my-2 h-10 w-full rounded-md font-bold text-gray-100">
                   Sign Up
                 </button>
               </form>
@@ -195,14 +195,14 @@ function Signup({ providers }) {
 
 export async function getServerSideProps(context) {
   const session = await getSession(context)
-  if (session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false
-      }
-    }
-  }
+  // if (session) {
+  //   return {
+  //     redirect: {
+  //       destination: '/',
+  //       permanent: false
+  //     }
+  //   }
+  // }
   return {
     props: {
       providers: await getProviders(context)

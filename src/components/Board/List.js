@@ -7,21 +7,21 @@ import Task from './Task'
 import { addCard, updateList, deleteList } from '@/store/boardSlice'
 import AddCardModal from '@/components/Modals/AddCardModal'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { useDisclosure } from '@chakra-ui/react'
+import { useDisclosure, Button } from '@chakra-ui/react'
 const List = ({ listId, index }) => {
   const dispatch = useDispatch()
   const currentList = useSelector((state) =>
     state.board.lists.find((l) => l.id === listId)
   )
-  const tasks = useSelector((state) =>
-    state.board.cards.filter((card) => card.listId === listId),
+  const tasks = useSelector(
+    (state) => state.board.cards.filter((card) => card.listId === listId),
     shallowEqual
   )
   const { isOpen, onOpen, onClose } = useDisclosure()
   let sortedTasks = tasks.sort((a, b) =>
     new Date(a.start) < new Date(b.start) ? -1 : 1
   )
-  console.log("name: ", currentList?.name, "sequence: ", currentList?.sequence);
+  console.log('name: ', currentList?.name, 'sequence: ', currentList?.sequence)
   const [listName, setListName] = useState(currentList?.name)
 
   async function handleListName(e) {
@@ -73,57 +73,51 @@ const List = ({ listId, index }) => {
             </div>
           </div> */}
 
-          <div
-            className=""
-          >
-          
-            <div className="mx-auto flex gap-12">
-              {currentList.sequence}
-              {currentList.id}
-              <span>{new Date(currentList.start).toLocaleTimeString()}</span>
-              <span>
-                {JSON.stringify(
-                  moment(currentList.end).diff(
-                    new moment(currentList.start),
-                    'hours'
-                  )
-                )}{' '}
-                hr :{' '}
-                {JSON.stringify(
-                  new moment(currentList.end).diff(
-                    new moment(currentList.start),
-                    'minutes'
-                  ) % 60
-                )}{' '}
-              </span>
-              <span>{new Date(currentList.end).toLocaleTimeString()}</span>
-            </div>
-            {/* <input value={listName} className='text-center' onChange={handleListName} /> */}
-            <div className='flex justify-center p-2'>
-              <CustomInput
-                center={true}
-                placeholder="Title"
-                value={currentList.name}
-                onChange={(e) =>
-                  dispatch(
-                    updateList({
-                      id: currentList.id,
-                      field: 'name',
-                      value: e.target.value
-                    })
-                  )
-                }
-              />
+          <div className="flex gap-12 p-2">
+            {/* {currentList.sequence} */}
+            {/* {currentList.id} */}
+            <span>{new Date(currentList.start).toLocaleTimeString()}</span>
+            <span>
+              {JSON.stringify(
+                moment(currentList.end).diff(
+                  new moment(currentList.start),
+                  'hours'
+                )
+              )}{' '}
+              hr :{' '}
+              {JSON.stringify(
+                new moment(currentList.end).diff(
+                  new moment(currentList.start),
+                  'minutes'
+                ) % 60
+              )}{' '}
+            </span>
+            <span>{new Date(currentList.end).toLocaleTimeString()}</span>
+          </div>
+          <div className="flex justify-center p-2">
+            <CustomInput
+              center={true}
+              placeholder="Title"
+              value={currentList.name}
+              onChange={(e) =>
+                dispatch(
+                  updateList({
+                    id: currentList.id,
+                    field: 'name',
+                    value: e.target.value
+                  })
+                )
+              }
+            />
 
-              <button
-                className={`margin-left:  auto; m-2 w-44  rounded-md border bg-red-500 p-2 text-white`}
-                onClick={() => {
-                  dispatch(deleteList(currentList.id))
-                }}
-              >
-                Delete List
-              </button>
-            </div>
+            <Button
+              className="m-2 p-2 bg-rose-400"
+              onClick={() => {
+                dispatch(deleteList(currentList.id))
+              }}
+            >
+              Delete List
+            </Button>
           </div>
 
           <Droppable
@@ -139,7 +133,11 @@ const List = ({ listId, index }) => {
               >
                 <div className="flex flex-col">
                   {tasks.map((task, index) => (
-                    <Task key={task.id} taskId={task.id} index={task.sequence} />
+                    <Task
+                      key={task.id}
+                      taskId={task.id}
+                      index={task.sequence}
+                    />
                   ))}
                 </div>
                 {droppableProvided.placeholder}
@@ -152,7 +150,7 @@ const List = ({ listId, index }) => {
               onClick={() => {
                 dispatch(addCard(currentList.id))
               }}
-            // onClick={onOpen}
+              // onClick={onOpen}
             >
               <AddIcon w={3} h={3} mr={3} />
               Add a card

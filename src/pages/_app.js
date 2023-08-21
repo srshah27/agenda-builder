@@ -1,15 +1,21 @@
 import '@/styles/globals.tail.css'
 import { SessionProvider } from 'next-auth/react'
 import NextNProgress from 'nextjs-progressbar'
-import Head from 'next/head'
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import { MultiSelectTheme } from 'chakra-multiselect'
 import store from '@/store/store'
 import { Provider } from 'react-redux'
+import localFont from 'next/font/local'
+
 const theme = extendTheme({
   components: {
     MultiSelect: MultiSelectTheme
   }
+})
+
+const cabinet = localFont({
+  src: '../../public/fonts/cabinet/WEB/fonts/CabinetGrotesk-Regular.ttf'
+  // variable: "--font-supreme",
 })
 
 const App = ({ Component, pageProps, session }) => {
@@ -23,7 +29,9 @@ const App = ({ Component, pageProps, session }) => {
             stopDelayMs={100}
             height={6}
           />
-          <Component {...pageProps} />
+          <main className={`${cabinet.className}`}>
+            <Component {...pageProps} />
+          </main>
         </SessionProvider>
       </ChakraProvider>
     </Provider>
