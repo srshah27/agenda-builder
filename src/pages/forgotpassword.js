@@ -1,4 +1,3 @@
-import { React, useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { RxDotFilled } from 'react-icons/rx'
 import Link from 'next/link'
@@ -8,6 +7,8 @@ import { useFormik, Field, ErrorMessage, FormikProvider } from 'formik'
 import Image from 'next/image'
 import Router from 'next/router'
 import toast, { Toaster } from 'react-hot-toast'
+import { Divider, Box, AbsoluteCenter } from '@chakra-ui/react'
+import { useState } from 'react'
 
 function forgotpassword() {
   const router = Router
@@ -73,7 +74,7 @@ function forgotpassword() {
                   <></>
                 )}
                 <button
-                  className="my-2 h-10 w-full rounded-md bg-emerald-400 font-bold mt-4"
+                  className="my-2 mt-4 h-10 w-full rounded-md bg-emerald-400 font-bold"
                   type="submit"
                 >
                   Send Confirmation
