@@ -253,9 +253,9 @@ export const boardSlice = createSlice({
     initializeCards: (state, action) => {
       state.cards = action.payload
       
-      state.cards.forEach(card => {
-        boardSlice.caseReducers.computeBgCard(state,{payload: card.id})
-      });
+      // state.cards.forEach(card => {
+      //   boardSlice.caseReducers.computeBgCard(state,{payload: card.id})
+      // });
       
     },
     addCard: (state, action) => {
@@ -311,11 +311,15 @@ export const boardSlice = createSlice({
           let otherStart = new Date(card.start)
           let otherEnd = new Date(card.end)
           
-          if ((currentStart > otherStart && currentStart < otherEnd) || (currentStart < otherStart && currentStart > otherEnd)) {
+          if ((currentStart > otherStart && currentStart < otherEnd)  ) {
             bg = 'red'
           }
-          if ((currentEnd > otherStart && currentEnd < otherEnd) || (currentEnd > otherStart && currentEnd < otherEnd)) {
+          if ((currentEnd > otherStart && currentEnd < otherEnd) ) {
             bg = 'red'
+          }
+          
+          if (currentStart == otherEnd || currentEnd == otherStart) {
+            bg = 'default'
           }
         }
       });
