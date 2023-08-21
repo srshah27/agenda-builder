@@ -8,9 +8,8 @@ import { useFormik, Field, ErrorMessage, FormikProvider } from 'formik'
 import Image from 'next/image'
 import Router from 'next/router'
 import toast, { Toaster } from 'react-hot-toast'
-import { Divider, Box, AbsoluteCenter } from '@chakra-ui/react'
 
-function Login() {
+function forgotpassword() {
   const router = Router
   const [error, setError] = useState('')
   const formik = useFormik({
@@ -32,7 +31,6 @@ function Login() {
     if (status.status === 401) setError(status.error)
     if (status.error) toast.error(status.error)
   }
-
   return (
     <FormikProvider value={formik}>
       <Toaster />
@@ -50,7 +48,7 @@ function Login() {
         <section className="w-full p-5">
           <div className="mx-auto my-0 w-96 max-w-lg rounded-sm  bg-white py-[25px] px-[40px] shadow-[0px_0px_50px_2px_rgb(0,0,0,0.2)]">
             <h1 className="mt-3 mb-6 text-center text-base font-semibold tracking-tight text-gray-500">
-              Log in to Agile Builder
+              Reset Password
             </h1>
             <div className="">
               <form className="w-50 mt-0 block" onSubmit={formik.handleSubmit}>
@@ -67,12 +65,6 @@ function Login() {
                 ) : (
                   <></>
                 )}
-                <input
-                  type="password"
-                  placeholder="Password"
-                  className="mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 p-2 transition-all duration-500"
-                  {...formik.getFieldProps('password')}
-                />
                 {formik.touched.password && formik.errors.password ? (
                   <span className="text-xs text-red-400">
                     {formik.errors.password}
@@ -81,43 +73,12 @@ function Login() {
                   <></>
                 )}
                 <button
-                  className="my-2 h-10 w-full rounded-md bg-emerald-400 font-bold"
+                  className="my-2 h-10 w-full rounded-md bg-emerald-400 font-bold mt-4"
                   type="submit"
                 >
-                  Log In
+                  Send Confirmation
                 </button>
               </form>
-              <div className="my-3 text-center text-xs text-gray-500"> OR </div>
-              <button
-                onClick={() => signIn('google', { callbackUrl: '/' })}
-                className="h-10 w-full items-center justify-center rounded-sm border-2 border-gray-50 text-center shadow-lg"
-              >
-                <FcGoogle className="mx-2 my-2 inline h-auto w-5 " />
-                <div className="inline font-bold text-slate-600">
-                  Continue with Google
-                </div>
-              </button>
-              <Divider className='h-px my-6' />
-              <div className="m-1 text-center text-sm text-gray-400 w-full">
-                Don&apos;t have an account?{' '}
-                <RxDotFilled className="inline text-gray-800" />{' '}
-                <Link
-                  className="text-blue-400 hover:underline"
-                  href={'/signup'}
-                >
-                  Sign Up!
-                </Link>
-              </div>
-              <div className="m-1 text-center text-sm text-gray-400 w-full">
-                Forgot Password?
-                <RxDotFilled className="inline text-gray-800" />{' '}
-                <Link
-                  className="text-blue-400 hover:underline"
-                  href={'/forgotpassword'}
-                >
-                  Reset!
-                </Link>
-              </div>
             </div>
           </div>
         </section>
@@ -142,11 +103,4 @@ function Login() {
   )
 }
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context)
-  return {
-    props: {}
-  }
-}
-
-export default Login
+export default forgotpassword
