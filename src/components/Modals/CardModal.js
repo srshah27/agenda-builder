@@ -11,13 +11,16 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Textarea
+  Textarea,
+  useToast,
+  useDisclosure
 } from '@chakra-ui/react'
 import Attribute from './AttributeInputs/Attributes'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCard, deleteCard } from '@/store/boardSlice'
-const CardModal = ({ taskId, onClose, isOpen }) => {
+const CardModal = ({ taskId, isOpen, onClose }) => {
+  const toast = useToast()
   const dispatch = useDispatch()
   const currentTask = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
@@ -177,7 +180,6 @@ const CardModal = ({ taskId, onClose, isOpen }) => {
                 placeholder="Activity Title"
                 value={currentTask.name}
                 onChange={(e) => {
-                  // setName(e.target.value)
                   dispatch(
                     updateCard({
                       id: taskId,
@@ -193,7 +195,6 @@ const CardModal = ({ taskId, onClose, isOpen }) => {
                 placeholder="Description"
                 value={currentTask.description}
                 onChange={(e) => {
-                  // setDescription(e.target.value)
                   dispatch(
                     updateCard({
                       id: taskId,
@@ -208,7 +209,6 @@ const CardModal = ({ taskId, onClose, isOpen }) => {
               return <Attribute taskId={taskId} attrId={attr.id} key={index} />
             })}
           </ModalBody>
-          {/* {JSON.stringify(attributes)} */}
 
           <ModalFooter>
             <Button
@@ -216,12 +216,30 @@ const CardModal = ({ taskId, onClose, isOpen }) => {
               mr={3}
               onClick={(e) => {
                 dispatch(deleteCard(taskId))
+                toast({
+                  title: 'Activity Deleted',
+                  status: 'error',
+                  duration: 1500,
+                  isClosable: true
+                }),
+                  onClose()
               }}
             >
-              {' '}
-              Delete{' '}
+              Delete
             </Button>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => {
+                toast({
+                  title: 'Changes Saved',
+                  status: 'success',
+                  duration: 1500,
+                  isClosable: true
+                }),
+                  onClose()
+              }}
+            >
               Done
             </Button>
           </ModalFooter>
