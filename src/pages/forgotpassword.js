@@ -1,16 +1,12 @@
-import { FcGoogle } from 'react-icons/fc'
-import { RxDotFilled } from 'react-icons/rx'
-import Link from 'next/link'
+import { useState } from 'react'
 import login_validate from '@/lib/validate'
-import { getProviders, signIn, getSession } from 'next-auth/react'
-import { useFormik, Field, ErrorMessage, FormikProvider } from 'formik'
+import { signIn } from 'next-auth/react'
+import { useFormik, FormikProvider } from 'formik'
 import Image from 'next/image'
 import Router from 'next/router'
 import toast, { Toaster } from 'react-hot-toast'
-import { Divider, Box, AbsoluteCenter } from '@chakra-ui/react'
-import { useState } from 'react'
 
-function forgotpassword() {
+export default function Forgotpassword() {
   const router = Router
   const [error, setError] = useState('')
   const formik = useFormik({
@@ -103,5 +99,3 @@ function forgotpassword() {
     </FormikProvider>
   )
 }
-
-export default forgotpassword
