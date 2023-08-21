@@ -11,16 +11,14 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Textarea,
-  useDisclosure
+  Textarea
 } from '@chakra-ui/react'
 import Attribute from './AttributeInputs/Attributes'
 import moment from 'moment'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateCard, deleteCard } from '@/store/boardSlice'
-const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
+const CardModal = ({ taskId, onClose, isOpen }) => {
   const dispatch = useDispatch()
-  // const [currentTask, setCurrentTask] = useState(task)
   const currentTask = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
   )
@@ -89,9 +87,59 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                   })
                 }}
               />
+              <FormLabel>Duration</FormLabel>
+              <div className="flex justify-around">
+                <Input
+                  type="number"
+                  value={duration.hours}
+                  step={1}
+                  min={0}
+                  max={23}
+                  onChange={(e) => {
+                    setCurrentDuration({
+                      hours: e.target.value,
+                      miniutes: duration.miniutes
+                    })
+                    let m = new moment(currentTask.start)
+                      .add(e.target.value, 'hours')
+                      .add(duration.miniutes, 'minutes')
+                    dispatch(
+                      updateCard({
+                        id: taskId,
+                        field: 'end',
+                        value: m.toDate().toISOString()
+                      })
+                    )
+                  }}
+                />
+                <Input
+                  type="number"
+                  value={duration.miniutes}
+                  step={1}
+                  min={0}
+                  max={59}
+                  onChange={(e) => {
+                    setCurrentDuration({
+                      hours: duration.hours,
+                      miniutes: e.target.value
+                    })
+                    let m = new moment(currentTask.start)
+                      .add(duration.hours, 'hours')
+                      .add(e.target.value, 'minutes')
+                    dispatch(
+                      updateCard({
+                        id: taskId,
+                        field: 'end',
+                        value: m.toDate().toISOString()
+                      })
+                    )
+                  }}
+                />
+              </div>
               <FormLabel>End Time</FormLabel>
               <Input
                 type="time"
+                disabled
                 value={moment(currentTask.end).format('HH:mm')}
                 onChange={(e) => {
                   let value = new Date(
@@ -120,56 +168,6 @@ const CardModal = ({ taskId, onClose, isOpen, onOpen, setDuration }) => {
                         'minutes'
                       ) % 60
                   })
-                }}
-              />
-              <FormLabel>Duration</FormLabel>
-              <Input
-                type="number"
-                value={duration.hours}
-                step={1}
-                min={0}
-                max={23}
-                onChange={(e) => {
-                  setCurrentDuration({
-                    hours: e.target.value,
-                    miniutes: duration.miniutes
-                  })
-                  let m = new moment(currentTask.start)
-                    .add(e.target.value, 'hours')
-                    .add(duration.miniutes, 'minutes')
-                  dispatch(
-                    updateCard({
-                      id: taskId,
-                      field: 'end',
-                      value: m.toDate().toISOString()
-                    })
-                  )
-                  // setEndTime(m.format('HH:mm'))
-                }}
-              />
-              <Input
-                type="number"
-                value={duration.miniutes}
-                step={1}
-                min={0}
-                max={59}
-                onChange={(e) => {
-                  setCurrentDuration({
-                    hours: duration.hours,
-                    miniutes: e.target.value
-                  })
-                  let m = new moment(currentTask.start)
-                    .add(duration.hours, 'hours')
-                    .add(e.target.value, 'minutes')
-                  dispatch(
-                    updateCard({
-                      id: taskId,
-                      field: 'end',
-                      value: m.toDate().toISOString()
-                    })
-                  )
-                  // setEnd(m.toDate())
-                  // setEndTime(m.format('HH:mm'))
                 }}
               />
 
