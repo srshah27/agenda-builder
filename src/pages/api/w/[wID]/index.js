@@ -27,12 +27,12 @@ export default async function handler(req, res) {
     }
 
     case 'PATCH': {
-      const { id, name, createdAt, collaborators, roles, invite } = req.body
+      const { name, createdAt, collaborators, roles, invite } = req.body
       const updatedWorkspace = await Workspace.findOneAndUpdate(
         {
           id: wID
         },
-        { id, name, createdAt, collaborators, roles, invite },
+        { name, createdAt, collaborators, roles, invite },
         { new: true }
       )
       return res.status(202).json({ updatedWorkspace })
