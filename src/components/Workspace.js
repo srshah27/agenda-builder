@@ -87,9 +87,8 @@ const Workspace = ({ id, workspace }) => {
     <Flex p="5">
       <Stack>
         <HStack mb="2">
-          <Text fontSize="xl" color={useColorModeValue('gray.900', 'gray.50')}>
-            {' '}
-            {workspace.name}{' '}
+          <Text fontSize="xl" color="gray.50">
+            {workspace.name}
           </Text>
           <Flex pos="absolute" right="13%">
             <Button
@@ -97,8 +96,7 @@ const Workspace = ({ id, workspace }) => {
               mx="2"
               bgColor={useColorModeValue('gray.100', 'gray.600')}
             >
-              {' '}
-              <TbLayoutBoardSplit />{' '}
+              <TbLayoutBoardSplit />
               <Text display={{ base: 'none', md: 'block' }}>Boards </Text>
             </Button>
             <Button
@@ -106,8 +104,7 @@ const Workspace = ({ id, workspace }) => {
               mx="2"
               bgColor={useColorModeValue('gray.100', 'gray.600')}
             >
-              {' '}
-              <HiOutlineViewGrid />{' '}
+              <HiOutlineViewGrid />
               <Text display={{ base: 'none', md: 'block' }}>Views </Text>
             </Button>
             <Button
@@ -116,8 +113,7 @@ const Workspace = ({ id, workspace }) => {
               bgColor={useColorModeValue('gray.100', 'gray.600')}
               onClick={onOpenInvite}
             >
-              {' '}
-              <BsPersonPlus />{' '}
+              <BsPersonPlus />
               <Text display={{ base: 'none', md: 'block' }}>Members </Text>
             </Button>
 
@@ -283,12 +279,10 @@ const Work = ({ asCreator, asCollaborator }) => {
       >
         {creatorWorkspace.length > 0 && (
           <HStack>
-            {' '}
-            <BsPersonGear />{' '}
+            <BsPersonGear />
             <Text fontSize="md" color={color} fontWeight="semibold">
-              {' '}
               Workspaces you created
-            </Text>{' '}
+            </Text>
           </HStack>
         )}
         {creatorWorkspace.map((workspace) => (
@@ -301,12 +295,10 @@ const Work = ({ asCreator, asCollaborator }) => {
 
         {collabWorkspace.length > 0 && (
           <HStack>
-            {' '}
-            <BsPeople />{' '}
+            <BsPeople />
             <Text fontSize="md" color={color} fontWeight="semibold">
-              {' '}
               Workspaces you Collaborate
-            </Text>{' '}
+            </Text>
           </HStack>
         )}
         {collabWorkspace.map((workspace) => (
