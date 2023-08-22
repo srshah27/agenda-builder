@@ -214,11 +214,11 @@ export const boardSlice = createSlice({
     handleListDragEnd: (state, action) => {
       let source = action.payload.source
       let destination = action.payload.destination
-      console.log(source, destination);
+      console.log(source, destination)
       let id = action.payload.draggableId
       let currentList = state.lists.find((list) => list.id === id)
       let oldData = []
-      
+
       state.lists.forEach((list) => {
         oldData.push({ ...list })
         if (list.sequence > source.index) {
@@ -235,7 +235,7 @@ export const boardSlice = createSlice({
       state.lists.find((list) => list.id === id)['sequence'] = destination.index
       // oldData.push({ ...currentList })
       // console.log(oldData);
-      
+
       state.lists.sort((a, b) => a.sequence - b.sequence)
       state.lists.forEach((list) => {
         if (list.sequence !== oldData.find((l) => l.id === list.id).sequence)
@@ -252,11 +252,10 @@ export const boardSlice = createSlice({
 
     initializeCards: (state, action) => {
       state.cards = action.payload
-      
+
       // state.cards.forEach(card => {
       //   boardSlice.caseReducers.computeBgCard(state,{payload: card.id})
       // });
-      
     },
     addCard: (state, action) => {
       let listId = action.payload
@@ -301,31 +300,31 @@ export const boardSlice = createSlice({
     },
     computeBgCard: (state, action) => {
       let currCard = state.cards.find((card) => card.id === action.payload)
-      console.log("Called Bg Color");
-      if(!currCard) return
+      console.log('Called Bg Color')
+      if (!currCard) return
       let currentStart = new Date(currCard.start)
       let currentEnd = new Date(currCard.end)
       let bg = 'default'
-      state.cards.forEach(card => {
-        if(card.id !== action.payload && currCard.listId === card.listId) {
+      state.cards.forEach((card) => {
+        if (card.id !== action.payload && currCard.listId === card.listId) {
           let otherStart = new Date(card.start)
           let otherEnd = new Date(card.end)
-          
-          if ((currentStart > otherStart && currentStart < otherEnd)  ) {
+
+          if (currentStart > otherStart && currentStart < otherEnd) {
             bg = 'red'
           }
-          if ((currentEnd > otherStart && currentEnd < otherEnd) ) {
+          if (currentEnd > otherStart && currentEnd < otherEnd) {
             bg = 'red'
           }
-          
+
           if (currentStart == otherEnd || currentEnd == otherStart) {
             bg = 'default'
           }
         }
-      });
+      })
       currCard.bg = bg
     },
-    
+
     deleteCard: (state, action) => {
       state.cards = state.cards.filter((card) => card.id !== action.payload)
       fetch(`/api/w/${state.workspaceId}/b/${state.id}/c/${action.payload}`, {
@@ -402,7 +401,8 @@ export const boardSlice = createSlice({
       })
       currentCard.listId = destination.droppableId
       currentCard.sequence = destination.index // Upadte query currentCard
-      state.cards.find((card) => card.id === id)['listId'] = destination.droppableId
+      state.cards.find((card) => card.id === id)['listId'] =
+        destination.droppableId
       state.cards.find((card) => card.id === id)['sequence'] = destination.index
       state.cards.sort((a, b) => a.sequence - b.sequence)
       state.cards.forEach((card) => {
@@ -447,7 +447,5 @@ export const {
   modifyCardAttributes,
   handleCardDragEnd
 } = boardSlice.actions
-
-
 
 export default boardSlice.reducer

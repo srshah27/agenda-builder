@@ -23,7 +23,7 @@ const List = ({ listId, index }) => {
   let sortedTasks = tasks.sort((a, b) =>
     new Date(a.start) < new Date(b.start) ? -1 : 1
   )
-//   console.log('name: ', currentList?.name, 'sequence: ', currentList?.sequence)
+  //   console.log('name: ', currentList?.name, 'sequence: ', currentList?.sequence)
   const [listName, setListName] = useState(currentList?.name)
 
   async function handleListName(e) {

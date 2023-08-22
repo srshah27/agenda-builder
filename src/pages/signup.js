@@ -113,41 +113,49 @@ function Signup({ providers }) {
                   <input
                     type="text"
                     placeholder="User Name*"
-                    className="p-2 mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
+                    className="mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 p-2 transition-all duration-500"
                     {...formik.getFieldProps('name')}
                   />
                   {formik.touched.name && formik.errors.name ? (
-                    <div className="text-red-400 text-xs">{formik.errors.name}</div>
+                    <div className="text-xs text-red-400">
+                      {formik.errors.name}
+                    </div>
                   ) : null}
                 </div>
                 <input
                   type="text"
                   placeholder="Email*"
-                  className="p-2 mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 transition-all duration-500"
+                  className="mt-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50 p-2 transition-all duration-500"
                   {...formik.getFieldProps('email')}
                 />
                 {formik.touched.email && formik.errors.email ? (
-                  <div className="text-red-400 text-xs">{formik.errors.email}</div>
+                  <div className="text-xs text-red-400">
+                    {formik.errors.email}
+                  </div>
                 ) : null}
                 <input
                   type="password"
                   placeholder="Password*"
-                  className="p-2 my-2 h-10 w-full rounded-sm border-2 border-gray-300  bg-gray-50 transition-all  duration-500"
+                  className="my-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50  p-2 transition-all  duration-500"
                   {...formik.getFieldProps('password')}
                 />
                 {formik.touched.password && formik.errors.password ? (
-                  <div className="text-red-400 text-xs">{formik.errors.password}</div>
+                  <div className="text-xs text-red-400">
+                    {formik.errors.password}
+                  </div>
                 ) : null}
                 <input
                   type="password"
                   placeholder=" Confirm Password*"
-                  className="p-2 my-2 h-10 w-full rounded-sm border-2 border-gray-300  bg-gray-50 transition-all  duration-500"
+                  className="my-2 h-10 w-full rounded-sm border-2 border-gray-300 bg-gray-50  p-2 transition-all  duration-500"
                   {...formik.getFieldProps('cpassword')}
                 />
                 {formik.touched.cpassword && formik.errors.cpassword ? (
-                  <span className="text-red-400 text-xs">{formik.errors.cpassword}</span>
+                  <span className="text-xs text-red-400">
+                    {formik.errors.cpassword}
+                  </span>
                 ) : null}
-                <button className="bg-emerald-400 my-2 h-10 w-full rounded-md font-bold text-gray-100">
+                <button className="my-2 h-10 w-full rounded-md bg-emerald-400 font-bold text-gray-100">
                   Sign Up
                 </button>
               </form>

@@ -12,5 +12,6 @@ module.exports = {
     container: {
       center: true
     }
-  }
+  },
+  plugins: ['prettier-plugin-tailwindcss']
 }

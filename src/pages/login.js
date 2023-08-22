@@ -97,8 +97,8 @@ function Login() {
                   Continue with Google
                 </div>
               </button>
-              <Divider className='h-px my-6' />
-              <div className="m-1 text-center text-sm text-gray-400 w-full">
+              <Divider className="my-6 h-px" />
+              <div className="m-1 w-full text-center text-sm text-gray-400">
                 Don&apos;t have an account?{' '}
                 <RxDotFilled className="inline text-gray-800" />{' '}
                 <Link
@@ -108,7 +108,7 @@ function Login() {
                   Sign Up!
                 </Link>
               </div>
-              <div className="m-1 text-center text-sm text-gray-400 w-full">
+              <div className="m-1 w-full text-center text-sm text-gray-400">
                 Forgot Password?
                 <RxDotFilled className="inline text-gray-800" />{' '}
                 <Link

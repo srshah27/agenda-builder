@@ -37,10 +37,12 @@ const Board = ({ boardData, setBoardData }) => {
             <div
               ref={droppableProvided.innerRef}
               {...droppableProvided.droppableProps}
-              className="flex flex-col items-center bg-[url(../../public/img/boardbg.png)] bg-cover px-4 min-h-screen"
+              className="flex min-h-screen flex-col items-center bg-[url(../../public/img/boardbg.png)] bg-cover px-4"
             >
               {lists.map((list, index) => {
-                return <List key={list.id} listId={list.id} index={list.sequence} />
+                return (
+                  <List key={list.id} listId={list.id} index={list.sequence} />
+                )
               })}
               {droppableProvided.placeholder}
               <button
