@@ -27,7 +27,9 @@ const AvatarMenu = () => {
       <MenuList>
         <MenuGroup title="Profile">
           <MenuItem>My Account</MenuItem>
-                  <MenuItem onClick={() => signOut({ callbackUrl: '/' })}>Sign Out </MenuItem>
+          <MenuItem onClick={() => signOut({ callbackUrl: '/' })}>
+            Sign Out{' '}
+          </MenuItem>
         </MenuGroup>
         <MenuDivider />
         <MenuGroup title="Help">

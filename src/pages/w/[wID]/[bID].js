@@ -47,7 +47,7 @@ const BoardPage = (props) => {
   // }, [bID, dispatch, wID])
 
   return (
-    <div className=''>
+    <div className="">
       <UserNav board={board} />
       <SubNav boardData={boardData} setBoardData={setBoardData} />
       <Board boardData={boardData} setBoardData={setBoardData} />

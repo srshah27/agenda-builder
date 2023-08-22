@@ -14,16 +14,16 @@ export default function Home() {
 }
 
 export async function getServerSideProps(context) {
-    const session = await getSession(context)
-    if(session){
-        return{
-            redirect:{
-                destination: '/u',
-                permanent: false,
-            }
-        }
-    }
+  const session = await getSession(context)
+  if (session) {
     return {
-        props: {}
+      redirect: {
+        destination: '/u',
+        permanent: false
+      }
     }
+  }
+  return {
+    props: {}
+  }
 }
