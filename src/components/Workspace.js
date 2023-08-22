@@ -16,7 +16,11 @@ import {
   Button,
   Input,
   useColorModeValue,
-  HStack
+  HStack,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem as ChakraMenuItem
 } from '@chakra-ui/react'
 import {
   Modal,
@@ -171,15 +175,20 @@ const Workspace = ({ id, workspace }) => {
               </ModalContent>
             </Modal>
 
-            <Button
-              h="8"
-              mx="2"
-              bgColor={useColorModeValue('gray.100', 'gray.600')}
-            >
-              {' '}
-              <FiSettings />{' '}
-              <Text display={{ base: 'none', md: 'block' }}>Settings </Text>
-            </Button>
+            <Menu>
+              <MenuButton
+                h="8"
+                mx="2"
+                as={Button}
+                rightIcon={<FiSettings />}
+                bgColor={'gray.100'}
+              >
+                Settings
+              </MenuButton>
+              <MenuList bgColor={'gray.100'}>
+                <ChakraMenuItem>Rename</ChakraMenuItem>
+              </MenuList>
+            </Menu>
           </Flex>
         </HStack>
         <Wrap>

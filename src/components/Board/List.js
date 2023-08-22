@@ -7,8 +7,10 @@ import Task from './Task'
 import { addCard, updateList, deleteList } from '@/store/boardSlice'
 import AddCardModal from '@/components/Modals/AddCardModal'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { useDisclosure, Button } from '@chakra-ui/react'
+import { useDisclosure, Button, CloseButton, useToast } from '@chakra-ui/react'
+import { toast } from 'react-hot-toast'
 const List = ({ listId, index }) => {
+  const toast = useToast()
   const dispatch = useDispatch()
   const currentList = useSelector((state) =>
     state.board.lists.find((l) => l.id === listId)
@@ -40,6 +42,7 @@ const List = ({ listId, index }) => {
   const [start, setStart] = useState(moment(currentList?.start).format('HH:mm'))
   const [end, setEnd] = useState(moment(currentList?.end).format('HH:mm'))
   if (!currentList) return null
+
   return (
     <Draggable draggableId={currentList.id} index={currentList.sequence}>
       {(draggableProvided, draggableSnapshot) => (
@@ -72,29 +75,44 @@ const List = ({ listId, index }) => {
               <span>{new Date(currentList.end).toLocaleTimeString()}</span>
             </div>
           </div> */}
-
-          <div className="flex gap-12 p-2">
-            {/* {currentList.sequence} */}
-            {/* {currentList.id} */}
-            <span>{new Date(currentList.start).toLocaleTimeString()}</span>
-            <span>
-              {JSON.stringify(
-                moment(currentList.end).diff(
-                  new moment(currentList.start),
-                  'hours'
-                )
-              )}{' '}
-              hr :{' '}
-              {JSON.stringify(
-                new moment(currentList.end).diff(
-                  new moment(currentList.start),
-                  'minutes'
-                ) % 60
-              )}{' '}
-            </span>
-            <span>{new Date(currentList.end).toLocaleTimeString()}</span>
+          <div className="flex items-center justify-between">
+            <div className="flex w-full items-center gap-12 p-2">
+              {/* {currentList.sequence} */}
+              {/* {currentList.id} */}
+              <span>{new Date(currentList.start).toLocaleTimeString()}</span>
+              <span>
+                {JSON.stringify(
+                  moment(currentList.end).diff(
+                    new moment(currentList.start),
+                    'hours'
+                  )
+                )}{' '}
+                hr :{' '}
+                {JSON.stringify(
+                  new moment(currentList.end).diff(
+                    new moment(currentList.start),
+                    'minutes'
+                  ) % 60
+                )}{' '}
+              </span>
+              <span>{new Date(currentList.end).toLocaleTimeString()}</span>
+            </div>
+            <div>
+              <CloseButton
+                className="mx-2 text-rose-600"
+                onClick={() => {
+                  dispatch(deleteList(currentList.id))
+                  toast({
+                    title: 'List Deleted',
+                    status: 'error',
+                    duration: 1500
+                  })
+                }}
+                size="md"
+              />
+            </div>
           </div>
-          <div className="flex justify-center p-2">
+          <div className="mb-3 flex justify-center">
             <CustomInput
               center={true}
               placeholder="Title"
@@ -109,15 +127,6 @@ const List = ({ listId, index }) => {
                 )
               }
             />
-
-            <Button
-              className="m-2 p-2 bg-rose-400"
-              onClick={() => {
-                dispatch(deleteList(currentList.id))
-              }}
-            >
-              Delete List
-            </Button>
           </div>
 
           <Droppable
