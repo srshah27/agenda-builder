@@ -39,11 +39,16 @@ import { nanoid } from 'nanoid'
 const Workspace = ({ id, workspace }) => {
     const [boards, setBoards] = useState([])
     useEffect(() => {
-        fetch(`/api/w/${id}/b`)
-            .then((res) => res.json())
-            .then((data) => {
-                setBoards(data.boards)
-            })
+        setInterval(async () => {
+            fetch(`/api/w/${id}/b`)
+                .then((res) => res.json())
+                .then((data) => {
+                    setBoards(data.boards)
+                })
+                .catch((err) => {
+                    console.log("Network Issue")
+                })
+        }, 5000)
     }, [boards, id])
     const { isOpen, onOpen, onClose } = useDisclosure()
     const {
@@ -202,7 +207,7 @@ const Workspace = ({ id, workspace }) => {
                                 Settings
                             </MenuButton>
                             <MenuList bgColor={'gray.100'}>
-                                <ChakraMenuItem as={'Button'} 
+                                <ChakraMenuItem as={'Button'}
                                     w="180px"
                                     h="30px"
                                     onClick={onOpenRename}
@@ -235,7 +240,7 @@ const Workspace = ({ id, workspace }) => {
                                             <Button mr={3} onClick={submitWorkspace}>
                                                 Save
                                             </Button>
-                                            <Button variant="ghost" onClick={() => {setWorkName(workspace?.name) ;onCloseRename()}}>
+                                            <Button variant="ghost" onClick={() => { setWorkName(workspace?.name); onCloseRename() }}>
                                                 Cancel
                                             </Button>
                                         </ModalFooter>
