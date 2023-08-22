@@ -301,7 +301,7 @@ export const boardSlice = createSlice({
     },
     computeBgCard: (state, action) => {
       let currCard = state.cards.find((card) => card.id === action.payload)
-      console.log("Called");
+      console.log("Called Bg Color");
       if(!currCard) return
       let currentStart = new Date(currCard.start)
       let currentEnd = new Date(currCard.end)

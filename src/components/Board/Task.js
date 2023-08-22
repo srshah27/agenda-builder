@@ -8,11 +8,11 @@ import { computeBgCard } from '@/store/boardSlice'
 import moment from 'moment'
 const Task = ({ taskId, index }) => {
   const dispatch = useDispatch()
-  dispatch(computeBgCard(taskId))
+//   dispatch(computeBgCard(taskId))
   const currentTask = useSelector((state) =>
     state.board.cards.find((card) => card.id === taskId)
   )
-  console.log(currentTask);
+//   console.log(currentTask);
   const bg = currentTask.bg ? currentTask.bg == 'default' ? 'bg-slate-200' : currentTask.bg == 'red' ? 'bg-red-200' : 'bg-slate-200' : 'bg-slate-200' 
   
   const { isOpen, onOpen, onClose } = useDisclosure()
