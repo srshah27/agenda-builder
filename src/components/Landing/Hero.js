@@ -9,7 +9,7 @@ function Hero() {
       className="flex w-screen flex-col bg-gradient-to-br from-[#aec6f6] via-[#faf6f7] to-[#aec6f6] supports-[min-height:100dvh]:min-h-[100dvh] md:grid md:grid-cols-2 lg:grid-cols-[60%_40%]"
       id="home"
     >
-      <div className="relative flex flex-1 flex-col justify-center px-5 pt-8 text-[#FE7600] dark:text-[#f5f1b2] md:px-6 md:py-[22px] lg:px-8">
+      <div className="relative flex flex-1 flex-col justify-center px-5 pt-8 text-[#FE7600] dark:text-[#f0e438] md:px-6 md:py-[22px] lg:px-8">
         <nav className="absolute left-0 top-8 flex w-full px-6 md:top-[22px] md:px-6 lg:px-8">
           <h1>
             <div className="flex cursor-default items-center text-[20px] font-bold leading-none lg:text-[22px]">
@@ -18,7 +18,7 @@ function Hero() {
           </h1>
         </nav>
         <div className="flex-col text-center text-[32px] leading-[1.2] md:flex md:text-left md:text-[40px]">
-          <h1 className="font-extrabold text-[#FE7600] dark:text-[#f5f1b2]">
+          <h1 className="font-extrabold text-[#FE7600] dark:text-[#f0e438]">
             Welcome to Agenda Builder
           </h1>
           <p className="py-6 text-base font-semibold text-gray-500 md:text-lg lg:text-xl">
